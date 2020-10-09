@@ -1,0 +1,115 @@
+
+function renderDoc (docData) {
+  /**
+    coverURL: "/cdn/3ec6/ba4852e6b5f601975afe825e6b44947cd5756129.jpg"
+    deletedAt: null
+    description: "A really fun song to map (also enjoyed playing through it of course)."
+    directDownload: "/cdn/3ec6/ba4852e6b5f601975afe825e6b44947cd5756129.zip"
+    downloadURL: "/api/download/key/3ec6"
+    hash: "ba4852e6b5f601975afe825e6b44947cd5756129"
+    key: "3ec6"
+    metadata:
+      {
+        automapper: null
+        bpm: 140
+        characteristics: [{…}]
+        difficulties: {easy: false, expert: false, expertPlus: true, hard: false, normal: false}
+        duration: 234
+        levelAuthorName: "Phoenixin & drmarc"
+        songAuthorName: "PinocchioP"
+        songName: "Mei Mei"
+        songSubName: ""
+      }
+    name: "Meikaruza"
+    stats: {downloads: 3356, plays: 0, downVotes: 9, upVotes: 37, heat: 619.5216025, …}
+    uploaded: "2019-03-18T21:55:50.000Z"
+    uploader: {_id: "5cff0b7498cc5a672c8503ef", username: "jonathanrune"}
+    _id: "5cff621548229f7d88fc8a33"
+   */
+  const coverURL = `https://beatsaver.com${docData.coverURL}`;
+  // const image = new Image();
+  // image.src = coverURL;
+  // image.onload = 
+
+  // <div class="doc__cover><img src="${coverURL}" /></div>
+  // <input class="requestbutton" type="button" id="request" value="Request" mapKey="${docData.key}"/>
+
+  const allVotes = docData.stats.upVotes + docData.stats.downVotes;
+  const percentVotes = (~~((docData.stats.upVotes / allVotes) * 1000)) / 10;
+
+   return `
+    <div class="doc__container">
+      <div class="doc__cover"><img src="${coverURL}" /></div>
+      <div class="doc__mapdata">
+        <div class="doc__name">${docData.metadata.songName}</div>
+        <div class="doc__author">${docData.metadata.songAuthorName}</div>
+        <div class="doc__mapper">${docData.metadata.levelAuthorName}</div>
+      </div>
+      <div class="doc__saverdata">
+        <div class="doc__key">${docData.key} 🔑</div>
+        <div class="doc__downloads">${docData.stats.downloads} 💾</div>
+      </div>
+      <div class="doc__scoredata">
+        <div class="doc__score--upvotes">${docData.stats.upVotes} 👍</div>
+        <div class="doc__score--downvotes">${docData.stats.downVotes} 👎</div>
+        <div class="doc__score--percentvotes">${percentVotes}% 💯</div>
+      </div>
+      <div class="doc__cta">
+        <div>Copypaste</div>
+        <div>!bsr ${docData.key}</div>
+      </div>
+    </div>
+   `;
+}
+
+const spinnerURL = 'https://beatsaver.com/beat_saver_logo_white.a01a4b8f.png';
+
+$(function() {
+  $('#song-query-submit').click((event) => {
+    const query = document.getElementById('song-query-input').value || '';
+
+    if (query === '') {
+      document.getElementById('container__results').innerHTML = '';
+      return;
+    }
+  
+    document.getElementById('container__results').innerHTML = `<center><img class="spin" src="${spinnerURL}" /></center>`
+    
+    fetchSongs(query, 1)
+      .then(data => {
+        const renderedDocs = data.docs.map(renderDoc);
+        document.getElementById('container__results').innerHTML = renderedDocs;
+      })
+  });
+  $('#song-query-input').change((event) => {
+    const query = document.getElementById('song-query-input').value || '';
+  
+    if (query === '') {
+      document.getElementById('container__results').innerHTML = '';
+      return;
+    }
+
+    document.getElementById('container__results').innerHTML = `<center><img class="spin" src="${spinnerURL}" /></center>`
+
+    fetchSongs(query, 1)
+      .then(data => {
+        const renderedDocs = data.docs.map(renderDoc);
+        document.getElementById('container__results').innerHTML = renderedDocs;
+      })
+  });
+  let hidden = true;
+  $('#logic_container').hide()
+  $('#cirle_container').click(() => {
+    if (hidden) {
+      $('#logic_container').show();
+      hidden = false;
+    } else {
+      $('#logic_container').hide();
+      hidden = true;
+    }
+  })
+  $('#container__hide').click(() => {
+    $('#logic_container').hide();
+    hidden = true;
+  })
+});

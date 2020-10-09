@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import './SearchPage/SearchPage.css';
+
+import Header from './Header/Header';
+
+import SearchPage from './SearchPage/SearchPage';
 
 function App() {
+  const [ isExpanded, setExpanded ] = React.useState(true);
+
+  if (isExpanded) {
+    return (
+      <div>
+        <Header
+          hidePanel={() => setExpanded(false)}
+        />
+        <SearchPage />
+      </div>
+    );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      className="expandButton animate"
+      onClick={() => setExpanded(true)}
+    >
+      <i className="Chevron"></i>
     </div>
-  );
+  )
 }
+
 
 export default App;

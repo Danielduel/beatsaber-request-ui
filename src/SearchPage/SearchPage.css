@@ -1,0 +1,89 @@
+.doc__container {
+  display: flex;
+  flex-direction: row;
+  font-size: 10px;
+  padding-top: 1px;
+}
+
+.doc__container * {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.doc__cover {
+  min-height: 50px;
+  min-width: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid var(--border);
+}
+.doc__cover > img {
+  max-height: 50px;
+  max-width: 50px;
+}
+
+.doc__mapdata {
+  padding-left: 7px;
+  width: 226px;
+  border-right: 1px solid var(--border);
+}
+.doc__name {
+  color: var(--text);
+  font-size: 12px;
+}
+.doc__author, .doc__mapper {
+  color: var(--text-secondary);
+  font-size: 10px;
+  margin-left: 5px;
+}
+
+.doc__saverdata {
+  padding-left: 8px;
+  color: #000000;
+  font-size: 10px;
+}
+
+.doc__scoredata {
+  padding-left: 12px;
+  color: #000000;
+  font-size: 10px;
+}
+
+.doc__cta {
+  margin-left: auto;
+  margin-right: 12px;
+}
+
+.SearchPage-input {
+  outline: none;
+
+  height: 40px;
+  border: 0px solid transparent;
+  border-radius: 30px;
+  background: var(--background-input);
+
+  padding: 9px 0px 8px 53px;
+  color: var(--text);
+  width: 260px;
+  font-size: 20px;
+  box-sizing: border-box;
+
+  margin-left: 8px;
+}
+
+.SearchPage-input + svg {
+  position: absolute;
+  left: 24px;
+  top: 15px;
+}
+
+.SearchPage-button {
+  outline: none;
+  box-sizing: border-box;
+  padding: 10px 9px;
+  margin-left: 12px;
+  border-radius: 10px;
+  border: 0px solid transparent;
+}

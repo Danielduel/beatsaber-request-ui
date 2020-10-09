@@ -1,38 +1,120 @@
-.App {
+:root {
+  --text: #333333;
+  --text-secondary: #555555;
+
+  --background: #CBC1CF;
+  --background-primary: #BEA8C7;
+  --border: #BCB3BF;
+  --background-icon-pressed: #A78CB0;
+  --background-icon-notpressed: #A78CB0;
+  --background-input: #DDDDDD;
+}
+
+input {
+  padding: 8px 9px;
+}
+
+body {
+  margin: 0;
+}
+
+.LayoutRow-Container {
+  width: 500px;
+  height: 52px;
+  background-color: var(--background);
+  box-sizing: border-box;
+  position: relative;
+}
+
+.LayoutRow-Container.primary {
+  background-color: var(--background-primary);
+}
+
+.LayoutRow-Container.pageHeader {
+  padding-top: 10px;
+}
+
+.LayoutRow-Container.borderBottom {
+  border-bottom: 1px solid var(--border);
+}
+
+.LayoutRow-Container.placeholder {
+  position: fixed;
+  height: 100vh;
+  font-size: 50px;
+  padding-top: 50px;
+  color: var(--background-primary);
+  font-weight: bolder;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Header-logo {
+  height: 30px;
+  width: auto;
+  margin-left: 12px;
+  margin-top: 11px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.Header-logotext {
+  position: absolute;
+  left: 122px;
+  top: 2px;
+  font-size: 10px;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.expandButton {
+  background: #5f2c82;
+  background: -webkit-linear-gradient(to right, #5f2c82, transparent);
+  background: linear-gradient(to right, #5f2c82, transparent);
+
+  position: fixed;
+  width: 40px;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  opacity: 1;
+  transition: opacity .8s ease-in-out;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.expandButton.animate {
+  opacity: 0;
+}
+
+.expandButton:hover {
+  opacity: 1;
+}
+
+.Chevron {
+  position:relative;
+  display:block;
+  transform: rotateZ(-90deg);
+  height: 100px; /*height should be double border*/
+  width: 100px;
+  margin-top: -40px;
+}
+.Chevron::before,
+.Chevron::after {
+  position:absolute;
+  display:block;
+  content:"";
+  border: 50px solid transparent; /*adjust size*/
+}
+/*Change the four instances of 'top' below to rotate (top/right/bottom/left)*/
+.Chevron::before {
+  top:5px;
+  border-top-color: #fff; /*Chevron Color*/
+}
+.Chevron::after {
+  top:-5px; /*adjust thickness*/
+  border-top-color: #5f2c82; /*Match background colour*/
+}
+
+.Header-hide {
+  position: absolute;
+  top: 7px;
+  right: 8px;
 }
