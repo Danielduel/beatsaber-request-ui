@@ -56,6 +56,15 @@
   margin-right: 12px;
 }
 
+.doc__key:hover {
+  position: absolute;
+  font-size: 3em;
+  background-color: var(--background-input);
+  padding: 20px;
+  border-radius: 20px;
+  z-index: 99;
+}
+
 .SearchPage-input {
   outline: none;
 

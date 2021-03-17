@@ -26,7 +26,7 @@ const Item = (docData) => {
         </div>
         <div className="doc__cta">
           <div>Copypaste</div>
-          <div>!bsr ${docData.key}</div>
+          <div className="doc__key">!bsr {docData.key}</div>
         </div>
       </div>
     </LayoutRow>

@@ -34,7 +34,8 @@ export default function SearchPage() {
       <SearchInput
         requestSearchSong={requestSearchSong}
       />
-      { songList && !isSearching && <SearchList documentList={songList.docs} /> }
+      <LayoutRow placeholder></LayoutRow> {/* Hack for background */}
+      { !message && songList && !isSearching && <SearchList documentList={songList.docs} /> }
       <LayoutRow placeholder>{ message }</LayoutRow>
     </>
   );
