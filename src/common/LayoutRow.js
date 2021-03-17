@@ -5,7 +5,9 @@ export default function LayoutRow({
   isPrimary,
   placeholder,
   isPageHeader,
-  hasBorderBottom
+  hasBorderBottom,
+
+  style
 }) {
   const classNames = `
     LayoutRow-Container
@@ -15,7 +17,7 @@ export default function LayoutRow({
     ${placeholder ? 'placeholder' : ''}
   `;
   return ( 
-    <div className={classNames}>
+    <div style={style} className={classNames}>
       { children }
     </div>
   );

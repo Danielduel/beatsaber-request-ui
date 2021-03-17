@@ -37,5 +37,13 @@ const Item = (docData) => {
 export default function ItemList({
   documentList
 }) {
-  return documentList.map(Item);
+  const renderedItems = documentList.map(Item);
+
+  return (
+    <div className="SearchList__container">
+      <LayoutRow style={{ marginTop: "-45px" }} />
+      { renderedItems }
+      <LayoutRow />
+    </div>
+  );
 }

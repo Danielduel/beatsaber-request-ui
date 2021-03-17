@@ -8,11 +8,11 @@ import LayoutRow from '../common/LayoutRow';
 import SearchInput from './SearchInput';
 import SearchList from './SearchList';
 
-// import mock from './mock';
-
 function getMessage(isSearching, songList) {
-  if (isSearching) { return 'Searching...' }
-  if (!songList) { return 'Start searching' }
+  if (isSearching) return "Searching..."
+  if (!songList) return "Start searching"
+  if (!songList.docs) return "No docs - error"
+  if (!songList.docs.length) return "No results"
   return '';
 }
 

@@ -1,6 +1,7 @@
 :root {
   --text: #333333;
   --text-secondary: #555555;
+  --text-dimmed: #888888;
 
   --background: #CBC1CF;
   --background-primary: #BEA8C7;
@@ -16,6 +17,13 @@ input {
 
 body {
   margin: 0;
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+* {
+  font-smooth: never;
+  -webkit-font-smoothing : none;
 }
 
 .LayoutRow-Container {
@@ -69,7 +77,7 @@ body {
   background: linear-gradient(to right, #5f2c82, transparent);
 
   position: fixed;
-  width: 40px;
+  width: 70px;
   top: 0;
   bottom: 0;
   display: flex;
@@ -117,4 +125,8 @@ body {
   position: absolute;
   top: 7px;
   right: 8px;
+}
+
+.App {
+  transition: margin-left 1s;
 }

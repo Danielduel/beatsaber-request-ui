@@ -11,7 +11,9 @@ function App() {
 
   if (isExpanded) {
     return (
-      <div>
+      <div
+        className="App"
+      >
         <Header
           hidePanel={() => setExpanded(false)}
         />

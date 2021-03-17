@@ -67,7 +67,7 @@
   padding: 9px 0px 8px 53px;
   color: var(--text);
   width: 260px;
-  font-size: 20px;
+  font-size: 1.1em;
   box-sizing: border-box;
 
   margin-left: 8px;
@@ -82,8 +82,22 @@
 .SearchPage-button {
   outline: none;
   box-sizing: border-box;
-  padding: 10px 9px;
+  height: 40px;
+  padding: 4px 20px;
   margin-left: 12px;
-  border-radius: 10px;
+  border-radius: 20px;
   border: 0px solid transparent;
+
+  font-weight: normal;
+  font-size: 1.1em;
+  color: var(--text-dimmed);
+  background-color: var(--background-input);
+}
+
+.SearchList__container {
+  box-sizing: border-box;
+  max-height: calc(100vh - (52px * 2));
+  min-height: calc(100vh - (52px * 2));
+  overflow-y: scroll;
+  margin-right: -40px; /* throw scroll awwaaaaaaaay */
 }
