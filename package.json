@@ -66,7 +66,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "prepareDeploy": "npm run build && cd build && zip -r ../deploy.zip . && cd .."
+    "prepareDeploy": "rm deploy.zip && npm run build && cd build && zip -r ../deploy.zip . && cd .."
   },
   "eslintConfig": {
     "extends": "react-app"
