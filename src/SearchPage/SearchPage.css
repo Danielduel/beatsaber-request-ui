@@ -115,5 +115,5 @@
   max-height: calc(100vh - (52px * 2));
   min-height: calc(100vh - (52px * 2));
   overflow-y: scroll;
-  margin-right: -40px; /* throw scroll awwaaaaaaaay */
+  margin-right: -999999999999px; /* throw scroll awwaaaaaaaay */
 }

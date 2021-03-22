@@ -16,7 +16,7 @@ export default function LayoutRow({
     ${hasBorderBottom ? 'borderBottom' : ''}
     ${placeholder ? 'placeholder' : ''}
   `;
-  return ( 
+  return (
     <div style={style} className={classNames}>
       { children }
     </div>

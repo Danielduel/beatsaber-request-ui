@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import {
   fetchSongs
@@ -7,6 +8,13 @@ import {
 import LayoutRow from '../common/LayoutRow';
 import SearchInput from './SearchInput';
 import SearchList from './SearchList';
+
+
+const SearchPageWrapper = styled.div`
+  display: grid;
+  grid-template-rows: 52px 1fr;
+  height: 100%;
+`;
 
 function getMessage(isSearching, songList) {
   if (isSearching) return "Searching..."
@@ -27,16 +35,16 @@ export default function SearchPage() {
       .then(() => { setIsSearching(false) });
   };
 
-  const message = getMessage(isSearching, songList)
+  const message = getMessage(isSearching, songList);
+  const canRenderSearchList = !message && songList && !isSearching;
 
   return (
-    <>
+    <SearchPageWrapper>
       <SearchInput
         requestSearchSong={requestSearchSong}
       />
-      <LayoutRow placeholder></LayoutRow> {/* Hack for background */}
-      { !message && songList && !isSearching && <SearchList documentList={songList.docs} /> }
-      <LayoutRow placeholder>{ message }</LayoutRow>
-    </>
+      { canRenderSearchList && <SearchList documentList={songList.docs} /> }
+      { message && <LayoutRow placeholder>{ message }</LayoutRow> }
+    </SearchPageWrapper>
   );
 }

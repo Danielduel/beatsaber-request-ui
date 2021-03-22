@@ -19,6 +19,7 @@ body {
   margin: 0;
   height: 100vh;
   overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 * {
@@ -47,13 +48,12 @@ body {
 }
 
 .LayoutRow-Container.placeholder {
-  position: fixed;
-  height: 100vh;
   font-size: 50px;
   padding-top: 50px;
   color: var(--background-primary);
   font-weight: bolder;
   text-align: center;
+  align-self: flex-start;
 }
 
 .Header-logo {
@@ -71,62 +71,8 @@ body {
   color: white;
 }
 
-.expandButton {
-  background: #5f2c82;
-  background: -webkit-linear-gradient(to right, #5f2c82, transparent);
-  background: linear-gradient(to right, #5f2c82, transparent);
-
-  position: fixed;
-  width: 70px;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  opacity: 1;
-  transition: opacity .8s ease-in-out;
-}
-
-.expandButton.animate {
-  opacity: 0;
-}
-
-.expandButton:hover {
-  opacity: 1;
-}
-
-.Chevron {
-  position:relative;
-  display:block;
-  transform: rotateZ(-90deg);
-  height: 100px; /*height should be double border*/
-  width: 100px;
-  margin-top: -40px;
-}
-.Chevron::before,
-.Chevron::after {
-  position:absolute;
-  display:block;
-  content:"";
-  border: 50px solid transparent; /*adjust size*/
-}
-/*Change the four instances of 'top' below to rotate (top/right/bottom/left)*/
-.Chevron::before {
-  top:5px;
-  border-top-color: #fff; /*Chevron Color*/
-}
-.Chevron::after {
-  top:-5px; /*adjust thickness*/
-  border-top-color: #5f2c82; /*Match background colour*/
-}
-
 .Header-hide {
   position: absolute;
   top: 7px;
   right: 8px;
-}
-
-.App {
-  transition: margin-left 1s;
 }
