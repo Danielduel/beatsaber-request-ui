@@ -1,10 +1,20 @@
 import React from 'react';
-import './App.css';
 import styled from 'styled-components';
+import {
+  MemoryRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
+import './App.css';
 import './SearchPage/SearchPage.css';
+
+import MagnifyingGlassIcon from "./common/icons/MagnifyingGlassIcon";
+import InfoIcon from "./common/icons/InfoIcon";
 import Header from './Header/Header';
 import SearchPage from './SearchPage/SearchPage';
+import InfoPage from "./InfoPage/InfoPage";
 
 const AppWrapper = styled.div`
   transition: margin-left 1s;
@@ -69,19 +79,43 @@ const AppUnexpandedChevron = styled.i`
   }
 `;
 
+const HeaderLinkWrapper = styled.div`
+  margin-left: 15px;
+  border: 0px solid transparent;
+  background-color: #fff;
+  box-sizing: border-box;
+  width: 45px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding-top: 4px;
+`;
+
 function App() {
   const [ isExpanded, setExpanded ] = React.useState(true);
 
   if (isExpanded) {
     return (
-      <AppWrapper>
-        <Header
-          hidePanel={() => setExpanded(false)}
-        />
-        <AppPageContainer>
-          <SearchPage />
-        </AppPageContainer>
-      </AppWrapper>
+      <Router>
+        <AppWrapper>
+          <Header hidePanel={() => setExpanded(false)}>
+            <HeaderLinkWrapper><Link to="/"><MagnifyingGlassIcon /></Link></HeaderLinkWrapper>
+            <HeaderLinkWrapper><Link to="/info"><InfoIcon /></Link></HeaderLinkWrapper>
+          </Header>
+          <AppPageContainer>
+            <Switch>
+              <Route exact path="/">
+                <SearchPage />
+              </Route>
+              <Route path="/info">
+                <InfoPage />
+              </Route>
+            </Switch>
+          </AppPageContainer>
+        </AppWrapper>
+      </Router>
     );
   }
 
