@@ -15,7 +15,15 @@ Table of contents:
 0. Changelog
 
 0.0.2:
-22 March 2021 - Replace "command" (cta) tooltip with the copy button
+22 March 2021:
+Replace "command" (cta) tooltip with the copy button
+Fix partial-pixel component position glitches
+Change extension name to "Beatsaber Request UI" (the extension page, not code)
+Add sections in the header
+Add Search section leading to the search
+Add Info section leading to the information page (internal - with version and link to the repository)
+Make search section to be open by default
+Add information page with links to the extension page, this repo issue tracker, link leading to the repo and the actual version of this extension
 
 0.0.1: (already verified)
 18 March 2021 - Add expand/unexpand and searching functionality
