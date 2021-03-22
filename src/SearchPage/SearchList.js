@@ -1,7 +1,9 @@
 import React from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import LayoutRow from '../common/LayoutRow';
 
 const Item = (docData) => {
+  const [ copied, setCopied ] = React.useState(false);
   const coverURL = `https://beatsaver.com${docData.coverURL}`;
   const allVotes = docData.stats.upVotes + docData.stats.downVotes;
   const percentVotes = (~~((docData.stats.upVotes / allVotes) * 1000)) / 10;
@@ -25,8 +27,16 @@ const Item = (docData) => {
           <div className="doc__score--percentvotes">{percentVotes}% 💯</div>
         </div>
         <div className="doc__cta">
-          <div>Copypaste</div>
-          <div className="doc__key">!bsr {docData.key}</div>
+          {
+            !copied ? (
+              <CopyToClipboard text={`!bsr ${docData.key}`}
+                onCopy={() => setCopied(true)}>
+                <button>Copy 📋</button>
+              </CopyToClipboard>
+            ) : (
+              <div>Paste on chat<br />to make request</div>
+            )
+          }
         </div>
       </div>
     </LayoutRow>

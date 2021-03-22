@@ -14,7 +14,11 @@ Table of contents:
 
 0. Changelog
 
-18 March 2021 (latest) - Add expand/unexpand and searching functionality
+0.0.2:
+22 March 2021 - Replace "command" (cta) tooltip with the copy button
+
+0.0.1: (already verified)
+18 March 2021 - Add expand/unexpand and searching functionality
 
 1. Motivation
 
@@ -46,8 +50,9 @@ Search is using https://beatsaver.com/ as a dataset and backend.
 
 Users can search for maps using input and the "Search" button.
 The extension is showing the result of the search as a list with different data fields.
-Fields such as key and "!bsr {key}" are magnified when hovering over them to make
-copy-pasting easier.
+Fields such as key <del>and "!bsr {key}" are</del> is magnified when hovering over
+them to make copy-pasting easier. 
+Last field is a button which copies command to the clipboard to be pasted into the chat.
 While searching - the extension should communicate that to the user.
 In case of no results - the extension should communicate that to the user.
 
