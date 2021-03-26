@@ -27,50 +27,63 @@ const AppPageContainer = styled.div`
 `;
 
 const AppUnexpandedWrapper = styled.div`
-  opacity: 1;
   background: #5f2c82;
-  background: -webkit-linear-gradient(to right, #5f2c82, transparent);
-  background: linear-gradient(to right, #5f2c82, transparent);
+
+  animation-name: initialBubbleAnimation;
+  animation-duration: 1s;
 
   position: fixed;
-  width: 70px;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 30px;
+  height: 30px;
 
-  transition: opacity 0.8s ease-in-out;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 4px solid #210633;
 
-  &:not(:hover) {
-    opacity: 0;
+  margin: calc(5rem + 35px);
+
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    height: 70px;
+    width: 70px;
+  }
+
+  &:hover > div {
+    visibility: visible;
+    opacity: 1;
   }
 `;
 
-const AppUnexpandedChevron = styled.i`
+const AppUnexpandedTooltip = styled.div`
+  width: 200px;
   position: relative;
-  display: block;
-  transform: rotateZ(-90deg);
-  height: 100px; /*height should be double border*/
-  width: 100px;
-  margin-top: -40px;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 15px 20px;
+  animation-name: initialBubbleTooltipAnimation;
+  animation-duration: 4s;
 
-  &::before,
-  &::after {
+  &:before {
+    height: 30px;
+    width: 5px;
+    background: black;
     position: absolute;
-    display: block;
-    content: "";
-    border: 50px solid transparent; /*adjust size*/
+    top: 0;
+    left: 0;
+    content: " ";
   }
-
-  /*Change the four instances of 'top' below to rotate (top/right/bottom/left)*/
-  &::before {
-    top: 5px;
-    border-top-color: #fff; /* Chevron Color*/
-  }
-  &::after {
-    top: -5px; /*adjust thickness*/
-    border-top-color: #5f2c82; /*Match background colour*/
+  &:after {
+    height: 5px;
+    width: 30px;
+    background: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: " ";
   }
 `;
 
@@ -89,7 +102,7 @@ const HeaderLinkWrapper = styled.div`
 `;
 
 function App() {
-  const [isExpanded, setExpanded] = React.useState(true);
+  const [isExpanded, setExpanded] = React.useState(false);
 
   if (isExpanded) {
     return (
@@ -124,7 +137,11 @@ function App() {
 
   return (
     <AppUnexpandedWrapper onClick={() => setExpanded(true)}>
-      <AppUnexpandedChevron />
+      <AppUnexpandedTooltip>
+        Click to open an extension,
+        <br />
+        this should make it easier to make requests.
+      </AppUnexpandedTooltip>
     </AppUnexpandedWrapper>
   );
 }

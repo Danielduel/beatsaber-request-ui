@@ -22,8 +22,9 @@ Use prettier
 Use eslint
 Don't offer automatically generated maps in the results (for now, will add optional checkbox in future)
 Typed common response data from beatsaver
+Don't render big panel at start, just a bubble with animation and a little tooltip
 
-0.0.2:(already verified)
+0.0.2: (already verified)
 22 March 2021:
 Replace "command" (cta) tooltip with the copy button
 Fix partial-pixel component position glitches

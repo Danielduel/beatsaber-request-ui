@@ -76,3 +76,30 @@ body {
   top: 7px;
   right: 8px;
 }
+
+@keyframes initialBubbleAnimation {
+  0% {
+    width: 90px;
+    height: 90px;
+  }
+  80% {
+    width: 20px;
+    height: 20px;
+  }
+  100% {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@keyframes initialBubbleTooltipAnimation {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
