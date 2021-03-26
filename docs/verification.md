@@ -5,16 +5,25 @@ URL of repository:
 https://github.com/Duelsik/beatsaber-request-ui
 
 Table of contents:
-* 0 - Changelog
-* 1 - Motivation
-* 2 - Main functions
-  * 2a - Expand/Unexpand
-  * 2b - Searching
-* 3 - Code verification tips
+
+- 0 - Changelog
+- 1 - Motivation
+- 2 - Main functions
+  - 2a - Expand/Unexpand
+  - 2b - Searching
+- 3 - Code verification tips
 
 0. Changelog
 
-0.0.2:
+0.0.3:
+26 March 2021:
+Switch app to typescript
+Use prettier
+Use eslint
+Don't offer automatically generated maps in the results (for now, will add optional checkbox in future)
+Typed common response data from beatsaver
+
+0.0.2:(already verified)
 22 March 2021:
 Replace "command" (cta) tooltip with the copy button
 Fix partial-pixel component position glitches
@@ -25,7 +34,7 @@ Add Info section leading to the information page (internal - with version and li
 Make search section to be open by default
 Add information page with links to the extension page, this repo issue tracker, link leading to the repo and the actual version of this extension
 
-0.0.1: (already verified)
+0.0.1:
 18 March 2021 - Add expand/unexpand and searching functionality
 
 1. Motivation
@@ -59,7 +68,7 @@ Search is using https://beatsaver.com/ as a dataset and backend.
 Users can search for maps using input and the "Search" button.
 The extension is showing the result of the search as a list with different data fields.
 Fields such as key <del>and "!bsr {key}" are</del> is magnified when hovering over
-them to make copy-pasting easier. 
+them to make copy-pasting easier.
 Last field is a button which copies command to the clipboard to be pasted into the chat.
 While searching - the extension should communicate that to the user.
 In case of no results - the extension should communicate that to the user.

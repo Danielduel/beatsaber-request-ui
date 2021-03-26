@@ -1,19 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
-import {
-  MemoryRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import React from "react";
+import styled from "styled-components";
+import { MemoryRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import './App.css';
-import './SearchPage/SearchPage.css';
+import "./App.css";
+import "./SearchPage/SearchPage.css";
 
 import MagnifyingGlassIcon from "./common/icons/MagnifyingGlassIcon";
 import InfoIcon from "./common/icons/InfoIcon";
-import Header from './Header/Header';
-import SearchPage from './SearchPage/SearchPage';
+import Header from "./Header/Header";
+import SearchPage from "./SearchPage/SearchPage";
 import InfoPage from "./InfoPage/InfoPage";
 
 const AppWrapper = styled.div`
@@ -44,8 +39,8 @@ const AppUnexpandedWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  transition: opacity .8s ease-in-out;
+
+  transition: opacity 0.8s ease-in-out;
 
   &:not(:hover) {
     opacity: 0;
@@ -94,15 +89,23 @@ const HeaderLinkWrapper = styled.div`
 `;
 
 function App() {
-  const [ isExpanded, setExpanded ] = React.useState(true);
+  const [isExpanded, setExpanded] = React.useState(true);
 
   if (isExpanded) {
     return (
       <Router>
         <AppWrapper>
           <Header hidePanel={() => setExpanded(false)}>
-            <HeaderLinkWrapper><Link to="/"><MagnifyingGlassIcon /></Link></HeaderLinkWrapper>
-            <HeaderLinkWrapper><Link to="/info"><InfoIcon /></Link></HeaderLinkWrapper>
+            <HeaderLinkWrapper>
+              <Link to="/">
+                <MagnifyingGlassIcon />
+              </Link>
+            </HeaderLinkWrapper>
+            <HeaderLinkWrapper>
+              <Link to="/info">
+                <InfoIcon />
+              </Link>
+            </HeaderLinkWrapper>
           </Header>
           <AppPageContainer>
             <Switch>
@@ -120,13 +123,10 @@ function App() {
   }
 
   return (
-    <AppUnexpandedWrapper
-      onClick={() => setExpanded(true)}
-    >
+    <AppUnexpandedWrapper onClick={() => setExpanded(true)}>
       <AppUnexpandedChevron />
     </AppUnexpandedWrapper>
-  )
+  );
 }
-
 
 export default App;

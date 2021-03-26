@@ -33,7 +33,8 @@
   color: var(--text);
   font-size: 12px;
 }
-.doc__author, .doc__mapper {
+.doc__author,
+.doc__mapper {
   color: var(--text-secondary);
   font-size: 10px;
   margin-left: 5px;

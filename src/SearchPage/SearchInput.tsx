@@ -1,11 +1,9 @@
-import React from 'react';
-import LayoutRow from '../common/LayoutRow';
+import React from "react";
+import LayoutRow from "../common/LayoutRow";
 import MagnifyingGlassIcon from "../common/icons/MagnifyingGlassIcon";
 
-export default function ItemList({
-  requestSearchSong
-}) {
-  const [query, setQuery] = React.useState('');
+export default function ItemList({ requestSearchSong }: { requestSearchSong: (query: string) => void }) {
+  const [query, setQuery] = React.useState("");
 
   return (
     <LayoutRow isPageHeader>
@@ -14,17 +12,14 @@ export default function ItemList({
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         placeholder="Enter song name"
-        onKeyUp={e => {
+        onKeyUp={(e) => {
           if (e.key === "Enter") {
-            requestSearchSong(query)
+            requestSearchSong(query);
           }
         }}
       />
       <MagnifyingGlassIcon />
-      <button
-        className="SearchPage-button"
-        onClick={() => requestSearchSong(query)}
-      >
+      <button className="SearchPage-button" onClick={() => requestSearchSong(query)}>
         Search
       </button>
     </LayoutRow>

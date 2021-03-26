@@ -1,17 +1,20 @@
-import React from 'react';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import LayoutRow from '../common/LayoutRow';
+import React from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import LayoutRow from "../common/LayoutRow";
+import { SongListDocsItem } from "./SearchPage";
 
-const Item = (docData) => {
-  const [ copied, setCopied ] = React.useState(false);
+const Item = (docData: SongListDocsItem) => {
+  const [copied, setCopied] = React.useState(false);
   const coverURL = `https://beatsaver.com${docData.coverURL}`;
   const allVotes = docData.stats.upVotes + docData.stats.downVotes;
-  const percentVotes = (~~((docData.stats.upVotes / allVotes) * 1000)) / 10;
+  const percentVotes = ~~((docData.stats.upVotes / allVotes) * 1000) / 10;
 
-   return (
+  return (
     <LayoutRow hasBorderBottom>
       <div className="doc__container">
-        <div className="doc__cover"><img src={coverURL} /></div>
+        <div className="doc__cover">
+          <img src={coverURL} />
+        </div>
         <div className="doc__mapdata">
           <div className="doc__name">{docData.metadata.songName}</div>
           <div className="doc__author">{docData.metadata.songAuthorName}</div>
@@ -27,32 +30,30 @@ const Item = (docData) => {
           <div className="doc__score--percentvotes">{percentVotes}% 💯</div>
         </div>
         <div className="doc__cta">
-          {
-            !copied ? (
-              <CopyToClipboard text={`!bsr ${docData.key}`}
-                onCopy={() => setCopied(true)}>
-                <button>Copy 📋</button>
-              </CopyToClipboard>
-            ) : (
-              <div>Paste on chat<br />to make request</div>
-            )
-          }
+          {!copied ? (
+            <CopyToClipboard text={`!bsr ${docData.key}`} onCopy={() => setCopied(true)}>
+              <button>Copy 📋</button>
+            </CopyToClipboard>
+          ) : (
+            <div>
+              Paste on chat
+              <br />
+              to make request
+            </div>
+          )}
         </div>
       </div>
     </LayoutRow>
-   );
-
+  );
 };
 
-export default function ItemList({
-  documentList
-}) {
+export default function ItemList({ documentList }: { documentList: SongListDocsItem[] }) {
   const renderedItems = documentList.map(Item);
 
   return (
     <div className="SearchList__container">
       <LayoutRow style={{ marginTop: "-45px" }} />
-      { renderedItems }
+      {renderedItems}
       <LayoutRow />
     </div>
   );
