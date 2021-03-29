@@ -54,8 +54,6 @@ module.exports = {
   appPath: resolveApp('.'),
   appBuild: resolveApp('build'),
   appPublic: resolveApp('public'),
-  appHtml: resolveApp('public/index.html'),
-  appIndexJs: resolveModule(resolveApp, 'src/index'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   appTsConfig: resolveApp('tsconfig.json'),
@@ -65,6 +63,23 @@ module.exports = {
   proxySetup: resolveApp('src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrlOrPath,
+  apps: {
+    fullvideo: {
+      appHtml: resolveApp('public/fullvideo.html'),
+      appIndexJs: resolveModule(resolveApp, 'src/index-fullvideo'),
+      excludeChunks: ["config", "mobile"]
+    },
+    config: {
+      appHtml: resolveApp('public/config.html'),
+      appIndexJs: resolveModule(resolveApp, 'src/index-config'),
+      excludeChunks: ["fullvideo", "mobile"]
+    },
+    mobile: {
+      appHtml: resolveApp('public/mobile.html'),
+      appIndexJs: resolveModule(resolveApp, 'src/index-mobile'),
+      excludeChunks: ["config", "fullvideo"]
+    }
+  }
 };
 
 
