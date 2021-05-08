@@ -23,6 +23,11 @@ Use eslint
 Don't offer automatically generated maps in the results (for now, will add optional checkbox in future)
 Typed common response data from beatsaver
 Don't render big panel at start, just a bubble with animation and a little tooltip
+08 May 2021:
+Finish codesplit to config, mobile and fullvideo extension (config and mobile are only for test)
+Reformat project
+Fix prettier config
+Update docs about functions
 
 0.0.2: (already verified)
 22 March 2021:
@@ -35,7 +40,7 @@ Add Info section leading to the information page (internal - with version and li
 Make search section to be open by default
 Add information page with links to the extension page, this repo issue tracker, link leading to the repo and the actual version of this extension
 
-0.0.1:
+0.0.1: (already verified)
 18 March 2021 - Add expand/unexpand and searching functionality
 
 1. Motivation
@@ -50,6 +55,8 @@ So in short - it should make user life easier and serve as an easy-to-use tool.
 
 2a. Expand/Unexpand
 
+(Fullvideo-only feature)
+(App starts as non-expanded, because viewers this is something on the streamer side)
 Users can hide and show the extension panel.
 
 Hiding:
@@ -57,8 +64,7 @@ Click the cross icon in the top right segment of the extension.
 The extension pane should hide.
 
 Showing:
-Hover over the very left part of the extension container.
-Chevron should appear, click it.
+Click on the small bubble in top left part of the video.
 The extension pane should appear.
 (this also is resetting the state of deeper elements like Search state)
 

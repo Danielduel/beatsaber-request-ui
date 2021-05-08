@@ -14,6 +14,7 @@
 .doc__cover {
   min-height: 50px;
   min-width: 52px;
+  flex: 52 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +27,7 @@
 
 .doc__mapdata {
   padding-left: 7px;
-  width: 226px;
+  flex: 226 0;
   border-right: 1px solid var(--border);
 }
 .doc__name {
@@ -41,12 +42,14 @@
 }
 
 .doc__saverdata {
+  flex: 50;
   padding-left: 8px;
   color: #000000;
   font-size: 10px;
 }
 
 .doc__scoredata {
+  flex: 50;
   padding-left: 12px;
   color: #000000;
   font-size: 10px;
@@ -55,7 +58,7 @@
 .doc__cta {
   margin-left: auto;
   margin-right: 10px;
-  width: 100px;
+  flex: 100 0;
   align-self: center;
   text-align: center;
 }
@@ -83,7 +86,7 @@
 
   padding: 9px 0px 8px 53px;
   color: var(--text);
-  width: 260px;
+  flex: 260 0;
   font-size: 1.1em;
   box-sizing: border-box;
 

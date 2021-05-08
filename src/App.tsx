@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import { MemoryRouter as Router, Switch, Route, Link } from "react-router-dom";
 
@@ -15,7 +15,9 @@ const AppWrapper = styled.div`
   transition: margin-left 1s;
 
   height: 100vh;
-  width: 500px;
+  width: min(100vw, 500px);
+  overflow-x: hidden;
+  position: relative;
 
   grid-template-rows: 52px 1fr;
 
@@ -101,42 +103,56 @@ const HeaderLinkWrapper = styled.div`
   padding-top: 4px;
 `;
 
-function App() {
+type MainAppProps = {
+  togglePanel: ((state: boolean) => void) | null;
+};
+
+const MainApp = ({ togglePanel }: MainAppProps): JSX.Element => {
+  return (
+    <Router>
+      <AppWrapper>
+        <Header togglePanel={togglePanel}>
+          <HeaderLinkWrapper>
+            <Link to="/">
+              <MagnifyingGlassIcon />
+            </Link>
+          </HeaderLinkWrapper>
+          <HeaderLinkWrapper>
+            <Link to="/info">
+              <InfoIcon />
+            </Link>
+          </HeaderLinkWrapper>
+        </Header>
+        <AppPageContainer>
+          <Switch>
+            <Route exact path="/">
+              <SearchPage />
+            </Route>
+            <Route path="/info">
+              <InfoPage />
+            </Route>
+          </Switch>
+        </AppPageContainer>
+      </AppWrapper>
+    </Router>
+  );
+};
+
+export function FullVideoApp(): JSX.Element {
   const [isExpanded, setExpanded] = React.useState(false);
+  const togglePanel = useCallback(
+    (state: boolean) => {
+      setExpanded(state);
+    },
+    [setExpanded]
+  );
 
   if (isExpanded) {
-    return (
-      <Router>
-        <AppWrapper>
-          <Header hidePanel={() => setExpanded(false)}>
-            <HeaderLinkWrapper>
-              <Link to="/">
-                <MagnifyingGlassIcon />
-              </Link>
-            </HeaderLinkWrapper>
-            <HeaderLinkWrapper>
-              <Link to="/info">
-                <InfoIcon />
-              </Link>
-            </HeaderLinkWrapper>
-          </Header>
-          <AppPageContainer>
-            <Switch>
-              <Route exact path="/">
-                <SearchPage />
-              </Route>
-              <Route path="/info">
-                <InfoPage />
-              </Route>
-            </Switch>
-          </AppPageContainer>
-        </AppWrapper>
-      </Router>
-    );
+    return <MainApp togglePanel={togglePanel} />;
   }
 
   return (
-    <AppUnexpandedWrapper onClick={() => setExpanded(true)}>
+    <AppUnexpandedWrapper onClick={() => togglePanel(true)}>
       <AppUnexpandedTooltip>
         Click to open an extension,
         <br />
@@ -146,4 +162,6 @@ function App() {
   );
 }
 
-export default App;
+export function MobileApp(): JSX.Element {
+  return <MainApp togglePanel={null} />;
+}

@@ -10,7 +10,7 @@ const InfoPageWrapper = styled.div`
 export default function InfoPage() {
   return (
     <InfoPageWrapper>
-      Version: 0.0.2 (very alpha)
+      Version: 0.0.3 (very alpha)
       <br />
       <br />
       <br />
