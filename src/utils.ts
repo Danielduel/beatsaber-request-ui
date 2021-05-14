@@ -1,5 +1,5 @@
-export function fetchSongs(query = "", automapper = 0) {
-  const url = `https://beatsaver.com/api/search/text/0?q=${query}&?automapper=${automapper}`;
+export function fetchSongs(query = "", automapper = "0") {
+  const url = `https://beatsaver.com/api/search/text/0?q=${query}&automapper=${automapper}`;
 
   return fetch(url)
     .then(function (response) {

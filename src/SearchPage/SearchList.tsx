@@ -3,11 +3,36 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import LayoutRow from "../common/LayoutRow";
 import { SongListDocsItem } from "./SearchPage";
 
+// Trimmed LowerCase
+const stringTLC = (s: string) => s.toLocaleLowerCase().trim();
+
+const autoMappers = ["Beat Sage", "Deep Saber"];
+const autoMappersTLC = autoMappers.map(stringTLC);
+
+const isCreatedByAutomapper = (docData: SongListDocsItem) => {
+  const songNameTLC = stringTLC(docData.metadata.songName);
+  const songAuthorNameTLC = stringTLC(docData.metadata.songAuthorName);
+  const levelAuthorNameTLC = stringTLC(docData.metadata.levelAuthorName);
+
+  return autoMappersTLC
+    .some(autoMapperTLC => {
+      return (
+        songNameTLC.includes(autoMapperTLC) ||
+        songAuthorNameTLC.includes(autoMapperTLC) ||
+        levelAuthorNameTLC.includes(autoMapperTLC)
+      )
+    });
+};
+
 const Item = (docData: SongListDocsItem) => {
   const [copied, setCopied] = React.useState(false);
   const coverURL = `https://beatsaver.com${docData.coverURL}`;
   const allVotes = docData.stats.upVotes + docData.stats.downVotes;
   const percentVotes = ~~((docData.stats.upVotes / allVotes) * 1000) / 10;
+
+  const shouldBeHidden = isCreatedByAutomapper(docData);
+
+  if (shouldBeHidden) return <></>;
 
   return (
     <LayoutRow hasBorderBottom>
