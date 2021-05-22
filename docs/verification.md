@@ -22,7 +22,8 @@ Table of contents:
 Initialize internationalization
 (fix) Change button style when hovering over search and copy button
 Minor refactor of button feel
-(tech) Stabilise return types
+(tech) Stabilize return types
+Add autofocus on searchbar input
 
 
 0.0.3:

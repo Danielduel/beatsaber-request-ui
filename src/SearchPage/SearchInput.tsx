@@ -34,6 +34,7 @@ export default function ItemList({ requestSearchSong }: { requestSearchSong: (qu
     <LayoutRow isPageHeader>
       <input
         className="SearchPage-input"
+        autoFocus
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         placeholder={t("Enter song name")}
