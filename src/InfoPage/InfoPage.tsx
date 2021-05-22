@@ -7,7 +7,7 @@ const InfoPageWrapper = styled.div`
   padding: 20px 10px;
 `;
 
-export default function InfoPage() {
+export default function InfoPage(): JSX.Element {
   return (
     <InfoPageWrapper>
       Version: 0.0.4 (very alpha)

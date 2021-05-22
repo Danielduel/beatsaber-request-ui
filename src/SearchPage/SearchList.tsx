@@ -1,6 +1,7 @@
 import React from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Translation } from "react-i18next";
+import styled from "styled-components";
 import LayoutRow from "../common/LayoutRow";
 import { SongListDocsItem } from "./SearchPage";
 
@@ -9,6 +10,27 @@ const stringTLC = (s: string) => s.toLocaleLowerCase().trim();
 
 const autoMappers = ["Beat Sage", "Deep Saber"];
 const autoMappersTLC = autoMappers.map(stringTLC);
+
+const CopyButton = styled.button`
+  outline: none;
+  box-sizing: border-box;
+  height: 40px;
+  padding: 10px 10px;
+  margin-left: 12px;
+  border-radius: 20px;
+  border: 0px solid transparent;
+  cursor: pointer;
+
+  font-weight: normal;
+  font-size: 0.8rem;
+  color: var(--text);
+  background-color: var(--background-input);
+  opacity: 0.9;
+
+  &:hover {
+    opacity: 1;
+  }
+`;
 
 const isCreatedByAutomapper = (docData: SongListDocsItem) => {
   const songNameTLC = stringTLC(docData.metadata.songName);
@@ -57,9 +79,9 @@ const Item = (docData: SongListDocsItem) => {
         <div className="doc__cta">
           {!copied ? (
             <CopyToClipboard text={`!bsr ${docData.key}`} onCopy={() => setCopied(true)}>
-              <button>
+              <CopyButton>
                 <Translation>{(t) => t("Copy")}</Translation> 📋
-              </button>
+              </CopyButton>
             </CopyToClipboard>
           ) : (
             <div>
@@ -74,7 +96,7 @@ const Item = (docData: SongListDocsItem) => {
   );
 };
 
-export default function ItemList({ documentList }: { documentList: SongListDocsItem[] }) {
+export default function ItemList({ documentList }: { documentList: SongListDocsItem[] }): JSX.Element {
   const renderedItems = documentList.map(Item);
 
   return (

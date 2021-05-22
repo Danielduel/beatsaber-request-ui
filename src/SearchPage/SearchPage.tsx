@@ -1,4 +1,4 @@
-declare const Twitch: any;
+// declare const Twitch: any;
 
 import React from "react";
 import styled from "styled-components";
@@ -45,7 +45,7 @@ export type SongListDocsItem = {
   };
   stats: { downloads: number; plays: number; downVotes: number; upVotes: number; heat: number; rating: number };
   description: string;
-  deletedAt: null | any;
+  deletedAt: null | string;
   _id: string;
   key: string;
   name: string;
@@ -75,7 +75,7 @@ function getMessage(isSearching: boolean, songList: SongListType | null) {
   return "";
 }
 
-export default function SearchPage() {
+export default function SearchPage(): JSX.Element {
   const [songList, setSongList] = React.useState<SongListType | null>(null);
   const [isSearching, setIsSearching] = React.useState(false);
 
