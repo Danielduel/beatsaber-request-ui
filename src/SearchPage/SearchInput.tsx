@@ -18,6 +18,7 @@ const SearchButton = styled.button`
   font-size: 1.1rem;
   color: var(--text-secondary);
   background-color: var(--background-input);
+  transition: opacity 0.3s;
 
   opacity: ${({ disabled }: { disabled: boolean }) => (disabled ? "0.5" : "0.9")};
 
@@ -26,13 +27,39 @@ const SearchButton = styled.button`
   }
 `;
 
+const ClearButton = styled.span`
+  line-height: 0;
+  background: var(--background);
+  margin-left: -37px;
+  margin-top: 3px;
+  border: 1px solid var(--background-primary);
+  border-radius: 50%;
+  padding: 4px;
+  opacity: 0.9;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const SearchInput = styled.input`
+  padding-right: 40px;
+`;
+
 export default function ItemList({ requestSearchSong }: { requestSearchSong: (query: string) => void }): JSX.Element {
   const [query, setQuery] = React.useState("");
   const [t] = useTranslation();
 
   return (
     <LayoutRow isPageHeader>
-      <input
+      <SearchInput
         className="SearchPage-input"
         autoFocus
         value={query}
@@ -45,6 +72,7 @@ export default function ItemList({ requestSearchSong }: { requestSearchSong: (qu
         }}
       />
       <MagnifyingGlassIcon />
+      {query.length ? <ClearButton onClick={() => setQuery("")}>❌</ClearButton> : null}
       <SearchButton disabled={!query.trim().length} onClick={() => requestSearchSong(query)}>
         {t("Search")}
       </SearchButton>

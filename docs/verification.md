@@ -24,7 +24,7 @@ Initialize internationalization
 Minor refactor of button feel
 (tech) Stabilize return types
 Add autofocus on searchbar input
-
+Add clear button to searchbar input
 
 0.0.3:
 26 March 2021:
