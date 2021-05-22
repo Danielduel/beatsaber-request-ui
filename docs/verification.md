@@ -25,8 +25,10 @@ Minor refactor of button feel
 (tech) Stabilize return types
 Add autofocus on searchbar input
 Add clear button to searchbar input
+23 May 2021
+Update page meta
 
-0.0.3:
+0.0.3: (already verified)
 26 March 2021:
 Switch app to typescript
 Use prettier
