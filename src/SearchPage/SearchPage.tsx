@@ -1,3 +1,5 @@
+declare const Twitch: any;
+
 import React from "react";
 import styled from "styled-components";
 
@@ -6,6 +8,7 @@ import { fetchSongs, isNotNull } from "../utils";
 import LayoutRow from "../common/LayoutRow";
 import SearchInput from "./SearchInput";
 import SearchList from "./SearchList";
+import { Translation } from "react-i18next";
 
 export type SongListDocsItemMetadataCharacteristicsDifficultiesEntry = {
   duration: number;
@@ -65,10 +68,10 @@ const SearchPageWrapper = styled.div`
 `;
 
 function getMessage(isSearching: boolean, songList: SongListType | null) {
-  if (isSearching) return "Searching...";
-  if (!songList) return "Start searching";
-  if (!songList.docs) return "No docs - error";
-  if (!songList.docs.length) return "No results";
+  if (isSearching) return <Translation>{(t) => t("Searching...")}</Translation>;
+  if (!songList) return <Translation>{(t) => t("Start searching")}</Translation>;
+  if (!songList.docs) return <Translation>{(t) => t("No docs - error")}</Translation>;
+  if (!songList.docs.length) return <Translation>{(t) => t("No results")}</Translation>;
   return "";
 }
 

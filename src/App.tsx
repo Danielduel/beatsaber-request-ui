@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import { Translation } from "react-i18next";
 import styled from "styled-components";
 import { MemoryRouter as Router, Switch, Route, Link } from "react-router-dom";
 
@@ -10,6 +11,8 @@ import InfoIcon from "./common/icons/InfoIcon";
 import Header from "./Header/Header";
 import SearchPage from "./SearchPage/SearchPage";
 import InfoPage from "./InfoPage/InfoPage";
+
+import "./i18n/init-i18n";
 
 const AppWrapper = styled.div`
   transition: margin-left 1s;
@@ -154,9 +157,9 @@ export function FullVideoApp(): JSX.Element {
   return (
     <AppUnexpandedWrapper onClick={() => togglePanel(true)}>
       <AppUnexpandedTooltip>
-        Click to open an extension,
+        <Translation>{(t) => t("Click to open an extension")}</Translation>
         <br />
-        this should make it easier to make requests.
+        <Translation>{(t) => t("this should make it easier to make requests")}</Translation>
       </AppUnexpandedTooltip>
     </AppUnexpandedWrapper>
   );

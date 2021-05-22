@@ -10,7 +10,7 @@ const InfoPageWrapper = styled.div`
 export default function InfoPage() {
   return (
     <InfoPageWrapper>
-      Version: 0.0.3 (very alpha)
+      Version: 0.0.4 (very alpha)
       <br />
       <br />
       <br />
@@ -19,6 +19,10 @@ export default function InfoPage() {
       <br />
       <br />
       This extension is opensource! https://github.com/Duelsik/beatsaber-request-ui
+      <br />
+      <br />
+      <br />
+      If you want to help with translations - feel free to create an issue on github to get in touch
     </InfoPageWrapper>
   );
 }

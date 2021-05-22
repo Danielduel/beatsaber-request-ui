@@ -1,4 +1,5 @@
 import React from "react";
+import { Translation } from "react-i18next";
 import styled from "styled-components";
 import LayoutRow from "../common/LayoutRow";
 
@@ -27,7 +28,10 @@ const Header = ({ togglePanel, children }: HeaderProps): JSX.Element => {
   return (
     <LayoutRow isPrimary>
       <img className="Header-logo" src="https://beatsaver.com/beat_saver_logo_white.a01a4b8f.png" />
-      <span className="Header-logotext">Powered by</span>
+
+      <span className="Header-logotext">
+        <Translation>{(t) => t("Powered by")}</Translation>
+      </span>
       {togglePanel && (
         <CloseButtonContainer className="Header-hide" onClick={() => togglePanel(false)}>
           <svg width="40" height="35" viewBox="0 0 40 35" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -1,5 +1,6 @@
 import React from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { Translation } from "react-i18next";
 import LayoutRow from "../common/LayoutRow";
 import { SongListDocsItem } from "./SearchPage";
 
@@ -14,14 +15,13 @@ const isCreatedByAutomapper = (docData: SongListDocsItem) => {
   const songAuthorNameTLC = stringTLC(docData.metadata.songAuthorName);
   const levelAuthorNameTLC = stringTLC(docData.metadata.levelAuthorName);
 
-  return autoMappersTLC
-    .some(autoMapperTLC => {
-      return (
-        songNameTLC.includes(autoMapperTLC) ||
-        songAuthorNameTLC.includes(autoMapperTLC) ||
-        levelAuthorNameTLC.includes(autoMapperTLC)
-      )
-    });
+  return autoMappersTLC.some((autoMapperTLC) => {
+    return (
+      songNameTLC.includes(autoMapperTLC) ||
+      songAuthorNameTLC.includes(autoMapperTLC) ||
+      levelAuthorNameTLC.includes(autoMapperTLC)
+    );
+  });
 };
 
 const Item = (docData: SongListDocsItem) => {
@@ -57,13 +57,15 @@ const Item = (docData: SongListDocsItem) => {
         <div className="doc__cta">
           {!copied ? (
             <CopyToClipboard text={`!bsr ${docData.key}`} onCopy={() => setCopied(true)}>
-              <button>Copy 📋</button>
+              <button>
+                <Translation>{(t) => t("Copy")}</Translation> 📋
+              </button>
             </CopyToClipboard>
           ) : (
             <div>
-              Paste on chat
+              <Translation>{(t) => t("Paste on chat")}</Translation>
               <br />
-              to make request
+              <Translation>{(t) => t("to make request")}</Translation>
             </div>
           )}
         </div>
