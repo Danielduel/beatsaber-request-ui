@@ -18,6 +18,7 @@ Table of contents:
 0.0.5:
 24 May 2021
 (feature) Add a language selector
+(docs) Clean this (`verification.md`) file
 
 0.0.4:
 14 May 2021
@@ -104,9 +105,10 @@ Hi another developer.
 Generally, this is an ejected react app.
 I've ejected that because I had to inject twitch scripts and do changes to allow
 testing it locally (and I think there were more problems, but I don't remember).
+(And building config/mobile/fullvideo... as separate apps from one codebase)
 
-I think you should start by a quick look in `/public/index.html` and see that twitch
-script is interpreted before everything else.
+I think you should start by a quick look on `/public/index-config.html`, `/public/index-fullvideo.html` and 
+`/public/index-mobile.html` to see that twitch script is interpreted before everything else.
 
 And then...
 
@@ -118,7 +120,4 @@ See `/src` folder:
 
 Note:
 I use `/src/SearchPage/mock` while developing to not hit API rate limits during
-HMD reloads and this is not a part of the final build.
-
-Also:
-I am looking into styled-components and using typescript in the future, just wanted to make a quick start.
+HMR reloads and this is not a part of the final build.
