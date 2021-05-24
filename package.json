@@ -82,6 +82,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
+    "zip": "yarn prepareDeploy",
     "prepareDeploy": "(rm deploy.zip || true) && npm run build && cd build && zip -r ../deploy.zip . && cd .."
   },
   "eslintConfig": {

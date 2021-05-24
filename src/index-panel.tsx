@@ -1,18 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { PanelApp } from "./App";
 import "./index.css";
-import { FullVideoApp } from "./App";
 import * as serviceWorker from "./serviceWorker";
 import AppEnvContext, { createAppEnvContextState } from "./AppEnvContext";
 
 const appEnvContextState = createAppEnvContextState({
-  frameFullvideo: true
+  framePanel: true
 });
 
 ReactDOM.render(
   <React.StrictMode>
     <AppEnvContext.Provider value={appEnvContextState}>
-      <FullVideoApp />
+      <PanelApp />
     </AppEnvContext.Provider>
   </React.StrictMode>,
   document.getElementById("root")

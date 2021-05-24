@@ -168,3 +168,7 @@ export function FullVideoApp(): JSX.Element {
 export function MobileApp(): JSX.Element {
   return <MainApp togglePanel={null} />;
 }
+
+export function PanelApp(): JSX.Element {
+  return <MainApp togglePanel={null} />;
+}

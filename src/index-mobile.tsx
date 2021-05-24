@@ -3,10 +3,17 @@ import ReactDOM from "react-dom";
 import { MobileApp } from "./App";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
+import AppEnvContext, { createAppEnvContextState } from "./AppEnvContext";
+
+const appEnvContextState = createAppEnvContextState({
+  frameMobile: true
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <MobileApp />
+    <AppEnvContext.Provider value={appEnvContextState}>
+      <MobileApp />
+    </AppEnvContext.Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

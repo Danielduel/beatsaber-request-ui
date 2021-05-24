@@ -107,7 +107,7 @@ I've ejected that because I had to inject twitch scripts and do changes to allow
 testing it locally (and I think there were more problems, but I don't remember).
 (And building config/mobile/fullvideo... as separate apps from one codebase)
 
-I think you should start by a quick look on `/public/index-config.html`, `/public/index-fullvideo.html` and 
+I think you should start by a quick look on `/public/index-config.html`, `/public/index-fullvideo.html`, `/public/index-fullvideo/panel.html` and 
 `/public/index-mobile.html` to see that twitch script is interpreted before everything else.
 
 And then...
