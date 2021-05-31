@@ -23,3 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 deploy.zip
+
+# not sure if client id stuff is private
+/tools

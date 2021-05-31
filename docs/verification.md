@@ -3,6 +3,10 @@ https://www.twitch.tv/danielduel
 
 URL of repository:
 https://github.com/Duelsik/beatsaber-request-ui
+I am tagging versions, so if you want to review version x.y.z go to
+https://github.com/Duelsik/beatsaber-request-ui/tree/x.y.z
+like, when you are reviewing version 0.0.4 you can use
+https://github.com/Duelsik/beatsaber-request-ui/tree/0.0.4
 
 Table of contents:
 
@@ -19,6 +23,9 @@ Table of contents:
 24 May 2021
 (feature) Add a language selector
 (docs) Clean this (`verification.md`) file
+31 May 2021
+(docs) gitignore tools and add note about tagged versions
+(feature) Add an option to use extension as a panel
 
 0.0.4:
 14 May 2021

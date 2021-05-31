@@ -27,7 +27,7 @@
 
 .doc__mapdata {
   padding-left: 7px;
-  flex: 226 0;
+  flex: 226 226;
   border-right: 1px solid var(--border);
 }
 .doc__name {
@@ -61,6 +61,7 @@
   flex: 100 0;
   align-self: center;
   text-align: center;
+  min-width: 90px;
 }
 
 .doc__key:hover {

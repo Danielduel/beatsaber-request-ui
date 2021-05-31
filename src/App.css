@@ -71,12 +71,6 @@ body {
   color: white;
 }
 
-.Header-hide {
-  position: absolute;
-  top: 7px;
-  right: 8px;
-}
-
 @keyframes initialBubbleAnimation {
   0% {
     width: 90px;
