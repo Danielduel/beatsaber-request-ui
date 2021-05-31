@@ -26,6 +26,7 @@ Table of contents:
 31 May 2021
 (docs) gitignore tools and add note about tagged versions
 (feature) Add an option to use extension as a panel
+(fix) Redesign clear button cross
 
 0.0.4:
 14 May 2021

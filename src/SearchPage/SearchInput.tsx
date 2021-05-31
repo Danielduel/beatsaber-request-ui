@@ -28,6 +28,9 @@ const SearchButton = styled.button`
 `;
 
 const ClearButton = styled.span`
+  color: transparent;
+  text-shadow: 0 0 0 #935ba5;
+
   line-height: 0;
   background: var(--background);
   margin-left: -37px;
