@@ -27,6 +27,8 @@ Table of contents:
 (docs) gitignore tools and add note about tagged versions
 (feature) Add an option to use extension as a panel
 (fix) Redesign clear button cross
+2 June 2021
+(docs) Add scripts and form cache to reduce hore of twitch staff not reading the repo
 
 0.0.4:
 14 May 2021
