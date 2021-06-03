@@ -29,6 +29,8 @@ Table of contents:
 (fix) Redesign clear button cross
 2 June 2021
 (docs) Add scripts and form cache to reduce hore of twitch staff not reading the repo
+3 June 2021
+(feature) Don't render anything if stream category isn't BeatSaber
 
 0.0.4:
 14 May 2021

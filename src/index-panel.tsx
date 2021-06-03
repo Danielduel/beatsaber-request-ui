@@ -3,17 +3,17 @@ import ReactDOM from "react-dom";
 import { PanelApp } from "./App";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
-import AppEnvContext, { createAppEnvContextState } from "./AppEnvContext";
+import { createWrappedProvider } from "./AppEnvContext";
 
-const appEnvContextState = createAppEnvContextState({
+const WrappedProvider = createWrappedProvider({
   framePanel: true
 });
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppEnvContext.Provider value={appEnvContextState}>
+    <WrappedProvider>
       <PanelApp />
-    </AppEnvContext.Provider>
+    </WrappedProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

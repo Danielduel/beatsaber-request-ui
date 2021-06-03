@@ -3,17 +3,17 @@ import ReactDOM from "react-dom";
 import BroadcasterConfigPage from "./BroadcasterConfigPage/BroadcasterConfigPage";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
-import AppEnvContext, { createAppEnvContextState } from "./AppEnvContext";
+import { createWrappedProvider } from "./AppEnvContext";
 
-const appEnvContextState = createAppEnvContextState({
+const WrappedProvider = createWrappedProvider({
   frameConfig: true
 });
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppEnvContext.Provider value={appEnvContextState}>
+    <WrappedProvider>
       <BroadcasterConfigPage />
-    </AppEnvContext.Provider>
+    </WrappedProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

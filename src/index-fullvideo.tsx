@@ -3,17 +3,22 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import { FullVideoApp } from "./App";
 import * as serviceWorker from "./serviceWorker";
-import AppEnvContext, { createAppEnvContextState } from "./AppEnvContext";
+import AppEnvContext, { createWrappedProvider } from "./AppEnvContext";
 
-const appEnvContextState = createAppEnvContextState({
+const WrappedProvider = createWrappedProvider({
   frameFullvideo: true
 });
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppEnvContext.Provider value={appEnvContextState}>
-      <FullVideoApp />
-    </AppEnvContext.Provider>
+    <WrappedProvider>
+      <AppEnvContext.Consumer>
+        {(context) => {
+          console.log(context.contextGame);
+          return context.contextGame === "Beat Saber" ? <FullVideoApp /> : null;
+        }}
+      </AppEnvContext.Consumer>
+    </WrappedProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
