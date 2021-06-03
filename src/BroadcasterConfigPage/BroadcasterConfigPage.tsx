@@ -1,5 +1,9 @@
+// TODO - Rewrite this mess using some tool for such work
+// This file is one big "xD" - don't do forms like this kids
+
 import React from "react";
 import "../App.css";
+import AppEnvContext, { ConfigBroadcaster } from "../AppEnvContext";
 import LayoutRow from "../common/LayoutRow";
 
 type TwitchConfigScope = "global" | "broadcaster";
@@ -7,7 +11,7 @@ type TwitchConfigScope = "global" | "broadcaster";
 declare let Twitch: {
   ext: {
     configuration: {
-      set: (scope: TwitchConfigScope, version: string, value: string) => Promise<any>;
+      set: (scope: TwitchConfigScope, version: string, value: string) => void;
       onChanged: (a: any) => void;
       broadcaster: any;
       developer: any;
@@ -16,44 +20,78 @@ declare let Twitch: {
   };
 };
 
-declare let twitch: any;
+type TwitchConfigInputRowProps = {
+  name: string;
+  type: React.InputHTMLAttributes<HTMLInputElement>["type"];
+  default: any;
+  value: string | number | null;
+};
 
-// type TwitchConfigInputRowProps = {
-//   name: string;
-//   type: React.InputHTMLAttributes<HTMLInputElement>["type"]
-//   default: any;
-//   value: string;
-// };
+const TwitchConfigInputRow = ({ name, type, value }: TwitchConfigInputRowProps) => {
+  const [_value, setValue] = React.useState(String(value));
+  const handleChange = React.useCallback(
+    (e: React.ChangeEvent) => {
+      setValue((e.target as HTMLInputElement).value);
+    },
+    [setValue]
+  );
+  return (
+    <LayoutRow>
+      <span>{name}:&nbsp;</span>
+      <input onChange={handleChange} placeholder={String(value)} type={type as string} name={name} />
+      &nbsp;(actual: {value})
+    </LayoutRow>
+  );
+};
 
-// const TwitchConfigInputRow = ({
-//   name,
-//   type
-// }: TwitchConfigInputRowProps) => {
-//   return (
-//     <LayoutRow>
-//       <input type={type as string} name={name} /><span>Something</span>&nbsp;(actual: )
-//     </LayoutRow>
-//   );
-// };
+// console.log(Twitch.ext.configuration.set("broadcaster", "1", "somethingelse"));
+
+const _BroadcasterConfigPage = ({ configBroadcaster }: { configBroadcaster: ConfigBroadcaster }): JSX.Element => {
+  const handleSubmit = React.useCallback((e: React.FormEvent) => {
+    // it's too late(2am) to think about this
+    const positionXValue = (document.getElementsByName("positionX")[0] as HTMLInputElement).value;
+    const positionYValue = (document.getElementsByName("positionY")[0] as HTMLInputElement).value;
+    const submitData = [positionXValue, positionYValue].join("|");
+    Twitch.ext.configuration.set("broadcaster", "1", submitData);
+  }, []);
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      style={{ maxWidth: "100%", background: "var(--background)", padding: "20px", boxSizing: "border-box" }}
+    >
+      <h4>Configuration:</h4>
+      <span>(just test, but should work, rather don&apos;t try to break it)</span>
+      <p>
+        <code>positionX</code> and <code>positionY</code> are percent values positioning inactive bubble on the viewer
+        screen. Zeroing both values will make inactive bubble to be top-left. You can pass negative numbers to hide
+        bubble.
+      </p>
+      <TwitchConfigInputRow type="number" name="positionX" default="none" value={configBroadcaster.positionX} />
+      <TwitchConfigInputRow type="number" name="positionY" default="none" value={configBroadcaster.positionY} />
+      <TwitchConfigInputRow type="submit" name="Send" default="none" value={null} />
+
+      <p>
+        <div>Debug data (experimental):</div>
+        <code>{JSON.stringify(configBroadcaster, null, 2)}</code>
+        <hr />
+        <div>Also, feel free to contact me in repository issues in order to make something configurable</div>
+        <code>https://github.com/Duelsik/beatsaber-request-ui/issues</code>
+      </p>
+    </form>
+  );
+};
 
 export default function BroadcasterConfigPage(): JSX.Element {
-  // console.log(this);
-  Twitch.ext.configuration.onChanged((data: any) => {
-    console.log(Twitch.ext.configuration.set("broadcaster", "versionname", "something"));
-    console.log(Twitch.ext.configuration.broadcaster);
-    console.log(Twitch.ext.configuration.developer);
-    console.log(Twitch.ext.configuration.global);
-  });
-  // console.log(Twitch);
-  // console.log(Twitch.ext.configuration.set("broadcaster", "0.0.5", "something"));
-  // console.log(Twitch.ext.configuration.set);
-  // console.log(Twitch.ext.configuration.broadcaster);
-  // console.log(Twitch.ext.configuration.developer);
-  // console.log(Twitch.ext.configuration.global);
   return (
-    <div>
-      <LayoutRow>There are no configuration options asd</LayoutRow>
-      {/* <TwitchConfigInputRow type="checkbox" name="test" default="none" value=""/> */}
-    </div>
+    <AppEnvContext.Consumer>
+      {(context) =>
+        context.configBroadcaster ? (
+          <_BroadcasterConfigPage configBroadcaster={context.configBroadcaster} />
+        ) : (
+          <p style={{ background: "var(--background)", padding: "20px", boxSizing: "border-box" }}>Loading config</p>
+        )
+      }
+    </AppEnvContext.Consumer>
   );
 }

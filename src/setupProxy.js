@@ -12,8 +12,16 @@ module.exports = function (app) {
     "/kraken",
     createProxyMiddleware({
       target: "https://api.twitch.tv",
-      changeOrigin: true,
-      logLevel: "debug"
+      changeOrigin: true
     })
   );
+  
+  // https://api.twitch.tv/extensions/
+  app.use(
+    "/extensions",
+    createProxyMiddleware({
+      target: "https://api.twitch.tv",
+      changeOrigin: true
+    })
+  )
 }

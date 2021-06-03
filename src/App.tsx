@@ -15,6 +15,7 @@ import SearchPage from "./SearchPage/SearchPage";
 import InfoPage from "./InfoPage/InfoPage";
 
 import "./i18n/init-i18n";
+import { ConfigBroadcaster } from "./AppEnvContext";
 
 const AppWrapper = styled.div`
   transition: margin-left 1s;
@@ -47,7 +48,10 @@ const AppUnexpandedWrapper = styled.div`
   border-radius: 50%;
   border: 4px solid #210633;
 
-  margin: calc(5rem + 35px);
+  ${({ top, bottom }: { top: number; bottom: number }) => `
+    margin-top: calc(${top}% + 35px);
+    margin-bottom: calc(${bottom}% + 35px);
+  `}
 
   transition: all 0.3s ease-in-out;
 
@@ -143,7 +147,7 @@ const MainApp = ({ togglePanel }: MainAppProps): JSX.Element => {
   );
 };
 
-export function FullVideoApp(): JSX.Element {
+export function FullVideoApp({ configBroadcaster }: { configBroadcaster: ConfigBroadcaster }): JSX.Element {
   const [isExpanded, setExpanded] = React.useState(false);
   const togglePanel = useCallback(
     (state: boolean) => {
@@ -157,7 +161,11 @@ export function FullVideoApp(): JSX.Element {
   }
 
   return (
-    <AppUnexpandedWrapper onClick={() => togglePanel(true)}>
+    <AppUnexpandedWrapper
+      top={configBroadcaster.positionX}
+      bottom={configBroadcaster.positionY}
+      onClick={() => togglePanel(true)}
+    >
       <AppUnexpandedTooltip>
         <Translation>{(t) => t("Click to open an extension")}</Translation>
         <br />
