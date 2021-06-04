@@ -11,3 +11,4 @@ export function wrapTwitchApiEndoint(url: string) {
   if (!isLocalhost) return twitchApiEndpoint + url;
   return url;
 }
+export const UNRANKED = [97223, 20506, 102179, 102180]; // wtf Umbra xD

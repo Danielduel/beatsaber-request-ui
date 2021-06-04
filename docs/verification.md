@@ -45,6 +45,8 @@ Table of contents:
   * (docs) Reformat verification doc to be nicely formatted (at least changelog section)
   * (fix) Fix api.twitch.tv calls
   * (fix) Fix bottom positioning to be left
+  * (feature) Fetch ranked maps (local json) and mark ranked maps
+  * (fix) Tweaks to the UI
 
 0.0.4: (already verified)
 * 14 May 2021

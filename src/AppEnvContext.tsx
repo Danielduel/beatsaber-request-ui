@@ -1,10 +1,24 @@
 import React, { PropsWithChildren } from "react";
 import * as Rx from "rxjs";
-import { wrapTwitchApiEndoint } from "./constants";
+import { wrapTwitchApiEndoint, UNRANKED } from "./constants";
 import { AuthResponse } from "./types/AuthResponse.d";
 import { ChannelInfoResponse } from "./types/ChannelInfoResponse";
+import { RankedListResponse } from "./types/RankedListResponse";
 import { RawConfigResponse } from "./types/RawConfigResponse";
 declare let Twitch: any;
+
+const rankedObservable: Rx.Observable<RankedListResponse> = Rx.from(
+  new Promise<RankedListResponse>((resolve, reject) =>
+    // fetch("https://scoresaber.com/api.php?function=get-leaderboards&cat=1&limit=9999&ranked=1&page=1")
+    // scoresaber has cors policy on this resource, loading that dynamically per version
+    import("./types/RankedListResponseMock.json")
+      .then((data) => resolve(data as RankedListResponse))
+      .catch((err) => {
+        console.error(err);
+        reject(err);
+      })
+  )
+);
 
 const authObservable: Rx.Observable<AuthResponse> = Rx.from(
   new Promise<AuthResponse>((resolve) =>
@@ -56,14 +70,30 @@ const channelExtConfigObservable = Rx.from(
   })
 );
 
+export type RankedRecordMap = Record<string, any>;
 const defaultState = {
   frameFullvideo: false,
   frameMobile: false,
   frameConfig: false,
   framePanel: false,
   frameLive: false,
+  rankedHashes: {} as RankedRecordMap,
   contextGame: "",
   configBroadcaster: null as ConfigBroadcaster | null
+};
+
+const transformRankedResponse = (response: RankedListResponse): RankedRecordMap => {
+  const intermediateData = response.songs
+    .filter((song) => !UNRANKED.includes(song.uid))
+    .map((song) => ({ hash: song.id }));
+
+  return intermediateData.reduce(
+    (result, item) => ({
+      ...result,
+      [item.hash.toLowerCase()]: {}
+    }),
+    {}
+  );
 };
 
 export type AppEnv = typeof defaultState;
@@ -119,6 +149,12 @@ export function createWrappedProvider(overrides: PartialAppEnv) {
           setState((_oldState) => ({ ..._oldState, configBroadcaster: defaultBroadcasterConfig }));
         }
         setState((_oldState) => ({ ..._oldState, configBroadcaster }));
+      });
+
+      rankedObservable.subscribe((rankedData) => {
+        const rankedHashes = transformRankedResponse(rankedData);
+        if (!rankedHashes) return;
+        setState((_oldState) => ({ ..._oldState, rankedHashes }));
       });
     }, []);
 

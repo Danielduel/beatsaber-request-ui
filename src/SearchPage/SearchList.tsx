@@ -2,6 +2,7 @@ import React from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Translation } from "react-i18next";
 import styled from "styled-components";
+import AppEnvContext, { RankedRecordMap } from "../AppEnvContext";
 import LayoutRow from "../common/LayoutRow";
 import { SongListDocsItem } from "./SearchPage";
 
@@ -46,64 +47,129 @@ const isCreatedByAutomapper = (docData: SongListDocsItem) => {
   });
 };
 
-const Item = (docData: SongListDocsItem) => {
-  const [copied, setCopied] = React.useState(false);
-  const coverURL = `https://beatsaver.com${docData.coverURL}`;
-  const allVotes = docData.stats.upVotes + docData.stats.downVotes;
-  const percentVotes = ~~((docData.stats.upVotes / allVotes) * 1000) / 10;
+const Item = (rankedHashes: RankedRecordMap, framePanel: boolean, frameFullvideo: boolean) => {
+  const _Item = (docData: SongListDocsItem) => {
+    const [copied, setCopied] = React.useState(false);
+    const coverURL = `https://beatsaver.com${docData.coverURL}`;
+    const allVotes = docData.stats.upVotes + docData.stats.downVotes;
+    const percentVotes = ~~((docData.stats.upVotes / allVotes) * 1000) / 10;
 
-  const shouldBeHidden = isCreatedByAutomapper(docData);
+    const shouldBeHidden = isCreatedByAutomapper(docData);
 
-  if (shouldBeHidden) return <></>;
+    if (shouldBeHidden) return <></>;
 
-  return (
-    <LayoutRow hasBorderBottom>
-      <div className="doc__container">
-        <div className="doc__cover">
-          <img src={coverURL} />
-        </div>
-        <div className="doc__mapdata">
-          <div className="doc__name">{docData.metadata.songName}</div>
-          <div className="doc__author">{docData.metadata.songAuthorName}</div>
-          <div className="doc__mapper">{docData.metadata.levelAuthorName}</div>
-        </div>
-        <div className="doc__saverdata">
-          <div className="doc__key">{docData.key} 🔑</div>
-          <div className="doc__downloads">{docData.stats.downloads} 💾</div>
-        </div>
-        <div className="doc__scoredata">
-          <div className="doc__score--upvotes">{docData.stats.upVotes} 👍</div>
-          <div className="doc__score--downvotes">{docData.stats.downVotes} 👎</div>
-          <div className="doc__score--percentvotes">{percentVotes}% 💯</div>
-        </div>
-        <div className="doc__cta">
-          {!copied ? (
-            <CopyToClipboard text={`!bsr ${docData.key}`} onCopy={() => setCopied(true)}>
-              <CopyButton>
-                <Translation>{(t) => t("Copy")}</Translation> 📋
-              </CopyButton>
-            </CopyToClipboard>
+    const isRanked = !!rankedHashes[docData.hash.toLowerCase()];
+
+    return (
+      <LayoutRow
+        key="sthelse"
+        hasBorderBottom
+        style={{
+          ...((framePanel && { height: "88px" }) || (frameFullvideo && { height: "60px" }) || {}),
+          backgroundColor: isRanked ? "var(--background-secondary)" : "invalid-color"
+        }}
+      >
+        <div className="doc__container">
+          <div className="doc__cover">
+            <img src={coverURL} />
+          </div>
+          <div
+            className="doc__mapdata"
+            style={(framePanel && { height: "88px" }) || (frameFullvideo && { height: "60px" }) || {}}
+          >
+            <div className="doc__name">{docData.metadata.songName}</div>
+            <div className="doc__author">{docData.metadata.songAuthorName}</div>
+            <div className="doc__mapper">{docData.metadata.levelAuthorName}</div>
+          </div>
+          {!framePanel ? (
+            <>
+              <div className="doc__saverdata">
+                <div className="doc__key">{docData.key} 🔑</div>
+                <div className="doc__downloads">{docData.stats.downloads} 💾</div>
+                {isRanked ? <div className="doc__score--percentvotes">Ranked ⭐</div> : null}
+              </div>
+              <div className="doc__scoredata">
+                <div className="doc__score--upvotes">{docData.stats.upVotes} 👍</div>
+                <div className="doc__score--downvotes">{docData.stats.downVotes} 👎</div>
+                <div className="doc__score--percentvotes">{percentVotes}% 💯</div>
+              </div>
+            </>
           ) : (
-            <div>
-              <Translation>{(t) => t("Paste on chat")}</Translation>
-              <br />
-              <Translation>{(t) => t("to make request")}</Translation>
+            <div
+              className="doc__mapdata"
+              style={{
+                height: "85px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignContent: "center"
+              }}
+            >
+              <div className="doc__score--upvotes">{docData.stats.upVotes} 👍</div>
+              <div className="doc__score--downvotes">{docData.stats.downVotes} 👎</div>
+              <div className="doc__score--percentvotes">{percentVotes}% 💯</div>
+              <div className="doc__downloads">{docData.stats.downloads} 💾</div>
+              {isRanked ? <div className="doc__score--percentvotes">Ranked ⭐</div> : null}
+              <div className="doc__key">{docData.key} 🔑</div>
             </div>
           )}
+          <div className="doc__cta">
+            {!copied ? (
+              <CopyToClipboard text={`!bsr ${docData.key}`} onCopy={() => setCopied(true)}>
+                <CopyButton
+                  style={{ backgroundColor: isRanked ? "var(--background-secondary-buttonover)" : "invalid-color" }}
+                >
+                  <Translation>{(t) => t("Copy")}</Translation> 📋
+                </CopyButton>
+              </CopyToClipboard>
+            ) : (
+              <div>
+                <Translation>{(t) => t("Paste on chat")}</Translation>
+                <br />
+                <Translation>{(t) => t("to make request")}</Translation>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    </LayoutRow>
-  );
+      </LayoutRow>
+    );
+  };
+  return _Item;
 };
 
-export default function ItemList({ documentList }: { documentList: SongListDocsItem[] }): JSX.Element {
-  const renderedItems = documentList.map(Item);
+const _ItemList = ({
+  documentList,
+  rankedHashes,
+  framePanel,
+  frameFullvideo
+}: {
+  documentList: SongListDocsItem[];
+  rankedHashes: RankedRecordMap;
+  framePanel: boolean;
+  frameFullvideo: boolean;
+}) => {
+  const renderedItems = documentList.map(Item(rankedHashes, framePanel, frameFullvideo));
 
   return (
     <div className="SearchList__container">
       <LayoutRow style={{ marginTop: "-45px" }} />
       {renderedItems}
-      <LayoutRow />
+      {frameFullvideo ? <LayoutRow /> : null}
     </div>
+  );
+};
+
+export default function ItemList({ documentList }: { documentList: SongListDocsItem[] }): JSX.Element {
+  return (
+    <AppEnvContext.Consumer>
+      {(context) => (
+        <_ItemList
+          documentList={documentList}
+          rankedHashes={context.rankedHashes}
+          framePanel={context.framePanel}
+          frameFullvideo={context.frameFullvideo}
+        />
+      )}
+    </AppEnvContext.Consumer>
   );
 }

@@ -3,6 +3,7 @@ import LayoutRow from "../common/LayoutRow";
 import MagnifyingGlassIcon from "../common/icons/MagnifyingGlassIcon";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import AppEnvContext from "../AppEnvContext";
 
 const SearchButton = styled.button`
   outline: none;
@@ -76,9 +77,15 @@ export default function ItemList({ requestSearchSong }: { requestSearchSong: (qu
       />
       <MagnifyingGlassIcon />
       {query.length ? <ClearButton onClick={() => setQuery("")}>❌</ClearButton> : null}
-      <SearchButton disabled={!query.trim().length} onClick={() => requestSearchSong(query)}>
-        {t("Search")}
-      </SearchButton>
+      <AppEnvContext.Consumer>
+        {(context) =>
+          !context.framePanel && (
+            <SearchButton disabled={!query.trim().length} onClick={() => requestSearchSong(query)}>
+              {t("Search")}
+            </SearchButton>
+          )
+        }
+      </AppEnvContext.Consumer>
     </LayoutRow>
   );
 }
