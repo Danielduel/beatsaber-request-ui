@@ -48,9 +48,11 @@ const AppUnexpandedWrapper = styled.div`
   border-radius: 50%;
   border: 4px solid #210633;
 
+  // Those isNaNs are defensive code placed here
+  // in order to be 300% sure that it can't be exploited
   ${({ x, y }: { x: number; y: number }) => `
-    margin-top: calc(${x}% + 35px);
-    margin-bottom: calc(${y}% + 35px);
+    margin-top: calc(${!isNaN(x) ? x : "0"}% + 35px);
+    margin-left: calc(${!isNaN(y) ? y : "0"}% + 35px);
   `}
 
   transition: all 0.3s ease-in-out;
