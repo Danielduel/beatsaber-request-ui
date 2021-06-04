@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import * as Rx from "rxjs";
+import { wrapTwitchApiEndoint } from "./constants";
 import { AuthResponse } from "./types/AuthResponse.d";
 import { ChannelInfoResponse } from "./types/ChannelInfoResponse";
 import { RawConfigResponse } from "./types/RawConfigResponse";
@@ -16,7 +17,7 @@ const authObservable: Rx.Observable<AuthResponse> = Rx.from(
 const channelInfoObservable = Rx.from(
   new Promise<ChannelInfoResponse>((resolve, reject) => {
     authObservable.subscribe((auth) => {
-      return fetch(`/kraken/channels/${auth.channelId}`, {
+      return fetch(wrapTwitchApiEndoint(`/kraken/channels/${auth.channelId}`), {
         method: "GET",
         headers: {
           "Accept": "application/vnd.twitchtv.v5+json",
@@ -37,7 +38,7 @@ const channelExtConfigObservable = Rx.from(
   new Promise((resolve, reject) => {
     // https://api.twitch.tv/extensions/<client ID>/configurations/channels/<channel ID>
     authObservable.subscribe((auth) => {
-      return fetch(`/extensions/${auth.clientId}/configurations/channels/${auth.channelId}`, {
+      return fetch(wrapTwitchApiEndoint(`/extensions/${auth.clientId}/configurations/channels/${auth.channelId}`), {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${auth.token}`,
@@ -82,6 +83,10 @@ export type ConfigBroadcaster = {
 const getBroadcasterConfig = (config: RawConfigResponse) =>
   Object.entries(config).find(([, value]) => value.segment.segment_type === "broadcaster");
 const numberOrDefault = (something: any, def: number) => (isNaN(something) ? def : Number(something));
+const defaultBroadcasterConfig: ConfigBroadcaster = {
+  positionX: 5,
+  positionY: 5
+};
 const getAndParseBroadcasterConfig = (config: RawConfigResponse): ConfigBroadcaster => {
   const broadcasterConfigEntry = getBroadcasterConfig(config);
   if (broadcasterConfigEntry) {
@@ -90,14 +95,11 @@ const getAndParseBroadcasterConfig = (config: RawConfigResponse): ConfigBroadcas
     const readArr = content.split("|");
 
     return {
-      positionX: numberOrDefault(readArr[0], 5),
-      positionY: numberOrDefault(readArr[1], 5)
+      positionX: numberOrDefault(readArr[0], defaultBroadcasterConfig.positionX),
+      positionY: numberOrDefault(readArr[1], defaultBroadcasterConfig.positionY)
     };
   }
-  return {
-    positionX: 5,
-    positionY: 5
-  };
+  return defaultBroadcasterConfig;
 };
 
 export function createWrappedProvider(overrides: PartialAppEnv) {
@@ -110,9 +112,12 @@ export function createWrappedProvider(overrides: PartialAppEnv) {
       });
 
       channelExtConfigObservable.subscribe((configData) => {
-        console.log("Config data", configData);
         // TODO - check if configData is RawConfigResponse or an Error
         const configBroadcaster = getAndParseBroadcasterConfig(configData as RawConfigResponse);
+        if (!configBroadcaster) {
+          // bad config -> set default
+          setState((_oldState) => ({ ..._oldState, configBroadcaster: defaultBroadcasterConfig }));
+        }
         setState((_oldState) => ({ ..._oldState, configBroadcaster }));
       });
     }, []);

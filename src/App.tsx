@@ -48,9 +48,9 @@ const AppUnexpandedWrapper = styled.div`
   border-radius: 50%;
   border: 4px solid #210633;
 
-  ${({ top, bottom }: { top: number; bottom: number }) => `
-    margin-top: calc(${top}% + 35px);
-    margin-bottom: calc(${bottom}% + 35px);
+  ${({ x, y }: { x: number; y: number }) => `
+    margin-top: calc(${x}% + 35px);
+    margin-bottom: calc(${y}% + 35px);
   `}
 
   transition: all 0.3s ease-in-out;
@@ -162,8 +162,8 @@ export function FullVideoApp({ configBroadcaster }: { configBroadcaster: ConfigB
 
   return (
     <AppUnexpandedWrapper
-      top={configBroadcaster.positionX}
-      bottom={configBroadcaster.positionY}
+      x={configBroadcaster.positionX}
+      y={configBroadcaster.positionY}
       onClick={() => togglePanel(true)}
     >
       <AppUnexpandedTooltip>

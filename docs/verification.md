@@ -42,7 +42,9 @@ Table of contents:
 * 4 June 2021
   * (feature) Make inactive bubble position configurable by the streamer
   * (dev) Configure proxies
-  * (docs) Reformat verification doc to be nicely formatted
+  * (docs) Reformat verification doc to be nicely formatted (at least changelog section)
+  * (fix) Fix api.twitch.tv calls
+  * (fix) Fix bottom positioning to be left
 
 0.0.4: (already verified)
 * 14 May 2021
