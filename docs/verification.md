@@ -27,6 +27,10 @@ Table of contents:
 
 0. Changelog
 
+0.0.6:
+* 6 July 2021
+  * (tech) Bump up version
+
 0.0.5:
 * 24 May 2021
   * (feature) Add a language selector
