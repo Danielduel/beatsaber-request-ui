@@ -30,6 +30,7 @@ Table of contents:
 0.0.6:
 * 6 July 2021
   * (tech) Bump up version
+  * (tech) Push tools directory to repo
 
 0.0.5:
 * 24 May 2021
