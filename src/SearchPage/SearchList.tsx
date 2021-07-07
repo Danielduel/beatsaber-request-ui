@@ -3,7 +3,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Translation } from "react-i18next";
 import styled from "styled-components";
 import AppEnvContext, { RankedRecordMap } from "../AppEnvContext";
-import LayoutRow from "../common/LayoutRow";
+import { LayoutRowBase } from "../components/LayoutRow/LayoutRow";
 import { SongListDocsItem } from "./SearchPage";
 
 // Trimmed LowerCase
@@ -61,12 +61,12 @@ const Item = (rankedHashes: RankedRecordMap, framePanel: boolean, frameFullvideo
     const isRanked = !!rankedHashes[docData.hash.toLowerCase()];
 
     return (
-      <LayoutRow
+      <LayoutRowBase
         key="sthelse"
-        hasBorderBottom
         style={{
           ...((framePanel && { height: "88px" }) || (frameFullvideo && { height: "60px" }) || {}),
-          backgroundColor: isRanked ? "var(--background-secondary)" : "invalid-color"
+          backgroundColor: isRanked ? "var(--background-secondary)" : "invalid-color",
+          borderBottom: "1px solid var(--border)"
         }}
       >
         <div className="doc__container">
@@ -131,7 +131,7 @@ const Item = (rankedHashes: RankedRecordMap, framePanel: boolean, frameFullvideo
             )}
           </div>
         </div>
-      </LayoutRow>
+      </LayoutRowBase>
     );
   };
   return _Item;
@@ -152,9 +152,9 @@ const _ItemList = ({
 
   return (
     <div className="SearchList__container">
-      <LayoutRow style={{ marginTop: "-45px" }} />
+      <LayoutRowBase style={{ marginTop: "-45px" }} />
       {renderedItems}
-      {frameFullvideo ? <LayoutRow /> : null}
+      {frameFullvideo ? <LayoutRowBase /> : null}
     </div>
   );
 };

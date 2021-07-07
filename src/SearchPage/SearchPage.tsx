@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import { fetchSongs, isNotNull } from "../utils";
 
-import LayoutRow from "../common/LayoutRow";
+import { LayoutRowPlaceholder } from "../components/LayoutRow/LayoutRow";
 import SearchInput from "./SearchInput";
 import SearchList from "./SearchList";
 import { Translation } from "react-i18next";
@@ -95,7 +95,7 @@ export default function SearchPage(): JSX.Element {
     <SearchPageWrapper>
       <SearchInput requestSearchSong={requestSearchSong} />
       {canRenderSearchList && isNotNull(songList) && <SearchList documentList={songList.docs} />}
-      {message && <LayoutRow placeholder>{message}</LayoutRow>}
+      {message && <LayoutRowPlaceholder>{message}</LayoutRowPlaceholder>}
     </SearchPageWrapper>
   );
 }

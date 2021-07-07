@@ -4,7 +4,7 @@
 import React from "react";
 import "../App.css";
 import AppEnvContext, { ConfigBroadcaster } from "../AppEnvContext";
-import LayoutRow from "../common/LayoutRow";
+import { LayoutRowBase } from "../components/LayoutRow/LayoutRow";
 
 type TwitchConfigInputRowProps = {
   name: string;
@@ -22,11 +22,11 @@ const TwitchConfigInputRow = ({ name, type, value }: TwitchConfigInputRowProps) 
     [setValue]
   );
   return (
-    <LayoutRow>
+    <LayoutRowBase>
       <span>{name}:&nbsp;</span>
       <input onChange={handleChange} placeholder={String(value)} type={type as string} name={name} />
       &nbsp;(actual: {value})
-    </LayoutRow>
+    </LayoutRowBase>
   );
 };
 

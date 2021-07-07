@@ -29,35 +29,6 @@ body {
   -webkit-font-smoothing: none;
 }
 
-.LayoutRow-Container {
-  width: min(100vw, 500px);
-  height: 52px;
-  background-color: var(--background);
-  box-sizing: border-box;
-  position: relative;
-}
-
-.LayoutRow-Container.primary {
-  background-color: var(--background-primary);
-}
-
-.LayoutRow-Container.pageHeader {
-  padding-top: 10px;
-}
-
-.LayoutRow-Container.borderBottom {
-  border-bottom: 1px solid var(--border);
-}
-
-.LayoutRow-Container.placeholder {
-  font-size: 50px;
-  padding-top: 50px;
-  color: var(--background-primary);
-  font-weight: bolder;
-  text-align: center;
-  align-self: flex-start;
-}
-
 .Header-logo {
   height: 30px;
   width: auto;

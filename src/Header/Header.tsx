@@ -1,7 +1,7 @@
 import React from "react";
 import { Translation } from "react-i18next";
 import styled from "styled-components";
-import LayoutRow from "../common/LayoutRow";
+import { LayoutRowPrimary } from "../components/LayoutRow/LayoutRow";
 
 const ChildrenContainer = styled.div`
   display: inline-flex;
@@ -29,7 +29,7 @@ type HeaderProps = {
 
 const Header = ({ togglePanel, children }: HeaderProps): JSX.Element => {
   return (
-    <LayoutRow isPrimary>
+    <LayoutRowPrimary>
       <img className="Header-logo" src="https://beatsaver.com/beat_saver_logo_white.a01a4b8f.png" />
 
       <span className="Header-logotext">
@@ -48,7 +48,7 @@ const Header = ({ togglePanel, children }: HeaderProps): JSX.Element => {
           </CloseButtonContainer>
         )}
       </ChildrenContainer>
-    </LayoutRow>
+    </LayoutRowPrimary>
   );
 };
 
