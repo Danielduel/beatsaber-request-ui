@@ -1,5 +1,3 @@
-declare let Twitch: any;
-
 import React, { useCallback } from "react";
 import { Translation } from "react-i18next";
 import styled from "styled-components";

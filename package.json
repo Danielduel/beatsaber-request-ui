@@ -84,6 +84,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
+    "clean": "find . -name \"*.tsbuildinfo\" | xargs rm",
     "zip": "yarn prepareDeploy",
     "installAndBuild": "npm i && npm run build",
     "prepareDeploy": "(rm deploy.zip || true) && npm run build && cd build && zip -r ../deploy.zip . && cd ..",
@@ -160,6 +161,7 @@
     ]
   },
   "devDependencies": {
+    "@types/twitch-ext": "^1.24.2",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
     "prettier": "^2.2.1"

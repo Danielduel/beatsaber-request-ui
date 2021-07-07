@@ -6,20 +6,6 @@ import "../App.css";
 import AppEnvContext, { ConfigBroadcaster } from "../AppEnvContext";
 import LayoutRow from "../common/LayoutRow";
 
-type TwitchConfigScope = "global" | "broadcaster";
-
-declare let Twitch: {
-  ext: {
-    configuration: {
-      set: (scope: TwitchConfigScope, version: string, value: string) => void;
-      onChanged: (a: any) => void;
-      broadcaster: any;
-      developer: any;
-      global: any;
-    };
-  };
-};
-
 type TwitchConfigInputRowProps = {
   name: string;
   type: React.InputHTMLAttributes<HTMLInputElement>["type"];

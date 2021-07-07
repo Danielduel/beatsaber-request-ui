@@ -31,6 +31,8 @@ Table of contents:
 * 6 July 2021
   * (tech) Bump up version
   * (tech) Push tools directory to repo
+* 7 July 2021
+  * (tech) Reduce css and include @types/twitch-ext
 
 0.0.5:
 * 24 May 2021

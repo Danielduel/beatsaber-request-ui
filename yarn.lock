@@ -1755,6 +1755,11 @@
     "@types/testing-library__dom" "*"
     pretty-format "^25.1.0"
 
+"@types/twitch-ext@^1.24.2":
+  version "1.24.2"
+  resolved "https://registry.yarnpkg.com/@types/twitch-ext/-/twitch-ext-1.24.2.tgz#516104e05be34d063ee7a731fb0645bbc989fdd7"
+  integrity sha512-Tsl3teTv/7AbgTZ48z/bMmozufB/rYV/oQP2TNzB6YfeaFwHEF4y0aJwZhMFP8khhTw2wSjdPdcNk3yNmQIUlw==
+
 "@types/yargs-parser@*":
   version "15.0.0"
   resolved "https://registry.npmjs.org/@types/yargs-parser/-/yargs-parser-15.0.0.tgz"

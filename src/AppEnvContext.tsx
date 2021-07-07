@@ -5,7 +5,6 @@ import { AuthResponse } from "./types/AuthResponse.d";
 import { ChannelInfoResponse } from "./types/ChannelInfoResponse";
 import { RankedListResponse } from "./types/RankedListResponse";
 import { RawConfigResponse } from "./types/RawConfigResponse";
-declare let Twitch: any;
 
 const rankedObservable: Rx.Observable<RankedListResponse> = Rx.from(
   new Promise<RankedListResponse>((resolve, reject) =>
