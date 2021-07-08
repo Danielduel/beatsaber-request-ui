@@ -1,4 +1,7 @@
 :root {
+  --navigation-height: 52px;
+  --body-height: calc(100vh - var(--navigation-height));
+
   --text: #333333;
   --text-secondary: #555555;
   --text-dimmed: #888888;

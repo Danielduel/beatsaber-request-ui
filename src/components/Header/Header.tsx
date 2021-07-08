@@ -1,7 +1,7 @@
 import React from "react";
 import { Translation } from "react-i18next";
 import styled from "styled-components";
-import { LayoutRowPrimary } from "../components/LayoutRow/LayoutRow";
+import { LayoutRowPrimary } from "../LayoutRow/LayoutRow";
 
 const ChildrenContainer = styled.div`
   display: inline-flex;

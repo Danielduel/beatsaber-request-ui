@@ -4,32 +4,24 @@ import styled from "styled-components";
 import { MemoryRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import "./App.css";
-import "./SearchPage/SearchPage.css";
+import "./pages/SearchPage/SearchPage.css";
 
 import MagnifyingGlassIcon from "./common/icons/MagnifyingGlassIcon";
 import InfoIcon from "./common/icons/InfoIcon";
-import Header from "./Header/Header";
+import Header from "./components/Header/Header";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import InfoPage from "./pages/InfoPage/InfoPage";
 
 import "./i18n/init-i18n";
 import { ConfigBroadcaster } from "./AppEnvContext";
+import { BodyWithNavigation, BodyWithNavigationBody } from "./layouts/BodyWithNavigation";
 
 const AppWrapper = styled.div`
   transition: margin-left 1s;
-
   height: 100vh;
   width: min(100vw, 500px);
   overflow-x: hidden;
   position: relative;
-
-  grid-template-rows: 52px 1fr;
-
-  display: grid;
-`;
-
-const AppPageContainer = styled.div`
-  background-color: var(--background);
 `;
 
 const AppUnexpandedWrapper = styled.div`
@@ -116,32 +108,42 @@ type MainAppProps = {
   togglePanel: ((state: boolean) => void) | null;
 };
 
+const Navigation = ({ togglePanel }: Pick<MainAppProps, "togglePanel">) => (
+  <Header togglePanel={togglePanel}>
+    <HeaderLinkWrapper>
+      <Link to="/">
+        <MagnifyingGlassIcon />
+      </Link>
+    </HeaderLinkWrapper>
+    <HeaderLinkWrapper>
+      <Link to="/info">
+        <InfoIcon />
+      </Link>
+    </HeaderLinkWrapper>
+  </Header>
+);
+
+const Routing = () => (
+  <BodyWithNavigationBody>
+    <Switch>
+      <Route exact path="/">
+        <SearchPage />
+      </Route>
+      <Route path="/info">
+        <InfoPage />
+      </Route>
+    </Switch>
+  </BodyWithNavigationBody>
+);
+
 const MainApp = ({ togglePanel }: MainAppProps): JSX.Element => {
   return (
     <Router>
       <AppWrapper>
-        <Header togglePanel={togglePanel}>
-          <HeaderLinkWrapper>
-            <Link to="/">
-              <MagnifyingGlassIcon />
-            </Link>
-          </HeaderLinkWrapper>
-          <HeaderLinkWrapper>
-            <Link to="/info">
-              <InfoIcon />
-            </Link>
-          </HeaderLinkWrapper>
-        </Header>
-        <AppPageContainer>
-          <Switch>
-            <Route exact path="/">
-              <SearchPage />
-            </Route>
-            <Route path="/info">
-              <InfoPage />
-            </Route>
-          </Switch>
-        </AppPageContainer>
+        <BodyWithNavigation>
+          <Navigation togglePanel={togglePanel} />
+          <Routing />
+        </BodyWithNavigation>
       </AppWrapper>
     </Router>
   );

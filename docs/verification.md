@@ -36,6 +36,7 @@ Table of contents:
 * 8 July 2021
   * (tech) Rewrite LayoutRow
   * (tech) Move pages to pages folder and create BodyWithNavigation layout
+  * (tech) Refactor app wrappers/containers
 
 0.0.5:
 * 24 May 2021

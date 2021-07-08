@@ -9,25 +9,27 @@ const InfoPageWrapper = styled.div`
   flex-direction: column;
 `;
 
+const InfoPageContent = () => (
+  <InfoPageWrapper>
+    <LanguageSelector />
+    <div>
+      Version: 0.0.5 (very alpha)
+      <br />
+      <br />
+      <br />
+      You can post issues or feature requests here: https://github.com/Duelsik/beatsaber-request-ui/issues
+      <br />
+      <br />
+      <br />
+      This extension is opensource! https://github.com/Duelsik/beatsaber-request-ui
+      <br />
+      <br />
+      <br />
+      If you want to help with translations - feel free to create an issue on github to get in touch
+    </div>
+  </InfoPageWrapper>
+);
+
 export default function InfoPage(): JSX.Element {
-  return (
-    <InfoPageWrapper>
-      <LanguageSelector />
-      <div>
-        Version: 0.0.5 (very alpha)
-        <br />
-        <br />
-        <br />
-        You can post issues or feature requests here: https://github.com/Duelsik/beatsaber-request-ui/issues
-        <br />
-        <br />
-        <br />
-        This extension is opensource! https://github.com/Duelsik/beatsaber-request-ui
-        <br />
-        <br />
-        <br />
-        If you want to help with translations - feel free to create an issue on github to get in touch
-      </div>
-    </InfoPageWrapper>
-  );
+  return <InfoPageContent />;
 }

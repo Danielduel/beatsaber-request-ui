@@ -3,6 +3,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Translation } from "react-i18next";
 import styled from "styled-components";
 import AppEnvContext, { RankedRecordMap } from "../../AppEnvContext";
+import { hideScrollbars } from "../../common/styles/hideScrollbars";
 import { LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
 import { SongListDocsItem } from "./SearchPage";
 
@@ -11,6 +12,15 @@ const stringTLC = (s: string) => s.toLocaleLowerCase().trim();
 
 const autoMappers = ["Beat Sage", "Deep Saber"];
 const autoMappersTLC = autoMappers.map(stringTLC);
+
+const SearchListContainer = styled.div`
+  box-sizing: border-box;
+  height: calc(100vh - (52px * 2));
+  padding-bottom: 1rem;
+  overflow-y: scroll;
+
+  ${hideScrollbars}
+`;
 
 const CopyButton = styled.button`
   outline: none;
@@ -47,6 +57,7 @@ const isCreatedByAutomapper = (docData: SongListDocsItem) => {
   });
 };
 
+let hack = 0;
 const Item = (rankedHashes: RankedRecordMap, framePanel: boolean, frameFullvideo: boolean) => {
   const _Item = (docData: SongListDocsItem) => {
     const [copied, setCopied] = React.useState(false);
@@ -62,7 +73,7 @@ const Item = (rankedHashes: RankedRecordMap, framePanel: boolean, frameFullvideo
 
     return (
       <LayoutRowBase
-        key="sthelse"
+        key={`sthelse-${hack++}`}
         style={{
           ...((framePanel && { height: "88px" }) || (frameFullvideo && { height: "60px" }) || {}),
           backgroundColor: isRanked ? "var(--background-secondary)" : "invalid-color",
@@ -151,11 +162,11 @@ const _ItemList = ({
   const renderedItems = documentList.map(Item(rankedHashes, framePanel, frameFullvideo));
 
   return (
-    <div className="SearchList__container">
+    <SearchListContainer>
       <LayoutRowBase style={{ marginTop: "-45px" }} />
       {renderedItems}
       {frameFullvideo ? <LayoutRowBase /> : null}
-    </div>
+    </SearchListContainer>
   );
 };
 

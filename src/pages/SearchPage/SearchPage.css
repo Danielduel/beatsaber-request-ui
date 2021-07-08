@@ -95,11 +95,3 @@
   left: 24px;
   top: 15px;
 }
-
-.SearchList__container {
-  box-sizing: border-box;
-  max-height: calc(100vh - (52px * 2));
-  min-height: calc(100vh - (52px * 2));
-  overflow-y: scroll;
-  margin-right: -999999999999px; /* throw scroll awwaaaaaaaay */
-}
