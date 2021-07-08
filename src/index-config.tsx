@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import BroadcasterConfigPage from "./BroadcasterConfigPage/BroadcasterConfigPage";
+import BroadcasterConfigPage from "./pages/BroadcasterConfigPage/BroadcasterConfigPage";
 import * as serviceWorker from "./serviceWorker";
 import { createWrappedProvider } from "./AppEnvContext";
 

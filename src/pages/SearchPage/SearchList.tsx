@@ -2,8 +2,8 @@ import React from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Translation } from "react-i18next";
 import styled from "styled-components";
-import AppEnvContext, { RankedRecordMap } from "../AppEnvContext";
-import { LayoutRowBase } from "../components/LayoutRow/LayoutRow";
+import AppEnvContext, { RankedRecordMap } from "../../AppEnvContext";
+import { LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
 import { SongListDocsItem } from "./SearchPage";
 
 // Trimmed LowerCase

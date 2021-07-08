@@ -35,6 +35,7 @@ Table of contents:
   * (tech) Reduce css and include @types/twitch-ext
 * 8 July 2021
   * (tech) Rewrite LayoutRow
+  * (tech) Move pages to pages folder and create BodyWithNavigation layout
 
 0.0.5:
 * 24 May 2021

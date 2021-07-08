@@ -2,9 +2,9 @@
 // This file is one big "xD" - don't do forms like this kids
 
 import React from "react";
-import "../App.css";
-import AppEnvContext, { ConfigBroadcaster } from "../AppEnvContext";
-import { LayoutRowBase } from "../components/LayoutRow/LayoutRow";
+import "../../App.css";
+import AppEnvContext, { ConfigBroadcaster } from "../../AppEnvContext";
+import { LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
 
 type TwitchConfigInputRowProps = {
   name: string;

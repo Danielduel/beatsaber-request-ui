@@ -3,9 +3,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import { fetchSongs, isNotNull } from "../utils";
+import { fetchSongs, isNotNull } from "../../utils";
 
-import { LayoutRowPlaceholder } from "../components/LayoutRow/LayoutRow";
+import { LayoutRowPlaceholder } from "../../components/LayoutRow/LayoutRow";
 import SearchInput from "./SearchInput";
 import SearchList from "./SearchList";
 import { Translation } from "react-i18next";

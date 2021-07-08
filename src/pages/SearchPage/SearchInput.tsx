@@ -1,9 +1,9 @@
 import React from "react";
-import { LayoutRowBase } from "../components/LayoutRow/LayoutRow";
-import MagnifyingGlassIcon from "../common/icons/MagnifyingGlassIcon";
+import { LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
+import MagnifyingGlassIcon from "../../common/icons/MagnifyingGlassIcon";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import AppEnvContext from "../AppEnvContext";
+import AppEnvContext from "../../AppEnvContext";
 
 const PageHeaderLayoutRow = styled(LayoutRowBase)`
   padding-top: 10px;

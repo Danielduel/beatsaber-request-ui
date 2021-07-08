@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import LanguageSelector from "../components/LanguageSelector/LanguageSelector";
+import LanguageSelector from "../../components/LanguageSelector/LanguageSelector";
 
 const InfoPageWrapper = styled.div`
   display: flex;

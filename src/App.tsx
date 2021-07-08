@@ -9,8 +9,8 @@ import "./SearchPage/SearchPage.css";
 import MagnifyingGlassIcon from "./common/icons/MagnifyingGlassIcon";
 import InfoIcon from "./common/icons/InfoIcon";
 import Header from "./Header/Header";
-import SearchPage from "./SearchPage/SearchPage";
-import InfoPage from "./InfoPage/InfoPage";
+import SearchPage from "./pages/SearchPage/SearchPage";
+import InfoPage from "./pages/InfoPage/InfoPage";
 
 import "./i18n/init-i18n";
 import { ConfigBroadcaster } from "./AppEnvContext";
