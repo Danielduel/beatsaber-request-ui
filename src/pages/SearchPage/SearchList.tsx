@@ -55,6 +55,20 @@ const CopyButton = styled.button`
   }
 `;
 
+const PostCopyTooltip = styled.div`
+  position: absolute;
+  margin-top: 2px;
+  height: 90%;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ddd;
+  padding: 0 10px;
+  border: 0px solid transparent;
+  border-radius: 10px;
+`;
+
 const isCreatedByAutomapper = (docData: SongListDocsItem) => {
   const songNameTLC = stringTLC(docData.metadata.songName);
   const songAuthorNameTLC = stringTLC(docData.metadata.songAuthorName);
@@ -146,11 +160,11 @@ const Item = (rankedHashes: RankedRecordMap, framePanel: boolean, frameFullvideo
                 </CopyButton>
               </CopyToClipboard>
             ) : (
-              <div>
+              <PostCopyTooltip>
                 <Translation>{(t) => t("Paste on chat")}</Translation>
                 <br />
                 <Translation>{(t) => t("to make request")}</Translation>
-              </div>
+              </PostCopyTooltip>
             )}
           </div>
         </div>
