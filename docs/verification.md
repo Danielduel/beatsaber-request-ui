@@ -42,6 +42,7 @@ Table of contents:
 * 10 July 2021
   * (feature) Improve and redesign search input
   * (fix) Style post-copy button on search item
+  * (fix) Fix copy button dimensions with longer translations
 
 0.0.5:
 * 24 May 2021

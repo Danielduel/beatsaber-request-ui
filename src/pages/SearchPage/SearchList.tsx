@@ -27,7 +27,6 @@ const CopyButton = styled.button`
   outline: none;
   box-sizing: border-box;
   height: 40px;
-  width: 75px;
   padding: 10px 10px;
   margin-left: 12px;
   border-radius: 20px;
@@ -55,11 +54,16 @@ const CopyButton = styled.button`
   }
 `;
 
+const CopyButtonText = styled.span`
+  margin-right: 5px;
+`;
+
 const PostCopyTooltip = styled.div`
   position: absolute;
   margin-top: 2px;
   height: 90%;
   top: 0;
+  right: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -156,7 +160,10 @@ const Item = (rankedHashes: RankedRecordMap, framePanel: boolean, frameFullvideo
                 <CopyButton
                   style={{ backgroundColor: isRanked ? "var(--background-secondary-buttonover)" : "invalid-color" }}
                 >
-                  <span><Translation>{(t) => t("Copy")}</Translation></span><CopyIcon />
+                  <CopyButtonText>
+                    <Translation>{(t) => t("Copy")}</Translation>
+                  </CopyButtonText>
+                  <CopyIcon />
                 </CopyButton>
               </CopyToClipboard>
             ) : (
