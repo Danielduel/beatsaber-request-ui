@@ -6,6 +6,7 @@ import AppEnvContext, { RankedRecordMap } from "../../AppEnvContext";
 import { hideScrollbars } from "../../common/styles/hideScrollbars";
 import { LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
 import { SongListDocsItem } from "./SearchPage";
+import { CopyIcon } from "./CopyIcon";
 
 // Trimmed LowerCase
 const stringTLC = (s: string) => s.toLocaleLowerCase().trim();
@@ -26,6 +27,7 @@ const CopyButton = styled.button`
   outline: none;
   box-sizing: border-box;
   height: 40px;
+  width: 75px;
   padding: 10px 10px;
   margin-left: 12px;
   border-radius: 20px;
@@ -37,6 +39,16 @@ const CopyButton = styled.button`
   color: var(--text);
   background-color: var(--background-input);
   opacity: 0.9;
+
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: width 0.03s linear;
+
+  & > svg {
+    width: 20px;
+    height: 20px;
+  }
 
   &:hover {
     opacity: 1;
@@ -73,7 +85,7 @@ const Item = (rankedHashes: RankedRecordMap, framePanel: boolean, frameFullvideo
 
     return (
       <LayoutRowBase
-        key={`sthelse-${hack++}`}
+        key={docData.hash}
         style={{
           ...((framePanel && { height: "88px" }) || (frameFullvideo && { height: "60px" }) || {}),
           backgroundColor: isRanked ? "var(--background-secondary)" : "invalid-color",
@@ -130,7 +142,7 @@ const Item = (rankedHashes: RankedRecordMap, framePanel: boolean, frameFullvideo
                 <CopyButton
                   style={{ backgroundColor: isRanked ? "var(--background-secondary-buttonover)" : "invalid-color" }}
                 >
-                  <Translation>{(t) => t("Copy")}</Translation> 📋
+                  <span><Translation>{(t) => t("Copy")}</Translation></span><CopyIcon />
                 </CopyButton>
               </CopyToClipboard>
             ) : (

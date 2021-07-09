@@ -101,7 +101,10 @@ const InfoPageContent = () => (
             <LinkWrapper href="https://www.flaticon.com/free-icon/translation_2793765">Translation icon</LinkWrapper>
           </li>
           <li>
-            <LinkWrapper href="https://www.flaticon.com/free-icon/research_2271541">This icon on the left</LinkWrapper>
+            <LinkWrapper href="https://www.flaticon.com/free-icon/research_2271541">This icon to the left</LinkWrapper>
+          </li>
+          <li>
+            <LinkWrapper href="https://www.flaticon.com/free-icon/copy_2911213">Copy icon</LinkWrapper>
           </li>
         </ul>
       </div>

@@ -39,6 +39,8 @@ Table of contents:
   * (tech) Refactor app wrappers/containers
 * 9 July 2021
   * (feature) Update infopage
+* 10 July 2021
+  * (feature) Improve and redesign search input
 
 0.0.5:
 * 24 May 2021
