@@ -60,6 +60,7 @@ const SearchListItemAvailableDifficultiesWrapper = styled.div`
     position: absolute;
     bottom: 0;
     right: 0;
+    height: initial;
     width: 100%;
     display: flex;
     flex-direction: row;
