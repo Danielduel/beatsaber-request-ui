@@ -8,6 +8,15 @@ const LayoutRowBase = styled.div`
   position: relative;
 `;
 
+const LayoutRowTall = styled.div`
+  width: min(100vw, 500px);
+  min-height: 95px;
+  padding: 3px 0;
+  background-color: var(--background);
+  box-sizing: border-box;
+  position: relative;
+`;
+
 const LayoutRowPrimary = styled(LayoutRowBase)`
   background-color: var(--background-primary);
 `;
@@ -21,4 +30,4 @@ const LayoutRowPlaceholder = styled(LayoutRowBase)`
   align-self: flex-start;
 `;
 
-export { LayoutRowBase, LayoutRowPrimary, LayoutRowPlaceholder };
+export { LayoutRowBase, LayoutRowPrimary, LayoutRowPlaceholder, LayoutRowTall };

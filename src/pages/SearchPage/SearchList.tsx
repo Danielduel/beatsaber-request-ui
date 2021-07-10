@@ -1,10 +1,10 @@
 import React from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Translation } from "react-i18next";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import AppEnvContext, { RankedRecordMap } from "../../AppEnvContext";
 import { hideScrollbars } from "../../common/styles/hideScrollbars";
-import { LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
+import { LayoutRowTall, LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
 import { SongListDocsItem } from "./SearchPage";
 import { CopyIcon } from "./CopyIcon";
 
@@ -87,7 +87,172 @@ const isCreatedByAutomapper = (docData: SongListDocsItem) => {
   });
 };
 
-let hack = 0;
+const SearchListItemCoverImageWrapper = styled.div`
+  height: 91px;
+  width: 91px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid var(--border);
+
+  & > img {
+    width: 91px;
+    max-height: 91px;
+  }
+`;
+const SearchListItemCoverImage = ({ coverURL }: { coverURL: string }) => {
+  return (
+    <SearchListItemCoverImageWrapper>
+      <img src={coverURL} />
+    </SearchListItemCoverImageWrapper>
+  );
+};
+
+type SearchListItemDetailsSpanVariant = "title" | "subtitle" | "item";
+type SearchListItemDetailsSpanProps = {
+  variant: SearchListItemDetailsSpanVariant;
+};
+const SearchListItemDetailsSpan = styled.span<SearchListItemDetailsSpanProps>`
+  ${({ variant }: SearchListItemDetailsSpanProps) => {
+    switch (variant) {
+      case "title":
+        return css`
+          font-size: 1.2rem;
+          color: var(--text);
+        `;
+      case "subtitle":
+        return css`
+          font-size: 1.1rem;
+          color: var(--text-secondary);
+          margin-left: 5px;
+        `;
+      case "item":
+        return css`
+          font-size: 1.1rem;
+          color: var(--text);
+          margin-left: 5px;
+        `;
+    }
+  }}
+`;
+const SearchListItemDetailsFullwidthItemWrapper = styled.div`
+  grid-column: span var(--columns);
+  grid-row: span 1;
+`;
+const SearchListItemDetailsFullwidthItem = ({
+  data,
+  suffix,
+  variant
+}: {
+  data: string | null | undefined;
+  suffix: string;
+  variant: SearchListItemDetailsSpanVariant;
+}) => {
+  if (typeof data === "string" && data.length > 0) {
+    return (
+      <SearchListItemDetailsFullwidthItemWrapper>
+        <SearchListItemDetailsSpan variant={variant}>
+          {data} {suffix}
+        </SearchListItemDetailsSpan>
+      </SearchListItemDetailsFullwidthItemWrapper>
+    );
+  }
+  return null;
+};
+const SearchListItemDetailsSmallItemWrapper = styled.div`
+  grid-column: span 4;
+  grid-row: span 1;
+`;
+const SearchListItemDetailsSmallItem = ({
+  data,
+  suffix,
+  variant
+}: {
+  data: string | null | undefined | number;
+  suffix: string;
+  variant: SearchListItemDetailsSpanVariant;
+}) => {
+  if (typeof data === "string" && data.length > 0) {
+    return (
+      <SearchListItemDetailsSmallItemWrapper>
+        <SearchListItemDetailsSpan variant={variant}>
+          {data} {suffix}
+        </SearchListItemDetailsSpan>
+      </SearchListItemDetailsSmallItemWrapper>
+    );
+  }
+
+  if (typeof data === "number") {
+    return (
+      <SearchListItemDetailsSmallItemWrapper>
+        <SearchListItemDetailsSpan variant={variant}>
+          {data} {suffix}
+        </SearchListItemDetailsSpan>
+      </SearchListItemDetailsSmallItemWrapper>
+    );
+  }
+
+  return null;
+};
+const SearchListItemDetailsWrapper = styled.div`
+  display: grid;
+  width: 100%;
+  --columns: 4;
+  grid-template-columns: repeat(4, calc(100% / 4));
+
+  @media (min-width: 380px) {
+    --columns: 8;
+    grid-template-columns: repeat(8, calc(100% / 8));
+  }
+
+  @media (min-width: 499px) {
+    --columns: 12;
+    grid-template-columns: repeat(12, calc(100% / 12));
+  }
+`;
+type SearchListItemDetailsProps = {
+  songName: string;
+  songAuthorName: string;
+  levelAuthorName: string;
+  bsrKey: string;
+  downloads: number;
+  upVotes: number;
+  downVotes: number;
+  percentVotes: number;
+  isRanked: boolean;
+};
+const SearchListItemDetails = ({
+  songName,
+  songAuthorName,
+  levelAuthorName,
+  bsrKey,
+  downloads,
+  upVotes,
+  downVotes,
+  percentVotes,
+  isRanked
+}: SearchListItemDetailsProps) => {
+  return (
+    <SearchListItemDetailsWrapper>
+      <SearchListItemDetailsFullwidthItem variant="title" data={songName} suffix="" />
+      <SearchListItemDetailsFullwidthItem variant="subtitle" data={songAuthorName} suffix="" />
+      <SearchListItemDetailsFullwidthItem variant="subtitle" data={levelAuthorName} suffix="" />
+      <SearchListItemDetailsSmallItem variant="item" data={bsrKey} suffix="🔑" />
+      <SearchListItemDetailsSmallItem variant="item" data={downloads} suffix="💾" />
+      <SearchListItemDetailsSmallItem variant="item" data={percentVotes} suffix="💯" />
+      <SearchListItemDetailsSmallItem variant="item" data={upVotes} suffix="👍" />
+      <SearchListItemDetailsSmallItem variant="item" data={downVotes} suffix="👎" />
+      <SearchListItemDetailsSmallItem variant="item" data={isRanked ? "Ranked" : null} suffix="⭐" />
+    </SearchListItemDetailsWrapper>
+  );
+};
+
+const SearchListItemWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  font-size: 10px;
+  padding-top: 1px;
+`;
 const Item = (rankedHashes: RankedRecordMap, framePanel: boolean, frameFullvideo: boolean) => {
   const _Item = (docData: SongListDocsItem) => {
     const [copied, setCopied] = React.useState(false);
@@ -102,58 +267,26 @@ const Item = (rankedHashes: RankedRecordMap, framePanel: boolean, frameFullvideo
     const isRanked = !!rankedHashes[docData.hash.toLowerCase()];
 
     return (
-      <LayoutRowBase
+      <LayoutRowTall
         key={docData.hash}
         style={{
-          ...((framePanel && { height: "88px" }) || (frameFullvideo && { height: "60px" }) || {}),
           backgroundColor: isRanked ? "var(--background-secondary)" : "invalid-color",
           borderBottom: "1px solid var(--border)"
         }}
       >
-        <div className="doc__container">
-          <div className="doc__cover">
-            <img src={coverURL} />
-          </div>
-          <div
-            className="doc__mapdata"
-            style={(framePanel && { height: "88px" }) || (frameFullvideo && { height: "60px" }) || {}}
-          >
-            <div className="doc__name">{docData.metadata.songName}</div>
-            <div className="doc__author">{docData.metadata.songAuthorName}</div>
-            <div className="doc__mapper">{docData.metadata.levelAuthorName}</div>
-          </div>
-          {!framePanel ? (
-            <>
-              <div className="doc__saverdata">
-                <div className="doc__key">{docData.key} 🔑</div>
-                <div className="doc__downloads">{docData.stats.downloads} 💾</div>
-                {isRanked ? <div className="doc__score--percentvotes">Ranked ⭐</div> : null}
-              </div>
-              <div className="doc__scoredata">
-                <div className="doc__score--upvotes">{docData.stats.upVotes} 👍</div>
-                <div className="doc__score--downvotes">{docData.stats.downVotes} 👎</div>
-                <div className="doc__score--percentvotes">{percentVotes}% 💯</div>
-              </div>
-            </>
-          ) : (
-            <div
-              className="doc__mapdata"
-              style={{
-                height: "85px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignContent: "center"
-              }}
-            >
-              <div className="doc__score--upvotes">{docData.stats.upVotes} 👍</div>
-              <div className="doc__score--downvotes">{docData.stats.downVotes} 👎</div>
-              <div className="doc__score--percentvotes">{percentVotes}% 💯</div>
-              <div className="doc__downloads">{docData.stats.downloads} 💾</div>
-              {isRanked ? <div className="doc__score--percentvotes">Ranked ⭐</div> : null}
-              <div className="doc__key">{docData.key} 🔑</div>
-            </div>
-          )}
+        <SearchListItemWrapper>
+          <SearchListItemCoverImage coverURL={coverURL} />
+          <SearchListItemDetails
+            songName={docData.metadata.songName}
+            songAuthorName={docData.metadata.songAuthorName}
+            levelAuthorName={docData.metadata.levelAuthorName}
+            bsrKey={docData.key}
+            downloads={docData.stats.downloads}
+            upVotes={docData.stats.upVotes}
+            downVotes={docData.stats.downVotes}
+            percentVotes={percentVotes}
+            isRanked={isRanked}
+          />
           <div className="doc__cta">
             {!copied ? (
               <CopyToClipboard text={`!bsr ${docData.key}`} onCopy={() => setCopied(true)}>
@@ -174,8 +307,8 @@ const Item = (rankedHashes: RankedRecordMap, framePanel: boolean, frameFullvideo
               </PostCopyTooltip>
             )}
           </div>
-        </div>
-      </LayoutRowBase>
+        </SearchListItemWrapper>
+      </LayoutRowTall>
     );
   };
   return _Item;

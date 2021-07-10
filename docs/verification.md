@@ -43,6 +43,8 @@ Table of contents:
   * (feature) Improve and redesign search input
   * (fix) Style post-copy button on search item
   * (fix) Fix copy button dimensions with longer translations
+  * (docs) Redesign base templates on figma
+  * (feature) Redesign and improve code quality on search list item
 
 0.0.5:
 * 24 May 2021
