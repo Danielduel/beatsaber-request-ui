@@ -6,6 +6,7 @@ import AppEnvContext, { RankedRecordMap } from "../../AppEnvContext";
 import { hideScrollbars } from "../../common/styles/hideScrollbars";
 import { LayoutRowTall, LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
 import { SearchListItemDetails } from "../../components/SearchList/SearchListItemDetails";
+import { SearchListItemAvailableDifficulties } from "../../components/SearchList/SearchListItemAvailableDifficulties";
 import { SongListDocsItem } from "./SearchPage";
 import { CopyIcon } from "./CopyIcon";
 
@@ -109,6 +110,15 @@ const SearchListItemCoverImage = ({ coverURL }: { coverURL: string }) => {
   );
 };
 
+const SearchListItemActionGroupWrapper = styled.div`
+  margin-left: auto;
+  margin-right: 10px;
+  flex: 100 0;
+  align-self: center;
+  text-align: center;
+  min-width: 90px;
+`;
+
 const SearchListItemWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -149,7 +159,7 @@ const Item = (rankedHashes: RankedRecordMap, framePanel: boolean, frameFullvideo
             percentVotes={percentVotes}
             isRanked={isRanked}
           />
-          <div className="doc__cta">
+          <SearchListItemActionGroupWrapper>
             {!copied ? (
               <CopyToClipboard text={`!bsr ${docData.key}`} onCopy={() => setCopied(true)}>
                 <CopyButton
@@ -168,7 +178,14 @@ const Item = (rankedHashes: RankedRecordMap, framePanel: boolean, frameFullvideo
                 <Translation>{(t) => t("to make request")}</Translation>
               </PostCopyTooltip>
             )}
-          </div>
+          </SearchListItemActionGroupWrapper>
+          <SearchListItemAvailableDifficulties
+            easy={!!docData.metadata.difficulties.easy}
+            normal={!!docData.metadata.difficulties.normal}
+            hard={!!docData.metadata.difficulties.hard}
+            expert={!!docData.metadata.difficulties.expert}
+            expertPlus={!!docData.metadata.difficulties.expertPlus}
+          />
         </SearchListItemWrapper>
       </LayoutRowTall>
     );

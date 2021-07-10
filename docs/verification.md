@@ -46,6 +46,7 @@ Table of contents:
   * (docs) Redesign base templates on figma
   * (feature) Redesign and improve code quality on search list item
   * (tech) Export SearchListItemDetails as component
+  * (feature) Show available difficulties per map
 
 0.0.5:
 * 24 May 2021

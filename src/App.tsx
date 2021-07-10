@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { MemoryRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import "./App.css";
-import "./pages/SearchPage/SearchPage.css";
 
 import MagnifyingGlassIcon from "./common/icons/MagnifyingGlassIcon";
 import InfoIcon from "./common/icons/InfoIcon";
