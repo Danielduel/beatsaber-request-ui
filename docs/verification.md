@@ -45,6 +45,7 @@ Table of contents:
   * (fix) Fix copy button dimensions with longer translations
   * (docs) Redesign base templates on figma
   * (feature) Redesign and improve code quality on search list item
+  * (tech) Export SearchListItemDetails as component
 
 0.0.5:
 * 24 May 2021
