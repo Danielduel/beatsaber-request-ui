@@ -45,10 +45,11 @@ Table of contents:
   * (fix) Fix copy button dimensions with longer translations
   * (docs) Redesign base templates on figma
   * (feature) Redesign and improve code quality on search list item
-  * (tech) Export SearchListItemDetails as component
+  * (tech) Export SearchListItemDetails as a component
   * (feature) Show available difficulties per map
   * (fix) Fix overflow issue with difficulties
   * (fix) Fix wrapping issue on search item details
+  * (tech) Exclude SearchListItem-related code as components
 
 0.0.5:
 * 24 May 2021

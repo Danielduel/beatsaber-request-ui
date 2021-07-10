@@ -4,6 +4,7 @@ import MagnifyingGlassIcon from "../../common/icons/MagnifyingGlassIcon";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import AppEnvContext from "../../AppEnvContext";
+import { shadowizeFont } from "../../common/styles/shadowizeFont";
 
 const PageHeaderLayoutRow = styled(LayoutRowBase)`
   display: flex;
@@ -34,8 +35,7 @@ const SearchButton = styled.button`
 `;
 
 const ClearButton = styled.span`
-  color: transparent;
-  text-shadow: 0 0 0 #935ba5;
+  ${shadowizeFont}
 
   line-height: 0;
   background: var(--background);
