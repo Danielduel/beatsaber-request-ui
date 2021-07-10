@@ -1,4 +1,6 @@
 import React from "react";
+import { SearchListItemActions } from "./SearchListItemActions";
+import { SearchListItemCoverImage } from "./SearchListItemCoverImage";
 import {
   SearchListItemDetailsFullwidthItem,
   SearchListItemDetailsSmallItem
@@ -6,6 +8,7 @@ import {
 import { SearchListItemDetailsWrapper } from "./SearchListItemDetails/SearchListItemDetailsWrapper";
 
 type SearchListItemDetailsProps = {
+  coverURL: string;
   songName: string;
   songAuthorName: string;
   levelAuthorName: string;
@@ -17,6 +20,7 @@ type SearchListItemDetailsProps = {
   isRanked: boolean;
 };
 const SearchListItemDetails = ({
+  coverURL,
   songName,
   songAuthorName,
   levelAuthorName,
@@ -29,6 +33,8 @@ const SearchListItemDetails = ({
 }: SearchListItemDetailsProps) => {
   return (
     <SearchListItemDetailsWrapper>
+      <SearchListItemCoverImage coverURL={coverURL} />
+      <SearchListItemActions bsrKey={bsrKey} isRanked={isRanked} />
       <SearchListItemDetailsFullwidthItem variant="title" data={songName} suffix="" />
       <SearchListItemDetailsFullwidthItem variant="subtitle" data={songAuthorName} suffix="" />
       <SearchListItemDetailsFullwidthItem variant="subtitle" data={levelAuthorName} suffix="" />

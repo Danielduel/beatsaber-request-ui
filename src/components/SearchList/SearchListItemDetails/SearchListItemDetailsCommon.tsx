@@ -15,13 +15,13 @@ const SearchListItemDetailsSpan = styled.span`
         `;
       case "subtitle":
         return css`
-          font-size: 1.1rem;
+          font-size: 0.7rem;
           color: var(--text-secondary);
           margin-left: 5px;
         `;
       case "item":
         return css`
-          font-size: 1.1rem;
+          font-size: 1rem;
           color: var(--text);
           margin-left: 5px;
         `;
@@ -60,7 +60,8 @@ const SearchListItemDetailsCommon = (WrapperComponent: React.FunctionComponent) 
 };
 
 const SearchListItemDetailsFullwidthItemWrapper = styled.div`
-  grid-column: span var(--columns);
+  margin-left: 5px;
+  grid-column: span var(--fullwidth-span);
   grid-row: span 1;
 `;
 const _SearchListItemDetailsFullwidthItem = SearchListItemDetailsCommon(SearchListItemDetailsFullwidthItemWrapper);
@@ -68,7 +69,8 @@ const SearchListItemDetailsFullwidthItem = (props: SearchListItemDetailsCommonPr
   return _SearchListItemDetailsFullwidthItem(props);
 };
 const SearchListItemDetailsSmallItemWrapper = styled.div`
-  grid-column: span 4;
+  margin-left: 10px;
+  grid-column: span var(--small-span);
   grid-row: span 1;
 `;
 const _SearchListItemDetailsSmallItem = SearchListItemDetailsCommon(SearchListItemDetailsSmallItemWrapper);

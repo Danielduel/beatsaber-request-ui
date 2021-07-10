@@ -50,6 +50,7 @@ Table of contents:
   * (fix) Fix overflow issue with difficulties
   * (fix) Fix wrapping issue on search item details
   * (tech) Exclude SearchListItem-related code as components
+  * (fix) Redesign after reviewing viewports
 
 0.0.5:
 * 24 May 2021

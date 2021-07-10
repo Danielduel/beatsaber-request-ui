@@ -39,7 +39,7 @@ const ClearButton = styled.span`
 
   line-height: 0;
   background: var(--background);
-  margin-left: -37px;
+  margin-left: -38px;
   margin-top: 2px;
   border: 1px solid var(--background-primary);
   border-radius: 50%;

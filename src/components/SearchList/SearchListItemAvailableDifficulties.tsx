@@ -58,7 +58,8 @@ const SearchListItemAvailableDifficultiesWrapper = styled.div`
 
   @media (min-width: 499px) {
     position: absolute;
-    bottom: 0;
+    top: 0;
+    bottom: initial;
     right: 0;
     height: initial;
     width: 100%;

@@ -1,19 +1,46 @@
 import styled from "styled-components";
 
+const dots = (number: number) => (new Array(number + 1).map(() => " ")).join(". "); 
+
 const SearchListItemDetailsWrapper = styled.div`
   display: grid;
   width: 100%;
-  --columns: 4;
-  grid-template-columns: repeat(4, calc(100% / 4));
+  --fullwidth-span: 3;
+  --small-span: 1;
+
+  grid-template-areas:
+    "${dots(3)}" /* title */
+    "${dots(3)}" /* artist */
+    "${dots(3)}" /* mapper */
+    "cover-image . action-group" /* details... */
+    "cover-image . action-group" /* details... */
+    "cover-image . action-group" /* details... */
+    "cover-image . action-group" /* details... */
+    "cover-image . action-group" /* details... */
+    "cover-image . action-group" /* details... */;
 
   @media (min-width: 380px) {
-    --columns: 8;
-    grid-template-columns: repeat(8, calc(100% / 8));
+    --fullwidth-span: 6;
+    --small-span: 2;
+
+    grid-template-areas:
+      "${dots(6)}" /* title */
+      "${dots(6)}" /* artist */
+      "${dots(6)}" /* mapper */
+      "cover-image ${dots(4)} action-group" /* details... */
+      "cover-image ${dots(4)} action-group" /* details... */
+      "cover-image ${dots(4)} action-group" /* details... */;
   }
 
   @media (min-width: 499px) {
-    --columns: 12;
-    grid-template-columns: repeat(12, calc(100% / 12));
+    --fullwidth-span: 13;
+    --small-span: 4;
+    grid-template-areas:
+      "cover-image ${dots(13)}" /* title */
+      "cover-image ${dots(13)}" /* artist */
+      "cover-image ${dots(13)}" /* mapper */
+      "cover-image ${dots(12)} action-group" /* details... */
+      "cover-image ${dots(12)} action-group" /* details... */;
   }
 `;
 

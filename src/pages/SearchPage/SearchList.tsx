@@ -1,6 +1,4 @@
 import React from "react";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import { Translation } from "react-i18next";
 import styled from "styled-components";
 import AppEnvContext, { RankedRecordMap } from "../../AppEnvContext";
 import { hideScrollbars } from "../../common/styles/hideScrollbars";
@@ -8,7 +6,6 @@ import { LayoutRowTall, LayoutRowBase } from "../../components/LayoutRow/LayoutR
 import { SearchListItemDetails } from "../../components/SearchList/SearchListItemDetails";
 import { SearchListItemAvailableDifficulties } from "../../components/SearchList/SearchListItemAvailableDifficulties";
 import { SongListDocsItem } from "./SearchPage";
-import { CopyIcon } from "./CopyIcon";
 
 // Trimmed LowerCase
 const stringTLC = (s: string) => s.toLocaleLowerCase().trim();
@@ -25,56 +22,6 @@ const SearchListContainer = styled.div`
   ${hideScrollbars}
 `;
 
-const CopyButton = styled.button`
-  outline: none;
-  box-sizing: border-box;
-  height: 40px;
-  padding: 10px 10px;
-  margin-left: 12px;
-  border-radius: 20px;
-  border: 0px solid transparent;
-  cursor: pointer;
-
-  font-weight: normal;
-  font-size: 0.8rem;
-  color: var(--text);
-  background-color: var(--background-input);
-  opacity: 0.9;
-
-  display: inline-flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: width 0.03s linear;
-
-  & > svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  &:hover {
-    opacity: 1;
-  }
-`;
-
-const CopyButtonText = styled.span`
-  margin-right: 5px;
-`;
-
-const PostCopyTooltip = styled.div`
-  position: absolute;
-  margin-top: 2px;
-  height: 90%;
-  top: 0;
-  right: 3px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ddd;
-  padding: 0 10px;
-  border: 0px solid transparent;
-  border-radius: 10px;
-`;
-
 const isCreatedByAutomapper = (docData: SongListDocsItem) => {
   const songNameTLC = stringTLC(docData.metadata.songName);
   const songAuthorNameTLC = stringTLC(docData.metadata.songAuthorName);
@@ -89,36 +36,6 @@ const isCreatedByAutomapper = (docData: SongListDocsItem) => {
   });
 };
 
-const SearchListItemCoverImageWrapper = styled.div`
-  height: 91px;
-  width: 91px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-right: 1px solid var(--border);
-
-  & > img {
-    width: 91px;
-    max-height: 91px;
-  }
-`;
-const SearchListItemCoverImage = ({ coverURL }: { coverURL: string }) => {
-  return (
-    <SearchListItemCoverImageWrapper>
-      <img src={coverURL} />
-    </SearchListItemCoverImageWrapper>
-  );
-};
-
-const SearchListItemActionGroupWrapper = styled.div`
-  margin-left: auto;
-  margin-right: 10px;
-  flex: 100 0;
-  align-self: center;
-  text-align: center;
-  min-width: 90px;
-`;
-
 const SearchListItemWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -127,7 +44,6 @@ const SearchListItemWrapper = styled.div`
 `;
 const Item = (rankedHashes: RankedRecordMap, framePanel: boolean, frameFullvideo: boolean) => {
   const _Item = (docData: SongListDocsItem) => {
-    const [copied, setCopied] = React.useState(false);
     const coverURL = `https://beatsaver.com${docData.coverURL}`;
     const allVotes = docData.stats.upVotes + docData.stats.downVotes;
     const percentVotes = ~~((docData.stats.upVotes / allVotes) * 1000) / 10;
@@ -147,8 +63,8 @@ const Item = (rankedHashes: RankedRecordMap, framePanel: boolean, frameFullvideo
         }}
       >
         <SearchListItemWrapper>
-          <SearchListItemCoverImage coverURL={coverURL} />
           <SearchListItemDetails
+            coverURL={coverURL}
             songName={docData.metadata.songName}
             songAuthorName={docData.metadata.songAuthorName}
             levelAuthorName={docData.metadata.levelAuthorName}
@@ -159,26 +75,6 @@ const Item = (rankedHashes: RankedRecordMap, framePanel: boolean, frameFullvideo
             percentVotes={percentVotes}
             isRanked={isRanked}
           />
-          <SearchListItemActionGroupWrapper>
-            {!copied ? (
-              <CopyToClipboard text={`!bsr ${docData.key}`} onCopy={() => setCopied(true)}>
-                <CopyButton
-                  style={{ backgroundColor: isRanked ? "var(--background-secondary-buttonover)" : "invalid-color" }}
-                >
-                  <CopyButtonText>
-                    <Translation>{(t) => t("Copy")}</Translation>
-                  </CopyButtonText>
-                  <CopyIcon />
-                </CopyButton>
-              </CopyToClipboard>
-            ) : (
-              <PostCopyTooltip>
-                <Translation>{(t) => t("Paste on chat")}</Translation>
-                <br />
-                <Translation>{(t) => t("to make request")}</Translation>
-              </PostCopyTooltip>
-            )}
-          </SearchListItemActionGroupWrapper>
           <SearchListItemAvailableDifficulties
             easy={!!docData.metadata.difficulties.easy}
             normal={!!docData.metadata.difficulties.normal}
