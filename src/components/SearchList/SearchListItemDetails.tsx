@@ -45,7 +45,7 @@ const SearchListItemDetailsFullwidthItem = ({
     return (
       <SearchListItemDetailsFullwidthItemWrapper>
         <SearchListItemDetailsSpan variant={variant}>
-          {data} {suffix}
+          {data}&nbsp;{suffix}
         </SearchListItemDetailsSpan>
       </SearchListItemDetailsFullwidthItemWrapper>
     );
@@ -69,7 +69,7 @@ const SearchListItemDetailsSmallItem = ({
     return (
       <SearchListItemDetailsSmallItemWrapper>
         <SearchListItemDetailsSpan variant={variant}>
-          {data} {suffix}
+          {data}&nbsp;{suffix}
         </SearchListItemDetailsSpan>
       </SearchListItemDetailsSmallItemWrapper>
     );
@@ -79,7 +79,7 @@ const SearchListItemDetailsSmallItem = ({
     return (
       <SearchListItemDetailsSmallItemWrapper>
         <SearchListItemDetailsSpan variant={variant}>
-          {data} {suffix}
+          {data}&nbsp;{suffix}
         </SearchListItemDetailsSpan>
       </SearchListItemDetailsSmallItemWrapper>
     );

@@ -48,6 +48,7 @@ Table of contents:
   * (tech) Export SearchListItemDetails as component
   * (feature) Show available difficulties per map
   * (fix) Fix overflow issue with difficulties
+  * (fix) Fix wrapping issue on search item details
 
 0.0.5:
 * 24 May 2021
