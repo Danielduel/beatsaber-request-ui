@@ -3,26 +3,7 @@ import AppEnvContext, { RankedRecordMap } from "../../AppEnvContext";
 import { SongListItem } from "../../components/SongList/SongListItem";
 import { SongListDocsItem } from "./SearchPage";
 import { SongListContainer } from "../../components/SongList/SongListContainer";
-
-// Trimmed LowerCase
-const stringTLC = (s: string) => s.toLocaleLowerCase().trim();
-
-const autoMappers = ["Beat Sage", "Deep Saber"];
-const autoMappersTLC = autoMappers.map(stringTLC);
-
-const isCreatedByAutomapper = (docData: SongListDocsItem) => {
-  const songNameTLC = stringTLC(docData.metadata.songName);
-  const songAuthorNameTLC = stringTLC(docData.metadata.songAuthorName);
-  const levelAuthorNameTLC = stringTLC(docData.metadata.levelAuthorName);
-
-  return autoMappersTLC.some((autoMapperTLC) => {
-    return (
-      songNameTLC.includes(autoMapperTLC) ||
-      songAuthorNameTLC.includes(autoMapperTLC) ||
-      levelAuthorNameTLC.includes(autoMapperTLC)
-    );
-  });
-};
+import { isCreatedByAutomapper } from "../../utils";
 
 const Item = (rankedHashes: RankedRecordMap) => {
   const _Item = (docData: SongListDocsItem) => {
@@ -30,7 +11,7 @@ const Item = (rankedHashes: RankedRecordMap) => {
     const allVotes = docData.stats.upVotes + docData.stats.downVotes;
     const percentVotes = ~~((docData.stats.upVotes / allVotes) * 1000) / 10;
 
-    const shouldBeHidden = isCreatedByAutomapper(docData);
+    const shouldBeHidden = isCreatedByAutomapper(docData.metadata.songName, docData.metadata.songAuthorName, docData.metadata.levelAuthorName);
 
     if (shouldBeHidden) return <></>;
 

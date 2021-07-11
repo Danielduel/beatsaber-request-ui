@@ -25,3 +25,23 @@ export function fetchSongs(query = "", automapper = "0"): Promise<SongListType> 
 export function isNotNull<T>(something: T | null): something is T {
   return something !== null;
 }
+
+// Trimmed LowerCase
+const stringTLC = (s: string) => s.toLocaleLowerCase().trim();
+
+const autoMappers = ["Beat Sage", "Deep Saber"];
+const autoMappersTLC = autoMappers.map(stringTLC);
+
+export const isCreatedByAutomapper = (songName: string, songAuthorName: string, levelAuthorName: string) => {
+  const songNameTLC = stringTLC(songName);
+  const songAuthorNameTLC = stringTLC(songAuthorName);
+  const levelAuthorNameTLC = stringTLC(levelAuthorName);
+
+  return autoMappersTLC.some((autoMapperTLC) => {
+    return (
+      songNameTLC.includes(autoMapperTLC) ||
+      songAuthorNameTLC.includes(autoMapperTLC) ||
+      levelAuthorNameTLC.includes(autoMapperTLC)
+    );
+  });
+};

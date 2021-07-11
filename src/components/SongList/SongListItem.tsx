@@ -24,10 +24,10 @@ type SongListItemProps = {
   songAuthorName: string;
   levelAuthorName: string;
   bsrKey: string;
-  downloads: number;
-  upVotes: number;
-  downVotes: number;
-  percentVotes: number;
+  downloads: number | null;
+  upVotes: number | null;
+  downVotes: number | null;
+  percentVotes: number | null;
   isRanked: boolean;
 };
 type SongListItemDifficultyProps = {
