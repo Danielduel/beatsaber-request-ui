@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const dots = (number: number) => (new Array(number + 1).map(() => " ")).join(". "); 
+const dots = (number: number) => new Array(number + 1).map(() => " ").join(". ");
 
-const SearchListItemDetailsWrapper = styled.div`
+const SongListItemDetailsWrapper = styled.div`
   display: grid;
   width: 100%;
   --fullwidth-span: 3;
@@ -44,4 +44,4 @@ const SearchListItemDetailsWrapper = styled.div`
   }
 `;
 
-export { SearchListItemDetailsWrapper };
+export { SongListItemDetailsWrapper };

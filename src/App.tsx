@@ -10,6 +10,7 @@ import InfoIcon from "./common/icons/InfoIcon";
 import Header from "./components/Header/Header";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import InfoPage from "./pages/InfoPage/InfoPage";
+import BeatfollowerPage from "./pages/BeatfollowerPage/BeatfollowerPage";
 
 import "./i18n/init-i18n";
 import { ConfigBroadcaster } from "./AppEnvContext";
@@ -115,6 +116,11 @@ const Navigation = ({ togglePanel }: Pick<MainAppProps, "togglePanel">) => (
       </Link>
     </HeaderLinkWrapper>
     <HeaderLinkWrapper>
+      <Link to="/beatfollower">
+        <MagnifyingGlassIcon />
+      </Link>
+    </HeaderLinkWrapper>
+    <HeaderLinkWrapper>
       <Link to="/info">
         <InfoIcon />
       </Link>
@@ -127,6 +133,9 @@ const Routing = () => (
     <Switch>
       <Route exact path="/">
         <SearchPage />
+      </Route>
+      <Route path="/beatfollower">
+        <BeatfollowerPage />
       </Route>
       <Route path="/info">
         <InfoPage />

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const SearchListItemCoverImageWrapper = styled.div`
+const SongListItemCoverImageWrapper = styled.div`
   grid-area: cover-image;
 
   height: 100%;
@@ -17,12 +17,12 @@ const SearchListItemCoverImageWrapper = styled.div`
   }
 `;
 
-const SearchListItemCoverImage = ({ coverURL }: { coverURL: string }) => {
+const SongListItemCoverImage = ({ coverURL }: { coverURL: string }): JSX.Element => {
   return (
-    <SearchListItemCoverImageWrapper>
+    <SongListItemCoverImageWrapper>
       <img src={coverURL} />
-    </SearchListItemCoverImageWrapper>
+    </SongListItemCoverImageWrapper>
   );
 };
 
-export { SearchListItemCoverImage };
+export { SongListItemCoverImage };

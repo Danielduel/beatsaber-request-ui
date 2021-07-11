@@ -1,8 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-type SearchListItemAvailableDifficultiesDifficultyBadgeVariant = "E" | "N" | "H" | "X" | "X+";
-const SearchListItemAvailableDifficultiesDifficultyBadge = styled.div`
+type SongListItemAvailableDifficultiesDifficultyBadgeVariant = "E" | "N" | "H" | "X" | "X+";
+const SongListItemAvailableDifficultiesDifficultyBadge = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,7 +13,7 @@ const SearchListItemAvailableDifficultiesDifficultyBadge = styled.div`
 
   width: 20px;
   height: 20px;
-  ${({ variant }: { variant: SearchListItemAvailableDifficultiesDifficultyBadgeVariant }) => {
+  ${({ variant }: { variant: SongListItemAvailableDifficultiesDifficultyBadgeVariant }) => {
     switch (variant) {
       case "E":
         return css`
@@ -45,7 +45,7 @@ const SearchListItemAvailableDifficultiesDifficultyBadge = styled.div`
     }
   }}
 `;
-const SearchListItemAvailableDifficultiesWrapper = styled.div`
+const SongListItemAvailableDifficultiesWrapper = styled.div`
   position: initial;
   bottom: 0;
   right: 0;
@@ -69,49 +69,49 @@ const SearchListItemAvailableDifficultiesWrapper = styled.div`
     justify-content: flex-end;
   }
 `;
-type SearchListItemAvailableDifficultiesProps = {
+type SongListItemAvailableDifficultiesProps = {
   easy: boolean;
   normal: boolean;
   hard: boolean;
   expert: boolean;
   expertPlus: boolean;
 };
-const SearchListItemAvailableDifficulties = ({
+const SongListItemAvailableDifficulties = ({
   easy,
   normal,
   hard,
   expert,
   expertPlus
-}: SearchListItemAvailableDifficultiesProps) => {
+}: SongListItemAvailableDifficultiesProps): JSX.Element => {
   return (
-    <SearchListItemAvailableDifficultiesWrapper>
+    <SongListItemAvailableDifficultiesWrapper>
       {easy && (
-        <SearchListItemAvailableDifficultiesDifficultyBadge variant="E">
+        <SongListItemAvailableDifficultiesDifficultyBadge variant="E">
           E
-        </SearchListItemAvailableDifficultiesDifficultyBadge>
+        </SongListItemAvailableDifficultiesDifficultyBadge>
       )}
       {normal && (
-        <SearchListItemAvailableDifficultiesDifficultyBadge variant="N">
+        <SongListItemAvailableDifficultiesDifficultyBadge variant="N">
           N
-        </SearchListItemAvailableDifficultiesDifficultyBadge>
+        </SongListItemAvailableDifficultiesDifficultyBadge>
       )}
       {hard && (
-        <SearchListItemAvailableDifficultiesDifficultyBadge variant="H">
+        <SongListItemAvailableDifficultiesDifficultyBadge variant="H">
           H
-        </SearchListItemAvailableDifficultiesDifficultyBadge>
+        </SongListItemAvailableDifficultiesDifficultyBadge>
       )}
       {expert && (
-        <SearchListItemAvailableDifficultiesDifficultyBadge variant="X">
+        <SongListItemAvailableDifficultiesDifficultyBadge variant="X">
           X
-        </SearchListItemAvailableDifficultiesDifficultyBadge>
+        </SongListItemAvailableDifficultiesDifficultyBadge>
       )}
       {expertPlus && (
-        <SearchListItemAvailableDifficultiesDifficultyBadge variant="X+">
+        <SongListItemAvailableDifficultiesDifficultyBadge variant="X+">
           X+
-        </SearchListItemAvailableDifficultiesDifficultyBadge>
+        </SongListItemAvailableDifficultiesDifficultyBadge>
       )}
-    </SearchListItemAvailableDifficultiesWrapper>
+    </SongListItemAvailableDifficultiesWrapper>
   );
 };
 
-export { SearchListItemAvailableDifficulties };
+export { SongListItemAvailableDifficulties };

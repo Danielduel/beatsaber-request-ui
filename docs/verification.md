@@ -51,6 +51,8 @@ Table of contents:
   * (fix) Fix wrapping issue on search item details
   * (tech) Exclude SearchListItem-related code as components
   * (fix) Redesign after reviewing viewports
+* 11 July 2021
+  * (tech) Refactor of SongItem and SongList to make app ready for more datasources
 
 0.0.5:
 * 24 May 2021

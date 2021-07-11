@@ -54,7 +54,7 @@ const PostCopyTooltip = styled.div`
   border-radius: 10px;
 `;
 
-const SearchListItemActionGroupWrapper = styled.div`
+const SongListItemActionGroupWrapper = styled.div`
   grid-area: action-group;
 
   margin-left: auto;
@@ -65,17 +65,14 @@ const SearchListItemActionGroupWrapper = styled.div`
   min-width: 90px;
 `;
 
-type SearchListItemActionsProps = {
+type SongListItemActionsProps = {
   bsrKey: string;
   isRanked: boolean;
 };
-const SearchListItemActions = ({
-  bsrKey,
-  isRanked
-}: SearchListItemActionsProps) => {
+const SongListItemActions = ({ bsrKey, isRanked }: SongListItemActionsProps): JSX.Element => {
   const [copied, setCopied] = React.useState(false);
   return (
-    <SearchListItemActionGroupWrapper>
+    <SongListItemActionGroupWrapper>
       {!copied ? (
         <CopyToClipboard text={`!bsr ${bsrKey}`} onCopy={() => setCopied(true)}>
           <CopyButton
@@ -94,8 +91,8 @@ const SearchListItemActions = ({
           <Translation>{(t) => t("to make request")}</Translation>
         </PostCopyTooltip>
       )}
-    </SearchListItemActionGroupWrapper>
+    </SongListItemActionGroupWrapper>
   );
 };
 
-export { SearchListItemActions };
+export { SongListItemActions };
