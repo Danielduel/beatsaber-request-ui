@@ -55,6 +55,7 @@ Table of contents:
   * (tech) Refactor of SongItem and SongList to make app ready for more datasources
   * (feature) Add initial beatfollower integration
   * (feature) Improve beatfollower integration UI
+  * (fix) Update ranked map list
 
 0.0.5:
 * 24 May 2021
