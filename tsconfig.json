@@ -26,7 +26,8 @@
     "noFallthroughCasesInSwitch": true // Report errors for fallthrough cases in switch statement
   },
   "include": [
-    "src/**/*" // *** The files TypeScript should type check ***
+    "src/**/*",
+    "typings.d.ts"
   ],
   "exclude": ["node_modules", "build"] // *** The files to not type check ***
 }

@@ -11,7 +11,11 @@ const Item = (rankedHashes: RankedRecordMap) => {
     const allVotes = docData.stats.upVotes + docData.stats.downVotes;
     const percentVotes = ~~((docData.stats.upVotes / allVotes) * 1000) / 10;
 
-    const shouldBeHidden = isCreatedByAutomapper(docData.metadata.songName, docData.metadata.songAuthorName, docData.metadata.levelAuthorName);
+    const shouldBeHidden = isCreatedByAutomapper(
+      docData.metadata.songName,
+      docData.metadata.songAuthorName,
+      docData.metadata.levelAuthorName
+    );
 
     if (shouldBeHidden) return <></>;
 

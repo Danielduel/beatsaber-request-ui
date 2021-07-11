@@ -16,6 +16,8 @@ import "./i18n/init-i18n";
 import { ConfigBroadcaster } from "./AppEnvContext";
 import { BodyWithNavigation, BodyWithNavigationBody } from "./layouts/BodyWithNavigation";
 
+import beatfollowerLogo from "./static/beatfollower.png";
+
 const AppWrapper = styled.div`
   transition: margin-left 1s;
   height: 100vh;
@@ -102,6 +104,12 @@ const HeaderLinkWrapper = styled.div`
   align-items: center;
   border-radius: 20px;
   padding-top: 4px;
+  overflow: hidden;
+`;
+
+const NavigationImage = styled.img`
+  width: 100%;
+  height: 100%;
 `;
 
 type MainAppProps = {
@@ -117,7 +125,7 @@ const Navigation = ({ togglePanel }: Pick<MainAppProps, "togglePanel">) => (
     </HeaderLinkWrapper>
     <HeaderLinkWrapper>
       <Link to="/beatfollower">
-        <MagnifyingGlassIcon />
+        <NavigationImage src={beatfollowerLogo} />
       </Link>
     </HeaderLinkWrapper>
     <HeaderLinkWrapper>

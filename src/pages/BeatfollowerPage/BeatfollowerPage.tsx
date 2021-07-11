@@ -3,6 +3,28 @@ import { SongListContainer } from "../../components/SongList/SongListContainer";
 import AppEnvContext, { RankedRecordMap } from "../../AppEnvContext";
 import { SongListItem } from "../../components/SongList/SongListItem";
 import { isCreatedByAutomapper } from "../../utils";
+import { LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
+import styled from "styled-components";
+
+const SubnavigationContainer = styled.div`
+  margin: 10px 5px 2px 5px;
+`;
+
+const StyledSelect = styled.select`
+  position: relative;
+  box-sizing: border-box;
+  height: 40px;
+  background-color: var(--background-input);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--text);
+  font-size: 1.2rem;
+  padding: 5px 40px 5px 20px;
+
+  -moz-appearance: none; /* Firefox */
+  -webkit-appearance: none; /* Safari and Chrome */
+  appearance: none;
+`;
 
 type BeatfollowerTopPlayedResponseItemBody = {
   _id: string;
@@ -79,16 +101,26 @@ function ItemList({ results }: { results: null | BeatfollowerTopPlayedResponse }
   if (results) {
     return (
       <AppEnvContext.Consumer>
-        {(context) => <_ItemList results={results as BeatfollowerTopPlayedResponse} rankedHashes={context.rankedHashes} />}
+        {(context) => (
+          <_ItemList results={results as BeatfollowerTopPlayedResponse} rankedHashes={context.rankedHashes} />
+        )}
       </AppEnvContext.Consumer>
     );
   }
   return null;
 }
 
-type TabVariant = "top/played/today" | "top/played/week" | "top/played/month" | "top/played/alltime" | "top/recommended/today" | "top/recommended/week" | "top/recommended/month" | "top/recommended/alltime";
+type TabVariant =
+  | "top/played/today"
+  | "top/played/week"
+  | "top/played/month"
+  | "top/played/alltime"
+  | "top/recommended/today"
+  | "top/recommended/week"
+  | "top/recommended/month"
+  | "top/recommended/alltime";
 export default function BeatfollowerPage(): JSX.Element {
-  const [tab, setTab] = React.useState<TabVariant>("top/played/week")
+  const [tab, setTab] = React.useState<TabVariant>("top/played/week");
   const [results, setResults] = React.useState<null | BeatfollowerTopPlayedResponse>(null);
 
   const selectOnChange = React.useCallback(
@@ -103,27 +135,29 @@ export default function BeatfollowerPage(): JSX.Element {
     fetch(`https://api.beatfollower.com/${tab}`)
       .then((res) => res.json())
       .then((data) => setResults(data));
-  }, [ tab, setResults ]);
+  }, [tab, setResults]);
 
   return (
     <div>
-      <div>
-        <select value={tab} onChange={selectOnChange}>
-          <option value="recommendation/PiercyTTV/0/50">Recommendations from PiercyTTV</option>
-          <option value="recommendation/Danielduel/0/50">Recommendations from Danielduel</option>
-          <option value="recommendation/Taragon123/0/50">Recommendations from Taragon123</option>
-          <option value="recommendation/phat32/0/50">Recommendations from phat32</option>
-          <option value="top/played/today">Played today</option>
-          <option value="top/played/today">Played today</option>
-          <option value="top/played/week">Played week</option>
-          <option value="top/played/month">Played month</option>
-          <option value="top/played/alltime">Played alltime</option>
-          <option value="top/recommended/today">Recommended today</option>
-          <option value="top/recommended/week">Recommended week</option>
-          <option value="top/recommended/month">Recommended month</option>
-          <option value="top/recommended/alltime">Recommended alltime</option>
-        </select>
-      </div>
+      <LayoutRowBase>
+        <SubnavigationContainer>
+          <StyledSelect value={tab} onChange={selectOnChange}>
+            <option value="recommendation/PiercyTTV/0/50">Recommendations from PiercyTTV</option>
+            <option value="recommendation/Danielduel/0/50">Recommendations from Danielduel</option>
+            <option value="recommendation/LicensedCrime/0/50">Recommendations from LicensedCrime</option>
+            <option value="recommendation/Taragon123/0/50">Recommendations from Taragon123</option>
+            <option value="recommendation/phat32/0/50">Recommendations from phat32</option>
+            <option value="top/played/today">Top played today</option>
+            <option value="top/played/week">Top played this week</option>
+            <option value="top/played/month">Top played this month</option>
+            <option value="top/played/alltime">Top played alltime</option>
+            <option value="top/recommended/today">Top recommended today</option>
+            <option value="top/recommended/week">Top recommended this week</option>
+            <option value="top/recommended/month">Top recommended this month</option>
+            <option value="top/recommended/alltime">Top recommended alltime</option>
+          </StyledSelect>
+        </SubnavigationContainer>
+      </LayoutRowBase>
       <SongListContainer>
         <ItemList results={results} />
       </SongListContainer>

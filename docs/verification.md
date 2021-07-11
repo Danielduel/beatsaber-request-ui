@@ -54,6 +54,7 @@ Table of contents:
 * 11 July 2021
   * (tech) Refactor of SongItem and SongList to make app ready for more datasources
   * (feature) Add initial beatfollower integration
+  * (feature) Improve beatfollower integration UI
 
 0.0.5:
 * 24 May 2021
