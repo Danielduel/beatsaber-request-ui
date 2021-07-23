@@ -26,8 +26,8 @@ const CloseButtonContainer = styled.div`
 
 const HeaderLinkWrapper = styled.span`
   border: 0px solid transparent;
-  background-color: ${({ highcontrast }: { highcontrast?: boolean }) =>
-    highcontrast ? "var(--background-icon-notpressed)" : "#fff"};
+  background-color: ${({ highcontrast, active }: { highcontrast?: boolean, active?: boolean }) =>
+    highcontrast ? (active ? "var(--background-icon-pressed)" : "var(--background-icon-notpressed)") : "#fff"};
   box-sizing: border-box;
   width: 45px;
   min-width: 45px;
@@ -97,7 +97,7 @@ const HeaderLink = ({ children, to, text }: HeaderLinkProps) => {
   const location = useLocation();
   return (
     <NavigationLink to={to} active={location.pathname === to}>
-      <HeaderLinkWrapper highcontrast>
+      <HeaderLinkWrapper active={location.pathname === to} highcontrast>
         { children }
       </HeaderLinkWrapper>
       <NavigationText active={location.pathname === to}>{text}</NavigationText>
