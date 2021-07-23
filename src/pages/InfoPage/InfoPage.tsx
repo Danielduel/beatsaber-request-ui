@@ -85,6 +85,9 @@ const InfoPageContent = () => (
           <li>
             <LinkWrapper href="https://scoresaber.com/">ScoreSaber (BS Score service)</LinkWrapper>
           </li>
+          <li>
+            <LinkWrapper href="https://www.beatfollower.com/">BeatFollower (BS playlist manager and sm)</LinkWrapper>
+          </li>
           Graphics:
           <li>
             <LinkWrapper href="https://www.flaticon.com/free-icon/github-logo_25231">Github logo icon</LinkWrapper>

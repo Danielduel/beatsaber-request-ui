@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { Translation } from "react-i18next";
 import styled from "styled-components";
-import { MemoryRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { MemoryRouter as Router, Switch, Route, Link, useLocation } from "react-router-dom";
 
 import "./App.css";
 
@@ -15,8 +15,6 @@ import BeatfollowerPage from "./pages/BeatfollowerPage/BeatfollowerPage";
 import "./i18n/init-i18n";
 import { ConfigBroadcaster } from "./AppEnvContext";
 import { BodyWithNavigation, BodyWithNavigationBody } from "./layouts/BodyWithNavigation";
-
-import beatfollowerLogo from "./static/beatfollower.png";
 
 const AppWrapper = styled.div`
   transition: margin-left 1s;
@@ -92,49 +90,16 @@ const AppUnexpandedTooltip = styled.div`
   }
 `;
 
-const HeaderLinkWrapper = styled.div`
-  margin-left: 15px;
-  border: 0px solid transparent;
-  background-color: #fff;
-  box-sizing: border-box;
-  width: 45px;
-  height: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-  padding-top: 4px;
-  overflow: hidden;
-`;
-
-const NavigationImage = styled.img`
-  width: 100%;
-  height: 100%;
-`;
-
 type MainAppProps = {
   togglePanel: ((state: boolean) => void) | null;
 };
 
-const Navigation = ({ togglePanel }: Pick<MainAppProps, "togglePanel">) => (
-  <Header togglePanel={togglePanel}>
-    <HeaderLinkWrapper>
-      <Link to="/">
-        <MagnifyingGlassIcon />
-      </Link>
-    </HeaderLinkWrapper>
-    <HeaderLinkWrapper>
-      <Link to="/beatfollower">
-        <NavigationImage src={beatfollowerLogo} />
-      </Link>
-    </HeaderLinkWrapper>
-    <HeaderLinkWrapper>
-      <Link to="/info">
-        <InfoIcon />
-      </Link>
-    </HeaderLinkWrapper>
-  </Header>
-);
+const Navigation = ({ togglePanel }: Pick<MainAppProps, "togglePanel">) => {
+  return (
+    <Header togglePanel={togglePanel}>
+    </Header>
+  );
+}
 
 const Routing = () => (
   <BodyWithNavigationBody>

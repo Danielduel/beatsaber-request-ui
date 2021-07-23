@@ -11,6 +11,7 @@ const SubnavigationContainer = styled.div`
 `;
 
 const StyledSelect = styled.select`
+  max-width: 100%;
   position: relative;
   box-sizing: border-box;
   height: 40px;
