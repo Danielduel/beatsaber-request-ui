@@ -69,6 +69,14 @@ const channelExtConfigObservable = Rx.from(
   })
 );
 
+const configurationConfigObservable = Rx.from(
+  new Promise((resolve, reject) => {
+    Twitch.ext.configuration.onChanged(() => {
+      return resolve(Twitch.ext.configuration.broadcaster?.content);
+    });
+  })
+);
+
 export type RankedRecordMap = Record<string, any>;
 const defaultState = {
   frameFullvideo: false,
@@ -132,22 +140,26 @@ const getAndParseBroadcasterConfig = (config: RawConfigResponse): ConfigBroadcas
 };
 
 export function createWrappedProvider(overrides: PartialAppEnv) {
+  const initialState = createAppEnvContextState(overrides);
+  type SetConfigState = React.Dispatch<React.SetStateAction<typeof initialState>>;
+  const configDataSubscribe = (setState: SetConfigState) => (configData: any) => {
+    if (!configData) return;
+    // TODO - check if configData is RawConfigResponse or an Error
+    const configBroadcaster = getAndParseBroadcasterConfig(configData as RawConfigResponse);
+    if (!configBroadcaster) {
+      // bad config -> set default
+      setState((_oldState) => ({ ..._oldState, configBroadcaster: defaultBroadcasterConfig }));
+    }
+    setState((_oldState) => ({ ..._oldState, configBroadcaster }));
+  }
+
   return function WrappedProvider({ children }: PropsWithChildren<Record<string, any>>): JSX.Element {
-    const initialState = createAppEnvContextState(overrides);
     const [state, setState] = React.useState(initialState);
     React.useEffect(() => {
+      channelExtConfigObservable.subscribe(configDataSubscribe(setState));
+      configurationConfigObservable.subscribe(configDataSubscribe(setState));
       channelInfoObservable.subscribe((channelInfo) => {
         setState((_oldState) => ({ ..._oldState, contextGame: channelInfo.game }));
-      });
-
-      channelExtConfigObservable.subscribe((configData) => {
-        // TODO - check if configData is RawConfigResponse or an Error
-        const configBroadcaster = getAndParseBroadcasterConfig(configData as RawConfigResponse);
-        if (!configBroadcaster) {
-          // bad config -> set default
-          setState((_oldState) => ({ ..._oldState, configBroadcaster: defaultBroadcasterConfig }));
-        }
-        setState((_oldState) => ({ ..._oldState, configBroadcaster }));
       });
 
       rankedObservable.subscribe((rankedData) => {

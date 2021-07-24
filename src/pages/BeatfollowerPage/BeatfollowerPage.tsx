@@ -22,6 +22,7 @@ const StyledSelect = styled.select`
   font-size: 1.2rem;
   padding: 5px 40px 5px 20px;
 
+  outline: none;
   -moz-appearance: none; /* Firefox */
   -webkit-appearance: none; /* Safari and Chrome */
   appearance: none;
@@ -126,6 +127,7 @@ export default function BeatfollowerPage(): JSX.Element {
 
   const selectOnChange = React.useCallback(
     (value: React.ChangeEvent<HTMLSelectElement>) => {
+      value?.currentTarget?.blur();
       const newTab = value.target.value;
       setTab(newTab as TabVariant);
     },
@@ -143,11 +145,11 @@ export default function BeatfollowerPage(): JSX.Element {
       <LayoutRowBase>
         <SubnavigationContainer>
           <StyledSelect value={tab} onChange={selectOnChange}>
-            <option value="recommendation/PiercyTTV/0/50">Recommendations from PiercyTTV</option>
+            {/* <option value="recommendation/PiercyTTV/0/50">Recommendations from PiercyTTV</option>
             <option value="recommendation/Danielduel/0/50">Recommendations from Danielduel</option>
             <option value="recommendation/LicensedCrime/0/50">Recommendations from LicensedCrime</option>
             <option value="recommendation/Taragon123/0/50">Recommendations from Taragon123</option>
-            <option value="recommendation/phat32/0/50">Recommendations from phat32</option>
+            <option value="recommendation/phat32/0/50">Recommendations from phat32</option> */}
             <option value="top/played/today">Top played today</option>
             <option value="top/played/week">Top played this week</option>
             <option value="top/played/month">Top played this month</option>
