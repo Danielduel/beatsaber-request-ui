@@ -56,6 +56,14 @@ Table of contents:
   * (feature) Add initial beatfollower integration
   * (feature) Improve beatfollower integration UI
   * (fix) Update ranked map list
+* 23 July 2021
+  * (feature) Redesign navigation bar
+* 24 July 2021
+  * (fix) Add pressed state on navigation items
+  * (fix) Add config datasource and comment out 3rd party streamers
+* 26 July 2021
+  * (feature) Use pagination on resources
+  * (docs) Update changelog
 
 0.0.5:
 * 24 May 2021
