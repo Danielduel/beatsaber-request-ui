@@ -5,6 +5,7 @@ import { SongListItem } from "../../components/SongList/SongListItem";
 import { isCreatedByAutomapper } from "../../utils";
 import { LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
 import styled from "styled-components";
+import { usePaginatedData } from "../../components/SongList/usePaginatedData";
 
 const SubnavigationContainer = styled.div`
   margin: 10px 5px 2px 5px;
@@ -121,24 +122,37 @@ type TabVariant =
   | "top/recommended/week"
   | "top/recommended/month"
   | "top/recommended/alltime";
+
+const mapResponsesToItems = (pages: BeatfollowerTopPlayedResponse[]): BeatfollowerTopPlayedResponseItem[] => {
+  return pages.flatMap((page) => {
+    return page.flat();
+  });
+};
+
 export default function BeatfollowerPage(): JSX.Element {
   const [tab, setTab] = React.useState<TabVariant>("top/played/week");
-  const [results, setResults] = React.useState<null | BeatfollowerTopPlayedResponse>(null);
+
+  const getUrl = React.useCallback(() => {
+    return `https://api.beatfollower.com/${tab}`;
+  }, [tab]);
+
+  const [results, isFetching, isError, initialFetch, _, clearData] = usePaginatedData(getUrl, mapResponsesToItems, {
+    initialPageNumber: 0
+  });
+
+  React.useEffect(() => {
+    initialFetch();
+  }, [initialFetch]);
 
   const selectOnChange = React.useCallback(
     (value: React.ChangeEvent<HTMLSelectElement>) => {
       value?.currentTarget?.blur();
       const newTab = value.target.value;
+      clearData();
       setTab(newTab as TabVariant);
     },
-    [setTab]
+    [setTab, clearData]
   );
-
-  React.useEffect(() => {
-    fetch(`https://api.beatfollower.com/${tab}`)
-      .then((res) => res.json())
-      .then((data) => setResults(data));
-  }, [tab, setResults]);
 
   return (
     <div>
@@ -163,6 +177,8 @@ export default function BeatfollowerPage(): JSX.Element {
       </LayoutRowBase>
       <SongListContainer>
         <ItemList results={results} />
+        {isFetching ?? "Fetching..."}
+        {isError ?? "Error!"}
       </SongListContainer>
     </div>
   );

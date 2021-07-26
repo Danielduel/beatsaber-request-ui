@@ -57,7 +57,7 @@ const _ItemList = ({
   return <SongListContainer>{renderedItems}</SongListContainer>;
 };
 
-export default function ItemList({ documentList }: { documentList: SongListDocsItem[] }): JSX.Element {
+export default function SearchList({ documentList }: { documentList: SongListDocsItem[] }): JSX.Element {
   return (
     <AppEnvContext.Consumer>
       {(context) => <_ItemList documentList={documentList} rankedHashes={context.rankedHashes} />}

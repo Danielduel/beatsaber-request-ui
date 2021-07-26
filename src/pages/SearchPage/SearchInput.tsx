@@ -59,7 +59,7 @@ const ClearButton = styled.span`
   }
 `;
 
-const SearchInput = styled.input`
+const SearchInputField = styled.input`
   padding-right: 40px;
   outline: none;
   width: 100%;
@@ -85,26 +85,34 @@ const SearchInputGroup = styled.div`
   flex: 260 0;
 `;
 
-export default function ItemList({ requestSearchSong }: { requestSearchSong: (query: string) => void }): JSX.Element {
-  const [query, setQuery] = React.useState("");
+type SearchInputProps = {
+  query: string;
+  setQuery: (value: string) => void;
+  submitSearch: () => void;
+};
+export default function SearchInput({
+  query,
+  setQuery,
+  submitSearch
+}: SearchInputProps): JSX.Element {
   const [t] = useTranslation();
 
   const searchInputOnChange = React.useCallback((event) => setQuery(event.target.value), [setQuery]);
   const searchInputOnKeyUp = React.useCallback(
     (e) => {
       if (e.key === "Enter") {
-        requestSearchSong(query);
+        submitSearch();
       }
     },
-    [requestSearchSong, query]
+    [submitSearch]
   );
   const searchClearOnClick = React.useCallback(() => setQuery(""), [setQuery]);
-  const searchSubmitOnClick = React.useCallback(() => requestSearchSong(query), [query, requestSearchSong]);
+  const searchSubmitOnClick = React.useCallback(() => submitSearch(), [submitSearch]);
 
   return (
     <PageHeaderLayoutRow>
       <SearchInputGroup>
-        <SearchInput
+        <SearchInputField
           autoFocus
           value={query}
           placeholder={t("Enter song name")}

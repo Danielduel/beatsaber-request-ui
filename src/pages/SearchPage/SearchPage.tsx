@@ -9,6 +9,7 @@ import { LayoutRowPlaceholder } from "../../components/LayoutRow/LayoutRow";
 import SearchInput from "./SearchInput";
 import SearchList from "./SearchList";
 import { Translation } from "react-i18next";
+import { usePaginatedData } from "../../components/SongList/usePaginatedData";
 
 export type SongListDocsItemMetadataCharacteristicsDifficultiesEntry = {
   duration: number;
@@ -67,35 +68,50 @@ const SearchPageWrapper = styled.div`
   height: 100%;
 `;
 
-function getMessage(isSearching: boolean, songList: SongListType | null) {
+function getMessage(wasSearching: boolean, isSearching: boolean, songList: SongListDocsItem[]) {
   if (isSearching) return <Translation>{(t) => t("Searching...")}</Translation>;
-  if (!songList) return <Translation>{(t) => t("Start searching")}</Translation>;
-  if (!songList.docs) return <Translation>{(t) => t("No docs - error")}</Translation>;
-  if (!songList.docs.length) return <Translation>{(t) => t("No results")}</Translation>;
+  if (!wasSearching) return <Translation>{(t) => t("Start searching")}</Translation>;
+  if (!songList.length) return <Translation>{(t) => t("No results")}</Translation>;
   return "";
 }
 
+const mapResponsesToItems = (pages: SongListType[]): SongListDocsItem[] => {
+  return pages.flatMap((page) => {
+    return page.docs.flat();
+  });
+};
+
 export default function SearchPage(): JSX.Element {
-  const [songList, setSongList] = React.useState<SongListType | null>(null);
-  const [isSearching, setIsSearching] = React.useState(false);
+  const [wasSearching, setWasSearching] = React.useState(false);
+  const [query, setQuery] = React.useState("");
+  const getUrl = React.useCallback((page) => {
+    return `https://beatsaver.com/api/search/text/${page}?q=${query}`;
+  }, [query]);
 
-  const requestSearchSong = (query: string) => {
-    setIsSearching(true);
-    fetchSongs(query)
-      .then(setSongList)
-      .then(() => {
-        setIsSearching(false);
-      });
-  };
+  const [results, isFetching, isError, initialFetch, fetchNextPage, clearData] = usePaginatedData(getUrl, mapResponsesToItems, {
+    initialPageNumber: 0
+  });
 
-  const message = getMessage(isSearching, songList);
-  const canRenderSearchList = !message && !isSearching;
+  const submitSearch = React.useCallback(() => {
+    clearData();
+    setWasSearching(true);
+    initialFetch();
+  }, [clearData, setWasSearching, initialFetch]);
+
+  const message = getMessage(wasSearching, isFetching, results);
+  const canRenderSearchList = !message && !isFetching;
 
   return (
     <SearchPageWrapper>
-      <SearchInput requestSearchSong={requestSearchSong} />
-      {canRenderSearchList && isNotNull(songList) && <SearchList documentList={songList.docs} />}
+      <SearchInput
+        query={query}
+        setQuery={setQuery}
+        submitSearch={submitSearch}
+      />
+      <SearchList key="list" documentList={results} />
       {message && <LayoutRowPlaceholder>{message}</LayoutRowPlaceholder>}
+      {isError && <LayoutRowPlaceholder>Error</LayoutRowPlaceholder>}
+      {canRenderSearchList && <button onClick={() => fetchNextPage()}>Fetch more</button>}
     </SearchPageWrapper>
   );
 }
