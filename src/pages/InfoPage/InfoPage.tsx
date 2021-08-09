@@ -42,7 +42,7 @@ const InfoPageContent = () => (
       <InfoIconWrapper>
         <VersionIcon />
       </InfoIconWrapper>
-      Version: 0.0.6 (very alpha)
+      Version: 0.0.6 (very alpha, rushed release due to BeatSaver API change, sorry for rough edges :C)
     </InfoRow>
     <InfoRow>
       <InfoIconWrapper>

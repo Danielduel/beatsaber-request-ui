@@ -66,6 +66,7 @@ Table of contents:
   * (docs) Update changelog
 * 9 August 2021
   * (feature) Use new beatsaver api
+  * (docs) Add information about rushed release
 
 0.0.5: (already verified)
 * 24 May 2021
