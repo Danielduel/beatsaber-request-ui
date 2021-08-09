@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import { fetchSongs, isNotNull } from "../../utils";
 
-import { LayoutRowPlaceholder } from "../../components/LayoutRow/LayoutRow";
+import { LayoutRowPlaceholder, LayoutRowPlaceholderTransparent } from "../../components/LayoutRow/LayoutRow";
 import SearchInput from "./SearchInput";
 import SearchList from "./SearchList";
 import { Translation } from "react-i18next";
@@ -172,8 +172,8 @@ export default function SearchPage(): JSX.Element {
         submitSearch={submitSearch}
       />
       <SearchPageFixedMessageWrapper>
-        {message && <LayoutRowPlaceholder>{message}</LayoutRowPlaceholder>}
-        {isError && <LayoutRowPlaceholder>Error</LayoutRowPlaceholder>}
+        {message && <LayoutRowPlaceholderTransparent>{message}</LayoutRowPlaceholderTransparent>}
+        {isError && <LayoutRowPlaceholderTransparent>Error</LayoutRowPlaceholderTransparent>}
       </SearchPageFixedMessageWrapper>
       <SearchList key="list" documentList={results}>
         <SearchPageFetchMoreButtonWrapper>

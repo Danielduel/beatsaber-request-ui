@@ -68,6 +68,7 @@ Table of contents:
   * (feature) Use new beatsaver api
   * (docs) Add information about rushed release
   * (fix) Fix pagination styling
+  * (fix) Fix overflow issue on mobile
 
 0.0.5: (already verified)
 * 24 May 2021

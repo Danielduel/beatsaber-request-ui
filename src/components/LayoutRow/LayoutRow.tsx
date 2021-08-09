@@ -30,4 +30,8 @@ const LayoutRowPlaceholder = styled(LayoutRowBase)`
   align-self: flex-start;
 `;
 
-export { LayoutRowBase, LayoutRowPrimary, LayoutRowPlaceholder, LayoutRowTall };
+const LayoutRowPlaceholderTransparent = styled(LayoutRowPlaceholder)`
+  background-color: transparent;
+`;
+
+export { LayoutRowBase, LayoutRowPrimary, LayoutRowPlaceholder, LayoutRowTall, LayoutRowPlaceholderTransparent };
