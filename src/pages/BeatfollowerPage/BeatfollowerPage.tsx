@@ -7,6 +7,12 @@ import { LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
 import styled from "styled-components";
 import { usePaginatedData } from "../../components/SongList/usePaginatedData";
 
+const BeatfollowerPageContainer = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
 const SubnavigationContainer = styled.div`
   margin: 10px 5px 2px 5px;
 `;
@@ -155,7 +161,7 @@ export default function BeatfollowerPage(): JSX.Element {
   );
 
   return (
-    <div>
+    <BeatfollowerPageContainer>
       <LayoutRowBase>
         <SubnavigationContainer>
           <StyledSelect value={tab} onChange={selectOnChange}>
@@ -180,6 +186,6 @@ export default function BeatfollowerPage(): JSX.Element {
         {isFetching ?? "Fetching..."}
         {isError ?? "Error!"}
       </SongListContainer>
-    </div>
+    </BeatfollowerPageContainer>
   );
 }

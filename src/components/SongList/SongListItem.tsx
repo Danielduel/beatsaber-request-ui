@@ -29,6 +29,7 @@ type SongListItemProps = {
   downVotes: number | null;
   percentVotes: number | null;
   isRanked: boolean;
+  isQualified?: boolean;
 };
 type SongListItemDifficultyProps = {
   easy: boolean;
@@ -49,6 +50,7 @@ const SongListItem = ({
   downVotes,
   percentVotes,
   isRanked,
+  isQualified,
   easy,
   normal,
   hard,
@@ -75,7 +77,7 @@ const SongListItem = ({
           <SongListItemDetailsSmallItem variant="item" data={percentVotes} suffix="💯" />
           <SongListItemDetailsSmallItem variant="item" data={upVotes} suffix="👍" />
           <SongListItemDetailsSmallItem variant="item" data={downVotes} suffix="👎" />
-          <SongListItemDetailsSmallItem variant="item" data={isRanked ? "Ranked" : null} suffix="⭐" />
+          <SongListItemDetailsSmallItem variant="item" data={(isRanked && "Ranked") || (isQualified && "Qualified") || null} suffix="⭐" />
         </SongListItemDetailsWrapper>
         <SongListItemAvailableDifficulties
           easy={easy}

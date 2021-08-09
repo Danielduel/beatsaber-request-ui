@@ -21,41 +21,77 @@ export type SongListDocsItemMetadataCharacteristicsDifficultiesEntry = {
   obstacles: number;
 };
 
-export type SongListDocsItem = {
-  metadata: {
-    difficulties: { easy: boolean; expert: boolean; expertPlus: boolean; hard: boolean; normal: boolean };
-    duration: number;
-    automapper: boolean | null;
-    characteristics: [
-      {
-        difficulties: {
-          easy: SongListDocsItemMetadataCharacteristicsDifficultiesEntry | null;
-          expert: SongListDocsItemMetadataCharacteristicsDifficultiesEntry | null;
-          expertPlus: SongListDocsItemMetadataCharacteristicsDifficultiesEntry | null;
-          hard: SongListDocsItemMetadataCharacteristicsDifficultiesEntry | null;
-          normal: SongListDocsItemMetadataCharacteristicsDifficultiesEntry | null;
-        };
-        name: string;
-      }
-    ];
-    levelAuthorName: string;
-    songAuthorName: string;
-    songName: string;
-    songSubName: string;
-    bpm: number;
-  };
-  stats: { downloads: number; plays: number; downVotes: number; upVotes: number; heat: number; rating: number };
-  description: string;
-  deletedAt: null | string;
-  _id: string;
-  key: string;
+type SongListDocsItemUploader = {
+  id: number;
   name: string;
-  uploader: { _id: string; username: string };
   hash: string;
-  uploaded: string;
-  directDownload: string;
+  avatar: string; // gravatar url
+};
+
+type SongListDocsItemMetadata = {
+  bpm: number;
+  duration: number;
+  songName: string;
+  songSubName: string;
+  songAuthorName: string;
+  levelAuthorName: string;
+};
+
+type SongListDocsItemStats = {
+  plays: number;
+  downloads: number;
+  upvotes: number;
+  downvotes: number;
+  score: number;
+};
+
+type SongListDocsItemVersionDiff = {
+  njs: number;
+  offset: number;
+  notes: number;
+  bombs: number;
+  obstacles: number;
+  nps: number;
+  length: number;
+  characteristic: string;
+  difficulty: "Easy" | "Normal" | "Hard" | "Expert" | "ExpertPlus";
+  events: number;
+  chroma: boolean;
+  me: boolean;
+  ne: boolean;
+  cinema: boolean;
+  seconds: number;
+  paritySummary: {
+    errors: number;
+    warns: number;
+    resets: number;
+  };
+};
+
+export type SongListDocsItemVersion = {
+  hash: string;
+  key: string;
+  state: string;
+  createdAt: string;
+  sageScore: number;
+  diffs: SongListDocsItemVersionDiff[];
   downloadURL: string;
   coverURL: string;
+  previewURL: string;
+};
+
+export type SongListDocsItem = {
+  id: string;
+  name: string;
+  description: string;
+  uploader: SongListDocsItemUploader;
+  metadata: SongListDocsItemMetadata;
+  stats: SongListDocsItemStats;
+  uploaded: string;
+  automapper: boolean;
+  ranked: boolean;
+  qualified: boolean;
+  versions: SongListDocsItemVersion[];
 };
 
 export type SongListType = {

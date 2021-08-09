@@ -1,15 +1,36 @@
 import React from "react";
 import AppEnvContext, { RankedRecordMap } from "../../AppEnvContext";
 import { SongListItem } from "../../components/SongList/SongListItem";
-import { SongListDocsItem } from "./SearchPage";
+import { SongListDocsItem, SongListDocsItemVersion } from "./SearchPage";
 import { SongListContainer } from "../../components/SongList/SongListContainer";
 import { isCreatedByAutomapper } from "../../utils";
 
+const getDiffs = (lastVersion: SongListDocsItemVersion) => {
+  if (!lastVersion) return;
+  const { diffs } = lastVersion;
+
+  if (!diffs) return;
+  const easy = diffs.some(diff => diff.difficulty === "Easy");
+  const normal = diffs.some(diff => diff.difficulty === "Normal");
+  const hard = diffs.some(diff => diff.difficulty === "Hard");
+  const expert = diffs.some(diff => diff.difficulty === "Expert");
+  const expertPlus = diffs.some(diff => diff.difficulty === "ExpertPlus");
+
+  return {
+    easy,
+    normal,
+    hard,
+    expert,
+    expertPlus
+  };
+}
+
 const Item = (rankedHashes: RankedRecordMap) => {
   const _Item = (docData: SongListDocsItem) => {
-    const coverURL = `https://beatsaver.com${docData.coverURL}`;
-    const allVotes = docData.stats.upVotes + docData.stats.downVotes;
-    const percentVotes = ~~((docData.stats.upVotes / allVotes) * 1000) / 10;
+    const allvotes = docData.stats.upvotes + docData.stats.downvotes;
+    const percentVotes = ~~((docData.stats.upvotes / allvotes) * 1000) / 10;
+    const lastVersion = docData.versions[docData.versions.length - 1];
+    const coverURL = lastVersion.coverURL;
 
     const shouldBeHidden = isCreatedByAutomapper(
       docData.metadata.songName,
@@ -19,26 +40,30 @@ const Item = (rankedHashes: RankedRecordMap) => {
 
     if (shouldBeHidden) return <></>;
 
-    const isRanked = !!rankedHashes[docData.hash.toLowerCase()];
+    const diffs = getDiffs(lastVersion);
+
+    const isRanked = docData.ranked;
+    const isQualified = docData.qualified;
 
     return (
       <SongListItem
-        hash={docData.hash}
+        hash={lastVersion.hash}
         coverURL={coverURL}
         songName={docData.metadata.songName}
         songAuthorName={docData.metadata.songAuthorName}
         levelAuthorName={docData.metadata.levelAuthorName}
-        bsrKey={docData.key}
+        bsrKey={docData.id}
         downloads={docData.stats.downloads}
-        upVotes={docData.stats.upVotes}
-        downVotes={docData.stats.downVotes}
+        upVotes={docData.stats.upvotes}
+        downVotes={docData.stats.downvotes}
         percentVotes={percentVotes}
         isRanked={isRanked}
-        easy={!!docData.metadata.difficulties.easy}
-        normal={!!docData.metadata.difficulties.normal}
-        hard={!!docData.metadata.difficulties.hard}
-        expert={!!docData.metadata.difficulties.expert}
-        expertPlus={!!docData.metadata.difficulties.expertPlus}
+        isQualified={isQualified}
+        easy={!!diffs?.easy}
+        normal={!!diffs?.normal}
+        hard={!!diffs?.hard}
+        expert={!!diffs?.expert}
+        expertPlus={!!diffs?.expertPlus}
       />
     );
   };
