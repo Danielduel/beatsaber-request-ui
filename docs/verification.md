@@ -67,6 +67,7 @@ Table of contents:
 * 9 August 2021
   * (feature) Use new beatsaver api
   * (docs) Add information about rushed release
+  * (fix) Fix pagination styling
 
 0.0.5: (already verified)
 * 24 May 2021

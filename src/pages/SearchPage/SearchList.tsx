@@ -72,20 +72,22 @@ const Item = (rankedHashes: RankedRecordMap) => {
 
 const _ItemList = ({
   documentList,
-  rankedHashes
+  rankedHashes,
+  children
 }: {
   documentList: SongListDocsItem[];
   rankedHashes: RankedRecordMap;
+  children?: JSX.Element | JSX.Element[]
 }) => {
   const renderedItems = documentList.map(Item(rankedHashes));
 
-  return <SongListContainer>{renderedItems}</SongListContainer>;
+  return <SongListContainer>{renderedItems}{(renderedItems.length > 0) && children}</SongListContainer>;
 };
 
-export default function SearchList({ documentList }: { documentList: SongListDocsItem[] }): JSX.Element {
+export default function SearchList({ documentList, children }: { documentList: SongListDocsItem[], children?: JSX.Element | JSX.Element[] }): JSX.Element {
   return (
     <AppEnvContext.Consumer>
-      {(context) => <_ItemList documentList={documentList} rankedHashes={context.rankedHashes} />}
+      {(context) => <_ItemList children={children} documentList={documentList} rankedHashes={context.rankedHashes} />}
     </AppEnvContext.Consumer>
   );
 }

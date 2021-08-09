@@ -98,10 +98,37 @@ export type SongListType = {
   docs: SongListDocsItem[];
 };
 
+const SearchPageFetchMoreButtonWrapper = styled.div`
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const SearchPageFetchMoreButton = styled.button`
+  height: 42px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 0px solid transparent;
+  background-color: var(--background-input);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  color: var(--text);
+`;
+
 const SearchPageWrapper = styled.div`
   display: grid;
   grid-template-rows: 52px 1fr;
   height: 100%;
+`;
+
+const SearchPageFixedMessageWrapper = styled.div`
+  position: fixed;
+  max-height: 10vh;
+  top: 20vh;
 `;
 
 function getMessage(wasSearching: boolean, isSearching: boolean, songList: SongListDocsItem[]) {
@@ -135,7 +162,7 @@ export default function SearchPage(): JSX.Element {
   }, [clearData, setWasSearching, initialFetch]);
 
   const message = getMessage(wasSearching, isFetching, results);
-  const canRenderSearchList = !message && !isFetching;
+  // const canRenderSearchList = !message && !isFetching;
 
   return (
     <SearchPageWrapper>
@@ -144,10 +171,15 @@ export default function SearchPage(): JSX.Element {
         setQuery={setQuery}
         submitSearch={submitSearch}
       />
-      <SearchList key="list" documentList={results} />
-      {message && <LayoutRowPlaceholder>{message}</LayoutRowPlaceholder>}
-      {isError && <LayoutRowPlaceholder>Error</LayoutRowPlaceholder>}
-      {canRenderSearchList && <button onClick={() => fetchNextPage()}>Fetch more</button>}
+      <SearchPageFixedMessageWrapper>
+        {message && <LayoutRowPlaceholder>{message}</LayoutRowPlaceholder>}
+        {isError && <LayoutRowPlaceholder>Error</LayoutRowPlaceholder>}
+      </SearchPageFixedMessageWrapper>
+      <SearchList key="list" documentList={results}>
+        <SearchPageFetchMoreButtonWrapper>
+          <SearchPageFetchMoreButton onClick={() => fetchNextPage()}>{isFetching ? "Fetching..." : "Fetch more"}</SearchPageFetchMoreButton>
+        </SearchPageFetchMoreButtonWrapper>
+      </SearchList>
     </SearchPageWrapper>
   );
 }
