@@ -31,6 +31,7 @@ Table of contents:
 * 10 August 2021
   * (feature) Redesign result rows
   * (fix) Remove blue overlay onClick on webkits
+  * (docs) Change version and remove rusher release notice
 
 0.0.6:
 * 6 July 2021
