@@ -15,6 +15,7 @@ const LayoutRowTall = styled.div`
   background-color: var(--background);
   box-sizing: border-box;
   position: relative;
+  overflow: hidden;
 `;
 
 const LayoutRowPrimary = styled(LayoutRowBase)`

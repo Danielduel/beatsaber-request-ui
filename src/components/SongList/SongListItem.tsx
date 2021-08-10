@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { LayoutRowTall } from "../LayoutRow/LayoutRow";
 import { SongListItemActions } from "./SongListItemActions";
 import { SongListItemAvailableDifficulties } from "./SongListItemAvailableDifficulties";
-import { SongListItemCoverImage } from "./SongListItemCoverImage";
+import { SongListItemCoverImage, SongListItemCoverImageBackground } from "./SongListItemCoverImage";
 import {
   SongListItemDetailsFullwidthItem,
   SongListItemDetailsSmallItem
@@ -15,6 +15,11 @@ const SongListItemWrapper = styled.div`
   flex-direction: row;
   font-size: 10px;
   padding-top: 1px;
+`;
+
+const SongListItemCoverWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 type SongListItemProps = {
@@ -66,9 +71,18 @@ const SongListItem = ({
       }}
     >
       <SongListItemWrapper>
-        <SongListItemDetailsWrapper>
+        <SongListItemCoverImageBackground coverURL={coverURL} />
+        <SongListItemCoverWrapper>
           <SongListItemCoverImage coverURL={coverURL} />
-          <SongListItemActions bsrKey={bsrKey} isRanked={isRanked} />
+          <SongListItemAvailableDifficulties
+            easy={easy}
+            normal={normal}
+            hard={hard}
+            expert={expert}
+            expertPlus={expertPlus}
+          />
+        </SongListItemCoverWrapper>
+        <SongListItemDetailsWrapper>
           <SongListItemDetailsFullwidthItem variant="title" data={songName} suffix="" />
           <SongListItemDetailsFullwidthItem variant="subtitle" data={songAuthorName} suffix="" />
           <SongListItemDetailsFullwidthItem variant="subtitle" data={levelAuthorName} suffix="" />
@@ -78,14 +92,8 @@ const SongListItem = ({
           <SongListItemDetailsSmallItem variant="item" data={upVotes} suffix="👍" />
           <SongListItemDetailsSmallItem variant="item" data={downVotes} suffix="👎" />
           <SongListItemDetailsSmallItem variant="item" data={(isRanked && "Ranked") || (isQualified && "Qualified") || null} suffix="⭐" />
+          <SongListItemActions bsrKey={bsrKey} isRanked={isRanked} />
         </SongListItemDetailsWrapper>
-        <SongListItemAvailableDifficulties
-          easy={easy}
-          normal={normal}
-          hard={hard}
-          expert={expert}
-          expertPlus={expertPlus}
-        />
       </SongListItemWrapper>
     </LayoutRowTall>
   );

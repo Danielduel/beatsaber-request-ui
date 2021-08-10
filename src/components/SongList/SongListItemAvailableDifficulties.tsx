@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 type SongListItemAvailableDifficultiesDifficultyBadgeVariant = "E" | "N" | "H" | "X" | "X+";
 const SongListItemAvailableDifficultiesDifficultyBadge = styled.div`
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   font-weight: bolder;
@@ -46,28 +46,8 @@ const SongListItemAvailableDifficultiesDifficultyBadge = styled.div`
   }}
 `;
 const SongListItemAvailableDifficultiesWrapper = styled.div`
-  position: initial;
-  bottom: 0;
-  right: 0;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-end;
-  margin: 3px;
-
-  @media (min-width: 499px) {
-    position: absolute;
-    top: 0;
-    bottom: initial;
-    right: 0;
-    height: initial;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: flex-end;
-  }
+  margin: 5px;
 `;
 type SongListItemAvailableDifficultiesProps = {
   easy: boolean;

@@ -8,7 +8,6 @@ const SongListItemCoverImageWrapper = styled.div`
   min-width: 91px;
   max-width: 91px;
 
-  height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -20,6 +19,22 @@ const SongListItemCoverImageWrapper = styled.div`
     min-width: 91px;
     max-width: 91px;
     max-height: 91px;
+  }
+`;
+
+const SongListItemCoverImageBackgroundWrapper = styled.div`
+  opacity: 0.05;
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > img {
+    width: 100%;
   }
 `;
 
@@ -35,4 +50,11 @@ const SongListItemCoverImage = ({ coverURL }: { coverURL: string }): JSX.Element
   );
 };
 
-export { SongListItemCoverImage };
+const SongListItemCoverImageBackground = ({ coverURL }: { coverURL: string }): JSX.Element => {
+  return (
+    <SongListItemCoverImageBackgroundWrapper>
+      <img src={coverURL} />
+    </SongListItemCoverImageBackgroundWrapper>
+  );
+};
+export { SongListItemCoverImage, SongListItemCoverImageBackground };

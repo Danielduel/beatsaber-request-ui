@@ -10,11 +10,13 @@ const SongListItemDetailsSpan = styled.span`
     switch (variant) {
       case "title":
         return css`
+          word-break: break-all;
           font-size: 1.2rem;
           color: var(--text);
         `;
       case "subtitle":
         return css`
+          word-break: break-all;
           font-size: 0.7rem;
           color: var(--text-secondary);
           margin-left: 5px;

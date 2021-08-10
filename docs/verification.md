@@ -27,6 +27,10 @@ Table of contents:
 
 0. Changelog
 
+0.0.7:
+* 10 August 2021
+  * (feature) Redesign result rows
+
 0.0.6:
 * 6 July 2021
   * (tech) Bump up version
