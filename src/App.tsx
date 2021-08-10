@@ -1,12 +1,10 @@
 import React, { useCallback } from "react";
 import { Translation } from "react-i18next";
 import styled from "styled-components";
-import { MemoryRouter as Router, Switch, Route, Link, useLocation } from "react-router-dom";
+import { MemoryRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.css";
 
-import MagnifyingGlassIcon from "./common/icons/MagnifyingGlassIcon";
-import InfoIcon from "./common/icons/InfoIcon";
 import Header from "./components/Header/Header";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import InfoPage from "./pages/InfoPage/InfoPage";
@@ -95,11 +93,8 @@ type MainAppProps = {
 };
 
 const Navigation = ({ togglePanel }: Pick<MainAppProps, "togglePanel">) => {
-  return (
-    <Header togglePanel={togglePanel}>
-    </Header>
-  );
-}
+  return <Header togglePanel={togglePanel}></Header>;
+};
 
 const Routing = () => (
   <BodyWithNavigationBody>

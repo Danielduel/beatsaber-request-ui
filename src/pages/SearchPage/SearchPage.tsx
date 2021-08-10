@@ -3,9 +3,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { fetchSongs, isNotNull } from "../../utils";
-
-import { LayoutRowPlaceholder, LayoutRowPlaceholderTransparent } from "../../components/LayoutRow/LayoutRow";
+import { LayoutRowPlaceholderTransparent } from "../../components/LayoutRow/LayoutRow";
 import SearchInput from "./SearchInput";
 import SearchList from "./SearchList";
 import { Translation } from "react-i18next";
@@ -147,13 +145,20 @@ const mapResponsesToItems = (pages: SongListType[]): SongListDocsItem[] => {
 export default function SearchPage(): JSX.Element {
   const [wasSearching, setWasSearching] = React.useState(false);
   const [query, setQuery] = React.useState("");
-  const getUrl = React.useCallback((page) => {
-    return `https://beatsaver.com/api/search/text/${page}?q=${query}`;
-  }, [query]);
+  const getUrl = React.useCallback(
+    (page) => {
+      return `https://beatsaver.com/api/search/text/${page}?q=${query}`;
+    },
+    [query]
+  );
 
-  const [results, isFetching, isError, initialFetch, fetchNextPage, clearData] = usePaginatedData(getUrl, mapResponsesToItems, {
-    initialPageNumber: 0
-  });
+  const [results, isFetching, isError, initialFetch, fetchNextPage, clearData] = usePaginatedData(
+    getUrl,
+    mapResponsesToItems,
+    {
+      initialPageNumber: 0
+    }
+  );
 
   const submitSearch = React.useCallback(() => {
     clearData();
@@ -166,18 +171,16 @@ export default function SearchPage(): JSX.Element {
 
   return (
     <SearchPageWrapper>
-      <SearchInput
-        query={query}
-        setQuery={setQuery}
-        submitSearch={submitSearch}
-      />
+      <SearchInput query={query} setQuery={setQuery} submitSearch={submitSearch} />
       <SearchPageFixedMessageWrapper>
         {message && <LayoutRowPlaceholderTransparent>{message}</LayoutRowPlaceholderTransparent>}
         {isError && <LayoutRowPlaceholderTransparent>Error</LayoutRowPlaceholderTransparent>}
       </SearchPageFixedMessageWrapper>
       <SearchList key="list" documentList={results}>
         <SearchPageFetchMoreButtonWrapper>
-          <SearchPageFetchMoreButton onClick={() => fetchNextPage()}>{isFetching ? "Fetching..." : "Fetch more"}</SearchPageFetchMoreButton>
+          <SearchPageFetchMoreButton onClick={() => fetchNextPage()}>
+            {isFetching ? "Fetching..." : "Fetch more"}
+          </SearchPageFetchMoreButton>
         </SearchPageFetchMoreButtonWrapper>
       </SearchList>
     </SearchPageWrapper>

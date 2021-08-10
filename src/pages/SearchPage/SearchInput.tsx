@@ -90,11 +90,7 @@ type SearchInputProps = {
   setQuery: (value: string) => void;
   submitSearch: () => void;
 };
-export default function SearchInput({
-  query,
-  setQuery,
-  submitSearch
-}: SearchInputProps): JSX.Element {
+export default function SearchInput({ query, setQuery, submitSearch }: SearchInputProps): JSX.Element {
   const [t] = useTranslation();
 
   const searchInputOnChange = React.useCallback((event) => setQuery(event.target.value), [setQuery]);

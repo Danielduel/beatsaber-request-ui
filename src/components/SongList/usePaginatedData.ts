@@ -23,22 +23,25 @@ function usePaginatedData<ResponseType, ItemType>(
     setIsError(false);
   }, [setPages, setResults, setPageNumber, setIsFetching, setIsError]);
 
-  const fetchPage = React.useCallback((page: number) => {
-    setIsFetching(true);
-    setIsError(false);
-    fetch(getUrl(page))
-      .then(res => res.json())
-      .then(data => {
-        setPageNumber(page);
-        setNewPage(data);
-        setIsFetching(false);
-        setIsError(false);
-      })
-      .catch(err => {
-        setIsFetching(false);
-        setIsError(true);
-      })
-  }, [getUrl, setIsFetching, setIsError, setPages]);
+  const fetchPage = React.useCallback(
+    (page: number) => {
+      setIsFetching(true);
+      setIsError(false);
+      fetch(getUrl(page))
+        .then((res) => res.json())
+        .then((data) => {
+          setPageNumber(page);
+          setNewPage(data);
+          setIsFetching(false);
+          setIsError(false);
+        })
+        .catch(() => {
+          setIsFetching(false);
+          setIsError(true);
+        });
+    },
+    [getUrl, setIsFetching, setIsError, setPages]
+  );
 
   const initialFetch = React.useCallback(() => {
     fetchPage(options.initialPageNumber);
@@ -47,7 +50,7 @@ function usePaginatedData<ResponseType, ItemType>(
   const fetchNextPage = React.useCallback(() => {
     fetchPage(pageNumber + 1);
   }, [pageNumber, fetchPage]);
-  
+
   React.useEffect(() => {
     if (newPage !== null) {
       setNewPage(null);
@@ -57,7 +60,7 @@ function usePaginatedData<ResponseType, ItemType>(
 
   React.useEffect(() => {
     setResults(flatMapResponseArrToItemArr(pages));
-  }, [pages, setResults, flatMapResponseArrToItemArr])
+  }, [pages, setResults, flatMapResponseArrToItemArr]);
 
   return [results, isFetching, isError, initialFetch, fetchNextPage, clearData] as const;
 }

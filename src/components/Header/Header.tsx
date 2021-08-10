@@ -1,5 +1,4 @@
 import React from "react";
-import { Translation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import InfoIcon from "../../common/icons/InfoIcon";
@@ -26,7 +25,7 @@ const CloseButtonContainer = styled.div`
 
 const HeaderLinkWrapper = styled.span`
   border: 0px solid transparent;
-  background-color: ${({ highcontrast, active }: { highcontrast?: boolean, active?: boolean }) =>
+  background-color: ${({ highcontrast, active }: { highcontrast?: boolean; active?: boolean }) =>
     highcontrast ? (active ? "var(--background-icon-pressed)" : "var(--background-icon-notpressed)") : "#fff"};
   box-sizing: border-box;
   width: 45px;
@@ -87,7 +86,6 @@ const NavigationLink = styled(Link)`
   }
 `;
 
-
 type HeaderLinkProps = {
   to: string;
   text: string;
@@ -98,7 +96,7 @@ const HeaderLink = ({ children, to, text }: HeaderLinkProps) => {
   return (
     <NavigationLink to={to} active={location.pathname === to}>
       <HeaderLinkWrapper active={location.pathname === to} highcontrast>
-        { children }
+        {children}
       </HeaderLinkWrapper>
       <NavigationText active={location.pathname === to}>{text}</NavigationText>
     </NavigationLink>
@@ -107,30 +105,22 @@ const HeaderLink = ({ children, to, text }: HeaderLinkProps) => {
 
 type HeaderProps = {
   togglePanel: ((state: boolean) => void) | null;
-  children: JSX.Element | JSX.Element[];
+  children?: JSX.Element | JSX.Element[];
 };
 const Header = ({ togglePanel, children }: HeaderProps): JSX.Element => {
   return (
     <LayoutRowPrimary>
       <ChildrenContainer>
-        <HeaderLink
-          to="/"
-          text="BeatSaver"
-        >
+        <HeaderLink to="/" text="BeatSaver">
           <NavigationImage small src={beatsaverLogo} />
         </HeaderLink>
-        <HeaderLink
-          to="/beatfollower"
-          text="BeatFollower"
-        >
+        <HeaderLink to="/beatfollower" text="BeatFollower">
           <NavigationImage src={beatfollowerLogo} />
         </HeaderLink>
-        <HeaderLink
-          to="/info"
-          text="Settings"
-        >
+        <HeaderLink to="/info" text="Settings">
           <InfoIcon />
         </HeaderLink>
+        {children}
         {togglePanel && (
           <CloseButtonContainer onClick={() => togglePanel(false)}>
             <svg width="40" height="35" viewBox="0 0 40 35" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-const repeat = (number: number, stringToRepeat: string) => new Array(number + 1).map(() => " ").join(stringToRepeat + " ");
+const repeat = (number: number, stringToRepeat: string) =>
+  new Array(number + 1).map(() => " ").join(stringToRepeat + " ");
 const dots = (number: number) => new Array(number + 1).map(() => " ").join(". ");
 
 const SongListItemDetailsWrapper = styled.div`

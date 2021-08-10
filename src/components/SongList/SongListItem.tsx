@@ -91,7 +91,11 @@ const SongListItem = ({
           <SongListItemDetailsSmallItem variant="item" data={percentVotes} suffix="💯" />
           <SongListItemDetailsSmallItem variant="item" data={upVotes} suffix="👍" />
           <SongListItemDetailsSmallItem variant="item" data={downVotes} suffix="👎" />
-          <SongListItemDetailsSmallItem variant="item" data={(isRanked && "Ranked") || (isQualified && "Qualified") || null} suffix="⭐" />
+          <SongListItemDetailsSmallItem
+            variant="item"
+            data={(isRanked && "Ranked") || (isQualified && "Qualified") || null}
+            suffix="⭐"
+          />
           <SongListItemActions bsrKey={bsrKey} isRanked={isRanked} />
         </SongListItemDetailsWrapper>
       </SongListItemWrapper>

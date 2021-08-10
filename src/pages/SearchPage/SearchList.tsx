@@ -1,5 +1,4 @@
 import React from "react";
-import AppEnvContext, { RankedRecordMap } from "../../AppEnvContext";
 import { SongListItem } from "../../components/SongList/SongListItem";
 import { SongListDocsItem, SongListDocsItemVersion } from "./SearchPage";
 import { SongListContainer } from "../../components/SongList/SongListContainer";
@@ -10,11 +9,11 @@ const getDiffs = (lastVersion: SongListDocsItemVersion) => {
   const { diffs } = lastVersion;
 
   if (!diffs) return;
-  const easy = diffs.some(diff => diff.difficulty === "Easy");
-  const normal = diffs.some(diff => diff.difficulty === "Normal");
-  const hard = diffs.some(diff => diff.difficulty === "Hard");
-  const expert = diffs.some(diff => diff.difficulty === "Expert");
-  const expertPlus = diffs.some(diff => diff.difficulty === "ExpertPlus");
+  const easy = diffs.some((diff) => diff.difficulty === "Easy");
+  const normal = diffs.some((diff) => diff.difficulty === "Normal");
+  const hard = diffs.some((diff) => diff.difficulty === "Hard");
+  const expert = diffs.some((diff) => diff.difficulty === "Expert");
+  const expertPlus = diffs.some((diff) => diff.difficulty === "ExpertPlus");
 
   return {
     easy,
@@ -23,9 +22,9 @@ const getDiffs = (lastVersion: SongListDocsItemVersion) => {
     expert,
     expertPlus
   };
-}
+};
 
-const Item = (rankedHashes: RankedRecordMap) => {
+const Item = () => {
   const _Item = (docData: SongListDocsItem) => {
     const allvotes = docData.stats.upvotes + docData.stats.downvotes;
     const percentVotes = ~~((docData.stats.upvotes / allvotes) * 1000) / 10;
@@ -72,22 +71,27 @@ const Item = (rankedHashes: RankedRecordMap) => {
 
 const _ItemList = ({
   documentList,
-  rankedHashes,
   children
 }: {
   documentList: SongListDocsItem[];
-  rankedHashes: RankedRecordMap;
-  children?: JSX.Element | JSX.Element[]
+  children?: JSX.Element | JSX.Element[];
 }) => {
-  const renderedItems = documentList.map(Item(rankedHashes));
+  const renderedItems = documentList.map(Item());
 
-  return <SongListContainer>{renderedItems}{(renderedItems.length > 0) && children}</SongListContainer>;
+  return (
+    <SongListContainer>
+      {renderedItems}
+      {renderedItems.length > 0 && children}
+    </SongListContainer>
+  );
 };
 
-export default function SearchList({ documentList, children }: { documentList: SongListDocsItem[], children?: JSX.Element | JSX.Element[] }): JSX.Element {
-  return (
-    <AppEnvContext.Consumer>
-      {(context) => <_ItemList children={children} documentList={documentList} rankedHashes={context.rankedHashes} />}
-    </AppEnvContext.Consumer>
-  );
+export default function SearchList({
+  documentList,
+  children
+}: {
+  documentList: SongListDocsItem[];
+  children?: JSX.Element | JSX.Element[];
+}): JSX.Element {
+  return <_ItemList documentList={documentList}>{children}</_ItemList>;
 }

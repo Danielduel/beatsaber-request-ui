@@ -142,7 +142,7 @@ export default function BeatfollowerPage(): JSX.Element {
     return `https://api.beatfollower.com/${tab}`;
   }, [tab]);
 
-  const [results, isFetching, isError, initialFetch, _, clearData] = usePaginatedData(getUrl, mapResponsesToItems, {
+  const [results, isFetching, isError, initialFetch, , clearData] = usePaginatedData(getUrl, mapResponsesToItems, {
     initialPageNumber: 0
   });
 

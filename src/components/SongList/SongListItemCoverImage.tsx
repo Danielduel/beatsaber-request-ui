@@ -42,7 +42,7 @@ const SongListItemCoverImage = ({ coverURL }: { coverURL: string }): JSX.Element
   const onError = React.useCallback<React.ReactEventHandler<HTMLImageElement>>((event) => {
     event.currentTarget.src = img;
   }, []);
-  
+
   return (
     <SongListItemCoverImageWrapper>
       <img src={coverURL} onError={onError} />

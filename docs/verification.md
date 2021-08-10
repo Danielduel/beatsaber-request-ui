@@ -32,6 +32,7 @@ Table of contents:
   * (feature) Redesign result rows
   * (fix) Remove blue overlay onClick on webkits
   * (docs) Change version and remove rusher release notice
+  * (tech) Cleanup code
 
 0.0.6:
 * 6 July 2021

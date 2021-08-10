@@ -70,14 +70,14 @@ const channelExtConfigObservable = Rx.from(
 );
 
 const configurationConfigObservable = Rx.from(
-  new Promise((resolve, reject) => {
+  new Promise((resolve) => {
     Twitch.ext.configuration.onChanged(() => {
       return resolve(Twitch.ext.configuration.broadcaster?.content);
     });
   })
 );
 
-export type RankedRecordMap = Record<string, any>;
+export type RankedRecordMap = Record<string, unknown>;
 const defaultState = {
   frameFullvideo: false,
   frameMobile: false,
@@ -151,7 +151,7 @@ export function createWrappedProvider(overrides: PartialAppEnv) {
       setState((_oldState) => ({ ..._oldState, configBroadcaster: defaultBroadcasterConfig }));
     }
     setState((_oldState) => ({ ..._oldState, configBroadcaster }));
-  }
+  };
 
   return function WrappedProvider({ children }: PropsWithChildren<Record<string, any>>): JSX.Element {
     const [state, setState] = React.useState(initialState);
