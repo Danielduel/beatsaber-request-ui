@@ -18,6 +18,10 @@
   --header-icon-color: var(--background-primary);
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
 input {
   padding: 8px 9px;
 }

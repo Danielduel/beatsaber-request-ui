@@ -30,6 +30,7 @@ Table of contents:
 0.0.7:
 * 10 August 2021
   * (feature) Redesign result rows
+  * (fix) Remove blue overlay onClick on webkits
 
 0.0.6:
 * 6 July 2021
