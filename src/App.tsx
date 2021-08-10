@@ -26,7 +26,7 @@ const AppUnexpandedWrapper = styled.div`
   background: #5f2c82;
 
   animation-name: initialBubbleAnimation;
-  animation-duration: 1s;
+  animation-duration: 10s;
 
   position: fixed;
   width: 30px;
@@ -48,6 +48,8 @@ const AppUnexpandedWrapper = styled.div`
   &:hover {
     height: 70px;
     width: 70px;
+    opacity: 1;
+    animation: none;
   }
 
   &:hover > div {

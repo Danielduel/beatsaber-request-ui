@@ -33,6 +33,7 @@ Table of contents:
   * (fix) Remove blue overlay onClick on webkits
   * (docs) Change version and remove rusher release notice
   * (tech) Cleanup code
+  * (fix) Fix config-related bug and modify bubble behavior
 
 0.0.6:
 * 6 July 2021

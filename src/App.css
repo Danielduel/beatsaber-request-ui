@@ -58,13 +58,19 @@ body {
     width: 90px;
     height: 90px;
   }
-  80% {
+  8% {
     width: 20px;
     height: 20px;
   }
-  100% {
+  10% {
     width: 30px;
     height: 30px;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 

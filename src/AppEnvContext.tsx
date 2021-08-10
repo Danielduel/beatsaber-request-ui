@@ -118,46 +118,55 @@ export type ConfigBroadcaster = {
   positionY: number;
 };
 const getBroadcasterConfig = (config: RawConfigResponse) =>
-  Object.entries(config).find(([, value]) => value.segment.segment_type === "broadcaster");
+  Object.entries(config).find(([, value]) => value?.segment?.segment_type === "broadcaster");
 const numberOrDefault = (something: any, def: number) => (isNaN(something) ? def : Number(something));
 const defaultBroadcasterConfig: ConfigBroadcaster = {
   positionX: 5,
   positionY: 5
 };
-const getAndParseBroadcasterConfig = (config: RawConfigResponse): ConfigBroadcaster => {
+const getAndParseBroadcasterConfig = (configString: string) => {
+  const readArr = configString.split("|");
+
+  return {
+    positionX: numberOrDefault(readArr[0], defaultBroadcasterConfig.positionX),
+    positionY: numberOrDefault(readArr[1], defaultBroadcasterConfig.positionY)
+  };
+}
+const getAndParseBroadcasterConfigSegmented = (config: RawConfigResponse): ConfigBroadcaster | null => {
   const broadcasterConfigEntry = getBroadcasterConfig(config);
   if (broadcasterConfigEntry) {
     const [, broadcasterConfig] = broadcasterConfigEntry;
     const content = broadcasterConfig.record.content;
-    const readArr = content.split("|");
-
-    return {
-      positionX: numberOrDefault(readArr[0], defaultBroadcasterConfig.positionX),
-      positionY: numberOrDefault(readArr[1], defaultBroadcasterConfig.positionY)
-    };
+    return getAndParseBroadcasterConfig(content);
   }
-  return defaultBroadcasterConfig;
+  // return defaultBroadcasterConfig;
+  return null;
 };
 
 export function createWrappedProvider(overrides: PartialAppEnv) {
   const initialState = createAppEnvContextState(overrides);
   type SetConfigState = React.Dispatch<React.SetStateAction<typeof initialState>>;
-  const configDataSubscribe = (setState: SetConfigState) => (configData: any) => {
+  const configDataSegmentedSubscribe = (setState: SetConfigState) => (configData: any) => {
     if (!configData) return;
     // TODO - check if configData is RawConfigResponse or an Error
-    const configBroadcaster = getAndParseBroadcasterConfig(configData as RawConfigResponse);
+    const configBroadcaster = getAndParseBroadcasterConfigSegmented(configData as RawConfigResponse);
     if (!configBroadcaster) {
-      // bad config -> set default
-      setState((_oldState) => ({ ..._oldState, configBroadcaster: defaultBroadcasterConfig }));
+      // bad config -> set default // DON'T
+      // setState((_oldState) => ({ ..._oldState, configBroadcaster: defaultBroadcasterConfig }));
+      return;
     }
     setState((_oldState) => ({ ..._oldState, configBroadcaster }));
   };
+  const configDataSubscribe = (setState: SetConfigState) => (configData: string) => {
+    const configBroadcaster = getAndParseBroadcasterConfig(configData);
+    setState((_oldState) => ({ ..._oldState, configBroadcaster }));
+  }
 
   return function WrappedProvider({ children }: PropsWithChildren<Record<string, any>>): JSX.Element {
     const [state, setState] = React.useState(initialState);
     React.useEffect(() => {
-      channelExtConfigObservable.subscribe(configDataSubscribe(setState));
-      configurationConfigObservable.subscribe(configDataSubscribe(setState));
+      channelExtConfigObservable.subscribe(configDataSegmentedSubscribe(setState));
+      configurationConfigObservable.subscribe(configDataSubscribe(setState) as (value: unknown) => void);
       channelInfoObservable.subscribe((channelInfo) => {
         setState((_oldState) => ({ ..._oldState, contextGame: channelInfo.game }));
       });

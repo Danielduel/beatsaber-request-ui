@@ -53,6 +53,8 @@ const _BroadcasterConfigPage = ({ configBroadcaster }: { configBroadcaster: Conf
         screen. Zeroing both values will make inactive bubble to be top-left. You can pass negative numbers to hide
         bubble.
       </p>
+      <h3>I recommend passing 2 zeros here</h3>
+      <h3>(you have to pass something here even if you are using only the panel extension)</h3>
       <TwitchConfigInputRow type="number" name="positionX" default="none" value={configBroadcaster.positionX} />
       <TwitchConfigInputRow type="number" name="positionY" default="none" value={configBroadcaster.positionY} />
       <TwitchConfigInputRow type="submit" name="Send" default="none" value={null} />
