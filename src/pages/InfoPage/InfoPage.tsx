@@ -109,6 +109,9 @@ const InfoPageContent = () => (
           <li>
             <LinkWrapper href="https://www.flaticon.com/free-icon/copy_2911213">Copy icon</LinkWrapper>
           </li>
+          <li>
+            <LinkWrapper href="https://loading.io/">Loading animation</LinkWrapper>
+          </li>
         </ul>
       </div>
     </InfoRow>

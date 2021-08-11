@@ -34,6 +34,8 @@ Table of contents:
   * (docs) Change version and remove rusher release notice
   * (tech) Cleanup code
   * (fix) Fix config-related bug and modify bubble behavior
+* 11 August 2021
+  * (feature) Upgrade image loading
 
 0.0.6:
 * 6 July 2021
