@@ -131,7 +131,7 @@ const getAndParseBroadcasterConfig = (configString: string) => {
     positionX: numberOrDefault(readArr[0], defaultBroadcasterConfig.positionX),
     positionY: numberOrDefault(readArr[1], defaultBroadcasterConfig.positionY)
   };
-}
+};
 const getAndParseBroadcasterConfigSegmented = (config: RawConfigResponse): ConfigBroadcaster | null => {
   const broadcasterConfigEntry = getBroadcasterConfig(config);
   if (broadcasterConfigEntry) {
@@ -160,7 +160,7 @@ export function createWrappedProvider(overrides: PartialAppEnv) {
   const configDataSubscribe = (setState: SetConfigState) => (configData: string) => {
     const configBroadcaster = getAndParseBroadcasterConfig(configData);
     setState((_oldState) => ({ ..._oldState, configBroadcaster }));
-  }
+  };
 
   return function WrappedProvider({ children }: PropsWithChildren<Record<string, any>>): JSX.Element {
     const [state, setState] = React.useState(initialState);

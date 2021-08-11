@@ -51,7 +51,11 @@ const SongListItemCoverImageImg = styled.img`
 
 const SongListItemCoverImageImgBg = styled.img`
   opacity: 0;
-  transition: opacity 0.3s linear;
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: scale(1.3);
+  margin-top: -50px;
+  transition: opacity 0.3s linear, transform 0.5s linear, margin-top 0.5s linear;
 `;
 
 const SongListItemCoverImageLoading = styled.img`
@@ -62,12 +66,15 @@ const SongListItemCoverImageLoading = styled.img`
 
 const SongListItemCoverImage = ({ coverURL }: { coverURL: string }): JSX.Element => {
   const loaderRef = React.useRef<null | HTMLImageElement>(null);
-  const onError = React.useCallback<React.ReactEventHandler<HTMLImageElement>>((event) => {
-    event.currentTarget.src = notfoundImg;
-    if (loaderRef.current) {
-      loaderRef.current.style.opacity = "0";
-    }
-  }, [loaderRef]);
+  const onError = React.useCallback<React.ReactEventHandler<HTMLImageElement>>(
+    (event) => {
+      event.currentTarget.src = notfoundImg;
+      if (loaderRef.current) {
+        loaderRef.current.style.opacity = "0";
+      }
+    },
+    [loaderRef]
+  );
   const onLoad = React.useCallback(() => {
     if (loaderRef.current) {
       loaderRef.current.style.opacity = "0";
@@ -82,10 +89,12 @@ const SongListItemCoverImage = ({ coverURL }: { coverURL: string }): JSX.Element
   );
 };
 
-const SongListItemCoverImageBackground = ({ coverURL }: { coverURL: string }): JSX.Element => {  
+const SongListItemCoverImageBackground = ({ coverURL }: { coverURL: string }): JSX.Element => {
   const onLoad = React.useCallback((event) => {
     event.currentTarget.style.opacity = "1";
-  }, [])
+    event.currentTarget.style.transform = "scale(1.0)";
+    event.currentTarget.style.marginTop = "10px";
+  }, []);
 
   return (
     <SongListItemCoverImageBackgroundWrapper>
