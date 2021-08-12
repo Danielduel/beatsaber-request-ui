@@ -42,10 +42,11 @@ Table of contents:
   * (tech) Exclude close button as a component
   * (feature) Improve feeling of copy-pasting
   * (docs) Add translations
+  * (docs) Update docs
 Special thanks:
 Thanks to ttv/acerolavr for spotting some bugs in this version.
 
-0.0.6:
+0.0.6: (already verified)
 * 6 July 2021
   * (tech) Bump up version
   * (tech) Push tools directory to repo
