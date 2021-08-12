@@ -41,6 +41,7 @@ Table of contents:
   * (fix) Fix pointer events on background image
   * (tech) Exclude close button as a component
   * (feature) Improve feeling of copy-pasting
+  * (docs) Add translations
 Special thanks:
 Thanks to ttv/acerolavr for spotting some bugs in this version.
 
