@@ -70,8 +70,8 @@ const SongListItem = ({
         borderBottom: "1px solid var(--border)"
       }}
     >
+      <SongListItemCoverImageBackground coverURL={coverURL} />
       <SongListItemWrapper>
-        <SongListItemCoverImageBackground coverURL={coverURL} />
         <SongListItemCoverWrapper>
           <SongListItemCoverImage coverURL={coverURL} />
           <SongListItemAvailableDifficulties

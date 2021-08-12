@@ -33,6 +33,7 @@ const SongListItemCoverImageBackgroundWrapper = styled.div`
   overflow: hidden;
   width: 100%;
   height: 100%;
+  pointer-events: none;
 
   display: flex;
   justify-content: center;

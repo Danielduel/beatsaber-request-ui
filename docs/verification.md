@@ -37,6 +37,10 @@ Table of contents:
 * 11 August 2021
   * (feature) Upgrade image loading
   * (fix) Animate song list backgrounds and improve codestyle
+* 12 August 2021
+  * (fix) Fix pointer events on background image
+Special thanks:
+Thanks to ttv/acerolavr for spotting some bugs in this version.
 
 0.0.6:
 * 6 July 2021
