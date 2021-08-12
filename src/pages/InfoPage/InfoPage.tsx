@@ -42,7 +42,7 @@ const InfoPageContent = () => (
       <InfoIconWrapper>
         <VersionIcon />
       </InfoIconWrapper>
-      Version: 0.0.7 (very alpha)
+      Version: 0.0.8 (very alpha)
     </InfoRow>
     <InfoRow>
       <InfoIconWrapper>
