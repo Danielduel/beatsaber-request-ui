@@ -114,7 +114,12 @@ const InfoPageContent = () => (
           </li>
           <li>
             <LinkWrapper href="https://www.kindpng.com/imgv/iixoxmh_black-exclamation-mark-png-transparent-png/">
-              Exclamation mark
+              Exclamation mark icon
+            </LinkWrapper>
+          </li>
+          <li>
+            <LinkWrapper href="https://www.pngarea.com/view/e5f64df6_question-mark-png-question-mark-free-icon-png/">
+              Question mark icon
             </LinkWrapper>
           </li>
         </ul>

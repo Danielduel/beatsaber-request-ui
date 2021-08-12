@@ -13,6 +13,8 @@ import { SongListItemDetailsWrapper } from "./SongListItemDetails/SongListItemDe
 import { Translation } from "react-i18next";
 import { Button } from "../Buttons/Button";
 import exclamation_mark from "./static/exclamation_mark.png";
+import question_mark from "./static/question_mark.png";
+import { DoubleButton } from "../Buttons/DoubleButton";
 
 const SongListItemWrapper = styled(LayoutRowTall)`
   width: 100%;
@@ -31,6 +33,9 @@ const SongListItemContainer = styled(LayoutRowTall)`
   margin-left: ${({ moveToLeft }: SongListItemContainerProps) => (moveToLeft ? "-150px" : "")};
 `;
 
+type SongListItemInfoWrapperProps = {
+  variant: "info" | "warn";
+};
 const SongListItemInfoWrapper = styled.div`
   position: absolute;
   right: 15px;
@@ -39,8 +44,11 @@ const SongListItemInfoWrapper = styled.div`
   box-sizing: border-box;
   padding: 0 5px;
   border-radius: 20px;
+  overflow: hidden;
 
-  background-color: var(--background-warn);
+  background-color: ${({ variant }: SongListItemInfoWrapperProps) => {
+    return (variant === "warn" && "var(--background-warn)") || (variant === "info" && "var(--background-info)");
+  }};
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -111,20 +119,38 @@ const SongListItem = ({
   expertPlus
 }: SongListItemProps & SongListItemDifficultyProps): JSX.Element => {
   const componentContextState = useSongListItemContextState();
-  const { copied, setCopied } = componentContextState;
+  const { copied, setCopied, askForBeatsaverNavigation, setAskForBeatsaverNavigation } = componentContextState;
+  const shouldMoveToLeft = copied || askForBeatsaverNavigation;
+  const toggleAskForBeatsaverNavigation = React.useCallback(() => {
+    setAskForBeatsaverNavigation(!askForBeatsaverNavigation);
+  }, [askForBeatsaverNavigation, setAskForBeatsaverNavigation]);
   return (
     <SongListItemContext.Provider value={componentContextState}>
       <SongListItemWrapper>
-        <SongListItemInfoWrapper>
-          <SongListItemInfoBgImage src={exclamation_mark} />
-          <Translation>{(t) => t("Paste on chat")}</Translation>
-          <br />
-          <Translation>{(t) => t("to make request")}</Translation>
-          <Button onClick={() => setCopied(false)}>
-            <Translation>{(t) => t("Done")}</Translation>
-          </Button>
-        </SongListItemInfoWrapper>
-        <SongListItemContainer key={hash} isRanked={isRanked} moveToLeft={copied}>
+        {copied && (
+          <SongListItemInfoWrapper variant="warn">
+            <SongListItemInfoBgImage src={exclamation_mark} />
+            <Translation>{(t) => t("Paste on chat")}</Translation>
+            <br />
+            <Translation>{(t) => t("to make request")}</Translation>
+            <Button onClick={() => setCopied(false)}>
+              <Translation>{(t) => t("Done")}</Translation>
+            </Button>
+          </SongListItemInfoWrapper>
+        )}
+        {askForBeatsaverNavigation && (
+          <SongListItemInfoWrapper variant="info">
+            <SongListItemInfoBgImage src={question_mark} />
+            <Translation>{(t) => t("Do you want to go to beatsaver page?")}</Translation>
+            <DoubleButton
+              leftButtonOnClick={() => setAskForBeatsaverNavigation(false)}
+              leftButtonText="Close"
+              rightButtonOnClick={() => window.open(`https://beatsaver.com/maps/${bsrKey}`)}
+              rightButtonText="Go!"
+            />
+          </SongListItemInfoWrapper>
+        )}
+        <SongListItemContainer key={hash} isRanked={isRanked} moveToLeft={shouldMoveToLeft}>
           <SongListItemCoverImageBackground coverURL={coverURL} />
           <SongListItemDetailsContainer>
             <SongListItemCoverWrapper>
@@ -138,7 +164,12 @@ const SongListItem = ({
               />
             </SongListItemCoverWrapper>
             <SongListItemDetailsWrapper>
-              <SongListItemDetailsFullwidthItem variant="title" data={songName} suffix="" />
+              <SongListItemDetailsFullwidthItem
+                variant="title"
+                data={songName}
+                suffix=""
+                onClick={toggleAskForBeatsaverNavigation}
+              />
               <SongListItemDetailsFullwidthItem variant="subtitle" data={songAuthorName} suffix="" />
               <SongListItemDetailsFullwidthItem variant="subtitle" data={levelAuthorName} suffix="" />
               <SongListItemDetailsSmallItem variant="item" data={bsrKey} suffix="🔑" />

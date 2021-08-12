@@ -4,6 +4,7 @@ import styled from "styled-components";
 import loadingGif from "./static/loading.gif";
 import baseImg from "./static/base.png";
 import notfoundImg from "./static/notfound.png";
+import { SongListItemContext } from "./SongListItemContext";
 
 const SongListItemCoverImageWrapper = styled.div`
   grid-area: cover-image;
@@ -66,6 +67,7 @@ const SongListItemCoverImageLoading = styled.img`
 `;
 
 const SongListItemCoverImage = ({ coverURL }: { coverURL: string }): JSX.Element => {
+  const { askForBeatsaverNavigation, setAskForBeatsaverNavigation } = React.useContext(SongListItemContext);
   const loaderRef = React.useRef<null | HTMLImageElement>(null);
   const onError = React.useCallback<React.ReactEventHandler<HTMLImageElement>>(
     (event) => {
@@ -81,9 +83,12 @@ const SongListItemCoverImage = ({ coverURL }: { coverURL: string }): JSX.Element
       loaderRef.current.style.opacity = "0";
     }
   }, [loaderRef]);
+  const toggleAskForBeatsaverNavigation = React.useCallback(() => {
+    setAskForBeatsaverNavigation(!askForBeatsaverNavigation);
+  }, [askForBeatsaverNavigation, setAskForBeatsaverNavigation]);
 
   return (
-    <SongListItemCoverImageWrapper>
+    <SongListItemCoverImageWrapper onClick={toggleAskForBeatsaverNavigation}>
       <SongListItemCoverImageImg src={coverURL} onLoad={onLoad} onError={onError} />
       <SongListItemCoverImageLoading ref={loaderRef} src={loadingGif} />
     </SongListItemCoverImageWrapper>

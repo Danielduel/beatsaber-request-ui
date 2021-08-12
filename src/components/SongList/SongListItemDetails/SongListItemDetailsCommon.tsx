@@ -35,11 +35,12 @@ type SongListItemDetailsCommonProps = {
   data: string | null | undefined | number;
   suffix: string;
   variant: SongListItemDetailsSpanVariant;
+  onClick?: () => void;
 };
 const SongListItemDetailsCommon = (WrapperComponent: React.FunctionComponent) => {
-  const memoRender = ({ variant, data, suffix }: SongListItemDetailsCommonProps) => (
+  const memoRender = ({ variant, data, suffix, onClick }: SongListItemDetailsCommonProps) => (
     <WrapperComponent>
-      <SongListItemDetailsSpan variant={variant}>
+      <SongListItemDetailsSpan variant={variant} onClick={onClick}>
         {data}&nbsp;{suffix}
       </SongListItemDetailsSpan>
     </WrapperComponent>

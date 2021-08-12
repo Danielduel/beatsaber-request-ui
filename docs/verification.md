@@ -30,6 +30,7 @@ Table of contents:
 0.0.8:
 * 13 August 2021
   * (docs) Bump up version
+  * (feature) Ask user if they want to visit beatsaver page of map
 
 0.0.7:
 * 10 August 2021

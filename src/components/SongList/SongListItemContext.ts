@@ -2,28 +2,37 @@ import React from "react";
 
 const defaultContextState = {
   copied: false,
-  setCopied: (_: boolean) => void 0
+  setCopied: (_: boolean) => void 0,
+  askForBeatsaverNavigation: false,
+  setAskForBeatsaverNavigation: (_: boolean) => void 0
 };
 
-// Used to tell other items that they aren't currently copied
-let lastCopiedSetStateAction = (_: boolean) => {};
+let lastResetingActionSetState = (_: boolean) => {};
 
-function useSongListItemContextState() {
-  const [copied, _setCopied] = React.useState(false);
-  const setCopied = React.useCallback(
+function useResettingState(initialState: boolean) {
+  const [state, _setState] = React.useState(initialState);
+  const setState = React.useCallback(
     (value: boolean) => {
       if (value === true) {
-        lastCopiedSetStateAction && lastCopiedSetStateAction(false);
-        lastCopiedSetStateAction = _setCopied;
+        lastResetingActionSetState && lastResetingActionSetState(false);
+        lastResetingActionSetState = _setState;
       }
-      _setCopied(value);
+      _setState(value);
     },
-    [_setCopied]
+    [_setState]
   );
+  return [state, setState] as const;
+}
+
+function useSongListItemContextState() {
+  const [copied, setCopied] = useResettingState(false);
+  const [askForBeatsaverNavigation, setAskForBeatsaverNavigation] = useResettingState(false);
 
   const returns = {
     copied,
-    setCopied
+    setCopied,
+    askForBeatsaverNavigation,
+    setAskForBeatsaverNavigation
   };
 
   return returns as typeof defaultContextState;
