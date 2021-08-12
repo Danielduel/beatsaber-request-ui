@@ -103,7 +103,7 @@ type HeaderProps = {
 const Header = ({ togglePanel, children }: HeaderProps): JSX.Element => {
   const handleClose = React.useCallback(() => {
     togglePanel && togglePanel(false);
-  }, [togglePanel])
+  }, [togglePanel]);
 
   return (
     <LayoutRowPrimary>

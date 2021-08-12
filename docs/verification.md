@@ -40,6 +40,7 @@ Table of contents:
 * 12 August 2021
   * (fix) Fix pointer events on background image
   * (tech) Exclude close button as a component
+  * (feature) Improve feeling of copy-pasting
 Special thanks:
 Thanks to ttv/acerolavr for spotting some bugs in this version.
 

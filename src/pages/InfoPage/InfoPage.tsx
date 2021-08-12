@@ -112,6 +112,11 @@ const InfoPageContent = () => (
           <li>
             <LinkWrapper href="https://loading.io/">Loading animation</LinkWrapper>
           </li>
+          <li>
+            <LinkWrapper href="https://www.kindpng.com/imgv/iixoxmh_black-exclamation-mark-png-transparent-png/">
+              Exclamation mark
+            </LinkWrapper>
+          </li>
         </ul>
       </div>
     </InfoRow>
