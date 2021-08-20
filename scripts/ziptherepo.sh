@@ -3,5 +3,5 @@ rm -rf repo
 git clone https://github.com/Duelsik/beatsaber-request-ui repo
 cd repo
 git fetch --all --tags
-git checkout tags/0.0.6
+git checkout tags/0.0.7
 zip -r ../repo.zip .

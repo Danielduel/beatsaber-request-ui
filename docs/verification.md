@@ -31,6 +31,7 @@ Table of contents:
 * 13 August 2021
   * (docs) Bump up version
   * (feature) Ask user if they want to visit beatsaver page of map
+  * (feature) Redesign and refactor config page
 
 0.0.7:
 * 10 August 2021

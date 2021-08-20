@@ -1,5 +1,9 @@
-import styled from "styled-components";
+import React from "react";
+import styled, { css } from "styled-components";
 
+type ButtonProps = {
+  active?: boolean;
+};
 const Button = styled.button`
   outline: none;
   box-sizing: border-box;
@@ -20,6 +24,14 @@ const Button = styled.button`
   align-items: center;
   transition: width 0.03s linear;
 
+  ${({ active }: ButtonProps) =>
+    active
+      ? css`
+          background-color: var(--background-input-active);
+          opacity: 1;
+        `
+      : null}
+
   & > svg {
     width: 20px;
     height: 20px;
@@ -30,4 +42,17 @@ const Button = styled.button`
   }
 `;
 
-export { Button };
+export type ButtonAsItemProps = {
+  active?: boolean;
+  onClick: (e: any) => void;
+  text: string;
+};
+const ButtonAsItem = ({ active, onClick, text }: ButtonAsItemProps) => {
+  return (
+    <Button active={active} onClick={onClick}>
+      {text}
+    </Button>
+  );
+};
+
+export { Button, ButtonAsItem };

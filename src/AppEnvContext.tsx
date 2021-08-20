@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import * as Rx from "rxjs";
 import { wrapTwitchApiEndoint, UNRANKED } from "./constants";
+// import { mockAppEnvContext } from "./mockAppEnvContext";
 import { AuthResponse } from "./types/AuthResponse.d";
 import { ChannelInfoResponse } from "./types/ChannelInfoResponse";
 import { RankedListResponse } from "./types/RankedListResponse";
@@ -47,27 +48,27 @@ const channelInfoObservable = Rx.from(
   })
 );
 
-const channelExtConfigObservable = Rx.from(
-  new Promise((resolve, reject) => {
-    // https://api.twitch.tv/extensions/<client ID>/configurations/channels/<channel ID>
-    authObservable.subscribe((auth) => {
-      return fetch(wrapTwitchApiEndoint(`/extensions/${auth.clientId}/configurations/channels/${auth.channelId}`), {
-        method: "GET",
-        headers: {
-          "Authorization": `Bearer ${auth.token}`,
-          "client-id": auth.clientId,
-          "content-type": "application/json"
-        }
-      })
-        .then((response) => response.json())
-        .then((data) => resolve(data))
-        .catch((err) => {
-          console.error(err);
-          return reject(null);
-        });
-    });
-  })
-);
+// const channelExtConfigObservable = Rx.from(
+//   new Promise((resolve, reject) => {
+//     // https://api.twitch.tv/extensions/<client ID>/configurations/channels/<channel ID>
+//     authObservable.subscribe((auth) => {
+//       return fetch(wrapTwitchApiEndoint(`/extensions/${auth.clientId}/configurations/channels/${auth.channelId}`), {
+//         method: "GET",
+//         headers: {
+//           "Authorization": `Bearer ${auth.token}`,
+//           "client-id": auth.clientId,
+//           "content-type": "application/json"
+//         }
+//       })
+//         .then((response) => response.json())
+//         .then((data) => resolve(data))
+//         .catch((err) => {
+//           console.error(err);
+//           return reject(null);
+//         });
+//     });
+//   })
+// );
 
 const configurationConfigObservable = Rx.from(
   new Promise((resolve) => {
@@ -76,6 +77,8 @@ const configurationConfigObservable = Rx.from(
     });
   })
 );
+
+// mockAppEnvContext();
 
 export type RankedRecordMap = Record<string, unknown>;
 const defaultState = {
@@ -124,12 +127,49 @@ const defaultBroadcasterConfig: ConfigBroadcaster = {
   positionX: 5,
   positionY: 5
 };
-const getAndParseBroadcasterConfig = (configString: string) => {
+const getAndParseBroadcasterConfig = (configString: string): ConfigBroadcaster => {
+  // This function is designed to crash whole app if data is malformed
   const readArr = configString.split("|");
+  if (readArr[0] === "panel") {
+    return {
+      positionX: 0,
+      positionY: 0
+    };
+  }
+
+  if (readArr[0] === "overlay") {
+    switch (readArr[1]) {
+      case "topLeft":
+        return {
+          positionX: 2,
+          positionY: 2
+        };
+      case "topRight":
+        return {
+          positionX: 98,
+          positionY: 2
+        };
+      case "bottomLeft":
+        return {
+          positionX: 2,
+          positionY: 98
+        };
+      case "bottomRight":
+        return {
+          positionX: 98,
+          positionY: 98
+        };
+      case "custom":
+        return {
+          positionX: numberOrDefault(readArr[2], 0),
+          positionY: numberOrDefault(readArr[3], 0)
+        };
+    }
+  }
 
   return {
-    positionX: numberOrDefault(readArr[0], defaultBroadcasterConfig.positionX),
-    positionY: numberOrDefault(readArr[1], defaultBroadcasterConfig.positionY)
+    positionX: 0,
+    positionY: 0
   };
 };
 const getAndParseBroadcasterConfigSegmented = (config: RawConfigResponse): ConfigBroadcaster | null => {
@@ -150,6 +190,7 @@ export function createWrappedProvider(overrides: PartialAppEnv) {
     if (!configData) return;
     // TODO - check if configData is RawConfigResponse or an Error
     const configBroadcaster = getAndParseBroadcasterConfigSegmented(configData as RawConfigResponse);
+    console.log(configBroadcaster);
     if (!configBroadcaster) {
       // bad config -> set default // DON'T
       // setState((_oldState) => ({ ..._oldState, configBroadcaster: defaultBroadcasterConfig }));
@@ -159,13 +200,14 @@ export function createWrappedProvider(overrides: PartialAppEnv) {
   };
   const configDataSubscribe = (setState: SetConfigState) => (configData: string) => {
     const configBroadcaster = getAndParseBroadcasterConfig(configData);
+    console.log(configBroadcaster);
     setState((_oldState) => ({ ..._oldState, configBroadcaster }));
   };
 
   return function WrappedProvider({ children }: PropsWithChildren<Record<string, any>>): JSX.Element {
     const [state, setState] = React.useState(initialState);
     React.useEffect(() => {
-      channelExtConfigObservable.subscribe(configDataSegmentedSubscribe(setState));
+      // channelExtConfigObservable.subscribe(configDataSegmentedSubscribe(setState));
       configurationConfigObservable.subscribe(configDataSubscribe(setState) as (value: unknown) => void);
       channelInfoObservable.subscribe((channelInfo) => {
         setState((_oldState) => ({ ..._oldState, contextGame: channelInfo.game }));

@@ -14,7 +14,7 @@ import { Translation } from "react-i18next";
 import { Button } from "../Buttons/Button";
 import exclamation_mark from "./static/exclamation_mark.png";
 import question_mark from "./static/question_mark.png";
-import { DoubleButton } from "../Buttons/DoubleButton";
+import { GroupButton } from "../Buttons/GroupButton";
 
 const SongListItemWrapper = styled(LayoutRowTall)`
   width: 100%;
@@ -142,11 +142,17 @@ const SongListItem = ({
           <SongListItemInfoWrapper variant="info">
             <SongListItemInfoBgImage src={question_mark} />
             <Translation>{(t) => t("Do you want to go to beatsaver page?")}</Translation>
-            <DoubleButton
-              leftButtonOnClick={() => setAskForBeatsaverNavigation(false)}
-              leftButtonText="Close"
-              rightButtonOnClick={() => window.open(`https://beatsaver.com/maps/${bsrKey}`)}
-              rightButtonText="Go!"
+            <GroupButton
+              group={[
+                {
+                  onClick: () => setAskForBeatsaverNavigation(false),
+                  text: "Close"
+                },
+                {
+                  onClick: () => window.open(`https://beatsaver.com/maps/${bsrKey}`),
+                  text: "Go!"
+                }
+              ]}
             />
           </SongListItemInfoWrapper>
         )}

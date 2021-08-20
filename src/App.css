@@ -16,6 +16,7 @@
   --background-icon-pressed: #b790c5;
   --background-icon-notpressed: #a580b1;
   --background-input: #dddddd;
+  --background-input-active: #c3dab7;
 
   --header-icon-color: var(--background-primary);
 }
@@ -31,8 +32,8 @@ input {
 body {
   margin: 0;
   height: 100vh;
-  overflow-y: hidden;
-  overflow-x: hidden;
+  /* overflow-y: hidden;
+  overflow-x: hidden; */
 }
 
 * {
