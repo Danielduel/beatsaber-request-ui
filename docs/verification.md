@@ -31,9 +31,11 @@ Table of contents:
 * 13 August 2021
   * (docs) Bump up version
   * (feature) Ask user if they want to visit beatsaver page of map
+* 21 August 2021
   * (feature) Redesign and refactor config page
+  * (docs) Update documentation
 
-0.0.7:
+0.0.7 (not published, failed to verify because TVT):
 * 10 August 2021
   * (feature) Redesign result rows
   * (fix) Remove blue overlay onClick on webkits
