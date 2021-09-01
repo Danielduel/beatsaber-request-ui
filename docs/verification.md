@@ -41,7 +41,8 @@ Table of contents:
   * (feature) Reposition inactive bubble and fix rotations
   * (fix) Reposition close button and fix bubble ratios
   * (fix) Direct external links to _blank
-  * (docs) Clean build warns
+  * (tech) Clean build warns
+  * (docs) Update twitch extension page
 Special thanks:
 Thanks to ttv/acerolavr for helping me with my bad english.
 

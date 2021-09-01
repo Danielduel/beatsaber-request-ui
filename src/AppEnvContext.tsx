@@ -75,7 +75,7 @@ const channelInfoObservable = Rx.from(
 const configurationConfigObservable = Rx.from(
   new Promise((resolve) => {
     if (isLocal) {
-      resolve("overlay|bottomRight");
+      resolve("overlay|topLeft");
     }
     Twitch.ext.configuration.onChanged(() => {
       return resolve(Twitch.ext.configuration.broadcaster?.content);
