@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 type ButtonProps = {
   active?: boolean;
 };
-const Button = styled.button`
+const styles = css`
   outline: none;
   box-sizing: border-box;
   height: 40px;
@@ -12,6 +12,8 @@ const Button = styled.button`
   border-radius: 20px;
   border: 0px solid transparent;
   cursor: pointer;
+  text-decoration: none;
+  line-height: 0;
 
   font-weight: normal;
   font-size: 0.8rem;
@@ -42,12 +44,27 @@ const Button = styled.button`
   }
 `;
 
+const Button = styled.button`
+  ${styles}
+`;
+const ButtonLink = styled.a`
+  ${styles}
+`;
+
 export type ButtonAsItemProps = {
   active?: boolean;
   onClick: (e: any) => void;
   text: string;
+  href?: string;
 };
-const ButtonAsItem = ({ active, onClick, text }: ButtonAsItemProps) => {
+const ButtonAsItem = ({ active, onClick, text, href }: ButtonAsItemProps) => {
+  if (href) {
+    return (
+      <ButtonLink active={active} onClick={onClick} href={href} target="_blank">
+        {text}
+      </ButtonLink>
+    );
+  }
   return (
     <Button active={active} onClick={onClick}>
       {text}
@@ -55,4 +72,4 @@ const ButtonAsItem = ({ active, onClick, text }: ButtonAsItemProps) => {
   );
 };
 
-export { Button, ButtonAsItem };
+export { Button, ButtonLink, ButtonAsItem };

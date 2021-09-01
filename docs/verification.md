@@ -40,6 +40,7 @@ Table of contents:
   * (docs) Update docs
   * (feature) Reposition inactive bubble and fix rotations
   * (fix) Reposition close button and fix bubble ratios
+  * (fix) Direct external links to _blank
 Special thanks:
 Thanks to ttv/acerolavr for helping me with my bad english.
 

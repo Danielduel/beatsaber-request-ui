@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, ButtonAsItem, ButtonAsItemProps } from "./Button";
+import { ButtonLink, Button, ButtonAsItem, ButtonAsItemProps } from "./Button";
 
 const GroupButtonContainer = styled.div`
-  & > ${Button} {
+  display: flex;
+  & > ${Button}, & > ${ButtonLink} {
     /* First button */
     &:first-child {
       border-top-right-radius: 0;

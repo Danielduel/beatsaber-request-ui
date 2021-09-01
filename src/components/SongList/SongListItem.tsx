@@ -149,8 +149,9 @@ const SongListItem = ({
                   text: "Close"
                 },
                 {
-                  onClick: () => window.open(`https://beatsaver.com/maps/${bsrKey}`),
-                  text: "Go!"
+                  onClick: () => {},
+                  text: "Go!",
+                  href: `https://beatsaver.com/maps/${bsrKey}`
                 }
               ]}
             />
