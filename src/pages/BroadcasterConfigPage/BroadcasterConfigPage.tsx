@@ -132,19 +132,25 @@ const _BroadcasterConfigPage = ({
       <FormRow>
         <QuestionRow>Do you want to use extension as a panel or overlay?</QuestionRow>
         <div>
-          <ExplainationRow>Extension as overlay is shown directly on top of your stream footage</ExplainationRow>
-          <ExplainationRow>Extension as panel can be added as a panel in your description</ExplainationRow>
           <ExplainationRow>
-            Extension will be available as mobile extension (icon above the chat) in Twitch App for Android
+            Configuring the extension as an overlay will place it directly over the stream.
           </ExplainationRow>
           <ExplainationRow>
-            Apple mobile devices (iPads, iPhones) require additional licensing from developer side which I don&lsquo;t
-            own for private use at this moment. Extension will be blocked by those devices.
+            Configuring the extension as a panel will allow you to add it as a panel in your description.
           </ExplainationRow>
           <ExplainationRow>
-            Worth noting - extension as overlay will NOT run if stream category (game) is not set to &quot;Beat Saber&quot; and
-            stream is not currently running.
+            Additionally, for both options - the extension will be available as mobile extension (icon above the chat)
+            in Twitch App for Android.
           </ExplainationRow>
+          <ExplainationRow>
+            Apple devices (iPads, iPhones) require additional developer licensing that I don&lsquo;t have at the moment,
+            so the extension will not work on these devices.
+          </ExplainationRow>
+          <ExplainationRow>
+            Note that the overlay will only run if the stream category is set to &quot;Beat Saber&quot; and the stream
+            is running.
+          </ExplainationRow>
+          <ExplainationRow>Highly advised to go for &quot;panel&quot; option.</ExplainationRow>
         </div>
         <GroupButton
           group={[
@@ -166,15 +172,17 @@ const _BroadcasterConfigPage = ({
         <FormRow>
           <QuestionRow>Where do you want to place extension in minimized form?</QuestionRow>
           <div>
-            <ExplainationRow>Highly adviced to use infrequently used spot.</ExplainationRow>
+            <ExplainationRow>
+              Place the extension in a spot that won&lsquo;t obstruct elements of the stream.
+            </ExplainationRow>
             <ExplainationRow>
               Worth noting how extension works if somebody will have problems in the chat:
               <br />
-              Extension in overlay mode starts as a small bubble which fades away after couple seconds.
+              The extension in overlay mode starts as a small bubble which fades away after couple seconds.
               <br />
-              Viewer can hover over bubble location to see it again and then click it. <br />
-              Clicking "maximizes" extension. <br />
-              Then, after using extension, user can click close button in top right corner to make it bubble again.
+              The overlay will start as a small bubble that appears when mousing over stream. Clicking on the bubble
+              will open the overlay, allowing you to search for songs to request. Exit out of the overlay with the
+              &quot;X&quot; on the top right.
             </ExplainationRow>
           </div>
           <GroupButton

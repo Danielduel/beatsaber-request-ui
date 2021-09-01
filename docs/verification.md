@@ -34,6 +34,9 @@ Table of contents:
 * 21 August 2021
   * (feature) Redesign and refactor config page
   * (docs) Update documentation
+  * (fix) Redact config page
+Special thanks:
+Thanks to ttv/acerolavr for helping me with my bad english.
 
 0.0.7 (not published, failed to verify because TVT):
 * 10 August 2021
