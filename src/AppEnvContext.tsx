@@ -190,7 +190,6 @@ export function createWrappedProvider(overrides: PartialAppEnv) {
     if (!configData) return;
     // TODO - check if configData is RawConfigResponse or an Error
     const configBroadcaster = getAndParseBroadcasterConfigSegmented(configData as RawConfigResponse);
-    console.log(configBroadcaster);
     if (!configBroadcaster) {
       // bad config -> set default // DON'T
       // setState((_oldState) => ({ ..._oldState, configBroadcaster: defaultBroadcasterConfig }));
@@ -200,7 +199,6 @@ export function createWrappedProvider(overrides: PartialAppEnv) {
   };
   const configDataSubscribe = (setState: SetConfigState) => (configData: string) => {
     const configBroadcaster = getAndParseBroadcasterConfig(configData);
-    console.log(configBroadcaster);
     setState((_oldState) => ({ ..._oldState, configBroadcaster }));
   };
 

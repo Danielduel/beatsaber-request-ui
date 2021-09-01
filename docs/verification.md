@@ -38,6 +38,7 @@ Table of contents:
   * (fix) Redact config page
   * (feature) Tell the streamer that config is alright
   * (docs) Update docs
+  * (feature) Reposition inactive bubble and fix rotations
 Special thanks:
 Thanks to ttv/acerolavr for helping me with my bad english.
 

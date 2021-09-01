@@ -14,6 +14,12 @@ import "./i18n/init-i18n";
 import { ConfigBroadcaster } from "./AppEnvContext";
 import { BodyWithNavigation, BodyWithNavigationBody } from "./layouts/BodyWithNavigation";
 
+function conditionalCssDependingOnPosition(x: number, y: number, top: string, bottom: string, left: string, right: string, merge: (horizontal: string, vertical: string) => string) {
+  const _horizontal = x > 50 ? right : left;
+  const _vertical = y > 50 ? bottom : top;
+  return merge(_horizontal, _vertical);
+}
+
 const AppWrapper = styled.div`
   transition: margin-left 1s;
   height: 100vh;
@@ -39,10 +45,11 @@ const AppUnexpandedWrapper = styled.div`
   // Those isNaNs are defensive code placed here
   // in order to be 300% sure that it can't be exploited
   ${({ x, y }: { x: number; y: number }) => `
-    margin-left: calc(${!isNaN(x) ? x : "0"}% + 35px);
-    margin-top: calc(${!isNaN(y) ? y : "0"}% + 35px);
+    left: ${!isNaN(x) ? x : "0"}%;
+    top: ${!isNaN(y) ? y : "0"}%;
   `}
 
+  opacity: 0;
   transition: all 0.3s ease-in-out;
 
   &:hover {
@@ -70,23 +77,35 @@ const AppUnexpandedTooltip = styled.div`
   animation-name: initialBubbleTooltipAnimation;
   animation-duration: 4s;
 
+  ${({ x, y }: { x: number; y: number }) => {
+    return conditionalCssDependingOnPosition(x, y, "0", "-100%", "0", "-240px", (h, v) => `
+      transform: translate(${h}, ${v});
+    `);
+  }}
+
   &:before {
     height: 30px;
     width: 5px;
     background: black;
     position: absolute;
-    top: 0;
-    left: 0;
     content: " ";
+    ${({ x, y }: { x: number; y: number }) => {
+      return conditionalCssDependingOnPosition(x, y, "top: 0;", "bottom: 0;", "left: 0;", "right: 0;", (h, v) => `
+        ${h} ${v}
+      `);
+    }}
   }
   &:after {
     height: 5px;
     width: 30px;
     background: black;
     position: absolute;
-    top: 0;
-    left: 0;
     content: " ";
+    ${({ x, y }: { x: number; y: number }) => {
+      return conditionalCssDependingOnPosition(x, y, "top: 0;", "bottom: 0;", "left: 0;", "right: 0;", (h, v) => `
+        ${h} ${v}
+      `);
+    }}
   }
 `;
 
@@ -146,7 +165,10 @@ export function FullVideoApp({ configBroadcaster }: { configBroadcaster: ConfigB
       y={configBroadcaster.positionY}
       onClick={() => togglePanel(true)}
     >
-      <AppUnexpandedTooltip>
+      <AppUnexpandedTooltip
+        x={configBroadcaster.positionX}
+        y={configBroadcaster.positionY}
+      >
         <Translation>{(t) => t("Click to open an extension")}</Translation>
         <br />
         <Translation>{(t) => t("this should make it easier to make requests")}</Translation>
