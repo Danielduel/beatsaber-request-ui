@@ -35,6 +35,7 @@ Table of contents:
   * (feature) Redesign and refactor config page
   * (docs) Update documentation
   * (fix) Redact config page
+  * (feature) Tell the streamer that config is alright
 Special thanks:
 Thanks to ttv/acerolavr for helping me with my bad english.
 

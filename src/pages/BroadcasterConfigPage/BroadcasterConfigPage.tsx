@@ -34,6 +34,20 @@ const FormRow = styled.div`
   }
 `;
 
+const SuccessRow = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+
+  & > img {
+    margin-right: 20px;
+  }
+  & > div {
+    width: 300px;
+  }
+`;
+
 const QuestionRow = styled.div`
   font-size: 1.1rem;
   font-weight: bold;
@@ -103,6 +117,7 @@ const _BroadcasterConfigPage = ({
 }: {
   configBroadcaster: ConfigBroadcaster | null;
 }): JSX.Element => {
+  const [wasSubmitted, setWasSubmitted] = React.useState(false);
   const [panelOrOverlay, setPanelOrOverlay] = React.useState<SerializationData["panelOrOverlay"]>(null);
   const [overlayPlacement, setOverlayPlacement] = React.useState<SerializationData["overlayPlacement"]>(null);
   const [customOverlayPlacementX, setCustomOverlayPlacementX] =
@@ -120,7 +135,10 @@ const _BroadcasterConfigPage = ({
       });
       console.log(data);
       if (data) {
+        setWasSubmitted(true);
         Twitch.ext.configuration.set("broadcaster", "2", data);
+      } else {
+        setWasSubmitted(false);
       }
     },
     [panelOrOverlay, overlayPlacement, customOverlayPlacementX, customOverlayPlacementY]
@@ -254,6 +272,17 @@ const _BroadcasterConfigPage = ({
           <div>
             <ButtonAsItem text="Send positions" onClick={handleSubmit} />
           </div>
+        </FormRow>
+      )}
+      {wasSubmitted && (
+        <FormRow>
+          <SuccessRow>
+            <img src="https://i.giphy.com/media/obN7DdnUWxuyqz5qZS/giphy.webp" height="100" />
+            <div>
+              <b>Everything is perfect</b>, though... future versions may affect the configuration and cause the
+              extension to not load. Check this configuration page if the extension stops working for you
+            </div>
+          </SuccessRow>
         </FormRow>
       )}
     </FormContainer>

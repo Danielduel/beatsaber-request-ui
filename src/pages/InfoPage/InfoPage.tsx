@@ -122,6 +122,11 @@ const InfoPageContent = () => (
               Question mark icon
             </LinkWrapper>
           </li>
+          <li>
+            <LinkWrapper href="https://i.giphy.com/media/obN7DdnUWxuyqz5qZS/giphy.webp">
+              Gif used on configuration page
+            </LinkWrapper>
+          </li>
         </ul>
       </div>
     </InfoRow>
