@@ -34,8 +34,10 @@ Table of contents:
 * 21 August 2021
   * (feature) Redesign and refactor config page
   * (docs) Update documentation
+* 1 September 2021
   * (fix) Redact config page
   * (feature) Tell the streamer that config is alright
+  * (docs) Update docs
 Special thanks:
 Thanks to ttv/acerolavr for helping me with my bad english.
 
@@ -209,18 +211,3 @@ Generally, this is an ejected react app.
 I've ejected that because I had to inject twitch scripts and do changes to allow
 testing it locally (and I think there were more problems, but I don't remember).
 (And building config/mobile/fullvideo... as separate apps from one codebase)
-
-I think you should start by a quick look on `/public/index-config.html`, `/public/index-fullvideo.html`, `/public/index-fullvideo/panel.html` and 
-`/public/index-mobile.html` to see that twitch script is interpreted before everything else.
-
-And then...
-
-See `/src` folder:
-`/src/App` is where things basically start.
-`/src/common/LayoutRow` is a common component for rendering rows.
-`/src/Header/Header` is header rendered at the top of the app.
-`/src/SearchPage/SearchPage` is searching "view".
-
-Note:
-I use `/src/SearchPage/mock` while developing to not hit API rate limits during
-HMR reloads and this is not a part of the final build.
