@@ -17,6 +17,7 @@
   --background-icon-notpressed: #a580b1;
   --background-input: #dddddd;
   --background-input-active: #c3dab7;
+  --background-close: #dfbfec;
 
   --header-icon-color: var(--background-primary);
 }

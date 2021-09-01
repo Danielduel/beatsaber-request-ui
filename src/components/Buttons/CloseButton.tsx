@@ -2,11 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 const CloseButtonContainer = styled.div`
-  background-color: white;
+  background-color: var(--background-close);
   line-height: 0;
   border-radius: 50%;
   cursor: pointer;
   margin-left: 10px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
 `;
 
 type CloseButtonProps = {

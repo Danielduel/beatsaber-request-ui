@@ -39,6 +39,7 @@ Table of contents:
   * (feature) Tell the streamer that config is alright
   * (docs) Update docs
   * (feature) Reposition inactive bubble and fix rotations
+  * (fix) Reposition close button and fix bubble ratios
 Special thanks:
 Thanks to ttv/acerolavr for helping me with my bad english.
 

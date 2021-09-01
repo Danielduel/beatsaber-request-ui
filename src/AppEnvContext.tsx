@@ -7,6 +7,8 @@ import { ChannelInfoResponse } from "./types/ChannelInfoResponse";
 import { RankedListResponse } from "./types/RankedListResponse";
 import { RawConfigResponse } from "./types/RawConfigResponse";
 
+const isLocal = location.host === "localhost:3000";
+
 const rankedObservable: Rx.Observable<RankedListResponse> = Rx.from(
   new Promise<RankedListResponse>((resolve, reject) =>
     // fetch("https://scoresaber.com/api.php?function=get-leaderboards&cat=1&limit=9999&ranked=1&page=1")
@@ -72,6 +74,9 @@ const channelInfoObservable = Rx.from(
 
 const configurationConfigObservable = Rx.from(
   new Promise((resolve) => {
+    if (isLocal) {
+      resolve("overlay|bottomRight");
+    }
     Twitch.ext.configuration.onChanged(() => {
       return resolve(Twitch.ext.configuration.broadcaster?.content);
     });
@@ -88,7 +93,7 @@ const defaultState = {
   framePanel: false,
   frameLive: false,
   rankedHashes: {} as RankedRecordMap,
-  contextGame: "",
+  contextGame: isLocal ? "Beat Saber" : "",
   configBroadcaster: null as ConfigBroadcaster | null
 };
 

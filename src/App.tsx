@@ -28,13 +28,21 @@ const AppWrapper = styled.div`
   position: relative;
 `;
 
+const AppUnexpandedWrapperWrapper = styled.div`
+  position: fixed;
+  padding: 15px;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+`;
+
 const AppUnexpandedWrapper = styled.div`
   background: #5f2c82;
 
   animation-name: initialBubbleAnimation;
   animation-duration: 10s;
 
-  position: fixed;
+  position: relative;
   width: 30px;
   height: 30px;
 
@@ -160,20 +168,22 @@ export function FullVideoApp({ configBroadcaster }: { configBroadcaster: ConfigB
   }
 
   return (
-    <AppUnexpandedWrapper
-      x={configBroadcaster.positionX}
-      y={configBroadcaster.positionY}
-      onClick={() => togglePanel(true)}
-    >
-      <AppUnexpandedTooltip
+    <AppUnexpandedWrapperWrapper>
+      <AppUnexpandedWrapper
         x={configBroadcaster.positionX}
         y={configBroadcaster.positionY}
+        onClick={() => togglePanel(true)}
       >
-        <Translation>{(t) => t("Click to open an extension")}</Translation>
-        <br />
-        <Translation>{(t) => t("this should make it easier to make requests")}</Translation>
-      </AppUnexpandedTooltip>
-    </AppUnexpandedWrapper>
+        <AppUnexpandedTooltip
+          x={configBroadcaster.positionX}
+          y={configBroadcaster.positionY}
+        >
+          <Translation>{(t) => t("Click to open an extension")}</Translation>
+          <br />
+          <Translation>{(t) => t("this should make it easier to make requests")}</Translation>
+        </AppUnexpandedTooltip>
+      </AppUnexpandedWrapper>
+    </AppUnexpandedWrapperWrapper>
   );
 }
 
