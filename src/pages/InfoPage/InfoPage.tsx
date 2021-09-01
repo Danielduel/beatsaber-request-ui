@@ -6,7 +6,6 @@ import { ReportIcon } from "./ReportIcon";
 import { VersionIcon } from "./VersionIcon";
 import { ResearchIcon } from "./ResearchIcon";
 import { TranslationIcon } from "./TranslationIcon";
-import AppEnvContext from "../../AppEnvContext";
 
 const InfoPageWrapper = styled.div`
   display: flex;
@@ -36,10 +35,7 @@ const LinkWrapper = styled.a`
   overflow: hidden;
 `;
 
-
 const InfoPageContent = () => {
-  const { frameMobile } = React.useContext(AppEnvContext);
-
   return (
     <InfoPageWrapper>
       <LanguageSelector />
@@ -56,7 +52,9 @@ const InfoPageContent = () => {
         <span>
           You can post issues or feature requests here:
           <br />
-          <LinkWrapper target="_blank" href="https://github.com/Duelsik/beatsaber-request-ui/issues">Link to GH issues</LinkWrapper>
+          <LinkWrapper target="_blank" href="https://github.com/Duelsik/beatsaber-request-ui/issues">
+            Link to GH issues
+          </LinkWrapper>
         </span>
       </InfoRow>
       <InfoRow>
@@ -66,7 +64,9 @@ const InfoPageContent = () => {
         <span>
           This extension is opensource!
           <br />
-          <LinkWrapper target="_blank" href="https://github.com/Duelsik/beatsaber-request-ui">Link to repository</LinkWrapper>
+          <LinkWrapper target="_blank" href="https://github.com/Duelsik/beatsaber-request-ui">
+            Link to repository
+          </LinkWrapper>
         </span>
       </InfoRow>
       <InfoRow>
@@ -85,45 +85,72 @@ const InfoPageContent = () => {
           <ul>
             Other projects:
             <li>
-              <LinkWrapper target="_blank" href="https://beatsaver.com/">BeatSaver (BS Map service)</LinkWrapper>
+              <LinkWrapper target="_blank" href="https://beatsaver.com/">
+                BeatSaver (BS Map service)
+              </LinkWrapper>
             </li>
             <li>
-              <LinkWrapper target="_blank" href="https://scoresaber.com/">ScoreSaber (BS Score service)</LinkWrapper>
+              <LinkWrapper target="_blank" href="https://scoresaber.com/">
+                ScoreSaber (BS Score service)
+              </LinkWrapper>
             </li>
             <li>
-              <LinkWrapper target="_blank" href="https://www.beatfollower.com/">BeatFollower (BS playlist manager and sm)</LinkWrapper>
+              <LinkWrapper target="_blank" href="https://www.beatfollower.com/">
+                BeatFollower (BS playlist manager and sm)
+              </LinkWrapper>
             </li>
             Graphics:
             <li>
-              <LinkWrapper target="_blank" href="https://www.flaticon.com/free-icon/github-logo_25231">Github logo icon</LinkWrapper>
+              <LinkWrapper target="_blank" href="https://www.flaticon.com/free-icon/github-logo_25231">
+                Github logo icon
+              </LinkWrapper>
             </li>
             <li>
-              <LinkWrapper target="_blank" href="https://icon-icons.com/icon/message-report/151198">Report icon</LinkWrapper>
+              <LinkWrapper target="_blank" href="https://icon-icons.com/icon/message-report/151198">
+                Report icon
+              </LinkWrapper>
             </li>
             <li>
-              <LinkWrapper target="_blank" href="https://www.iconfinder.com/icons/3209198/episode_event_front_statement_version_icon">
+              <LinkWrapper
+                target="_blank"
+                href="https://www.iconfinder.com/icons/3209198/episode_event_front_statement_version_icon"
+              >
                 Version icon
               </LinkWrapper>
             </li>
             <li>
-              <LinkWrapper target="_blank" href="https://www.flaticon.com/free-icon/translation_2793765">Translation icon</LinkWrapper>
+              <LinkWrapper target="_blank" href="https://www.flaticon.com/free-icon/translation_2793765">
+                Translation icon
+              </LinkWrapper>
             </li>
             <li>
-              <LinkWrapper target="_blank" href="https://www.flaticon.com/free-icon/research_2271541">This icon to the left</LinkWrapper>
+              <LinkWrapper target="_blank" href="https://www.flaticon.com/free-icon/research_2271541">
+                This icon to the left
+              </LinkWrapper>
             </li>
             <li>
-              <LinkWrapper target="_blank" href="https://www.flaticon.com/free-icon/copy_2911213">Copy icon</LinkWrapper>
+              <LinkWrapper target="_blank" href="https://www.flaticon.com/free-icon/copy_2911213">
+                Copy icon
+              </LinkWrapper>
             </li>
             <li>
-              <LinkWrapper target="_blank" href="https://loading.io/">Loading animation</LinkWrapper>
+              <LinkWrapper target="_blank" href="https://loading.io/">
+                Loading animation
+              </LinkWrapper>
             </li>
             <li>
-              <LinkWrapper target="_blank" href="https://www.kindpng.com/imgv/iixoxmh_black-exclamation-mark-png-transparent-png/">
+              <LinkWrapper
+                target="_blank"
+                href="https://www.kindpng.com/imgv/iixoxmh_black-exclamation-mark-png-transparent-png/"
+              >
                 Exclamation mark icon
               </LinkWrapper>
             </li>
             <li>
-              <LinkWrapper target="_blank" href="https://www.pngarea.com/view/e5f64df6_question-mark-png-question-mark-free-icon-png/">
+              <LinkWrapper
+                target="_blank"
+                href="https://www.pngarea.com/view/e5f64df6_question-mark-png-question-mark-free-icon-png/"
+              >
                 Question mark icon
               </LinkWrapper>
             </li>

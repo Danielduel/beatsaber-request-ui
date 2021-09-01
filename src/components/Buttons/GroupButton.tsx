@@ -31,7 +31,7 @@ type GroupButtonProps = {
   group: ButtonAsItemProps[];
 };
 
-const GroupButton = ({ group }: GroupButtonProps) => {
+const GroupButton = ({ group }: GroupButtonProps): JSX.Element => {
   return <GroupButtonContainer>{group.map(ButtonAsItem)}</GroupButtonContainer>;
 };
 

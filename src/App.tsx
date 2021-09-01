@@ -14,7 +14,15 @@ import "./i18n/init-i18n";
 import { ConfigBroadcaster } from "./AppEnvContext";
 import { BodyWithNavigation, BodyWithNavigationBody } from "./layouts/BodyWithNavigation";
 
-function conditionalCssDependingOnPosition(x: number, y: number, top: string, bottom: string, left: string, right: string, merge: (horizontal: string, vertical: string) => string) {
+function conditionalCssDependingOnPosition(
+  x: number,
+  y: number,
+  top: string,
+  bottom: string,
+  left: string,
+  right: string,
+  merge: (horizontal: string, vertical: string) => string
+) {
   const _horizontal = x > 50 ? right : left;
   const _vertical = y > 50 ? bottom : top;
   return merge(_horizontal, _vertical);
@@ -86,9 +94,17 @@ const AppUnexpandedTooltip = styled.div`
   animation-duration: 4s;
 
   ${({ x, y }: { x: number; y: number }) => {
-    return conditionalCssDependingOnPosition(x, y, "0", "-100%", "0", "-240px", (h, v) => `
+    return conditionalCssDependingOnPosition(
+      x,
+      y,
+      "0",
+      "-100%",
+      "0",
+      "-240px",
+      (h, v) => `
       transform: translate(${h}, ${v});
-    `);
+    `
+    );
   }}
 
   &:before {
@@ -98,9 +114,17 @@ const AppUnexpandedTooltip = styled.div`
     position: absolute;
     content: " ";
     ${({ x, y }: { x: number; y: number }) => {
-      return conditionalCssDependingOnPosition(x, y, "top: 0;", "bottom: 0;", "left: 0;", "right: 0;", (h, v) => `
+      return conditionalCssDependingOnPosition(
+        x,
+        y,
+        "top: 0;",
+        "bottom: 0;",
+        "left: 0;",
+        "right: 0;",
+        (h, v) => `
         ${h} ${v}
-      `);
+      `
+      );
     }}
   }
   &:after {
@@ -110,9 +134,17 @@ const AppUnexpandedTooltip = styled.div`
     position: absolute;
     content: " ";
     ${({ x, y }: { x: number; y: number }) => {
-      return conditionalCssDependingOnPosition(x, y, "top: 0;", "bottom: 0;", "left: 0;", "right: 0;", (h, v) => `
+      return conditionalCssDependingOnPosition(
+        x,
+        y,
+        "top: 0;",
+        "bottom: 0;",
+        "left: 0;",
+        "right: 0;",
+        (h, v) => `
         ${h} ${v}
-      `);
+      `
+      );
     }}
   }
 `;
@@ -174,10 +206,7 @@ export function FullVideoApp({ configBroadcaster }: { configBroadcaster: ConfigB
         y={configBroadcaster.positionY}
         onClick={() => togglePanel(true)}
       >
-        <AppUnexpandedTooltip
-          x={configBroadcaster.positionX}
-          y={configBroadcaster.positionY}
-        >
+        <AppUnexpandedTooltip x={configBroadcaster.positionX} y={configBroadcaster.positionY}>
           <Translation>{(t) => t("Click to open an extension")}</Translation>
           <br />
           <Translation>{(t) => t("this should make it easier to make requests")}</Translation>

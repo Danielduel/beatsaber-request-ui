@@ -53,11 +53,11 @@ const ButtonLink = styled.a`
 
 export type ButtonAsItemProps = {
   active?: boolean;
-  onClick: (e: any) => void;
+  onClick: (e: React.FormEvent | React.MouseEvent) => void;
   text: string;
   href?: string;
 };
-const ButtonAsItem = ({ active, onClick, text, href }: ButtonAsItemProps) => {
+const ButtonAsItem = ({ active, onClick, text, href }: ButtonAsItemProps): JSX.Element => {
   if (href) {
     return (
       <ButtonLink active={active} onClick={onClick} href={href} target="_blank">

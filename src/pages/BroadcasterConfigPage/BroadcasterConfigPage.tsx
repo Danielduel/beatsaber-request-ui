@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
 import AppEnvContext, { ConfigBroadcaster } from "../../AppEnvContext";
 import { GroupButton } from "../../components/Buttons/GroupButton";
-import { Button, ButtonAsItem } from "../../components/Buttons/Button";
+import { ButtonAsItem } from "../../components/Buttons/Button";
 
 type TwitchConfigInputRowProps = {
   name: string;
@@ -117,6 +117,7 @@ const _BroadcasterConfigPage = ({
 }: {
   configBroadcaster: ConfigBroadcaster | null;
 }): JSX.Element => {
+  configBroadcaster;
   const [wasSubmitted, setWasSubmitted] = React.useState(false);
   const [panelOrOverlay, setPanelOrOverlay] = React.useState<SerializationData["panelOrOverlay"]>(null);
   const [overlayPlacement, setOverlayPlacement] = React.useState<SerializationData["overlayPlacement"]>(null);
