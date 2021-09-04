@@ -27,6 +27,10 @@ Table of contents:
 
 0. Changelog
 
+0.0.9:
+* 4 September 2021
+  * (tech) Clean info page boilerplate
+
 0.0.8:
 * 13 August 2021
   * (docs) Bump up version
