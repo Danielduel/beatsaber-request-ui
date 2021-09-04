@@ -7,7 +7,7 @@ import { ReportIcon } from "./ReportIcon";
 import { VersionIcon } from "./VersionIcon";
 import { ResearchIcon } from "./ResearchIcon";
 import { TranslationIcon } from "./TranslationIcon";
-import { wrapWithLi } from "../../common/utils/wrapWithLi";
+import { wrapWithLi } from "../../common/utils/wrapWith";
 import { decapitateMapTail } from "../../common/utils/decapitate";
 
 const InfoPageWrapper = styled.div`
