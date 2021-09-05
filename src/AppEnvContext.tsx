@@ -1,13 +1,11 @@
 import React, { PropsWithChildren } from "react";
 import * as Rx from "rxjs";
-import { wrapTwitchApiEndoint, UNRANKED } from "./constants";
+import { wrapTwitchApiEndoint, UNRANKED, isLocalhost } from "./constants";
 // import { mockAppEnvContext } from "./mockAppEnvContext";
 import { AuthResponse } from "./types/AuthResponse.d";
 import { ChannelInfoResponse } from "./types/ChannelInfoResponse";
 import { RankedListResponse } from "./types/RankedListResponse";
 import { RawConfigResponse } from "./types/RawConfigResponse";
-
-const isLocal = location.host === "localhost:3000";
 
 const rankedObservable: Rx.Observable<RankedListResponse> = Rx.from(
   new Promise<RankedListResponse>((resolve, reject) =>
@@ -74,7 +72,7 @@ const channelInfoObservable = Rx.from(
 
 const configurationConfigObservable = Rx.from(
   new Promise((resolve) => {
-    if (isLocal) {
+    if (isLocalhost) {
       resolve("overlay|topLeft");
     }
     Twitch.ext.configuration.onChanged(() => {
@@ -93,7 +91,7 @@ const defaultState = {
   framePanel: false,
   frameLive: false,
   rankedHashes: {} as RankedRecordMap,
-  contextGame: isLocal ? "Beat Saber" : "",
+  contextGame: isLocalhost ? "Beat Saber" : "",
   configBroadcaster: null as ConfigBroadcaster | null
 };
 

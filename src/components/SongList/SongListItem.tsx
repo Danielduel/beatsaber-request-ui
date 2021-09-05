@@ -145,11 +145,12 @@ const SongListItem = ({
             <GroupButton
               group={[
                 {
+                  kind: "button",
                   onClick: () => setAskForBeatsaverNavigation(false),
                   text: "Close"
                 },
                 {
-                  onClick: () => {},
+                  kind: "link",
                   text: "Go!",
                   href: `https://beatsaver.com/maps/${bsrKey}`
                 }

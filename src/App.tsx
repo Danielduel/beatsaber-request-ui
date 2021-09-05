@@ -1,5 +1,4 @@
 import React, { useCallback } from "react";
-import { Translation } from "react-i18next";
 import styled from "styled-components";
 import { MemoryRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -11,7 +10,6 @@ import InfoPage from "./pages/InfoPage/InfoPage";
 import BeatfollowerPage from "./pages/BeatfollowerPage/BeatfollowerPage";
 
 import "./i18n/init-i18n";
-import { ConfigBroadcaster } from "./AppEnvContext";
 import { BodyWithNavigation, BodyWithNavigationBody } from "./layouts/BodyWithNavigation";
 import { UnexpandedApp } from "./components/UnexpandedApp/UnexpandedApp";
 
@@ -60,7 +58,7 @@ const MainApp = ({ togglePanel }: MainAppProps): JSX.Element => {
   );
 };
 
-export function FullVideoApp({ configBroadcaster }: { configBroadcaster: ConfigBroadcaster }): JSX.Element {
+export function FullVideoApp(): JSX.Element {
   const [isExpanded, setExpanded] = React.useState(false);
   const togglePanel = useCallback(
     (state: boolean) => {

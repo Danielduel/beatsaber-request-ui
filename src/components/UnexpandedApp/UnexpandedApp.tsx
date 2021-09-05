@@ -134,7 +134,7 @@ type UnexpandedAppProps = {
   togglePanel: (state: boolean) => void;
 };
 
-const UnexpandedApp = ({ togglePanel }: UnexpandedAppProps) => {
+const UnexpandedApp = ({ togglePanel }: UnexpandedAppProps): JSX.Element | null => {
   const { configBroadcaster } = React.useContext(AppEnvContext);
 
   if (!configBroadcaster) {

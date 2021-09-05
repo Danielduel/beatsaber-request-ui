@@ -31,6 +31,8 @@ Table of contents:
 * 4 September 2021
   * (tech) Clean info page boilerplate
   * (tech) Exclude UnexpandedApp as separate component and generalize wrapWith
+* 5 September 2021
+  * (tech) Refine typings
 
 0.0.8:
 * 13 August 2021

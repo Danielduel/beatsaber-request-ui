@@ -1,13 +1,21 @@
 import React from "react";
+import { placeholderDispatch } from "../../common/utils/placeholderDispatch";
 
-const defaultContextState = {
-  copied: false,
-  setCopied: (_: boolean) => void 0,
-  askForBeatsaverNavigation: false,
-  setAskForBeatsaverNavigation: (_: boolean) => void 0
+type DefaultContextStateType = {
+  copied: boolean;
+  setCopied: React.Dispatch<React.SetStateAction<boolean>>;
+  askForBeatsaverNavigation: boolean;
+  setAskForBeatsaverNavigation: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-let lastResetingActionSetState = (_: boolean) => {};
+const defaultContextState: DefaultContextStateType = {
+  copied: false,
+  setCopied: placeholderDispatch,
+  askForBeatsaverNavigation: false,
+  setAskForBeatsaverNavigation: placeholderDispatch
+};
+
+let lastResetingActionSetState: React.Dispatch<React.SetStateAction<boolean>> = placeholderDispatch;
 
 function useResettingState(initialState: boolean) {
   const [state, _setState] = React.useState(initialState);
@@ -24,7 +32,7 @@ function useResettingState(initialState: boolean) {
   return [state, setState] as const;
 }
 
-function useSongListItemContextState() {
+function useSongListItemContextState(): typeof defaultContextState {
   const [copied, setCopied] = useResettingState(false);
   const [askForBeatsaverNavigation, setAskForBeatsaverNavigation] = useResettingState(false);
 

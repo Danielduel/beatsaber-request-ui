@@ -1,6 +1,8 @@
 import { head, tail } from "ramda";
 
-const decapitate = <T>(items: T[]) => {
+type DecapitateReturnType = [ReturnType<typeof head>, ReturnType<typeof tail>];
+
+const decapitate = <T>(items: T[]): DecapitateReturnType => {
   const first = head(items);
   const rest = tail(items);
   return [first, rest];
@@ -8,7 +10,7 @@ const decapitate = <T>(items: T[]) => {
 
 const decapitateMapTail =
   <T, U>(fn: (item: T, index: number) => U) =>
-  (items: T[]) => {
+  (items: T[]): DecapitateReturnType => {
     const first = head(items);
     const rest = tail(items);
     return [first, rest.map(fn)];

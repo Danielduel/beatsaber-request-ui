@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { FullVideoApp } from "./App";
 import * as serviceWorker from "./serviceWorker";
-import AppEnvContext, { ConfigBroadcaster, createWrappedProvider } from "./AppEnvContext";
+import AppEnvContext, { createWrappedProvider } from "./AppEnvContext";
 
 const WrappedProvider = createWrappedProvider({
   frameFullvideo: true
@@ -13,12 +13,8 @@ ReactDOM.render(
     <WrappedProvider>
       <AppEnvContext.Consumer>
         {(context) => {
-          console.log(`[BSR UI] Detected game ${context.contextGame}`);
-          console.log(`[BSR UI] Got config ${JSON.stringify(context.configBroadcaster)}`);
           const shouldRender = context.contextGame === "Beat Saber" && context.configBroadcaster;
-          return shouldRender ? (
-            <FullVideoApp configBroadcaster={context.configBroadcaster as ConfigBroadcaster} />
-          ) : null;
+          return shouldRender ? <FullVideoApp /> : null;
         }}
       </AppEnvContext.Consumer>
     </WrappedProvider>

@@ -174,11 +174,13 @@ const _BroadcasterConfigPage = ({
         <GroupButton
           group={[
             {
+              kind: "button",
               active: panelOrOverlay === "panel",
               onClick: () => setPanelOrOverlay("panel"),
               text: "Panel"
             },
             {
+              kind: "button",
               active: panelOrOverlay === "overlay",
               onClick: () => setPanelOrOverlay("overlay"),
               text: "Overlay"
@@ -207,26 +209,31 @@ const _BroadcasterConfigPage = ({
           <GroupButton
             group={[
               {
+                kind: "button",
                 active: overlayPlacement === "topLeft",
                 onClick: () => setOverlayPlacement("topLeft"),
                 text: "↖ Top left"
               },
               {
+                kind: "button",
                 active: overlayPlacement === "topRight",
                 onClick: () => setOverlayPlacement("topRight"),
                 text: "↗ Top right"
               },
               {
+                kind: "button",
                 active: overlayPlacement === "bottomLeft",
                 onClick: () => setOverlayPlacement("bottomLeft"),
                 text: "↙ Bottom left"
               },
               {
+                kind: "button",
                 active: overlayPlacement === "bottomRight",
                 onClick: () => setOverlayPlacement("bottomRight"),
                 text: "↘ Bottom right"
               },
               {
+                kind: "button",
                 active: overlayPlacement === "custom",
                 onClick: () => setOverlayPlacement("custom"),
                 text: "🖉 Custom"
@@ -271,7 +278,7 @@ const _BroadcasterConfigPage = ({
             />
           </div>
           <div>
-            <ButtonAsItem text="Send positions" onClick={handleSubmit} />
+            <ButtonAsItem kind="button" text="Send positions" onClick={handleSubmit} />
           </div>
         </FormRow>
       )}
