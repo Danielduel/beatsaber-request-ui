@@ -5,14 +5,13 @@ import React from "react";
 import "../../App.css";
 import styled from "styled-components";
 import { LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
-import AppEnvContext, { ConfigBroadcaster } from "../../AppEnvContext";
 import { GroupButton } from "../../components/Buttons/GroupButton";
 import { ButtonAsItem } from "../../components/Buttons/Button";
 
 type TwitchConfigInputRowProps = {
   name: string;
   type: React.InputHTMLAttributes<HTMLInputElement>["type"];
-  default: any;
+  default?: string;
   value: string | number | null;
   setValue: React.Dispatch<React.SetStateAction<number | null>>;
 };
@@ -112,12 +111,7 @@ function serializeData({
   return;
 }
 
-const _BroadcasterConfigPage = ({
-  configBroadcaster
-}: {
-  configBroadcaster: ConfigBroadcaster | null;
-}): JSX.Element => {
-  configBroadcaster;
+const _BroadcasterConfigPage = (): JSX.Element => {
   const [wasSubmitted, setWasSubmitted] = React.useState(false);
   const [panelOrOverlay, setPanelOrOverlay] = React.useState<SerializationData["panelOrOverlay"]>(null);
   const [overlayPlacement, setOverlayPlacement] = React.useState<SerializationData["overlayPlacement"]>(null);
@@ -298,9 +292,5 @@ const _BroadcasterConfigPage = ({
 };
 
 export default function BroadcasterConfigPage(): JSX.Element {
-  return (
-    <AppEnvContext.Consumer>
-      {(context) => <_BroadcasterConfigPage configBroadcaster={context.configBroadcaster} />}
-    </AppEnvContext.Consumer>
-  );
+  return <_BroadcasterConfigPage />;
 }

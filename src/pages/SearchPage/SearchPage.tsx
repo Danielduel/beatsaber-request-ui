@@ -7,7 +7,7 @@ import { LayoutRowPlaceholderTransparent } from "../../components/LayoutRow/Layo
 import SearchInput from "./SearchInput";
 import SearchList from "./SearchList";
 import { Translation } from "react-i18next";
-import { usePaginatedData } from "../../components/SongList/usePaginatedData";
+import { usePaginatedData } from "../../common/hooks/usePaginatedData";
 
 export type SongListDocsItemMetadataCharacteristicsDifficultiesEntry = {
   duration: number;

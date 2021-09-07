@@ -33,6 +33,8 @@ Table of contents:
   * (tech) Exclude UnexpandedApp as separate component and generalize wrapWith
 * 5 September 2021
   * (tech) Refine typings
+* 7 September 2021
+  * (tech) Rewrite app start and replace rxjs with mostjs
 
 0.0.8:
 * 13 August 2021

@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-// @ts-ignore-next-line
 import loadingGif from "./static/loading.gif";
 import baseImg from "./static/base.png";
 import notfoundImg from "./static/notfound.png";

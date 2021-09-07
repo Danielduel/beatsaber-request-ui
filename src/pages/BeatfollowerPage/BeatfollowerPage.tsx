@@ -1,11 +1,12 @@
 import React from "react";
 import { SongListContainer } from "../../components/SongList/SongListContainer";
-import AppEnvContext, { RankedRecordMap } from "../../AppEnvContext";
+import AppEnvContext from "../../AppEnvContext";
 import { SongListItem } from "../../components/SongList/SongListItem";
 import { isCreatedByAutomapper } from "../../utils";
 import { LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
 import styled from "styled-components";
-import { usePaginatedData } from "../../components/SongList/usePaginatedData";
+import { RankedRecordMap } from "../../integrations/scoresaber/scoreSaberImportRankedMapsData";
+import { usePaginatedData } from "../../common/hooks/usePaginatedData";
 
 const BeatfollowerPageContainer = styled.div`
   height: 100%;

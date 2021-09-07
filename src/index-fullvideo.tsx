@@ -13,7 +13,7 @@ ReactDOM.render(
     <WrappedProvider>
       <AppEnvContext.Consumer>
         {(context) => {
-          const shouldRender = context.contextGame === "Beat Saber" && context.configBroadcaster;
+          const shouldRender = context.contextGame === "Beat Saber" && context.configuration?.broadcaster.panelPosition;
           return shouldRender ? <FullVideoApp /> : null;
         }}
       </AppEnvContext.Consumer>

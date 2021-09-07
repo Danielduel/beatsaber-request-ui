@@ -135,20 +135,18 @@ type UnexpandedAppProps = {
 };
 
 const UnexpandedApp = ({ togglePanel }: UnexpandedAppProps): JSX.Element | null => {
-  const { configBroadcaster } = React.useContext(AppEnvContext);
+  const { configuration } = React.useContext(AppEnvContext);
 
-  if (!configBroadcaster) {
+  if (!configuration) {
     return null;
   }
 
+  const panelPosition = configuration.broadcaster.panelPosition;
+
   return (
     <AppUnexpandedWrapperWrapper>
-      <AppUnexpandedWrapper
-        x={configBroadcaster.positionX}
-        y={configBroadcaster.positionY}
-        onClick={() => togglePanel(true)}
-      >
-        <AppUnexpandedTooltip x={configBroadcaster.positionX} y={configBroadcaster.positionY}>
+      <AppUnexpandedWrapper x={panelPosition.positionX} y={panelPosition.positionY} onClick={() => togglePanel(true)}>
+        <AppUnexpandedTooltip x={panelPosition.positionX} y={panelPosition.positionY}>
           <Translation>{(t) => t("Click to open an extension")}</Translation>
           <br />
           <Translation>{(t) => t("this should make it easier to make requests")}</Translation>
