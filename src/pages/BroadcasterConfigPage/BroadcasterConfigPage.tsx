@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
 import { GroupButton } from "../../components/Buttons/GroupButton";
 import { ButtonAsItem } from "../../components/Buttons/Button";
+import { ColorSchemeCreator } from "./ColorSchemeCreator";
 
 type TwitchConfigInputRowProps = {
   name: string;
@@ -28,6 +29,7 @@ const FormRow = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 10px;
+
   & > *:last-child {
     margin-left: 50px;
   }
@@ -42,6 +44,7 @@ const SuccessRow = styled.div`
   & > img {
     margin-right: 20px;
   }
+
   & > div {
     width: 300px;
   }
@@ -287,6 +290,10 @@ const _BroadcasterConfigPage = (): JSX.Element => {
           </SuccessRow>
         </FormRow>
       )}
+      <FormRow>
+        <QuestionRow>Define your own color scheme</QuestionRow>
+        <ColorSchemeCreator></ColorSchemeCreator>
+      </FormRow>
     </FormContainer>
   );
 };
