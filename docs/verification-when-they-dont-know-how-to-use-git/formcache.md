@@ -1,7 +1,7 @@
 Change hardcoded version of the extension in scripts/ziptherepo.sh
 
 Command:
-yarn ziprepo 
+yarn ziprepo
 
 Extension name:
 Beatsaber Request UI
