@@ -12,10 +12,13 @@ import BeatfollowerPage from "./pages/BeatfollowerPage/BeatfollowerPage";
 import "./i18n/init-i18n";
 import { BodyWithNavigation, BodyWithNavigationBody } from "./layouts/BodyWithNavigation";
 import { UnexpandedApp } from "./components/UnexpandedApp/UnexpandedApp";
+import AppEnvContext from "./AppEnvContext";
+import { Footer } from "./components/Footer/Footer";
 
 const AppWrapper = styled.div`
   transition: margin-left 1s;
   height: 100vh;
+  max-height: 100vh;
   width: min(100vw, 500px);
   overflow-x: hidden;
   position: relative;
@@ -46,12 +49,17 @@ const Routing = () => (
 );
 
 const MainApp = ({ togglePanel }: MainAppProps): JSX.Element => {
+  const { configuration } = React.useContext(AppEnvContext);
+  const scoreSaberConfig = configuration?.broadcaster.scoreSaber || null;
+  const shouldRenderFooter = !!scoreSaberConfig;
+
   return (
     <Router>
       <AppWrapper>
-        <BodyWithNavigation>
+        <BodyWithNavigation shouldRenderFooter={shouldRenderFooter}>
           <Navigation togglePanel={togglePanel} />
           <Routing />
+          <Footer shouldRenderFooter={shouldRenderFooter} />
         </BodyWithNavigation>
       </AppWrapper>
     </Router>

@@ -35,6 +35,8 @@ Table of contents:
   * (tech) Refine typings
 * 7 September 2021
   * (tech) Rewrite app start and replace rxjs with mostjs
+* 13 October 2021
+  * (feature) Add footer and ScoreSaber bar
 
 0.0.8:
 * 13 August 2021

@@ -1,6 +1,7 @@
 :root {
   --navigation-height: 52px;
-  --body-height: calc(100vh - var(--navigation-height));
+  --footer-height: 100px;
+  /* --body-height: calc(100% - var(--navigation-height)); */
 
   --text: #333333;
   --text-secondary: #555555;
