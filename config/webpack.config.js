@@ -419,6 +419,7 @@ module.exports = function (webpackEnv) {
                 ),
 
                 plugins: [
+                  "@babel/plugin-proposal-numeric-separator",
                   [
                     require.resolve('babel-plugin-named-asset-import'),
                     {
@@ -450,6 +451,9 @@ module.exports = function (webpackEnv) {
                 babelrc: false,
                 configFile: false,
                 compact: false,
+                plugins: [
+                  "@babel/plugin-proposal-numeric-separator",
+                ],
                 presets: [
                   [
                     require.resolve('babel-preset-react-app/dependencies'),

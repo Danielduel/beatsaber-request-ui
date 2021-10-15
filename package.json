@@ -27,6 +27,7 @@
     "babel-preset-react-app": "^9.1.2",
     "camelcase": "^5.3.1",
     "case-sensitive-paths-webpack-plugin": "2.3.0",
+    "color": "^4.0.1",
     "css-loader": "3.4.2",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
@@ -168,6 +169,8 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-numeric-separator": "^7.14.5",
+    "@types/color": "^3.0.2",
     "@types/ramda": "types/npm-ramda#dist",
     "@types/twitch-ext": "^1.24.2",
     "eslint-config-prettier": "^8.1.0",
