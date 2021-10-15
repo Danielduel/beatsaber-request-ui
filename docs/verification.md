@@ -37,6 +37,7 @@ Table of contents:
   * (tech) Rewrite app start and replace rxjs with mostjs
 * 13 October 2021
   * (feature) Add footer and ScoreSaber bar
+  * (feature) Add ColorPicker to config page [@cutler7]
 
 0.0.8:
 * 13 August 2021

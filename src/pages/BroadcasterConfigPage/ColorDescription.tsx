@@ -1,17 +1,24 @@
 import styled from "styled-components";
 import React from "react";
 
-const ColorSample = styled.div.attrs((props) => ({
-  style: {
-    background: props.color
-  }
-}))`
-  width: 2rem;
-  height: 1rem;
+type ColorSampleProps = {
+  color: string;
+};
+
+const ColorSample = styled.div`
+  width: 2em;
+  height: 1em;
+  border: 1px solid black;
+  background: ${({ color }: ColorSampleProps) => color};
 `;
 
 const ColorDescriptionContainer = styled.div`
   display: flex;
+  margin: 1em;
+`;
+
+const ColorDescriptionLabel = styled.div`
+  width: 10em;
 `;
 
 type ColorDescriptionProps = {
@@ -19,11 +26,11 @@ type ColorDescriptionProps = {
   color: string;
 };
 
-export const ColorDescription = (props: ColorDescriptionProps): JSX.Element => {
+export const ColorDescription = ({ color, description }: ColorDescriptionProps): JSX.Element => {
   return (
     <ColorDescriptionContainer>
-      <div>{props.description}</div>
-      <ColorSample color={props.color} />
+      <ColorDescriptionLabel>{description}</ColorDescriptionLabel>
+      <ColorSample color={color} />
     </ColorDescriptionContainer>
   );
 };

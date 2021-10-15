@@ -7,7 +7,8 @@ import styled from "styled-components";
 import { LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
 import { GroupButton } from "../../components/Buttons/GroupButton";
 import { ButtonAsItem } from "../../components/Buttons/Button";
-import { ColorSchemeCreator } from "./ColorSchemeCreator";
+import { ColorSchemeAutoCreator } from "./ColorSchemeAutoCreator";
+import { ColorSchemeManualCreator } from "./ColorSchemeManualCreator";
 
 type TwitchConfigInputRowProps = {
   name: string;
@@ -80,6 +81,7 @@ const TwitchConfigInputRow = ({ name, type, value, setValue }: TwitchConfigInput
 
 // console.log(Twitch.ext.configuration.set("broadcaster", "1", "somethingelse"));
 type SerializationData = {
+  colorScheme: null | "auto" | "manual";
   panelOrOverlay: null | "panel" | "overlay";
   overlayPlacement: null | "topLeft" | "bottomLeft" | "topRight" | "bottomRight" | "custom";
   customOverlayPlacementX: null | number;
@@ -118,6 +120,7 @@ const _BroadcasterConfigPage = (): JSX.Element => {
   const [wasSubmitted, setWasSubmitted] = React.useState(false);
   const [panelOrOverlay, setPanelOrOverlay] = React.useState<SerializationData["panelOrOverlay"]>(null);
   const [overlayPlacement, setOverlayPlacement] = React.useState<SerializationData["overlayPlacement"]>(null);
+  const [colorScheme, setColorScheme] = React.useState<SerializationData["colorScheme"]>(null);
   const [customOverlayPlacementX, setCustomOverlayPlacementX] =
     React.useState<SerializationData["customOverlayPlacementX"]>(null);
   const [customOverlayPlacementY, setCustomOverlayPlacementY] =
@@ -126,6 +129,7 @@ const _BroadcasterConfigPage = (): JSX.Element => {
     (e: React.FormEvent | React.MouseEvent) => {
       e.preventDefault();
       const data = serializeData({
+        colorScheme,
         panelOrOverlay,
         overlayPlacement,
         customOverlayPlacementX,
@@ -292,7 +296,27 @@ const _BroadcasterConfigPage = (): JSX.Element => {
       )}
       <FormRow>
         <QuestionRow>Define your own color scheme</QuestionRow>
-        <ColorSchemeCreator></ColorSchemeCreator>
+        <ExplainationRow>
+          You can generate your color scheme basing on leading color or create scheme manually.
+        </ExplainationRow>
+        <GroupButton
+          group={[
+            {
+              kind: "button",
+              active: colorScheme === "auto",
+              onClick: () => setColorScheme("auto"),
+              text: "Auto"
+            },
+            {
+              kind: "button",
+              active: colorScheme === "manual",
+              onClick: () => setColorScheme("manual"),
+              text: "Manual"
+            }
+          ]}
+        />
+        {colorScheme === "auto" && <ColorSchemeAutoCreator></ColorSchemeAutoCreator>}
+        {colorScheme === "manual" && <ColorSchemeManualCreator></ColorSchemeManualCreator>}
       </FormRow>
     </FormContainer>
   );
