@@ -1,7 +1,7 @@
 import { SongListType } from "./pages/SearchPage/SearchPage";
 
 export function fetchSongs(query = "", automapper = "0"): Promise<SongListType> {
-  const url = `https://beatsaver.com/api/search/text/0?q=${query}&automapper=${automapper}`;
+  const url = `https://api.beatsaver.com/search/text/0?q=${query}&automapper=${automapper}`;
 
   return fetch(url)
     .then(function (response) {
