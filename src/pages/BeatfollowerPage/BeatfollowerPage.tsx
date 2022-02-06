@@ -64,7 +64,7 @@ const Item = (rankedHashes: RankedRecordMap) => {
   const _Item = (_data: BeatfollowerTopPlayedResponseItem) => {
     const data = _data.song;
 
-    const coverURL = `https://beatsaver.com${data.coverUrl}`;
+    const coverURL = `https://cdn.beatmaps.io/${data.hash.toLowerCase()}.jpg`;
     const shouldBeHidden = isCreatedByAutomapper(data.songName, data.songAuthorName, data.levelAuthorName);
 
     if (shouldBeHidden) return <></>;
