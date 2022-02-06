@@ -20,12 +20,13 @@ https://beatsaver.com,https://beatfollower.com,https://github.com,https://flatic
 Image targets:
 
 * https://cdn.beatmaps.io/
+* https://cdn.beatsaver.com/
 * https://eu.cdn.beatsaver.com/
 * https://na.cdn.beatsaver.com/
 * https://as.cdn.beatsaver.com/
 * https://i.giphy.com
 
-https://cdn.beatmaps.io/,https://eu.cdn.beatsaver.com/,https://na.cdn.beatsaver.com/,https://as.cdn.beatsaver.com/,https://i.giphy.com
+https://cdn.beatmaps.io/,https://cdn.beatsaver.com/,https://eu.cdn.beatsaver.com/,https://na.cdn.beatsaver.com/,https://as.cdn.beatsaver.com/,https://i.giphy.com
 
 Media targets:
 
