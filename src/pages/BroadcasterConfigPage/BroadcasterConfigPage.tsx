@@ -5,14 +5,15 @@ import React from "react";
 import "../../App.css";
 import styled from "styled-components";
 import { LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
-import AppEnvContext, { ConfigBroadcaster } from "../../AppEnvContext";
 import { GroupButton } from "../../components/Buttons/GroupButton";
 import { ButtonAsItem } from "../../components/Buttons/Button";
+import { ColorSchemeAutoCreator } from "./ColorSchemeAutoCreator";
+import { ColorSchemeManualCreator } from "./ColorSchemeManualCreator";
 
 type TwitchConfigInputRowProps = {
   name: string;
   type: React.InputHTMLAttributes<HTMLInputElement>["type"];
-  default: any;
+  default?: string;
   value: string | number | null;
   setValue: React.Dispatch<React.SetStateAction<number | null>>;
 };
@@ -29,6 +30,7 @@ const FormRow = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 10px;
+
   & > *:last-child {
     margin-left: 50px;
   }
@@ -43,6 +45,7 @@ const SuccessRow = styled.div`
   & > img {
     margin-right: 20px;
   }
+
   & > div {
     width: 300px;
   }
@@ -78,6 +81,7 @@ const TwitchConfigInputRow = ({ name, type, value, setValue }: TwitchConfigInput
 
 // console.log(Twitch.ext.configuration.set("broadcaster", "1", "somethingelse"));
 type SerializationData = {
+  colorScheme: null | "auto" | "manual";
   panelOrOverlay: null | "panel" | "overlay";
   overlayPlacement: null | "topLeft" | "bottomLeft" | "topRight" | "bottomRight" | "custom";
   customOverlayPlacementX: null | number;
@@ -112,15 +116,11 @@ function serializeData({
   return;
 }
 
-const _BroadcasterConfigPage = ({
-  configBroadcaster
-}: {
-  configBroadcaster: ConfigBroadcaster | null;
-}): JSX.Element => {
-  configBroadcaster;
+const _BroadcasterConfigPage = (): JSX.Element => {
   const [wasSubmitted, setWasSubmitted] = React.useState(false);
   const [panelOrOverlay, setPanelOrOverlay] = React.useState<SerializationData["panelOrOverlay"]>(null);
   const [overlayPlacement, setOverlayPlacement] = React.useState<SerializationData["overlayPlacement"]>(null);
+  const [colorScheme, setColorScheme] = React.useState<SerializationData["colorScheme"]>(null);
   const [customOverlayPlacementX, setCustomOverlayPlacementX] =
     React.useState<SerializationData["customOverlayPlacementX"]>(null);
   const [customOverlayPlacementY, setCustomOverlayPlacementY] =
@@ -129,6 +129,7 @@ const _BroadcasterConfigPage = ({
     (e: React.FormEvent | React.MouseEvent) => {
       e.preventDefault();
       const data = serializeData({
+        colorScheme,
         panelOrOverlay,
         overlayPlacement,
         customOverlayPlacementX,
@@ -174,11 +175,13 @@ const _BroadcasterConfigPage = ({
         <GroupButton
           group={[
             {
+              kind: "button",
               active: panelOrOverlay === "panel",
               onClick: () => setPanelOrOverlay("panel"),
               text: "Panel"
             },
             {
+              kind: "button",
               active: panelOrOverlay === "overlay",
               onClick: () => setPanelOrOverlay("overlay"),
               text: "Overlay"
@@ -207,26 +210,31 @@ const _BroadcasterConfigPage = ({
           <GroupButton
             group={[
               {
+                kind: "button",
                 active: overlayPlacement === "topLeft",
                 onClick: () => setOverlayPlacement("topLeft"),
                 text: "↖ Top left"
               },
               {
+                kind: "button",
                 active: overlayPlacement === "topRight",
                 onClick: () => setOverlayPlacement("topRight"),
                 text: "↗ Top right"
               },
               {
+                kind: "button",
                 active: overlayPlacement === "bottomLeft",
                 onClick: () => setOverlayPlacement("bottomLeft"),
                 text: "↙ Bottom left"
               },
               {
+                kind: "button",
                 active: overlayPlacement === "bottomRight",
                 onClick: () => setOverlayPlacement("bottomRight"),
                 text: "↘ Bottom right"
               },
               {
+                kind: "button",
                 active: overlayPlacement === "custom",
                 onClick: () => setOverlayPlacement("custom"),
                 text: "🖉 Custom"
@@ -271,7 +279,7 @@ const _BroadcasterConfigPage = ({
             />
           </div>
           <div>
-            <ButtonAsItem text="Send positions" onClick={handleSubmit} />
+            <ButtonAsItem kind="button" text="Send positions" onClick={handleSubmit} />
           </div>
         </FormRow>
       )}
@@ -286,14 +294,34 @@ const _BroadcasterConfigPage = ({
           </SuccessRow>
         </FormRow>
       )}
+      <FormRow>
+        <QuestionRow>Define your own color scheme</QuestionRow>
+        <ExplainationRow>
+          You can generate your color scheme basing on leading color or create scheme manually.
+        </ExplainationRow>
+        <GroupButton
+          group={[
+            {
+              kind: "button",
+              active: colorScheme === "auto",
+              onClick: () => setColorScheme("auto"),
+              text: "Auto"
+            },
+            {
+              kind: "button",
+              active: colorScheme === "manual",
+              onClick: () => setColorScheme("manual"),
+              text: "Manual"
+            }
+          ]}
+        />
+        {colorScheme === "auto" && <ColorSchemeAutoCreator></ColorSchemeAutoCreator>}
+        {colorScheme === "manual" && <ColorSchemeManualCreator></ColorSchemeManualCreator>}
+      </FormRow>
     </FormContainer>
   );
 };
 
 export default function BroadcasterConfigPage(): JSX.Element {
-  return (
-    <AppEnvContext.Consumer>
-      {(context) => <_BroadcasterConfigPage configBroadcaster={context.configBroadcaster} />}
-    </AppEnvContext.Consumer>
-  );
+  return <_BroadcasterConfigPage />;
 }

@@ -51,25 +51,41 @@ const ButtonLink = styled.a`
   ${styles}
 `;
 
-export type ButtonAsItemProps = {
+export type ButtonAsItemPropsLink = {
+  kind: "link";
   active?: boolean;
-  onClick: (e: React.FormEvent | React.MouseEvent) => void;
   text: string;
-  href?: string;
+  href: string;
 };
-const ButtonAsItem = ({ active, onClick, text, href }: ButtonAsItemProps): JSX.Element => {
-  if (href) {
-    return (
-      <ButtonLink active={active} onClick={onClick} href={href} target="_blank">
-        {text}
-      </ButtonLink>
-    );
+export type ButtonAsItemPropsButton = {
+  kind: "button";
+  active?: boolean;
+  text: string;
+  onClick: (e: React.FormEvent | React.MouseEvent) => void;
+};
+
+export type ButtonAsItemProps = ButtonAsItemPropsLink | ButtonAsItemPropsButton;
+
+const ButtonAsItem = (buttonAsItemProps: ButtonAsItemProps): JSX.Element => {
+  const { active, text } = buttonAsItemProps;
+  switch (buttonAsItemProps.kind) {
+    case "button":
+      const { onClick } = buttonAsItemProps;
+      return (
+        <Button active={active} onClick={onClick}>
+          {text}
+        </Button>
+      );
+    case "link":
+      const { href } = buttonAsItemProps;
+      return (
+        <ButtonLink active={active} href={href} target="_blank">
+          {text}
+        </ButtonLink>
+      );
+    default:
+      return <></>;
   }
-  return (
-    <Button active={active} onClick={onClick}>
-      {text}
-    </Button>
-  );
 };
 
 export { Button, ButtonLink, ButtonAsItem };

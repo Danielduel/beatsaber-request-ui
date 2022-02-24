@@ -32,7 +32,7 @@ const stringTLC = (s: string) => s.toLocaleLowerCase().trim();
 const autoMappers = ["Beat Sage", "Deep Saber"];
 const autoMappersTLC = autoMappers.map(stringTLC);
 
-export const isCreatedByAutomapper = (songName: string, songAuthorName: string, levelAuthorName: string) => {
+export const isCreatedByAutomapper = (songName: string, songAuthorName: string, levelAuthorName: string): boolean => {
   const songNameTLC = stringTLC(songName);
   const songAuthorNameTLC = stringTLC(songAuthorName);
   const levelAuthorNameTLC = stringTLC(levelAuthorName);

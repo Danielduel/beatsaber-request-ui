@@ -16,7 +16,7 @@ type CloseButtonProps = {
   onClick: () => void | null;
 };
 
-const CloseButton = ({ onClick }: CloseButtonProps) => (
+const CloseButton = ({ onClick }: CloseButtonProps): JSX.Element => (
   <CloseButtonContainer onClick={onClick}>
     <svg width="40" height="35" viewBox="0 0 40 35" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
