@@ -27,7 +27,7 @@ Table of contents:
 
 0. Changelog
 
-0.0.9:
+0.0.10:
 * 4 September 2021
   * (tech) Clean info page boilerplate
   * (tech) Exclude UnexpandedApp as separate component and generalize wrapWith
@@ -38,6 +38,10 @@ Table of contents:
 * 13 October 2021
   * (feature) Add footer and ScoreSaber bar
   * (feature) Add ColorPicker to config page [@cutler7]
+
+0.0.9 (hotfix in the middle of 0.0.10 timeline):
+* 6 February 2022
+  * (docs) Add CSP policy document
 
 0.0.8:
 * 13 August 2021

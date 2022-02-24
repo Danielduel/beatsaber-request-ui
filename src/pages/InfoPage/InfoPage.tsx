@@ -51,7 +51,7 @@ const ul = (rows: React.ReactNode[][]) => {
 };
 
 const infoRows: React.ReactNode[][] = [
-  [<VersionIcon key="icon" />, "Version: 0.0.9 (very alpha)"],
+  [<VersionIcon key="icon" />, "Version: 0.0.10 (very alpha)"],
   [
     <ReportIcon key="icon" />,
     "You can post issues or feature requests here:",
