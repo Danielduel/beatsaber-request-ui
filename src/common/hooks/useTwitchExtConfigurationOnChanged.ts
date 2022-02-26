@@ -18,6 +18,7 @@ function useTwitchExtConfigurationOnChanged() {
       // this has to be delayed
       setTimeout(() => {
         handler(appConfigurationFromStrings("overlay|topLeft;ss://76561198023909718", "", ""));
+        // handler(appConfigurationFromStrings("overlay|topLeft;", "", ""));
       }, 0);
     }
 

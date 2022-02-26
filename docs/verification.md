@@ -40,6 +40,7 @@ Table of contents:
   * (feature) Add ColorPicker to config page [@cutler7]
 * 26 February 2022
   * (fix) Change CSP and BeatSaver endpoints to use api subdomain [@zaourzag]
+  * (fix) Layout issue without footer
 
 0.0.9 (hotfix in the middle of 0.0.10 timeline):
 * 6 February 2022
