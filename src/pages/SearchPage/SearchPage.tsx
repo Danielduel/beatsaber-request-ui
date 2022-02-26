@@ -147,7 +147,7 @@ export default function SearchPage(): JSX.Element {
   const [query, setQuery] = React.useState("");
   const getUrl = React.useCallback(
     (page) => {
-      return `https://beatsaver.com/api/search/text/${page}?q=${query}`;
+      return `https://api.beatsaver.com/search/text/${page}?q=${query}`;
     },
     [query]
   );
