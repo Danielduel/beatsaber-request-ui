@@ -315,8 +315,8 @@ const _BroadcasterConfigPage = (): JSX.Element => {
             }
           ]}
         />
-        {colorScheme === "auto" && <ColorSchemeAutoCreator></ColorSchemeAutoCreator>}
-        {colorScheme === "manual" && <ColorSchemeManualCreator></ColorSchemeManualCreator>}
+        {colorScheme === "auto" && <ColorSchemeAutoCreator />}
+        {colorScheme === "manual" && <ColorSchemeManualCreator />}
       </FormRow>
     </FormContainer>
   );

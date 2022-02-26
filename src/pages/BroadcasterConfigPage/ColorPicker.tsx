@@ -43,10 +43,13 @@ export const ColorPicker = ({
   const handleChange = React.useCallback(
     (e: React.ChangeEvent) => {
       valueRef.current = asInput(e.target).value;
+      setColor(valueRef.current);
+      setSelectedColor(Color(valueRef.current));
     },
     [valueRef]
   );
 
+  /*
   const handlePickerClose = React.useCallback(
     (e: React.FocusEvent) => {
       const value = valueRef.current;
@@ -54,12 +57,18 @@ export const ColorPicker = ({
       setSelectedColor(Color(value));
     },
     [valueRef, setColor, setSelectedColor]
-  );
+    );
+  */
 
   return (
     <ColorPickerContainer>
       <ColorPickerLabel fontWeight={fontWeight}>{label}</ColorPickerLabel>
-      <ColorPickerInput type="color" onBlur={handlePickerClose} onChange={handleChange} value={color} />
+      <ColorPickerInput
+        type="color"
+        // onBlur={handlePickerClose}
+        onChange={handleChange}
+        value={color}
+      />
     </ColorPickerContainer>
   );
 };

@@ -41,6 +41,7 @@ Table of contents:
 * 26 February 2022
   * (fix) Change CSP and BeatSaver endpoints to use api subdomain [@zaourzag]
   * (fix) Layout issue without footer
+  * (fix) Remove delay from color picker input
 
 0.0.9 (hotfix in the middle of 0.0.10 timeline):
 * 6 February 2022
