@@ -12,9 +12,9 @@ const BodyWithNavigation = styled.div`
   grid-template-columns: 1fr;
   ${({ shouldRenderFooter }: BodyWithNavigationProps) => {
     return shouldRenderFooter
-      ? "grid-template-rows: var(--navigation-height) 1fr var(--footer-height, 0px);"
+      ? "grid-template-rows: var(--navigation-height) 1fr var(--footer-height, 0px)"
       : "grid-template-rows: var(--navigation-height) 1fr";
-  }}
+  }};
 
   background-color: var(--background);
 `;
