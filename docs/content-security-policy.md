@@ -38,5 +38,5 @@ API targets:
 * https://api.beatsaver.com
 * https://api.beatfollower.com
 
-https://api.twitch.tv,https://beatsaver.com,https://api.beatfollower.com
+https://api.twitch.tv,https://api.beatsaver.com,https://api.beatfollower.com
 
