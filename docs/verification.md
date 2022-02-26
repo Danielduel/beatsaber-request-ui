@@ -38,6 +38,8 @@ Table of contents:
 * 13 October 2021
   * (feature) Add footer and ScoreSaber bar
   * (feature) Add ColorPicker to config page [@cutler7]
+* 26 February 2022
+  * (fix) Change CSP and BeatSaver endpoints to use api subdomain [@zaourzag]
 
 0.0.9 (hotfix in the middle of 0.0.10 timeline):
 * 6 February 2022
