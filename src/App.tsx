@@ -53,6 +53,9 @@ const MainApp = ({ togglePanel }: MainAppProps): JSX.Element => {
   const scoreSaberConfig = configuration?.broadcaster.scoreSaber || null;
   const shouldRenderFooter = !!scoreSaberConfig;
 
+  console.log(configuration?.broadcaster);
+  console.log("Should render footer: " + shouldRenderFooter);
+
   return (
     <Router>
       <AppWrapper>

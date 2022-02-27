@@ -1,14 +1,15 @@
 // TODO - Rewrite this mess using some tool for such work
 // This file is one big "xD" - don't do forms like this kids
 
-import React from "react";
+import React, { ChangeEvent } from "react";
 import "../../App.css";
 import styled from "styled-components";
 import { LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
 import { GroupButton } from "../../components/Buttons/GroupButton";
-import { ButtonAsItem } from "../../components/Buttons/Button";
+import { ButtonAsItem, ButtonLink } from "../../components/Buttons/Button";
 import { ColorSchemeAutoCreator } from "./ColorSchemeAutoCreator";
 import { ColorSchemeManualCreator } from "./ColorSchemeManualCreator";
+import { ScoreSaberBar } from "../../components/ScoreSaberBar/ScoreSaberBar";
 
 type TwitchConfigInputRowProps = {
   name: string;
@@ -34,6 +35,10 @@ const FormRow = styled.div`
   & > *:last-child {
     margin-left: 50px;
   }
+`;
+
+const LinkLogo = styled.img`
+  height: 1rem;
 `;
 
 const SuccessRow = styled.div`
@@ -81,6 +86,7 @@ const TwitchConfigInputRow = ({ name, type, value, setValue }: TwitchConfigInput
 
 // console.log(Twitch.ext.configuration.set("broadcaster", "1", "somethingelse"));
 type SerializationData = {
+  scoreSaberId: string;
   colorScheme: null | "auto" | "manual";
   panelOrOverlay: null | "panel" | "overlay";
   overlayPlacement: null | "topLeft" | "bottomLeft" | "topRight" | "bottomRight" | "custom";
@@ -89,13 +95,19 @@ type SerializationData = {
 };
 
 function serializeData({
+  scoreSaberId,
   panelOrOverlay,
   overlayPlacement,
   customOverlayPlacementX,
   customOverlayPlacementY
 }: SerializationData) {
+  const separator = ";";
+  const scoreSaberData = scoreSaberId ? `${separator}ss://${scoreSaberId}` : "";
+
+  const optionalFields = scoreSaberData;
+
   if (panelOrOverlay === "panel") {
-    return "panel";
+    return "panel" + optionalFields;
   }
 
   if (panelOrOverlay === "overlay" && overlayPlacement !== null) {
@@ -106,11 +118,11 @@ function serializeData({
         !isNaN(customOverlayPlacementX) &&
         !isNaN(customOverlayPlacementY)
       ) {
-        return `overlay|custom|${customOverlayPlacementX}|${customOverlayPlacementY}`;
+        return `overlay|custom|${customOverlayPlacementX}|${customOverlayPlacementY}` + optionalFields;
       }
       return;
     }
-    return `overlay|${overlayPlacement}`;
+    return `overlay|${overlayPlacement}` + optionalFields;
   }
 
   return;
@@ -118,6 +130,7 @@ function serializeData({
 
 const _BroadcasterConfigPage = (): JSX.Element => {
   const [wasSubmitted, setWasSubmitted] = React.useState(false);
+  const [scoreSaberId, setScoreSaberId] = React.useState("");
   const [panelOrOverlay, setPanelOrOverlay] = React.useState<SerializationData["panelOrOverlay"]>(null);
   const [overlayPlacement, setOverlayPlacement] = React.useState<SerializationData["overlayPlacement"]>(null);
   const [colorScheme, setColorScheme] = React.useState<SerializationData["colorScheme"]>(null);
@@ -130,6 +143,7 @@ const _BroadcasterConfigPage = (): JSX.Element => {
       e.preventDefault();
       const data = serializeData({
         colorScheme,
+        scoreSaberId,
         panelOrOverlay,
         overlayPlacement,
         customOverlayPlacementX,
@@ -143,7 +157,21 @@ const _BroadcasterConfigPage = (): JSX.Element => {
         setWasSubmitted(false);
       }
     },
-    [panelOrOverlay, overlayPlacement, customOverlayPlacementX, customOverlayPlacementY]
+    [panelOrOverlay, overlayPlacement, customOverlayPlacementX, customOverlayPlacementY, scoreSaberId]
+  );
+
+  const scoreSaberLinkOnChange = React.useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const link = e.target.value;
+      const splitLink = link.split("/");
+      const id = splitLink.find((part) => Number(part));
+      if (!id) {
+        e.target.value = "";
+      } else {
+        setScoreSaberId(id);
+      }
+    },
+    [setScoreSaberId]
   );
 
   return (
@@ -294,6 +322,54 @@ const _BroadcasterConfigPage = (): JSX.Element => {
           </SuccessRow>
         </FormRow>
       )}
+
+      <FormRow>
+        <QuestionRow>Connect your ScoreSaber profile (optional)</QuestionRow>
+        <ExplainationRow>
+          You can connect your ScoreSaber profile to display your stats in extensions footer.
+          <br />
+          Find yourself on ScoreSaber and paste link to your profile, for example mine is
+          <br />
+          <input disabled value="https://scoresaber.com/u/76561198023909718" style={{ width: "90%" }} />
+          <br />
+          Most likely your link will be pretty much the same, but the number at the end will differ.
+          <br />
+          Handy link:
+          <br />
+          <ButtonLink href="https://scoresaber.com/rankings" target="_blank">
+            <LinkLogo src="https://scoresaber.com/images/logo.svg" />
+            &nbsp; Go to ScoreSaber ranking search
+          </ButtonLink>
+          <br />
+          Paste your link here:
+          <br />
+          <input onChange={scoreSaberLinkOnChange} style={{ width: "90%", marginBottom: "1rem" }} />
+          {scoreSaberId && (
+            <>
+              <ScoreSaberBar scoreSaberId={scoreSaberId} withoutReload />
+              <br />
+              <GroupButton
+                group={[
+                  {
+                    kind: "button",
+                    active: false,
+                    onClick: handleSubmit,
+                    text: "That's me, save"
+                  },
+                  {
+                    kind: "button",
+                    active: false,
+                    onClick: () => setScoreSaberId(""),
+                    text: "Reset"
+                  }
+                ]}
+              />
+            </>
+          )}
+        </ExplainationRow>
+        <div></div>
+      </FormRow>
+
       <FormRow>
         <QuestionRow>Define your own color scheme</QuestionRow>
         <ExplainationRow>

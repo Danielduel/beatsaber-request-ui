@@ -10,6 +10,7 @@ import { Button } from "../Buttons/Button";
 
 type ScoreSaberBarProps = {
   scoreSaberId: string;
+  withoutReload?: boolean;
 };
 
 const ScoreSaberBarWrapper = styled.div`
@@ -54,7 +55,7 @@ const ScoreSaberBarPlayerActionContainer = styled.div`
 const ScoreSaberBarPlayerReload = styled(Button)``;
 
 // https://scoresaber.com/imports/images/usr-avatars/76561198023909718.jpg
-const ScoreSaberBar = ({ scoreSaberId }: ScoreSaberBarProps) => {
+const ScoreSaberBar = ({ scoreSaberId, withoutReload }: ScoreSaberBarProps) => {
   const [scoreSaberBasicPlayerData, setScoreSaberBasicPlayerData] =
     React.useState<null | ScoreSaber.BasicPlayerResponse>(null);
   const [scoreSaberBasicPlayerData$, refetchScoreSaberBasicPlayerData] = useRefetchingData(
@@ -78,13 +79,13 @@ const ScoreSaberBar = ({ scoreSaberId }: ScoreSaberBarProps) => {
         <ScoreSaberBarPlayerRanking>
           🌎 {rank} ({emojiFlag} {countryRank})
         </ScoreSaberBarPlayerRanking>
-        <ScoreSaberBarPlayerPP>
-          {pp}pp
-        </ScoreSaberBarPlayerPP>
+        <ScoreSaberBarPlayerPP>{pp}pp</ScoreSaberBarPlayerPP>
       </ScoreSaberBarPlayerDataContainer>
-      <ScoreSaberBarPlayerActionContainer>
-        <ScoreSaberBarPlayerReload onClick={refetchScoreSaberBasicPlayerData}>Reload</ScoreSaberBarPlayerReload>
-      </ScoreSaberBarPlayerActionContainer>
+      {!withoutReload && (
+        <ScoreSaberBarPlayerActionContainer>
+          <ScoreSaberBarPlayerReload onClick={refetchScoreSaberBasicPlayerData}>Reload</ScoreSaberBarPlayerReload>
+        </ScoreSaberBarPlayerActionContainer>
+      )}
     </ScoreSaberBarWrapper>
   );
 };

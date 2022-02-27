@@ -17,12 +17,14 @@ function useTwitchExtConfigurationOnChanged() {
     if (isLocalhost) {
       // this has to be delayed
       setTimeout(() => {
-        handler(appConfigurationFromStrings("overlay|topLeft;ss://76561198023909718", "", ""));
+        // handler(appConfigurationFromStrings("overlay|topLeft;ss://76561198023909718", "", ""));
         // handler(appConfigurationFromStrings("overlay|topLeft;", "", ""));
+        handler(appConfigurationFromStrings("panel;ss://76561198023909718", "", ""));
       }, 0);
     }
 
     Twitch.ext.configuration.onChanged(() => {
+      console.log("Broadcaster content: " + Twitch.ext.configuration.broadcaster?.content);
       handler(
         appConfigurationFromStrings(
           stringOrDefault(Twitch.ext.configuration.broadcaster?.content, ""),

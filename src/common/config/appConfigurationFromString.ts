@@ -6,6 +6,7 @@ function appConfigurationFromStrings(
   developerString: string,
   globalString: string
 ): AppConfiguration {
+  console.log("AppConfiguration: " + broadcasterString);
   return {
     broadcaster: broadcasterConfigFromString(broadcasterString),
     developer: null,
