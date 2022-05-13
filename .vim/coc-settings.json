@@ -1,0 +1,10 @@
+{
+  "deno.enable": false,
+  "tsserver.enable": true,
+  
+  "eslint.packageManager": "yarn",
+  "eslint.nodePath": ".yarn/sdks",
+  "workspace.workspaceFolderCheckCwd": false,
+  "tsserver.tsdk": ".yarn/sdks/typescript/lib"
+}
+

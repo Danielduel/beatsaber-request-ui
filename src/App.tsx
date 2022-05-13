@@ -14,9 +14,9 @@ import { BodyWithNavigation, BodyWithNavigationBody } from "./layouts/BodyWithNa
 import { UnexpandedApp } from "./components/UnexpandedApp/UnexpandedApp";
 import AppEnvContext from "./AppEnvContext";
 import { Footer } from "./components/Footer/Footer";
+import { isLocalhost } from "./constants";
 
 const AppWrapper = styled.div`
-  transition: margin-left 1s;
   height: 100vh;
   max-height: 100vh;
   width: min(100vw, 500px);
@@ -52,6 +52,12 @@ const MainApp = ({ togglePanel }: MainAppProps): JSX.Element => {
   const { configuration } = React.useContext(AppEnvContext);
   const scoreSaberConfig = configuration?.broadcaster.scoreSaber || null;
   const shouldRenderFooter = !!scoreSaberConfig;
+
+  React.useLayoutEffect(() => {
+    if (isLocalhost) {
+      document.body.style.background = "black";
+    }
+  }, []);
 
   console.log(configuration?.broadcaster);
   console.log("Should render footer: " + shouldRenderFooter);
