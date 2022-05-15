@@ -7,11 +7,12 @@ import { TwitchExtAuthStream } from "./useTwitchExtOnAuthorized";
 
 const fetchTwitchChannelInfo = (auth: AuthResponse): Promise<ChannelInfoResponse> => {
   return new Promise((resolve, reject) => {
-    return fetch(wrapTwitchApiEndoint(`/kraken/channels/${auth.channelId}`), {
+    return fetch(wrapTwitchApiEndoint(`/helix/channels?broadcaster_id=${auth.channelId}`), {
       method: "GET",
       headers: {
         "Accept": "application/vnd.twitchtv.v5+json",
-        "Client-ID": auth.clientId
+        "Client-Id": auth.clientId,
+        "Authorization": "Extension " + auth.helixToken
       }
     })
       .then((response) => response.json())

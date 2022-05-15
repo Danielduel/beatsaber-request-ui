@@ -50,7 +50,11 @@ export function createWrappedProvider(overrides: PartialAppEnv) {
     });
 
     useStreamSubscribe(twitchChannelInfo$, (channelInfo) => {
-      setState((_oldState) => ({ ..._oldState, contextGame: channelInfo.game }));
+      console.log("channelInfo", channelInfo);
+      // defensive code, not sure how stable this api is
+      if (channelInfo && channelInfo.data && channelInfo.data[0] && channelInfo.data[0].game_name) {
+        setState((_oldState) => ({ ..._oldState, contextGame: channelInfo.data[0].game_name }));
+      }
     });
 
     useStreamSubscribe(rankedData$, (rankedData) => {
