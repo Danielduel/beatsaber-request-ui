@@ -18,6 +18,8 @@ const defaultState = {
   frameConfig: false,
   framePanel: false,
   frameLive: false,
+  srmBridgeChannel: null as string | null,
+  userId: null as string | null,
   rankedHashes: {} as RankedRecordMap,
   contextGame: isLocalhost ? "Beat Saber" : "",
   configuration: null as AppConfiguration | null
@@ -43,12 +45,15 @@ export function createWrappedProvider(overrides: PartialAppEnv) {
     const [rankedData$] = useRefetchingData(scoreSaberImportRankedMapsData);
     const [twitchExtConfiguration$] = useTwitchExtConfigurationOnChanged();
 
+    useStreamSubscribe(twitchExtAuth$, (auth) => {
+      setState((_oldState) => ({ ..._oldState, srmBridgeChannel: auth.channelId, userId: auth.userId }));
+    });
+
     useStreamSubscribe(twitchChannelInfo$, (channelInfo) => {
       setState((_oldState) => ({ ..._oldState, contextGame: channelInfo.game }));
     });
 
     useStreamSubscribe(rankedData$, (rankedData) => {
-      console.log("got ranked data");
       const rankedHashes = transformRankedResponse(rankedData);
       setState((_oldState) => ({ ..._oldState, rankedHashes }));
     });

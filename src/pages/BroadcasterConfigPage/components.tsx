@@ -2,6 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import { LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
 
+export const colors = {
+  black: "#090909",
+
+  darker: "#242424",
+  dark: "#2c2c2c",
+
+  shade: "#999999",
+  light: "#ffffff",
+
+  accent: "#4058f2",
+  hover: "rgba(255, 255, 255, 0.1)"
+};
+
 export const FormContainer = styled.form`
   width: 100%;
   padding: 20px;

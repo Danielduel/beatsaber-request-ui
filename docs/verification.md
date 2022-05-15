@@ -46,17 +46,15 @@ Table of contents:
   - (fix) Layout issue without footer
   - (fix) Remove delay from color picker input
 - 27 February 2022
-
   - (feature) ScoreSaber integration
+- 29 March 2022
+  - (tech) Add nvmrc file
 
-    0.0.9 (hotfix in the middle of 0.0.10 timeline):
-
+0.0.9 (hotfix in the middle of 0.0.10 timeline):
 - 6 February 2022
-
   - (docs) Add CSP policy document
 
-    0.0.8:
-
+0.0.8:
 - 13 August 2021
   - (docs) Bump up version
   - (feature) Ask user if they want to visit beatsaver page of map

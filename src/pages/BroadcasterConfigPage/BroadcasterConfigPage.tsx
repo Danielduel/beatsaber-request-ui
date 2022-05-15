@@ -1,7 +1,7 @@
 // TODO - Rewrite this mess using some tool for such work
 // This file is one big "xD" - don't do forms like this kids
 
-import React, { ChangeEvent } from "react";
+import React, { PropsWithChildren } from "react";
 import "../../App.css";
 import styled from "styled-components";
 import { LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
@@ -9,10 +9,12 @@ import { GroupButton } from "../../components/Buttons/GroupButton";
 import { ButtonAsItem, ButtonLink } from "../../components/Buttons/Button";
 import { ColorSchemeAutoCreator } from "./ThemeSetup/ColorSchemeAutoCreator";
 import { ColorSchemeManualCreator } from "./ThemeSetup/ColorSchemeManualCreator";
-import { ScoreSaberBar } from "../../components/ScoreSaberBar/ScoreSaberBar";
-import { ExplainationRow, FormContainer, FormRow, QuestionRow, SuccessRow, TwitchConfigInputRow } from "./components";
+import { colors, ExplainationRow, FormContainer, FormRow, QuestionRow, SuccessRow, TwitchConfigInputRow } from "./components";
 import { isLocalhost } from "../../constants";
-import { ScoreSaberSetup } from "./ScoreSaberSetup/ScoreSaberSetup";
+import { ScoreSaberConfig } from "./ScoreSaberConfig/ScoreSaberConfig";
+import { LayoutConfig } from "./LayoutConfig/LayoutConfig";
+
+
 
 // console.log(Twitch.ext.configuration.set("broadcaster", "1", "somethingelse"));
 type SerializationData = {
@@ -23,8 +25,6 @@ type SerializationData = {
   customOverlayPlacementX: null | number;
   customOverlayPlacementY: null | number;
 };
-
-const a = "asd";
 
 function serializeData({
   scoreSaberId,
@@ -271,11 +271,134 @@ const _BroadcasterConfigPage = (): JSX.Element => {
   );
 };
 
+const ConfigPageLayoutWrapper = styled.div`
+  background-color: #333;
+  width: 100vw;
+  height: 100vh;
+  border-radius: 2rem;
+  position: relative;
+  border: 0px solid transparent;
+  overflow: hidden;
+`;
+
+const ConfigPageLayoutContainer = styled.div`
+  display: grid;
+  grid-template-columns: 200px 1fr;
+`;
+
+const ConfigPageMenu = styled.div`
+  background-color: ${colors.darker};
+  padding: 1rem 1rem 2rem;
+  min-height: 100vh;
+`;
+const ConfigPageMenuTitle = styled.div`
+  color: ${colors.shade};
+  font-size: 1rem;
+  padding: 0.25rem 1rem;
+`;
+
+const ConfigPageBody = styled.div`
+  width: 100%;
+  background-color: ${colors.dark};
+`;
+
+export const ConfigContext = React.createContext<ReturnType<typeof useConfigContextValue>>({});
+const ConfigPageMenuItemContainer = styled.div`
+  margin-top: 0.5rem;
+  padding: 0.25rem 1rem;
+  color: ${colors.shade};
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  &:hover {
+    background-color: ${colors.hover};
+    color: ${colors.light};
+  }
+  ${({ active }: { active: boolean }) => active && `background-color: ${colors.accent} !important; color: white;`}
+`;
+
+const useConfigContextValue = () => {
+  const [activeId, setActiveId] = React.useState("scoresaber");
+  const [layoutActiveId, setLayoutActiveId] = React.useState("custom");
+  const [layoutPreciseX, setLayoutPreciseX] = React.useState(50);
+  const [layoutPreciseY, setLayoutPreciseY] = React.useState(50);
+
+  return {
+    activeId, setActiveId,
+    layoutActiveId, setLayoutActiveId,
+    layoutPreciseX, setLayoutPreciseX,
+    layoutPreciseY, setLayoutPreciseY
+  } as const;
+}
+
+const ConfigPageMenuItem = ({ label, id }: ReturnType<typeof menuItem>) => {
+  const { activeId, setActiveId } = React.useContext(ConfigContext);
+
+  const onClick = React.useCallback(() => {
+    setActiveId(id);
+  }, [ id, setActiveId ]);
+  
+  return (
+    <ConfigPageMenuItemContainer onClick={onClick} active={id === activeId}> 
+      { label }
+    </ConfigPageMenuItemContainer>
+  );
+}
+
+const ConfigPageBodyRouter = () => {
+  const { activeId, setActiveId } = React.useContext(ConfigContext);
+  
+  switch (activeId) {
+    case "layout": return <LayoutConfig />;
+    case "scoresaber": return <ScoreSaberConfig />
+  }
+
+  return <></>;
+}
+
+const menuItem = (label: string, id: string) => ({ label, id });
+const menuItems = [
+  menuItem("Layout", "layout"),
+  menuItem("ScoreSaber", "scoresaber"),
+  menuItem("Theme", "theme")
+];
+
+const ConfigContextProvider = ({ children }: PropsWithChildren<{}>) => {
+  const state = useConfigContextValue();
+
+  return (
+    <ConfigContext.Provider value={state}>
+      {children}
+    </ConfigContext.Provider>
+  )
+}
+
+const ConfigPageLayout = () => {
+  return (
+    <ConfigContextProvider>
+      <ConfigPageLayoutWrapper>
+        <ConfigPageLayoutContainer>
+          <ConfigPageMenu>
+            <ConfigPageMenuTitle>
+              Settings
+            </ConfigPageMenuTitle>
+            { menuItems.map(props => <ConfigPageMenuItem {...props} />) }
+          </ConfigPageMenu>
+          <ConfigPageBody>
+            <ConfigPageBodyRouter />
+          </ConfigPageBody>
+        </ConfigPageLayoutContainer>
+      </ConfigPageLayoutWrapper>
+    </ConfigContextProvider>
+  );
+}
+
 export default function BroadcasterConfigPage(): JSX.Element {
   React.useLayoutEffect(() => {
     if (isLocalhost) {
       document.body.style.background = "black";
     }
   }, []);
-  return <_BroadcasterConfigPage />;
+
+  return <ConfigPageLayout />
+  // return <_BroadcasterConfigPage />;
 }

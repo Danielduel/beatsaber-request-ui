@@ -39,5 +39,6 @@ API targets:
 - https://api.beatsaver.com
 - https://api.beatfollower.com
 - https://new.scoresaber.com
+- https://172.105.67.201
 
 https://api.twitch.tv,https://api.beatsaver.com,https://api.beatfollower.com,https://new.scoresaber.com

@@ -24,6 +24,8 @@ function useTwitchExtConfigurationOnChanged() {
     }
 
     Twitch.ext.configuration.onChanged(() => {
+      console.log("Twitch ext:");
+      console.log(Twitch.ext);
       console.log("Broadcaster content: " + Twitch.ext.configuration.broadcaster?.content);
       handler(
         appConfigurationFromStrings(
