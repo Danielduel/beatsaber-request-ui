@@ -4,17 +4,25 @@
 import React, { PropsWithChildren } from "react";
 import "../../App.css";
 import styled from "styled-components";
+import "overlayscrollbars/css/OverlayScrollbars.css";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { LayoutRowBase } from "../../components/LayoutRow/LayoutRow";
 import { GroupButton } from "../../components/Buttons/GroupButton";
 import { ButtonAsItem, ButtonLink } from "../../components/Buttons/Button";
 import { ColorSchemeAutoCreator } from "./ThemeSetup/ColorSchemeAutoCreator";
 import { ColorSchemeManualCreator } from "./ThemeSetup/ColorSchemeManualCreator";
-import { colors, ExplainationRow, FormContainer, FormRow, QuestionRow, SuccessRow, TwitchConfigInputRow } from "./components";
+import {
+  colors,
+  ExplainationRow,
+  FormContainer,
+  FormRow,
+  QuestionRow,
+  SuccessRow,
+  TwitchConfigInputRow
+} from "./components";
 import { isLocalhost } from "../../constants";
 import { ScoreSaberConfig } from "./ScoreSaberConfig/ScoreSaberConfig";
 import { LayoutConfig } from "./LayoutConfig/LayoutConfig";
-
-
 
 // console.log(Twitch.ext.configuration.set("broadcaster", "1", "somethingelse"));
 type SerializationData = {
@@ -273,23 +281,24 @@ const _BroadcasterConfigPage = (): JSX.Element => {
 
 const ConfigPageLayoutWrapper = styled.div`
   background-color: #333;
-  width: 100vw;
-  height: 100vh;
-  border-radius: 2rem;
-  position: relative;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   border: 0px solid transparent;
-  overflow: hidden;
 `;
 
 const ConfigPageLayoutContainer = styled.div`
   display: grid;
+  height: 100%;
+  width: 100%;
   grid-template-columns: 200px 1fr;
 `;
 
 const ConfigPageMenu = styled.div`
   background-color: ${colors.darker};
   padding: 1rem 1rem 2rem;
-  min-height: 100vh;
 `;
 const ConfigPageMenuTitle = styled.div`
   color: ${colors.shade};
@@ -317,60 +326,58 @@ const ConfigPageMenuItemContainer = styled.div`
 `;
 
 const useConfigContextValue = () => {
-  const [activeId, setActiveId] = React.useState("scoresaber");
+  const [activeId, setActiveId] = React.useState("layout");
   const [layoutActiveId, setLayoutActiveId] = React.useState("custom");
   const [layoutPreciseX, setLayoutPreciseX] = React.useState(50);
   const [layoutPreciseY, setLayoutPreciseY] = React.useState(50);
 
   return {
-    activeId, setActiveId,
-    layoutActiveId, setLayoutActiveId,
-    layoutPreciseX, setLayoutPreciseX,
-    layoutPreciseY, setLayoutPreciseY
+    activeId,
+    setActiveId,
+    layoutActiveId,
+    setLayoutActiveId,
+    layoutPreciseX,
+    setLayoutPreciseX,
+    layoutPreciseY,
+    setLayoutPreciseY
   } as const;
-}
+};
 
 const ConfigPageMenuItem = ({ label, id }: ReturnType<typeof menuItem>) => {
   const { activeId, setActiveId } = React.useContext(ConfigContext);
 
   const onClick = React.useCallback(() => {
     setActiveId(id);
-  }, [ id, setActiveId ]);
-  
+  }, [id, setActiveId]);
+
   return (
-    <ConfigPageMenuItemContainer onClick={onClick} active={id === activeId}> 
-      { label }
+    <ConfigPageMenuItemContainer onClick={onClick} active={id === activeId}>
+      {label}
     </ConfigPageMenuItemContainer>
   );
-}
+};
 
 const ConfigPageBodyRouter = () => {
   const { activeId, setActiveId } = React.useContext(ConfigContext);
-  
+
   switch (activeId) {
-    case "layout": return <LayoutConfig />;
-    case "scoresaber": return <ScoreSaberConfig />
+    case "layout":
+      return <LayoutConfig />;
+    case "scoresaber":
+      return <ScoreSaberConfig />;
   }
 
   return <></>;
-}
+};
 
 const menuItem = (label: string, id: string) => ({ label, id });
-const menuItems = [
-  menuItem("Layout", "layout"),
-  menuItem("ScoreSaber", "scoresaber"),
-  menuItem("Theme", "theme")
-];
+const menuItems = [menuItem("Layout", "layout"), menuItem("ScoreSaber", "scoresaber"), menuItem("Theme", "theme")];
 
 const ConfigContextProvider = ({ children }: PropsWithChildren<{}>) => {
   const state = useConfigContextValue();
 
-  return (
-    <ConfigContext.Provider value={state}>
-      {children}
-    </ConfigContext.Provider>
-  )
-}
+  return <ConfigContext.Provider value={state}>{children}</ConfigContext.Provider>;
+};
 
 const ConfigPageLayout = () => {
   return (
@@ -378,19 +385,21 @@ const ConfigPageLayout = () => {
       <ConfigPageLayoutWrapper>
         <ConfigPageLayoutContainer>
           <ConfigPageMenu>
-            <ConfigPageMenuTitle>
-              Settings
-            </ConfigPageMenuTitle>
-            { menuItems.map(props => <ConfigPageMenuItem {...props} />) }
+            <ConfigPageMenuTitle>Settings</ConfigPageMenuTitle>
+            {menuItems.map((props) => (
+              <ConfigPageMenuItem {...props} />
+            ))}
           </ConfigPageMenu>
           <ConfigPageBody>
-            <ConfigPageBodyRouter />
+            <OverlayScrollbarsComponent options={{ scrollbars: { autoHide: 'scroll' } }} >
+              <ConfigPageBodyRouter />
+            </OverlayScrollbarsComponent>
           </ConfigPageBody>
         </ConfigPageLayoutContainer>
       </ConfigPageLayoutWrapper>
     </ConfigContextProvider>
   );
-}
+};
 
 export default function BroadcasterConfigPage(): JSX.Element {
   React.useLayoutEffect(() => {
@@ -399,6 +408,6 @@ export default function BroadcasterConfigPage(): JSX.Element {
     }
   }, []);
 
-  return <ConfigPageLayout />
+  return <ConfigPageLayout />;
   // return <_BroadcasterConfigPage />;
 }

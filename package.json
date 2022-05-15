@@ -55,6 +55,8 @@
     "mini-css-extract-plugin": "0.9.0",
     "most": "^1.9.0",
     "optimize-css-assets-webpack-plugin": "5.0.3",
+    "overlayscrollbars": "^1.13.1",
+    "overlayscrollbars-react": "^0.2.3",
     "pnp-webpack-plugin": "1.6.4",
     "postcss-flexbugs-fixes": "4.1.0",
     "postcss-loader": "3.0.0",
@@ -171,6 +173,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-numeric-separator": "^7.14.5",
     "@types/color": "^3.0.2",
+    "@types/overlayscrollbars": "^1.12.1",
     "@types/ramda": "types/npm-ramda#dist",
     "@types/twitch-ext": "^1.24.2",
     "eslint-config-prettier": "^8.1.0",

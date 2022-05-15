@@ -17,13 +17,17 @@ const LayoutConfigOptionsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: auto;
-  max-width: 50rem;
+  max-width: 40rem;
+
+  @media (max-width: 900px) {
+    max-width: 30rem;
+  }
 `;
 
 const LayoutOptionWrapper = styled.div`
   min-width: 15rem;
   margin: auto;
-  min-width: ${({ wide }: { wide?: boolean }) => wide ? "100%" : "50%"};
+  /* min-width: ${({ wide }: { wide?: boolean }) => wide ? "100%" : "50%"}; */
 `;
 
 const LayoutOptionContainer = styled.div`
@@ -33,6 +37,10 @@ const LayoutOptionContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin: 2rem;
+
+  @media (max-width: 900px) {
+    margin: 0.5rem;
+  }
 `;
 
 const LayoutOptionBody = styled.div`
@@ -51,9 +59,17 @@ const LayoutTitle = styled.div`
   color: ${colors.light};
   font-size: 1.2rem;
   margin-top: 1rem;
+
+  @media (max-width: 900px) {
+    font-size: 0.8rem;
+  }
 `;
 const LayoutIcon = styled.img`
   width: 10rem;
+
+  @media (max-width: 900px) {
+    max-width: 5rem;
+  }
 `;
 
 type LayoutOptionProps = {
