@@ -16,7 +16,7 @@ import AppEnvContext from "./AppEnvContext";
 import { Footer } from "./components/Footer/Footer";
 import { isLocalhost } from "./constants";
 
-const AppWrapper = styled.div`
+export const AppWrapper = styled.div`
   height: 100vh;
   max-height: 100vh;
   width: min(100vw, 500px);

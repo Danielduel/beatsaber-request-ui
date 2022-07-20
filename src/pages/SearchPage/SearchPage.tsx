@@ -124,9 +124,9 @@ const SearchPageWrapper = styled.div`
 `;
 
 const SearchPageFixedMessageWrapper = styled.div`
-  position: fixed;
+  position: absolute;
   max-height: 10vh;
-  top: 20vh;
+  top: 30%;
 `;
 
 function getMessage(wasSearching: boolean, isSearching: boolean, songList: SongListDocsItem[]) {

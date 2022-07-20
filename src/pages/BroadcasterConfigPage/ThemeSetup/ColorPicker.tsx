@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Color from "color";
+import { colors } from "../components";
 
 const ColorPickerInput = styled.input`
   padding: 0;
@@ -18,6 +19,7 @@ type ColorPickerLabelProps = {
 const ColorPickerLabel = styled.div`
   width: 10em;
   font-weight: ${({ fontWeight }: ColorPickerLabelProps) => fontWeight};
+  color: ${colors.light};
 `;
 
 const asInput = (element: Element): HTMLInputElement => {

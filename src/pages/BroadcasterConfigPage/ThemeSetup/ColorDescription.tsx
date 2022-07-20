@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from "react";
+import { colors } from "../components";
 
 type ColorSampleProps = {
   color: string;
@@ -19,6 +20,7 @@ const ColorDescriptionContainer = styled.div`
 
 const ColorDescriptionLabel = styled.div`
   width: 10em;
+  color: ${colors.light};
 `;
 
 type ColorDescriptionProps = {
