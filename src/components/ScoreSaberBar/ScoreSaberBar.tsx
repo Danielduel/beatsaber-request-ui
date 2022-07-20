@@ -21,6 +21,15 @@ const ScoreSaberBarWrapper = styled.div`
   align-items: center;
 `;
 
+const ScoreSaberBarWrapperNoResults = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 1rem;
+`;
+
 const ScoreSaberBarPlayerAvatar = styled.img`
   height: 5em;
   border-radius: 1em;
@@ -55,18 +64,19 @@ const ScoreSaberBarPlayerActionContainer = styled.div`
 const ScoreSaberBarPlayerReload = styled(Button)``;
 
 // https://scoresaber.com/imports/images/usr-avatars/76561198023909718.jpg
-const ScoreSaberBar = ({ scoreSaberId, withoutReload }: ScoreSaberBarProps) => {
+const _ScoreSaberBar = ({ scoreSaberId, withoutReload }: ScoreSaberBarProps) => {
   const [scoreSaberBasicPlayerData, setScoreSaberBasicPlayerData] =
     React.useState<null | ScoreSaber.BasicPlayerResponse>(null);
   const [scoreSaberBasicPlayerData$, refetchScoreSaberBasicPlayerData] = useRefetchingData(
     scoreSaberFetchBasicPlayerData(scoreSaberId)
   );
   useStreamSubscribe(scoreSaberBasicPlayerData$, setScoreSaberBasicPlayerData);
-  const avatarUrl = getScoresaberAvatarUrl(scoreSaberBasicPlayerData?.playerInfo.avatar ?? "");
 
-  if (!scoreSaberBasicPlayerData) {
-    return <>No data</>;
+  if (!scoreSaberBasicPlayerData || !scoreSaberBasicPlayerData.playerInfo) {
+    return <ScoreSaberBarWrapperNoResults>Can't find this player</ScoreSaberBarWrapperNoResults>;
   }
+
+  const avatarUrl = getScoresaberAvatarUrl(scoreSaberBasicPlayerData?.playerInfo.avatar ?? "");
 
   const { playerName, rank, country, countryRank, pp } = scoreSaberBasicPlayerData.playerInfo;
   const emojiFlag = emojiFlags.countryCode(country).emoji ?? "❓";
@@ -88,6 +98,14 @@ const ScoreSaberBar = ({ scoreSaberId, withoutReload }: ScoreSaberBarProps) => {
       )}
     </ScoreSaberBarWrapper>
   );
+};
+
+const ScoreSaberBar = ({ scoreSaberId, withoutReload }: ScoreSaberBarProps) => {
+  if (!scoreSaberId) {
+    return <ScoreSaberBarWrapperNoResults>ScoreSaber ID is empty</ScoreSaberBarWrapperNoResults>;
+  }
+
+  return <_ScoreSaberBar scoreSaberId={scoreSaberId} withoutReload={withoutReload} />;
 };
 
 export { ScoreSaberBar };

@@ -14,8 +14,8 @@ function useTwitchExtOnAuthorized(): readonly [TwitchExtAuthStream] {
   const { handler, stream: data$ } = createConfiguredEventHandler<AuthResponse>();
 
   React.useEffect(() => {
-    Twitch.ext.onAuthorized((auth: AuthResponse) => {
-      handler(auth);
+    Twitch.ext.onAuthorized((auth: Twitch.ext.Authorized) => {
+      handler(auth as AuthResponse);
     });
   }, []);
 

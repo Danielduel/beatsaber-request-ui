@@ -25,9 +25,11 @@ const LayoutConfigOptionsContainer = styled.div`
 `;
 
 const LayoutOptionWrapper = styled.div`
+  user-select: none;
+  cursor: pointer;
   min-width: 15rem;
   margin: auto;
-  /* min-width: ${({ wide }: { wide?: boolean }) => wide ? "100%" : "50%"}; */
+  /* min-width: ${({ wide }: { wide?: boolean }) => (wide ? "100%" : "50%")}; */
 `;
 
 const LayoutOptionContainer = styled.div`
@@ -50,10 +52,9 @@ const LayoutOptionBody = styled.div`
   align-items: center;
   padding: 1rem;
   border-radius: 1rem;
-  border: 0.25rem dotted ${({ active }: { active: boolean }) => active ? colors.accent : "transparent"};
+  border: 0.25rem dotted ${({ active }: { active: boolean }) => (active ? colors.accent : "transparent")};
   background-color: ${colors.darker};
 `;
-
 
 const LayoutTitle = styled.div`
   color: ${colors.light};
@@ -84,15 +85,15 @@ const LayoutOption = ({ icon, wide, id, label, children }: React.PropsWithChildr
 
   const onClick = React.useCallback(() => {
     setLayoutActiveId(id);
-  }, [ setLayoutActiveId, id ])
+  }, [setLayoutActiveId, id]);
 
   return (
     <LayoutOptionWrapper wide={wide}>
       <LayoutOptionContainer onClick={onClick}>
         <LayoutOptionBody active={active}>
           <LayoutIcon src={icon} />
-          <LayoutTitle>{ label }</LayoutTitle>
-          { active && children }
+          <LayoutTitle>{label}</LayoutTitle>
+          {active && children}
         </LayoutOptionBody>
       </LayoutOptionContainer>
     </LayoutOptionWrapper>
@@ -106,11 +107,10 @@ const PreciseMatrix = styled.div`
   height: 90px;
   background-color: #fff;
 `;
-const preciseTranslate = (
-  { layoutPreciseX, layoutPreciseY }:
-  { layoutPreciseX: number; layoutPreciseY: number; }) => {
-
-  return `transform: translate(${160 * layoutPreciseX / 100}px, ${90 * layoutPreciseY / 100}px) translate(-50%, -50%);`
+const preciseTranslate = ({ layoutPreciseX, layoutPreciseY }: { layoutPreciseX: number; layoutPreciseY: number }) => {
+  return `transform: translate(${(160 * layoutPreciseX) / 100}px, ${
+    (90 * layoutPreciseY) / 100
+  }px) translate(-50%, -50%);`;
 };
 const PreciseMarker = styled.img`
   position: absolute;
@@ -150,28 +150,34 @@ const PreciseInput = styled.input`
   appearance: none;
 `;
 const PreciseOptionDetails = () => {
-  const {
-    layoutPreciseX, setLayoutPreciseX,
-    layoutPreciseY, setLayoutPreciseY
-  } = React.useContext(ConfigContext);
+  const { layoutPreciseX, setLayoutPreciseX, layoutPreciseY, setLayoutPreciseY } = React.useContext(ConfigContext);
 
-  const matrixOnClick = React.useCallback((ev: React.MouseEvent) => {
-    const { top, left, width, height } = ev.currentTarget.getBoundingClientRect();
-    const { pageX, pageY } = ev;
-    const x = pageX - left;
-    const y = pageY - top;
+  const matrixOnClick = React.useCallback(
+    (ev: React.MouseEvent) => {
+      const { top, left, width, height } = ev.currentTarget.getBoundingClientRect();
+      const { pageX, pageY } = ev;
+      const x = pageX - left;
+      const y = pageY - top;
 
-    setLayoutPreciseX(~~((x / width) * 100));
-    setLayoutPreciseY(~~((y / height) * 100));
-  }, [ setLayoutPreciseX, setLayoutPreciseY ]);
+      setLayoutPreciseX(~~((x / width) * 100));
+      setLayoutPreciseY(~~((y / height) * 100));
+    },
+    [setLayoutPreciseX, setLayoutPreciseY]
+  );
 
-  const onChangeX = React.useCallback((ev: React.ChangeEvent<HTMLInputElement>) => {
-    setLayoutPreciseX(+ev.currentTarget.value);
-  }, [ setLayoutPreciseX ]);
-  
-  const onChangeY = React.useCallback((ev: React.ChangeEvent<HTMLInputElement>) => {
-    setLayoutPreciseX(+ev.currentTarget.value);
-  }, [ setLayoutPreciseX ]);
+  const onChangeX = React.useCallback(
+    (ev: React.ChangeEvent<HTMLInputElement>) => {
+      setLayoutPreciseX(+ev.currentTarget.value);
+    },
+    [setLayoutPreciseX]
+  );
+
+  const onChangeY = React.useCallback(
+    (ev: React.ChangeEvent<HTMLInputElement>) => {
+      setLayoutPreciseX(+ev.currentTarget.value);
+    },
+    [setLayoutPreciseX]
+  );
 
   return (
     <>
@@ -188,7 +194,7 @@ const PreciseOptionDetails = () => {
       </PreciseInputContainer>
     </>
   );
-}
+};
 
 export const LayoutConfig = () => {
   return (

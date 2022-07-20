@@ -302,7 +302,8 @@ const ConfigPageMenu = styled.div`
 `;
 const ConfigPageMenuTitle = styled.div`
   color: ${colors.shade};
-  font-size: 1rem;
+  user-select: none;
+  font-size: 0.9rem;
   padding: 0.25rem 1rem;
 `;
 
@@ -311,8 +312,11 @@ const ConfigPageBody = styled.div`
   background-color: ${colors.dark};
 `;
 
-export const ConfigContext = React.createContext<ReturnType<typeof useConfigContextValue>>({});
+export type ConfigContextType = ReturnType<typeof useConfigContextValue>;
+export const ConfigContext = React.createContext<ConfigContextType>({} as ConfigContextType);
 const ConfigPageMenuItemContainer = styled.div`
+  user-select: none;
+  cursor: pointer;
   margin-top: 0.5rem;
   padding: 0.25rem 1rem;
   color: ${colors.shade};
@@ -326,10 +330,14 @@ const ConfigPageMenuItemContainer = styled.div`
 `;
 
 const useConfigContextValue = () => {
-  const [activeId, setActiveId] = React.useState("layout");
+  const [activeId, setActiveId] = React.useState("scoresaber");
+  
   const [layoutActiveId, setLayoutActiveId] = React.useState("custom");
   const [layoutPreciseX, setLayoutPreciseX] = React.useState(50);
   const [layoutPreciseY, setLayoutPreciseY] = React.useState(50);
+
+  const [scoreSaberEnabled, setScoreSaberEnabled] = React.useState(false);
+  const [scoreSaberId, setScoreSaberId] = React.useState("");
 
   return {
     activeId,
@@ -339,7 +347,9 @@ const useConfigContextValue = () => {
     layoutPreciseX,
     setLayoutPreciseX,
     layoutPreciseY,
-    setLayoutPreciseY
+    setLayoutPreciseY,
+    scoreSaberEnabled, setScoreSaberEnabled,
+    scoreSaberId, setScoreSaberId
   } as const;
 };
 
@@ -391,7 +401,7 @@ const ConfigPageLayout = () => {
             ))}
           </ConfigPageMenu>
           <ConfigPageBody>
-            <OverlayScrollbarsComponent options={{ scrollbars: { autoHide: 'scroll' } }} >
+            <OverlayScrollbarsComponent options={{ scrollbars: { autoHide: "scroll" }, clipAlways: false }} >
               <ConfigPageBodyRouter />
             </OverlayScrollbarsComponent>
           </ConfigPageBody>
@@ -409,5 +419,4 @@ export default function BroadcasterConfigPage(): JSX.Element {
   }, []);
 
   return <ConfigPageLayout />;
-  // return <_BroadcasterConfigPage />;
 }
