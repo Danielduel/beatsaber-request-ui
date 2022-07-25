@@ -7,5 +7,5 @@ export type RawConfigResponseItem = {
     segment_type: "broadcaster";
     channel_id: string;
   };
-}
+};
 export type RawConfigResponse = Record<string, RawConfigResponseItem>;

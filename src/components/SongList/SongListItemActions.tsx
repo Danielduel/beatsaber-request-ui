@@ -25,7 +25,6 @@ const RequestButtonText = styled.span`
   margin-right: 5px;
 `;
 
-
 const CopyButtonText = styled.span`
   margin-right: 5px;
 `;
@@ -70,8 +69,8 @@ const SongListItemActions = ({ bsrKey, isRanked }: SongListItemActionsProps): JS
             })
           }
         >
-            <RequestButtonText>Request</RequestButtonText>
-            <ForwardIconStyled />
+          <RequestButtonText>Request</RequestButtonText>
+          <ForwardIconStyled />
         </RequestButton>
       </SongListItemActionGroupWrapper>
     );

@@ -3,9 +3,7 @@ import "../../App.css";
 import styled from "styled-components";
 import "overlayscrollbars/css/OverlayScrollbars.css";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
-import {
-  colors
-} from "./components";
+import { colors } from "./components";
 import { isLocalhost } from "../../constants";
 import { ScoreSaberConfig } from "./ScoreSaberConfig/ScoreSaberConfig";
 import { LayoutConfig } from "./LayoutConfig/LayoutConfig";
@@ -53,7 +51,7 @@ function serializeData({
   }
 
   return;
-};
+}
 
 const ConfigPageLayoutWrapper = styled.div`
   background-color: #333;
@@ -107,7 +105,7 @@ const ConfigPageMenuItemContainer = styled.div`
 
 const useConfigContextValue = () => {
   const [activeId, setActiveId] = React.useState("theme");
-  
+
   const [layoutActiveId, setLayoutActiveId] = React.useState("custom");
   const [layoutPreciseX, setLayoutPreciseX] = React.useState(50);
   const [layoutPreciseY, setLayoutPreciseY] = React.useState(50);
@@ -124,8 +122,10 @@ const useConfigContextValue = () => {
     setLayoutPreciseX,
     layoutPreciseY,
     setLayoutPreciseY,
-    scoreSaberEnabled, setScoreSaberEnabled,
-    scoreSaberId, setScoreSaberId
+    scoreSaberEnabled,
+    setScoreSaberEnabled,
+    scoreSaberId,
+    setScoreSaberId
   } as const;
 };
 
@@ -184,7 +184,7 @@ const ConfigPageLayout = () => {
             ))}
           </ConfigPageMenu>
           <ConfigPageBody>
-            <OverlayScrollbarsComponent options={{ scrollbars: { autoHide: "scroll" }, clipAlways: false }} >
+            <OverlayScrollbarsComponent options={{ scrollbars: { autoHide: "scroll" }, clipAlways: false }}>
               <ConfigPageBodyRouter />
             </OverlayScrollbarsComponent>
           </ConfigPageBody>

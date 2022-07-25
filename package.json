@@ -101,7 +101,7 @@
     "ziprepo": "sh ./scripts/ziptherepo.sh"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": ["react-app", ".eslintrc"]
   },
   "browserslist": {
     "production": [
@@ -169,6 +169,9 @@
     "presets": [
       "react-app"
     ]
+  },
+  "engines": {
+    "node": "16"
   },
   "devDependencies": {
     "@babel/plugin-proposal-numeric-separator": "^7.14.5",

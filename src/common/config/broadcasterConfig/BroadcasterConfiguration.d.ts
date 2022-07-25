@@ -5,11 +5,11 @@ export namespace BroadcasterConfiguration {
   };
 
   export type ScoreSaber = {
-    id: string
-  }
+    id: string;
+  };
 }
 
 export type BroadcasterConfiguration = {
   panelPosition: BroadcasterConfiguration.PanelPosition;
   scoreSaber: BroadcasterConfiguration.ScoreSaber | null;
-}
+};

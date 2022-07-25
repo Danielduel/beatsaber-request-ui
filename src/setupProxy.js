@@ -1,4 +1,4 @@
-const { createProxyMiddleware } = require('http-proxy-middleware');
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = function (app) {
   app.use(
@@ -15,7 +15,7 @@ module.exports = function (app) {
       changeOrigin: true
     })
   );
-  
+
   // https://api.twitch.tv/extensions/
   app.use(
     "/extensions",
@@ -23,5 +23,5 @@ module.exports = function (app) {
       target: "https://api.twitch.tv",
       changeOrigin: true
     })
-  )
-}
+  );
+};

@@ -22,7 +22,6 @@
 //   })
 // );
 
-
 // const getBroadcasterConfig = (config: RawConfigResponse) =>
 //   Object.entries(config).find(([, value]) => value?.segment?.segment_type === "broadcaster");
 

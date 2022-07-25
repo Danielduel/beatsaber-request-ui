@@ -9,24 +9,25 @@ import scoreSaberLogo from "./ss-logo.svg";
 type ToggleProps = {
   toggled?: boolean;
 };
-const toggledStyles = ({toggled}: ToggleProps) => toggled
-  ? css`
-    background-color: ${colors.light};
-    &:after {
-      background-color: ${colors.accent};
-      right: 0;
-    }
-  `
-  : css`
-    background-color: ${colors.shade};
-    &:after {
-      background-color: ${colors.dark};
-      left: 0;
-    }
-  `;
+const toggledStyles = ({ toggled }: ToggleProps) =>
+  toggled
+    ? css`
+        background-color: ${colors.light};
+        &:after {
+          background-color: ${colors.accent};
+          right: 0;
+        }
+      `
+    : css`
+        background-color: ${colors.shade};
+        &:after {
+          background-color: ${colors.dark};
+          left: 0;
+        }
+      `;
 const Toggle = styled.div`
-display: inline-block;
-transform: translateY(0.5rem);
+  display: inline-block;
+  transform: translateY(0.5rem);
   &:after {
     top: 0;
     border-radius: 50%;
@@ -60,11 +61,11 @@ const BarContainer = styled.div`
 
 const ScoreSaberInput = styled.input`
   width: 30rem;
-  border-radius: 1rem 1rem 0 0 ;
+  border-radius: 1rem 1rem 0 0;
 `;
 
 const ScoreSaberDetails = () => {
-  const {scoreSaberId, setScoreSaberId} = React.useContext(ConfigContext);
+  const { scoreSaberId, setScoreSaberId } = React.useContext(ConfigContext);
 
   const scoreSaberLinkOnChange = React.useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -88,8 +89,8 @@ const ScoreSaberDetails = () => {
       <br />
       <br />
       <ButtonLink href="https://scoresaber.com/rankings" target="_blank">
-      <LinkLogo src={scoreSaberLogo} />
-      &nbsp; Go to ScoreSaber ranking search
+        <LinkLogo src={scoreSaberLogo} />
+        &nbsp; Go to ScoreSaber ranking search
       </ButtonLink>
       <br />
       <br />
@@ -102,31 +103,27 @@ const ScoreSaberDetails = () => {
       </BarContainer>
     </>
   );
-}
+};
 
 export const ScoreSaberConfig = () => {
   const { scoreSaberEnabled, setScoreSaberEnabled } = React.useContext(ConfigContext);
 
   const toggleOnClick = React.useCallback(() => {
-    setScoreSaberEnabled(!scoreSaberEnabled)
-  }, [ setScoreSaberEnabled, scoreSaberEnabled ])
+    setScoreSaberEnabled(!scoreSaberEnabled);
+  }, [setScoreSaberEnabled, scoreSaberEnabled]);
 
   return (
     <ScoreSaberWrapper>
-      ScoreSaber bar shows your current ranking at the bottom of the widget.<br />
+      ScoreSaber bar shows your current ranking at the bottom of the widget.
+      <br />
       It looks like this:
-
       <br />
       <br />
-
       <BarContainer>
         <ScoreSaberBar scoreSaberId="76561198023909718" />
       </BarContainer>
-
       Do you want to enable ScoreSaber bar? <Toggle onClick={toggleOnClick} toggled={scoreSaberEnabled} />
-
-      { scoreSaberEnabled && <ScoreSaberDetails />}
+      {scoreSaberEnabled && <ScoreSaberDetails />}
     </ScoreSaberWrapper>
   );
 };
-

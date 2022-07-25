@@ -74,7 +74,7 @@ const LayoutIcon = styled.img`
 `;
 
 type LayoutOptionProps = {
-  icon: any;
+  icon: string;
   wide?: boolean;
   id: string;
   label: string;

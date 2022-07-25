@@ -31,21 +31,21 @@ export namespace ScoreSaber {
     // not sure if "role" is literal enum
     // or just cleartext from backend perspective
     role: string | "Quality Assurance Team";
-    badges: unknown[],
+    badges: unknown[];
     history: string;
     permissions: number; // 0 is no, 2 is Cerret, Umbranox(superadmin) 63, most likely it is couple bit flags
     inactive: number; // most likely 0 or 1
     banned: number; // most likely 0 or 1
-  }
+  };
   export type BasicPlayerResponse = {
-    playerInfo: PlayerInfo
-  }
-  export type RankedDiffEnum = |
-    "_ExpertPlus_SoloStandard" |
-    "_Expert_SoloStandard" |
-    "_Hard_SoloStandard" |
-    "_Normal_SoloStandard" |
-    "_Easy_SoloStandard";
+    playerInfo: PlayerInfo;
+  };
+  export type RankedDiffEnum =
+    | "_ExpertPlus_SoloStandard"
+    | "_Expert_SoloStandard"
+    | "_Hard_SoloStandard"
+    | "_Normal_SoloStandard"
+    | "_Easy_SoloStandard";
   export type RankedListResponseItem = {
     uid: number;
     id: string; // hash "1F723CED1FF1748A947972A603532D15BB8F6804",
