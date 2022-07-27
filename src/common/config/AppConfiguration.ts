@@ -37,9 +37,9 @@ export const createAppConfigurationFromConfigs = (
     global
   };
 
-  const validationResult = appConfigurationValidator.validate(result);
-  const configValid = ["global", "developer", "broadcaster"].some(configKey => Object.keys(validationResult).includes(configKey));
+  const validationResult = {...appConfigurationValidator.validate(result)};
+  const configInvalid = ["global", "developer", "broadcaster"].some(configKey => Object.keys(validationResult).includes(configKey));
 
-  if (!configValid) throw validationResult;
+  if (configInvalid) throw validationResult;
   return result;
 };

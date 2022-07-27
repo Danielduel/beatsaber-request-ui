@@ -95,6 +95,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
+    "format:fix": "prettier -w .",
     "clean": "find . -name \"*.tsbuildinfo\" | xargs rm",
     "zip": "yarn prepareDeploy",
     "installAndBuild": "npm i && npm run build",

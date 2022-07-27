@@ -65,22 +65,7 @@ const ScoreSaberInput = styled.input`
 `;
 
 const ScoreSaberDetails = () => {
-  const { scoreSaberId, setScoreSaberId } = React.useContext(ConfigContext);
-
-  const scoreSaberLinkOnChange = React.useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      const link = e.target.value;
-      const splitLink = link.split("/");
-      const id = splitLink.find((part) => Number(part));
-      if (!id) {
-        e.target.value = "";
-      } else {
-        setScoreSaberId(id);
-      }
-    },
-    [setScoreSaberId]
-  );
-
+  const { scoreSaberId } = React.useContext(ConfigContext);
   return (
     <>
       <br />
@@ -97,20 +82,20 @@ const ScoreSaberDetails = () => {
       Paste the link to the field below
       <br />
       <br />
-      <ScoreSaberInput onChange={scoreSaberLinkOnChange} />
+      <ScoreSaberInput onChange={scoreSaberId.sinkEvent} />
       <BarContainer>
-        <ScoreSaberBar scoreSaberId={scoreSaberId} withoutReload />
+        <ScoreSaberBar scoreSaberId={scoreSaberId.value} withoutReload />
       </BarContainer>
     </>
   );
 };
 
 export const ScoreSaberConfig = () => {
-  const { scoreSaberEnabled, setScoreSaberEnabled } = React.useContext(ConfigContext);
+  const { scoreSaberEnabled } = React.useContext(ConfigContext);
 
   const toggleOnClick = React.useCallback(() => {
-    setScoreSaberEnabled(!scoreSaberEnabled);
-  }, [setScoreSaberEnabled, scoreSaberEnabled]);
+    scoreSaberEnabled.setValue(!scoreSaberEnabled.value);
+  }, [ scoreSaberEnabled.setValue, scoreSaberEnabled.value ]);
 
   return (
     <ScoreSaberWrapper>
@@ -122,8 +107,8 @@ export const ScoreSaberConfig = () => {
       <BarContainer>
         <ScoreSaberBar scoreSaberId="76561198023909718" />
       </BarContainer>
-      Do you want to enable ScoreSaber bar? <Toggle onClick={toggleOnClick} toggled={scoreSaberEnabled} />
-      {scoreSaberEnabled && <ScoreSaberDetails />}
+      Do you want to enable ScoreSaber bar? <Toggle onClick={toggleOnClick} toggled={scoreSaberEnabled.value} />
+      {scoreSaberEnabled.value && <ScoreSaberDetails />}
     </ScoreSaberWrapper>
   );
 };

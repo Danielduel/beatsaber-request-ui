@@ -13,6 +13,7 @@ import custom_marker from "./custom_marker.svg";
 import { colors } from "../components";
 import { ConfigContext } from "../BroadcasterConfigPage";
 
+export type LayoutConfigOptionIds = "top_left" | "top_right" | "bottom_left" | "bottom_right" | "custom";
 const LayoutConfigOptionsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -76,7 +77,7 @@ const LayoutIcon = styled.img`
 type LayoutOptionProps = {
   icon: string;
   wide?: boolean;
-  id: string;
+  id: LayoutConfigOptionIds;
   label: string;
 };
 const LayoutOption = ({ icon, wide, id, label, children }: React.PropsWithChildren<LayoutOptionProps>) => {
@@ -195,6 +196,7 @@ const PreciseOptionDetails = () => {
     </>
   );
 };
+
 
 export const LayoutConfig = () => {
   return (

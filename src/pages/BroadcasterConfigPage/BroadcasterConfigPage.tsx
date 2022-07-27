@@ -6,9 +6,13 @@ import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { colors } from "./components";
 import { isLocalhost } from "../../constants";
 import { ScoreSaberConfig } from "./ScoreSaberConfig/ScoreSaberConfig";
-import { LayoutConfig } from "./LayoutConfig/LayoutConfig";
+import { LayoutConfig, LayoutConfigOptionIds } from "./LayoutConfig/LayoutConfig";
 import { ThemeSetup } from "./ThemeSetup/ThemeSetup";
 import Color from "color";
+import { useTwitchExtConfigurationOnChanged } from "../../common/hooks/useTwitchExtConfigurationOnChanged";
+import { useStreamSubscribe } from "../../common/hooks/useStreamSubscribe";
+import { AppConfiguration } from "../../common/config/AppConfiguration";
+import { useFormField } from "../../common/hooks/useFormField";
 
 const ConfigPageLayoutWrapper = styled.div`
   background-color: #333;
@@ -30,6 +34,9 @@ const ConfigPageLayoutContainer = styled.div`
 const ConfigPageMenu = styled.div`
   background-color: ${colors.darker};
   padding: 1rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 `;
 const ConfigPageMenuTitle = styled.div`
   color: ${colors.shade};
@@ -59,23 +66,46 @@ const ConfigPageMenuItemContainer = styled.div`
   }
   ${({ active }: { active: boolean }) => active && `background-color: ${colors.accent} !important; color: white;`}
 `;
+const ConfigPageSaveButtonButton = styled(ConfigPageMenuItemContainer)`
+  position: absolute;
+  bottom: 1rem;
+  width: calc(100% - 4rem);
+  text-align: center;
+  border: 0.125rem solid ${colors.darker};
+`;
 
+const unwrapScoreSaberId = (link: string) => {
+  const splitLink = link.split("/");
+  const id = splitLink.find((part) => Number(part));
+  return !id ? "" : id;
+};
 const useConfigContextValue = () => {
   const [activeId, setActiveId] = React.useState("theme");
 
-  const [layoutActiveId, setLayoutActiveId] = React.useState("custom");
+  const [layoutActiveId, setLayoutActiveId] = React.useState<LayoutConfigOptionIds>("custom");
   const [layoutPreciseX, setLayoutPreciseX] = React.useState(50);
   const [layoutPreciseY, setLayoutPreciseY] = React.useState(50);
 
-  const [scoreSaberEnabled, setScoreSaberEnabled] = React.useState(false);
-  const [scoreSaberId, setScoreSaberId] = React.useState("");
+  const scoreSaberEnabled = useFormField(false);
+  const scoreSaberId = useFormField("", "onchange", () => void 0, unwrapScoreSaberId);
 
   const [themePrimaryColor, setThemePrimaryColor] = React.useState(Color("#b161d0"));
   const [themeSecondaryColor, setThemeSecondaryColor] = React.useState(Color("#9939bf"));
   const [themeAccentColor, setThemeAccentColor] = React.useState(Color("#cd8c36"));
   const [themeWarningColor, setThemeWarningColor] = React.useState(Color("#d0297d"));
 
+  const [configOnTwitch, setConfigOnTwitch] = React.useState<null | AppConfiguration>(null);
+  const [twitchExtConfiguration$] = useTwitchExtConfigurationOnChanged();
+  useStreamSubscribe(twitchExtConfiguration$, (configuration) => {
+    setConfigOnTwitch(configuration);
+  });
+
+  const wasSomethingChanged = scoreSaberEnabled.dirty || scoreSaberId.dirty;
+  const isSomethingChanged = wasSomethingChanged;
+
   return {
+    isSomethingChanged,
+    configOnTwitch,
     activeId,
     setActiveId,
     layoutActiveId,
@@ -85,9 +115,7 @@ const useConfigContextValue = () => {
     layoutPreciseY,
     setLayoutPreciseY,
     scoreSaberEnabled,
-    setScoreSaberEnabled,
     scoreSaberId,
-    setScoreSaberId,
     themePrimaryColor,
     setThemePrimaryColor,
     themeSecondaryColor,
@@ -142,6 +170,13 @@ const ConfigContextProvider = ({ children }: PropsWithChildren<{}>) => {
   return <ConfigContext.Provider value={state}>{children}</ConfigContext.Provider>;
 };
 
+const ConfigPageSaveButton = (): JSX.Element | null => {
+  const { isSomethingChanged } = React.useContext(ConfigContext);
+
+  // if (!isSomethingChanged) return null;
+  return <ConfigPageSaveButtonButton active>Save</ConfigPageSaveButtonButton>;
+};
+
 const ConfigPageLayout = () => {
   return (
     <ConfigContextProvider>
@@ -152,6 +187,7 @@ const ConfigPageLayout = () => {
             {menuItems.map((props) => (
               <ConfigPageMenuItem {...props} />
             ))}
+            <ConfigPageSaveButton />
           </ConfigPageMenu>
           <ConfigPageBody>
             <OverlayScrollbarsComponent options={{ scrollbars: { autoHide: "scroll" }, clipAlways: false }}>
