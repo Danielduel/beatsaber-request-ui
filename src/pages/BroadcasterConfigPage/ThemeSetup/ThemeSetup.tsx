@@ -45,7 +45,7 @@ export const ThemeSetup = () => {
       {
         text: "Auto",
         kind: "button",
-        
+
         active: creatorKind !== "auto",
         onClick: () => setCreatorKind("auto")
       },

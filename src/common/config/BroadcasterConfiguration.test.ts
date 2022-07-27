@@ -1,21 +1,27 @@
-import { BroadcasterConfiguration, BroadcasterConfigurationPanelPosition, BroadcasterConfigurationScoreSaber, broadcasterConfigurationValidator, panelPositionBroadcasterConfigurationValidator, scoreSaberBroadcasterConfigurationValidator } from "./BroadcasterConfiguration";
-const bigNumber = 1e+69;
+import {
+  BroadcasterConfiguration,
+  BroadcasterConfigurationPanelPosition,
+  BroadcasterConfigurationScoreSaber,
+  broadcasterConfigurationValidator,
+  panelPositionBroadcasterConfigurationValidator,
+  scoreSaberBroadcasterConfigurationValidator
+} from "./BroadcasterConfiguration";
+const bigNumber = 1e69;
 
 describe("ScoreSaberBroadcasterConfigurationValidator", () => {
   describe("🟢 Should pass on", () => {
-
     const validScoreSaberConfigs: BroadcasterConfigurationScoreSaber[] = [
       {
         id: "Something"
       }
     ];
-  
-    validScoreSaberConfigs.forEach(validConfig => {
+
+    validScoreSaberConfigs.forEach((validConfig) => {
       const result = scoreSaberBroadcasterConfigurationValidator.validate(validConfig);
-  
+
       test(`${JSON.stringify(validConfig)}`, () => {
         expect(result).not.toHaveProperty("id");
-      })
+      });
     });
   });
 
@@ -37,7 +43,7 @@ describe("ScoreSaberBroadcasterConfigurationValidator", () => {
         id: undefined
       },
       {
-        id: [ "Jera cute" ]
+        id: ["Jera cute"]
       },
       {
         id: []
@@ -50,20 +56,19 @@ describe("ScoreSaberBroadcasterConfigurationValidator", () => {
       },
       {}
     ] as unknown[] as BroadcasterConfigurationScoreSaber[];
-  
-    invalidScoreSaberConfigs.forEach(invalidConfig => {
+
+    invalidScoreSaberConfigs.forEach((invalidConfig) => {
       const result = scoreSaberBroadcasterConfigurationValidator.validate(invalidConfig);
-  
+
       test(`${JSON.stringify(invalidConfig)}`, () => {
         expect(result).toHaveProperty("id");
-      })
+      });
     });
   });
 });
 
 describe("PanelPositionBroadcasterConfigurationValidator", () => {
   describe("🟢 Should pass on", () => {
-
     const validScoreSaberConfigs: BroadcasterConfigurationPanelPosition[] = [
       {
         x: 200,
@@ -82,14 +87,14 @@ describe("PanelPositionBroadcasterConfigurationValidator", () => {
         y: 0.5
       }
     ];
-  
-    validScoreSaberConfigs.forEach(validConfig => {
+
+    validScoreSaberConfigs.forEach((validConfig) => {
       const result = panelPositionBroadcasterConfigurationValidator.validate(validConfig);
-  
+
       test(`${JSON.stringify(validConfig)} should pass validation`, () => {
         expect(result).not.toHaveProperty("x");
         expect(result).not.toHaveProperty("y");
-      })
+      });
     });
   });
 
@@ -121,10 +126,10 @@ describe("PanelPositionBroadcasterConfigurationValidator", () => {
         y: bigNumber
       }
     ] as unknown[] as BroadcasterConfigurationPanelPosition[];
-  
-    invalidScoreSaberConfigs.forEach(invalidConfig => {
+
+    invalidScoreSaberConfigs.forEach((invalidConfig) => {
       const result = panelPositionBroadcasterConfigurationValidator.validate(invalidConfig);
-  
+
       test(`${JSON.stringify(invalidConfig)} should fail validation because x`, () => {
         expect(result).toHaveProperty("x");
       });
@@ -133,9 +138,9 @@ describe("PanelPositionBroadcasterConfigurationValidator", () => {
       });
     });
 
-    invalidScoreSaberConfigsX.forEach(invalidConfig => {
+    invalidScoreSaberConfigsX.forEach((invalidConfig) => {
       const result = panelPositionBroadcasterConfigurationValidator.validate(invalidConfig);
-  
+
       test(`${JSON.stringify(invalidConfig)} should fail validation (because x)`, () => {
         expect(result).toHaveProperty("x");
       });
@@ -143,10 +148,10 @@ describe("PanelPositionBroadcasterConfigurationValidator", () => {
         expect(result).not.toHaveProperty("y");
       });
     });
-  
-    invalidScoreSaberConfigsY.forEach(invalidConfig => {
+
+    invalidScoreSaberConfigsY.forEach((invalidConfig) => {
       const result = panelPositionBroadcasterConfigurationValidator.validate(invalidConfig);
-  
+
       test(`${JSON.stringify(invalidConfig)} should fail validation (because y)`, () => {
         expect(result).toHaveProperty("y");
       });
@@ -156,8 +161,6 @@ describe("PanelPositionBroadcasterConfigurationValidator", () => {
     });
   });
 });
-
-
 
 describe("BroadcasterConfigurationValidator", () => {
   const defaultConfig: BroadcasterConfiguration = {
@@ -182,15 +185,15 @@ describe("BroadcasterConfigurationValidator", () => {
         scoreSaber: { id: "hehe" } // just want to underline that's legal
       }
     ];
-  
-    validBroadcasterConfigs.forEach(validConfig => {
+
+    validBroadcasterConfigs.forEach((validConfig) => {
       const result = broadcasterConfigurationValidator.validate(validConfig);
-  
+
       test(`${JSON.stringify(validConfig)} should pass validation`, () => {
         expect(result).not.toHaveProperty("panelPosition");
         expect(result).not.toHaveProperty("scoreSaberEnabled");
         expect(result).not.toHaveProperty("scoreSaber");
-      })
+      });
     });
   });
 
@@ -229,16 +232,15 @@ describe("BroadcasterConfigurationValidator", () => {
         }
       ] as unknown[] as BroadcasterConfiguration[];
 
-      invalidConfigs.forEach(invalidConfig => {
+      invalidConfigs.forEach((invalidConfig) => {
         const result = broadcasterConfigurationValidator.validate(invalidConfig);
-    
+
         test(`${JSON.stringify(invalidConfig)}`, () => {
           expect(result).not.toHaveProperty("panelPosition");
           expect(result).not.toHaveProperty("scoreSaberEnabled");
           expect(result).toHaveProperty("scoreSaber");
-        })
+        });
       });
     });
   });
 });
-

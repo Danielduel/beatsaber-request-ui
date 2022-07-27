@@ -39,10 +39,7 @@ export class ScoreSaberBroadcasterConfigurationValidator extends Validator<Broad
   constructor() {
     super();
 
-    this.ruleFor("id")
-      .notNull()
-      .must(beString)
-      .maxLength(100)
+    this.ruleFor("id").notNull().must(beString).maxLength(100);
   }
 }
 export const scoreSaberBroadcasterConfigurationValidator = new ScoreSaberBroadcasterConfigurationValidator();

@@ -51,13 +51,13 @@ Table of contents:
 
   - (tech) Add nvmrc file
 
-  0.0.9 (hotfix in the middle of 0.0.10 timeline):
+    0.0.9 (hotfix in the middle of 0.0.10 timeline):
 
 - 6 February 2022
 
   - (docs) Add CSP policy document
 
-  0.0.8:
+    0.0.8:
 
 - 13 August 2021
   - (docs) Bump up version

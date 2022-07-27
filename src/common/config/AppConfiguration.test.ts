@@ -12,18 +12,16 @@ describe("AppConfigurationValidator", () => {
   };
 
   describe("🟢 Should pass on", () => {
-    const validAppConfigurations = [
-      { ...defaultAppConfiguration }
-    ] as AppConfiguration[];
+    const validAppConfigurations = [{ ...defaultAppConfiguration }] as AppConfiguration[];
 
-    validAppConfigurations.forEach(validConfig => {
+    validAppConfigurations.forEach((validConfig) => {
       const result = appConfigurationValidator.validate(validConfig);
 
       test(`${validConfig}`, () => {
         expect(result).not.toHaveProperty("broadcaster");
         expect(result).not.toHaveProperty("developer");
         expect(result).not.toHaveProperty("global");
-      })
+      });
     });
   });
 });

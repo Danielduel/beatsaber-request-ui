@@ -95,7 +95,7 @@ export const ScoreSaberConfig = () => {
 
   const toggleOnClick = React.useCallback(() => {
     scoreSaberEnabled.setValue(!scoreSaberEnabled.value);
-  }, [ scoreSaberEnabled.setValue, scoreSaberEnabled.value ]);
+  }, [scoreSaberEnabled.setValue, scoreSaberEnabled.value]);
 
   return (
     <ScoreSaberWrapper>

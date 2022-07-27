@@ -39,10 +39,7 @@ const StyledOptionItem = (i18nInstance: i18n, selectedLanguage: string) => {
 const LanguageSelector = (): JSX.Element => {
   const i18nInstance = getI18n();
   const selectRef = useRef<HTMLSelectElement | null>(null);
-  const {
-    value: language,
-    sinkEvent: selectOnChange
-  } = useFormField<HTMLSelectElement, string>(
+  const { value: language, sinkEvent: selectOnChange } = useFormField<HTMLSelectElement, string>(
     i18nInstance.language,
     "onchange",
     (newLanguage) => {

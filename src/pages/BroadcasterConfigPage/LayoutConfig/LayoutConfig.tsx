@@ -197,7 +197,6 @@ const PreciseOptionDetails = () => {
   );
 };
 
-
 export const LayoutConfig = () => {
   return (
     <LayoutConfigOptionsContainer>

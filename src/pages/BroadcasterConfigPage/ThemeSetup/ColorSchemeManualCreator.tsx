@@ -17,7 +17,11 @@ export const ColorSchemeManualCreator = (): JSX.Element => {
   return (
     <div>
       <ColorPicker label="Primary color:" selectedColor={themePrimaryColor} setSelectedColor={setThemePrimaryColor} />
-      <ColorPicker label="Secondary color:" selectedColor={themeSecondaryColor} setSelectedColor={setThemeSecondaryColor} />
+      <ColorPicker
+        label="Secondary color:"
+        selectedColor={themeSecondaryColor}
+        setSelectedColor={setThemeSecondaryColor}
+      />
       <ColorPicker label="Accent color:" selectedColor={themeAccentColor} setSelectedColor={setThemeAccentColor} />
       <ColorPicker label="Warning color:" selectedColor={themeWarningColor} setSelectedColor={setThemeWarningColor} />
     </div>
