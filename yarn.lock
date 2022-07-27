@@ -5121,6 +5121,11 @@ flatten@^1.0.2:
   resolved "https://registry.npmjs.org/flatten/-/flatten-1.0.3.tgz"
   integrity sha512-dVsPA/UwQ8+2uoFe5GHtiBMu48dWLTdsuEd7CKGlZlD78r1TTWBvDuFaFGKCo/ZfEr95Uk56vZoX86OsHkUeIg==
 
+fluentvalidation-ts@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.npmjs.org/fluentvalidation-ts/-/fluentvalidation-ts-2.2.2.tgz#21cd04c60760515eac8d73640ea718d71c353780"
+  integrity sha512-ZVBNfYtmfGu+hFIvtL1s+J+pVhP61XoFJihs/I4Ld3NYECqpbYUbZCWIIFNbFEL37wha9/odRCN+MvgBOJwysQ==
+
 flush-write-stream@^1.0.0:
   version "1.1.1"
   resolved "https://registry.npmjs.org/flush-write-stream/-/flush-write-stream-1.1.1.tgz"

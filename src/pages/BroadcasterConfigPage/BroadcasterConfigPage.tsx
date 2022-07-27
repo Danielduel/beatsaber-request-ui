@@ -8,50 +8,7 @@ import { isLocalhost } from "../../constants";
 import { ScoreSaberConfig } from "./ScoreSaberConfig/ScoreSaberConfig";
 import { LayoutConfig } from "./LayoutConfig/LayoutConfig";
 import { ThemeSetup } from "./ThemeSetup/ThemeSetup";
-
-// console.log(Twitch.ext.configuration.set("broadcaster", "1", "somethingelse"));
-type SerializationData = {
-  scoreSaberId: string;
-  colorScheme: null | "auto" | "manual";
-  panelOrOverlay: null | "panel" | "overlay";
-  overlayPlacement: null | "topLeft" | "bottomLeft" | "topRight" | "bottomRight" | "custom";
-  customOverlayPlacementX: null | number;
-  customOverlayPlacementY: null | number;
-};
-
-function serializeData({
-  scoreSaberId,
-  panelOrOverlay,
-  overlayPlacement,
-  customOverlayPlacementX,
-  customOverlayPlacementY
-}: SerializationData) {
-  const separator = ";";
-  const scoreSaberData = scoreSaberId ? `${separator}ss://${scoreSaberId}` : "";
-
-  const optionalFields = scoreSaberData;
-
-  if (panelOrOverlay === "panel") {
-    return "panel" + optionalFields;
-  }
-
-  if (panelOrOverlay === "overlay" && overlayPlacement !== null) {
-    if (overlayPlacement === "custom") {
-      if (
-        customOverlayPlacementX !== null &&
-        customOverlayPlacementY !== null &&
-        !isNaN(customOverlayPlacementX) &&
-        !isNaN(customOverlayPlacementY)
-      ) {
-        return `overlay|custom|${customOverlayPlacementX}|${customOverlayPlacementY}` + optionalFields;
-      }
-      return;
-    }
-    return `overlay|${overlayPlacement}` + optionalFields;
-  }
-
-  return;
-}
+import Color from "color";
 
 const ConfigPageLayoutWrapper = styled.div`
   background-color: #333;
@@ -113,6 +70,11 @@ const useConfigContextValue = () => {
   const [scoreSaberEnabled, setScoreSaberEnabled] = React.useState(false);
   const [scoreSaberId, setScoreSaberId] = React.useState("");
 
+  const [themePrimaryColor, setThemePrimaryColor] = React.useState(Color("#b161d0"));
+  const [themeSecondaryColor, setThemeSecondaryColor] = React.useState(Color("#9939bf"));
+  const [themeAccentColor, setThemeAccentColor] = React.useState(Color("#cd8c36"));
+  const [themeWarningColor, setThemeWarningColor] = React.useState(Color("#d0297d"));
+
   return {
     activeId,
     setActiveId,
@@ -125,7 +87,15 @@ const useConfigContextValue = () => {
     scoreSaberEnabled,
     setScoreSaberEnabled,
     scoreSaberId,
-    setScoreSaberId
+    setScoreSaberId,
+    themePrimaryColor,
+    setThemePrimaryColor,
+    themeSecondaryColor,
+    setThemeSecondaryColor,
+    themeAccentColor,
+    setThemeAccentColor,
+    themeWarningColor,
+    setThemeWarningColor
   } as const;
 };
 

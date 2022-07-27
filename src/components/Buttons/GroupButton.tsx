@@ -27,7 +27,7 @@ const GroupButtonContainer = styled.div`
   }
 `;
 
-type GroupButtonProps = {
+export type GroupButtonProps = {
   group: ButtonAsItemProps[];
 };
 

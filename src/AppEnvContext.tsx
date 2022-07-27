@@ -63,7 +63,6 @@ export function createWrappedProvider(overrides: PartialAppEnv) {
     });
 
     useStreamSubscribe(twitchExtConfiguration$, (configuration) => {
-      console.log(configuration);
       setState((_oldState) => ({ ..._oldState, configuration }));
     });
 

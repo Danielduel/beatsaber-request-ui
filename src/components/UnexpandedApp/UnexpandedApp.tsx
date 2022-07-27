@@ -145,8 +145,8 @@ const UnexpandedApp = ({ togglePanel }: UnexpandedAppProps): JSX.Element | null 
 
   return (
     <AppUnexpandedWrapperWrapper>
-      <AppUnexpandedWrapper x={panelPosition.positionX} y={panelPosition.positionY} onClick={() => togglePanel(true)}>
-        <AppUnexpandedTooltip x={panelPosition.positionX} y={panelPosition.positionY}>
+      <AppUnexpandedWrapper x={panelPosition.x} y={panelPosition.y} onClick={() => togglePanel(true)}>
+        <AppUnexpandedTooltip x={panelPosition.x} y={panelPosition.y}>
           <Translation>{(t) => t("Click to open an extension")}</Translation>
           <br />
           <Translation>{(t) => t("this should make it easier to make requests")}</Translation>

@@ -1,19 +1,25 @@
 import React from "react";
 import { ColorPicker } from "./ColorPicker";
-import Color from "color";
+import { ConfigContext } from "../BroadcasterConfigPage";
 
 export const ColorSchemeManualCreator = (): JSX.Element => {
-  const [primaryColor, setPrimaryColor] = React.useState(Color("#b161d0"));
-  const [secondaryColor, setSecondaryColor] = React.useState(Color("#9939bf"));
-  const [accentColor, setAccentColor] = React.useState(Color("#cd8c36"));
-  const [warningColor, setWarningColor] = React.useState(Color("#d0297d"));
+  const {
+    themePrimaryColor,
+    themeSecondaryColor,
+    themeAccentColor,
+    themeWarningColor,
+    setThemeAccentColor,
+    setThemePrimaryColor,
+    setThemeSecondaryColor,
+    setThemeWarningColor
+  } = React.useContext(ConfigContext);
 
   return (
     <div>
-      <ColorPicker label="Primary color:" selectedColor={primaryColor} setSelectedColor={setPrimaryColor} />
-      <ColorPicker label="Secondary color:" selectedColor={secondaryColor} setSelectedColor={setSecondaryColor} />
-      <ColorPicker label="Accent color:" selectedColor={accentColor} setSelectedColor={setAccentColor} />
-      <ColorPicker label="Warning color:" selectedColor={warningColor} setSelectedColor={setWarningColor} />
+      <ColorPicker label="Primary color:" selectedColor={themePrimaryColor} setSelectedColor={setThemePrimaryColor} />
+      <ColorPicker label="Secondary color:" selectedColor={themeSecondaryColor} setSelectedColor={setThemeSecondaryColor} />
+      <ColorPicker label="Accent color:" selectedColor={themeAccentColor} setSelectedColor={setThemeAccentColor} />
+      <ColorPicker label="Warning color:" selectedColor={themeWarningColor} setSelectedColor={setThemeWarningColor} />
     </div>
   );
 };

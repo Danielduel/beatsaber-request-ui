@@ -41,6 +41,7 @@
     "eslint-plugin-react": "^7.23.1",
     "eslint-plugin-react-hooks": "^1.6.1",
     "file-loader": "4.3.0",
+    "fluentvalidation-ts": "^2.2.2",
     "fp-ts": "^2.11.1",
     "fs-extra": "^8.1.0",
     "html-webpack-plugin": "4.0.0-beta.11",
@@ -101,7 +102,10 @@
     "ziprepo": "sh ./scripts/ziptherepo.sh"
   },
   "eslintConfig": {
-    "extends": ["react-app", ".eslintrc"]
+    "extends": [
+      "react-app",
+      ".eslintrc"
+    ]
   },
   "browserslist": {
     "production": [
@@ -127,7 +131,7 @@
       "react-app-polyfill/jsdom"
     ],
     "setupFilesAfterEnv": [
-      "<rootDir>/src/setupTests.js"
+      "<rootDir>/src/setupTests.ts"
     ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
