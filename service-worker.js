@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/beatsaber-request-ui/precache-manifest.54fea023e8eb471d66ae1894c710d458.js"
+  "/beatsaber-request-ui/precache-manifest.cef82a7864bfbceba1874f989e77a913.js"
 );
 
 self.addEventListener('message', (event) => {
