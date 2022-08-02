@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/beatsaber-request-ui/fullvideo.html"
   },
   {
-    "revision": "dad3d269777ff55e7d437876f634678f",
+    "revision": "718c36b43854208cd9c814c48d403630",
     "url": "/beatsaber-request-ui/index.html"
   },
   {
