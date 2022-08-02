@@ -81,6 +81,11 @@ module.exports = {
       appHtml: resolveApp("public/panel.html"),
       appIndexJs: resolveModule(resolveApp, "src/index-panel"),
       excludeChunks: ["config", "fullvideo", "mobile"]
+    },
+    index: {
+      appHtml: resolveApp("public/index.html"),
+      appIndexJs: null,
+      excludeChunks: ["config", "fullvideo", "mobile", "panel"]
     }
   }
 };
