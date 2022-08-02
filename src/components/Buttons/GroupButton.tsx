@@ -28,11 +28,12 @@ const GroupButtonContainer = styled.div`
 `;
 
 export type GroupButtonProps = {
+  className?: string;
   group: ButtonAsItemProps[];
 };
 
-const GroupButton = ({ group }: GroupButtonProps): JSX.Element => {
-  return <GroupButtonContainer>{group.map(ButtonAsItem)}</GroupButtonContainer>;
+const GroupButton = ({ group, className }: GroupButtonProps): JSX.Element => {
+  return <GroupButtonContainer className={className}>{group.map(ButtonAsItem)}</GroupButtonContainer>;
 };
 
 export { GroupButton };

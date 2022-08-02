@@ -73,7 +73,7 @@ export type TwitchConfigInputRowProps = {
   setValue: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
-export const TwitchConfigInputRow = ({ name, type, value, setValue }: TwitchConfigInputRowProps) => {
+export const TwitchConfigInputRow = ({ name, type, value, setValue }: TwitchConfigInputRowProps): JSX.Element => {
   const handleChange = React.useCallback(
     (e: React.ChangeEvent) => {
       setValue(+(e.target as HTMLInputElement).value);

@@ -1,5 +1,4 @@
 import { Validator } from "fluentvalidation-ts";
-import { ValidationErrors } from "fluentvalidation-ts/dist/ValidationErrors";
 import { BroadcasterConfiguration, broadcasterConfigurationValidator } from "./BroadcasterConfiguration";
 
 export type GlobalConfiguration = null;

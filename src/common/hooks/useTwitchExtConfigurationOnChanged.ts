@@ -8,8 +8,8 @@ type ExtConfig = Pick<typeof Twitch.ext.configuration, "broadcaster" | "develope
 
 export const deserializeTwitchExtConfiguration = (extConfig: ExtConfig): AppConfiguration | undefined => {
   let broadcasterObject = null;
-  let gloablObject = null;
-  let developerObject = null;
+  const gloablObject = null;
+  const developerObject = null;
   try {
     const broadcasterContent = extConfig.broadcaster?.version !== "2" ? "{}" : extConfig.broadcaster?.content;
     broadcasterObject = JSON.parse(broadcasterContent) as BroadcasterConfiguration;

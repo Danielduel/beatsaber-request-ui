@@ -38,7 +38,7 @@ const AppEnvContext = React.createContext(defaultState);
 export function createWrappedProvider(overrides: PartialAppEnv) {
   const initialState = createAppEnvContextState(overrides);
 
-  return function WrappedProvider({ children }: PropsWithChildren<Record<string, any>>): JSX.Element {
+  return function WrappedProvider({ children }: PropsWithChildren<Record<string, unknown>>): JSX.Element {
     const [twitchExtAuth$] = useTwitchExtOnAuthorized();
     const [twitchChannelInfo$] = useTwitchChannelInfo(twitchExtAuth$);
     const [state, setState] = React.useState(initialState);

@@ -89,10 +89,10 @@ const useConfigContextValue = () => {
   const scoreSaberEnabled = useFormField(false);
   const scoreSaberId = useFormField("", "onchange", () => void 0, unwrapScoreSaberId);
 
-  const [themePrimaryColor, setThemePrimaryColor] = React.useState(Color("#b161d0"));
-  const [themeSecondaryColor, setThemeSecondaryColor] = React.useState(Color("#9939bf"));
-  const [themeAccentColor, setThemeAccentColor] = React.useState(Color("#cd8c36"));
-  const [themeWarningColor, setThemeWarningColor] = React.useState(Color("#d0297d"));
+  const themePrimaryColor = useFormField(Color("#b161d0"));
+  const themeSecondaryColor = useFormField(Color("#9939bf"));
+  const themeAccentColor = useFormField(Color("#cd8c36"));
+  const themeWarningColor = useFormField(Color("#d0297d"));
 
   const [configOnTwitch, setConfigOnTwitch] = React.useState<null | AppConfiguration>(null);
   const [twitchExtConfiguration$] = useTwitchExtConfigurationOnChanged();
@@ -117,13 +117,9 @@ const useConfigContextValue = () => {
     scoreSaberEnabled,
     scoreSaberId,
     themePrimaryColor,
-    setThemePrimaryColor,
     themeSecondaryColor,
-    setThemeSecondaryColor,
     themeAccentColor,
-    setThemeAccentColor,
-    themeWarningColor,
-    setThemeWarningColor
+    themeWarningColor
   } as const;
 };
 
@@ -164,7 +160,7 @@ const menuItems = [
   menuItem("SRM Bridge", "srmbridge")
 ];
 
-const ConfigContextProvider = ({ children }: PropsWithChildren<{}>) => {
+const ConfigContextProvider = ({ children }: PropsWithChildren<Record<string, unknown>>) => {
   const state = useConfigContextValue();
 
   return <ConfigContext.Provider value={state}>{children}</ConfigContext.Provider>;
@@ -173,7 +169,7 @@ const ConfigContextProvider = ({ children }: PropsWithChildren<{}>) => {
 const ConfigPageSaveButton = (): JSX.Element | null => {
   const { isSomethingChanged } = React.useContext(ConfigContext);
 
-  // if (!isSomethingChanged) return null;
+  if (!isSomethingChanged) return null;
   return <ConfigPageSaveButtonButton active>Save</ConfigPageSaveButtonButton>;
 };
 
@@ -185,7 +181,7 @@ const ConfigPageLayout = () => {
           <ConfigPageMenu>
             <ConfigPageMenuTitle>Settings</ConfigPageMenuTitle>
             {menuItems.map((props) => (
-              <ConfigPageMenuItem {...props} />
+              <ConfigPageMenuItem key={props.id} {...props} />
             ))}
             <ConfigPageSaveButton />
           </ConfigPageMenu>

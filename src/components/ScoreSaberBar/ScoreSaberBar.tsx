@@ -73,7 +73,7 @@ const _ScoreSaberBar = ({ scoreSaberId, withoutReload }: ScoreSaberBarProps) => 
   useStreamSubscribe(scoreSaberBasicPlayerData$, setScoreSaberBasicPlayerData);
 
   if (!scoreSaberBasicPlayerData || !scoreSaberBasicPlayerData.playerInfo) {
-    return <ScoreSaberBarWrapperNoResults>Can't find this player</ScoreSaberBarWrapperNoResults>;
+    return <ScoreSaberBarWrapperNoResults>Can&apos;t find this player</ScoreSaberBarWrapperNoResults>;
   }
 
   const avatarUrl = getScoresaberAvatarUrl(scoreSaberBasicPlayerData?.playerInfo.avatar ?? "");

@@ -3,27 +3,31 @@ import { ColorPicker } from "./ColorPicker";
 import { ConfigContext } from "../BroadcasterConfigPage";
 
 export const ColorSchemeManualCreator = (): JSX.Element => {
-  const {
-    themePrimaryColor,
-    themeSecondaryColor,
-    themeAccentColor,
-    themeWarningColor,
-    setThemeAccentColor,
-    setThemePrimaryColor,
-    setThemeSecondaryColor,
-    setThemeWarningColor
-  } = React.useContext(ConfigContext);
+  const { themePrimaryColor, themeSecondaryColor, themeAccentColor, themeWarningColor } =
+    React.useContext(ConfigContext);
 
   return (
     <div>
-      <ColorPicker label="Primary color:" selectedColor={themePrimaryColor} setSelectedColor={setThemePrimaryColor} />
+      <ColorPicker
+        label="Primary color:"
+        selectedColor={themePrimaryColor.value}
+        setSelectedColor={themePrimaryColor.setValue}
+      />
       <ColorPicker
         label="Secondary color:"
-        selectedColor={themeSecondaryColor}
-        setSelectedColor={setThemeSecondaryColor}
+        selectedColor={themeSecondaryColor.value}
+        setSelectedColor={themeSecondaryColor.setValue}
       />
-      <ColorPicker label="Accent color:" selectedColor={themeAccentColor} setSelectedColor={setThemeAccentColor} />
-      <ColorPicker label="Warning color:" selectedColor={themeWarningColor} setSelectedColor={setThemeWarningColor} />
+      <ColorPicker
+        label="Accent color:"
+        selectedColor={themeAccentColor.value}
+        setSelectedColor={themeAccentColor.setValue}
+      />
+      <ColorPicker
+        label="Warning color:"
+        selectedColor={themeWarningColor.value}
+        setSelectedColor={themeWarningColor.setValue}
+      />
     </div>
   );
 };

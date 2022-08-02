@@ -29,7 +29,7 @@ const asInput = (element: Element): HTMLInputElement => {
 type ColorPickerProps = {
   fontWeight?: "normal" | "bold";
   label: string;
-  setSelectedColor: React.Dispatch<React.SetStateAction<Color<string>>>;
+  setSelectedColor: (_: Color<string>) => void;
   selectedColor: Color<string>;
 };
 

@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import { ButtonLink } from "../../../components/Buttons/Button";
 import { ScoreSaberBar } from "../../../components/ScoreSaberBar/ScoreSaberBar";
