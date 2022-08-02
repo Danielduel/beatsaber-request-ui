@@ -65,22 +65,22 @@ module.exports = {
     fullvideo: {
       appHtml: resolveApp("public/fullvideo.html"),
       appIndexJs: resolveModule(resolveApp, "src/index-fullvideo"),
-      excludeChunks: ["config", "mobile", "panel"]
+      excludeChunks: ["config", "mobile", "panel", "index"]
     },
     config: {
       appHtml: resolveApp("public/config.html"),
       appIndexJs: resolveModule(resolveApp, "src/index-config"),
-      excludeChunks: ["fullvideo", "mobile", "panel"]
+      excludeChunks: ["fullvideo", "mobile", "panel", "index"]
     },
     mobile: {
       appHtml: resolveApp("public/mobile.html"),
       appIndexJs: resolveModule(resolveApp, "src/index-mobile"),
-      excludeChunks: ["config", "fullvideo", "panel"]
+      excludeChunks: ["config", "fullvideo", "panel", "index"]
     },
     panel: {
       appHtml: resolveApp("public/panel.html"),
       appIndexJs: resolveModule(resolveApp, "src/index-panel"),
-      excludeChunks: ["config", "fullvideo", "mobile"]
+      excludeChunks: ["config", "fullvideo", "mobile", "index"]
     },
     index: {
       appHtml: resolveApp("public/index.html"),
