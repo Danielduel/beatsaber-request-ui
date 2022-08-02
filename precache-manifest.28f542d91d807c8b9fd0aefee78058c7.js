@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a1ecfba4517c3912b163ccce66f450b2",
+    "revision": "38a68f3ff117fa38a20b2e7b78dec392",
     "url": "/beatsaber-request-ui/config.html"
   },
   {
-    "revision": "a52256464acbce44266ad081e4a8755f",
+    "revision": "5fde2c2e1644c6b952f52ee06af1824e",
     "url": "/beatsaber-request-ui/fullvideo.html"
   },
   {
@@ -12,11 +12,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/beatsaber-request-ui/index.html"
   },
   {
-    "revision": "7cfea1f25e4983c36cda76ca6ceffb4a",
+    "revision": "c1fb3b9e9011fe2b04cb6f8b4e240e23",
     "url": "/beatsaber-request-ui/mobile.html"
   },
   {
-    "revision": "05d86a7be8a01c26ed957e9060c0225e",
+    "revision": "81954a40c153685f33af6322527f2986",
     "url": "/beatsaber-request-ui/panel.html"
   },
   {
