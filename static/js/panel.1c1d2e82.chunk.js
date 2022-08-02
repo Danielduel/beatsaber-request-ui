@@ -1,0 +1,2 @@
+(this["webpackJsonpbeatsaber-request-ui"]=this["webpackJsonpbeatsaber-request-ui"]||[]).push([[6,4],{72:function(e,t,a){e.exports=a(73)},73:function(e,t,a){"use strict";a.r(t);var n=a(0),r=a.n(n),s=a(27),u=a.n(s),c=a(19),l=a(24),o=a(4),i=Object(o.a)({framePanel:!0});u.a.render(r.a.createElement(r.a.StrictMode,null,r.a.createElement(i,null,r.a.createElement(c.d,null))),document.getElementById("root")),l.a()}},[[72,11,0,1]]]);
+//# sourceMappingURL=panel.1c1d2e82.chunk.js.map
