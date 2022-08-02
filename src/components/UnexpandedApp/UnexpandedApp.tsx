@@ -1,5 +1,5 @@
 import React from "react";
-import { Translation } from "react-i18next";
+import { Translation, useTranslation } from "react-i18next";
 import styled from "styled-components";
 import AppEnvContext from "../../AppEnvContext";
 
@@ -135,6 +135,7 @@ type UnexpandedAppProps = {
 };
 
 const UnexpandedApp = ({ togglePanel }: UnexpandedAppProps): JSX.Element | null => {
+  const [t] = useTranslation();
   const { configuration } = React.useContext(AppEnvContext);
 
   if (!configuration) {
@@ -147,9 +148,9 @@ const UnexpandedApp = ({ togglePanel }: UnexpandedAppProps): JSX.Element | null 
     <AppUnexpandedWrapperWrapper>
       <AppUnexpandedWrapper x={panelPosition.x} y={panelPosition.y} onClick={() => togglePanel(true)}>
         <AppUnexpandedTooltip x={panelPosition.x} y={panelPosition.y}>
-          <Translation>{(t) => t("Click to open an extension")}</Translation>
+          {t("Click to open an extension")}
           <br />
-          <Translation>{(t) => t("this should make it easier to make requests")}</Translation>
+          {t("this should make it easier to make requests")}
         </AppUnexpandedTooltip>
       </AppUnexpandedWrapper>
     </AppUnexpandedWrapperWrapper>

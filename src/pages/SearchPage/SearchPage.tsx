@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { LayoutRowPlaceholderTransparent } from "../../components/LayoutRow/LayoutRow";
 import SearchInput from "./SearchInput";
 import SearchList from "./SearchList";
-import { Translation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { usePaginatedData } from "../../common/hooks/usePaginatedData";
 
 export type SongListDocsItemMetadataCharacteristicsDifficultiesEntry = {
@@ -129,10 +129,15 @@ const SearchPageFixedMessageWrapper = styled.div`
   top: 30%;
 `;
 
-function getMessage(wasSearching: boolean, isSearching: boolean, songList: SongListDocsItem[]) {
-  if (isSearching) return <Translation>{(t) => t("Searching...")}</Translation>;
-  if (!wasSearching) return <Translation>{(t) => t("Start searching")}</Translation>;
-  if (!songList.length) return <Translation>{(t) => t("No results")}</Translation>;
+function getMessage(
+  t: (translation: string) => string,
+  wasSearching: boolean,
+  isSearching: boolean,
+  songList: SongListDocsItem[]
+) {
+  if (isSearching) return t("Searching...");
+  if (!wasSearching) return t("Start searching");
+  if (!songList.length) return t("No results");
   return "";
 }
 
@@ -143,6 +148,7 @@ const mapResponsesToItems = (pages: SongListType[]): SongListDocsItem[] => {
 };
 
 export default function SearchPage(): JSX.Element {
+  const [t] = useTranslation();
   const [wasSearching, setWasSearching] = React.useState(false);
   const [query, setQuery] = React.useState("");
   const getUrl = React.useCallback(
@@ -166,7 +172,7 @@ export default function SearchPage(): JSX.Element {
     initialFetch();
   }, [clearData, setWasSearching, initialFetch]);
 
-  const message = getMessage(wasSearching, isFetching, results);
+  const message = getMessage(t, wasSearching, isFetching, results);
   // const canRenderSearchList = !message && !isFetching;
 
   return (

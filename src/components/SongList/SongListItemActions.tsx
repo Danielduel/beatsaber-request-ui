@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { Translation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { CopyIcon } from "../../common/icons/CopyIcon";
 import { SongListItemContext } from "./SongListItemContext";
 import { Button } from "../Buttons/Button";
@@ -45,6 +45,7 @@ type SongListItemActionsProps = {
   isRanked: boolean;
 };
 const SongListItemActions = ({ bsrKey, isRanked }: SongListItemActionsProps): JSX.Element => {
+  const [t] = useTranslation();
   const { srmBridgeChannel, userId } = React.useContext(AppEnvContext);
   const { copied, setCopied } = React.useContext(SongListItemContext);
   const useBridge = true;
@@ -80,9 +81,7 @@ const SongListItemActions = ({ bsrKey, isRanked }: SongListItemActionsProps): JS
     <SongListItemActionGroupWrapper>
       <CopyToClipboard text={`!bsr ${bsrKey}`} onCopy={() => setCopied(true)}>
         <CopyButton style={{ backgroundColor: isRanked ? "var(--background-secondary-buttonover)" : "invalid-color" }}>
-          <CopyButtonText>
-            <Translation>{(t) => (copied ? t("Copied") : t("Copy"))}</Translation>
-          </CopyButtonText>
+          <CopyButtonText>{copied ? t("Copied") : t("Copy")}</CopyButtonText>
           <CopyIcon />
         </CopyButton>
       </CopyToClipboard>

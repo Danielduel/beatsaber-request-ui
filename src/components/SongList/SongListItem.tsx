@@ -10,7 +10,7 @@ import {
   SongListItemDetailsSmallItem
 } from "./SongListItemDetails/SongListItemDetailsCommon";
 import { SongListItemDetailsWrapper } from "./SongListItemDetails/SongListItemDetailsWrapper";
-import { Translation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { Button } from "../Buttons/Button";
 import exclamation_mark from "./static/exclamation_mark.png";
 import question_mark from "./static/question_mark.png";
@@ -118,30 +118,30 @@ const SongListItem = ({
   expert,
   expertPlus
 }: SongListItemProps & SongListItemDifficultyProps): JSX.Element => {
+  const [t] = useTranslation();
   const componentContextState = useSongListItemContextState();
   const { copied, setCopied, askForBeatsaverNavigation, setAskForBeatsaverNavigation } = componentContextState;
   const shouldMoveToLeft = copied || askForBeatsaverNavigation;
   const toggleAskForBeatsaverNavigation = React.useCallback(() => {
     setAskForBeatsaverNavigation(!askForBeatsaverNavigation);
   }, [askForBeatsaverNavigation, setAskForBeatsaverNavigation]);
+
   return (
     <SongListItemContext.Provider value={componentContextState}>
       <SongListItemWrapper>
         {copied && (
           <SongListItemInfoWrapper variant="warn">
             <SongListItemInfoBgImage src={exclamation_mark} />
-            <Translation>{(t) => t("Paste on chat")}</Translation>
+            {t("Paste on chat")}
             <br />
-            <Translation>{(t) => t("to make request")}</Translation>
-            <Button onClick={() => setCopied(false)}>
-              <Translation>{(t) => t("Done")}</Translation>
-            </Button>
+            {t("to make request")}
+            <Button onClick={() => setCopied(false)}>{t("Done")}</Button>
           </SongListItemInfoWrapper>
         )}
         {askForBeatsaverNavigation && (
           <SongListItemInfoWrapper variant="info">
             <SongListItemInfoBgImage src={question_mark} />
-            <Translation>{(t) => t("Do you want to go to beatsaver page?")}</Translation>
+            {t("Do you want to go to beatsaver page?")}
             <GroupButton
               group={[
                 {

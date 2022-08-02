@@ -1,6 +1,6 @@
 import { i18n } from "i18next";
 import React, { useRef } from "react";
-import { getI18n, Translation } from "react-i18next";
+import { getI18n, useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { useFormField } from "../../common/hooks/useFormField";
 import { languages } from "../../i18n/init-i18n";
@@ -37,6 +37,7 @@ const StyledOptionItem = (i18nInstance: i18n, selectedLanguage: string) => {
 };
 
 const LanguageSelector = (): JSX.Element => {
+  const [t] = useTranslation();
   const i18nInstance = getI18n();
   const selectRef = useRef<HTMLSelectElement | null>(null);
   const { value: language, sinkEvent: selectOnChange } = useFormField<HTMLSelectElement, string>(
@@ -50,9 +51,7 @@ const LanguageSelector = (): JSX.Element => {
 
   return (
     <LanguageSelectContainer>
-      <StyledSelectLabel>
-        <Translation>{(t) => t("Select language")}</Translation>:
-      </StyledSelectLabel>
+      <StyledSelectLabel>{t("Select language")}</StyledSelectLabel>
       <StyledSelect ref={selectRef} value={language} onChange={selectOnChange}>
         {languages.map(StyledOptionItem(i18nInstance, language))}
         {/* <StyledOption value="en">EN</StyledOption>
