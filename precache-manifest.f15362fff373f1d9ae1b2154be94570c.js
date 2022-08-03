@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "775e1be2b402cf105e6f88a5601d108c",
+    "revision": "0055d84a91aa6c7fbfffd606c1adc894",
     "url": "/beatsaber-request-ui/config.html"
   },
   {
-    "revision": "351dbbad675e93887e26dd77168fe0c8",
+    "revision": "88431f7ca80faf8d14fa2397085d33bf",
     "url": "/beatsaber-request-ui/fullvideo.html"
   },
   {
@@ -12,27 +12,27 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/beatsaber-request-ui/index.html"
   },
   {
-    "revision": "b1d006403cf53a1b0cbe1f245db07615",
+    "revision": "6f9451245d1b8bf0f9b05558015d7d3f",
     "url": "/beatsaber-request-ui/mobile.html"
   },
   {
-    "revision": "046fc6482faf8a97d0e52068e2711c7c",
+    "revision": "43cf5cdc8eebdab88287d3413de23bae",
     "url": "/beatsaber-request-ui/panel.html"
   },
   {
-    "revision": "0448891ef4b1b094d4ff",
+    "revision": "5e3998321385e247b91f",
     "url": "/beatsaber-request-ui/static/css/config.8e947f00.chunk.css"
   },
   {
-    "revision": "605ba63aa52708dc1c3c",
+    "revision": "14a37855871be15c5543",
     "url": "/beatsaber-request-ui/static/css/fullvideo.5b5f9093.chunk.css"
   },
   {
-    "revision": "61f081d2bf2f0161041f",
+    "revision": "6ee016b37b1e3970d548",
     "url": "/beatsaber-request-ui/static/css/mobile.5b5f9093.chunk.css"
   },
   {
-    "revision": "fb6ac27e61ba7b84b773",
+    "revision": "a2c7e8c169858281515a",
     "url": "/beatsaber-request-ui/static/css/panel.5b5f9093.chunk.css"
   },
   {
@@ -56,28 +56,28 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/beatsaber-request-ui/static/js/12.d486f87e.chunk.js"
   },
   {
-    "revision": "0448891ef4b1b094d4ff",
-    "url": "/beatsaber-request-ui/static/js/config.40ad31b4.chunk.js"
+    "revision": "5e3998321385e247b91f",
+    "url": "/beatsaber-request-ui/static/js/config.4c986338.chunk.js"
   },
   {
     "revision": "93b9b419fa624173230ff52d42adc4cb",
-    "url": "/beatsaber-request-ui/static/js/config.40ad31b4.chunk.js.LICENSE.txt"
+    "url": "/beatsaber-request-ui/static/js/config.4c986338.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "605ba63aa52708dc1c3c",
-    "url": "/beatsaber-request-ui/static/js/fullvideo.b410b833.chunk.js"
+    "revision": "14a37855871be15c5543",
+    "url": "/beatsaber-request-ui/static/js/fullvideo.d19d98d8.chunk.js"
   },
   {
     "revision": "7afff236b9da8816cf59",
     "url": "/beatsaber-request-ui/static/js/index.acc89168.chunk.js"
   },
   {
-    "revision": "61f081d2bf2f0161041f",
-    "url": "/beatsaber-request-ui/static/js/mobile.83c58ccd.chunk.js"
+    "revision": "6ee016b37b1e3970d548",
+    "url": "/beatsaber-request-ui/static/js/mobile.e80af9f1.chunk.js"
   },
   {
-    "revision": "fb6ac27e61ba7b84b773",
-    "url": "/beatsaber-request-ui/static/js/panel.6150f5be.chunk.js"
+    "revision": "a2c7e8c169858281515a",
+    "url": "/beatsaber-request-ui/static/js/panel.7a12c5f3.chunk.js"
   },
   {
     "revision": "02ce9c80bfb260d3db07",
