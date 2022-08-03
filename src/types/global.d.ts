@@ -7,3 +7,5 @@ declare module "*.svg" {
   const value: any;
   export = value;
 }
+
+type TranslationFunction = (translation: string) => string;

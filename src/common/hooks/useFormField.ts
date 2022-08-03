@@ -37,6 +37,15 @@ export const useFormField = <E extends BoundableHTMLElements, T>(
     [_setValue, setDirty, pristineValue]
   );
 
+  const setValueAndPristineValue = React.useCallback(
+    (value: T) => {
+      _setValue(value);
+      setPristineValue(value);
+      setDirty(false);
+    },
+    [_setValue, setDirty, setPristineValue]
+  );
+
   const getValueFromEvent = React.useMemo(() => getGetValueFromEvent(eventToBindTo), [eventToBindTo]);
   const sinkEvent = React.useCallback(
     (event: BoundableEvent2EventType<typeof eventToBindTo, E>) => {
@@ -51,6 +60,7 @@ export const useFormField = <E extends BoundableHTMLElements, T>(
   return {
     value,
     setValue,
+    setValueAndPristineValue,
     dirty,
     setDirty,
     sinkEvent

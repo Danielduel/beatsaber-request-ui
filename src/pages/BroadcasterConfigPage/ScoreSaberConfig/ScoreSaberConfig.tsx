@@ -82,7 +82,7 @@ const ScoreSaberDetails = () => {
       Paste the link to the field below
       <br />
       <br />
-      <ScoreSaberInput onChange={scoreSaberId.sinkEvent} />
+      <ScoreSaberInput value={scoreSaberId.value} onChange={scoreSaberId.sinkEvent} />
       <BarContainer>
         <ScoreSaberBar scoreSaberId={scoreSaberId.value} withoutReload />
       </BarContainer>

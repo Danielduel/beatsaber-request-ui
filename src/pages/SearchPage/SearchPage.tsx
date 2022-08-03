@@ -129,12 +129,7 @@ const SearchPageFixedMessageWrapper = styled.div`
   top: 30%;
 `;
 
-function getMessage(
-  t: (translation: string) => string,
-  wasSearching: boolean,
-  isSearching: boolean,
-  songList: SongListDocsItem[]
-) {
+function getMessage(t: TranslationFunction, wasSearching: boolean, isSearching: boolean, songList: SongListDocsItem[]) {
   if (isSearching) return t("Searching...");
   if (!wasSearching) return t("Start searching");
   if (!songList.length) return t("No results");

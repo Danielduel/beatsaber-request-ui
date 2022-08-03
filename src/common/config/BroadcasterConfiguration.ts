@@ -61,3 +61,4 @@ export class BroadcasterConfigurationValidator extends Validator<BroadcasterConf
   }
 }
 export const broadcasterConfigurationValidator = new BroadcasterConfigurationValidator();
+export type BroadcasterConfigurationValidation = ReturnType<typeof broadcasterConfigurationValidator["validate"]>;

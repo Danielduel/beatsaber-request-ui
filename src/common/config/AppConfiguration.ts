@@ -4,6 +4,7 @@ import { BroadcasterConfiguration, broadcasterConfigurationValidator } from "./B
 export type GlobalConfiguration = null;
 export type DeveloperConfiguration = null;
 export type AppConfiguration = {
+  isTwitch: boolean;
   broadcaster: BroadcasterConfiguration;
   developer: DeveloperConfiguration;
   global: GlobalConfiguration;
@@ -26,11 +27,13 @@ export class AppConfigurationValidator extends Validator<AppConfiguration> {
 export const appConfigurationValidator = new AppConfigurationValidator();
 
 export const createAppConfigurationFromConfigs = (
+  isTwitch: boolean,
   broadcaster: BroadcasterConfiguration,
   developer: DeveloperConfiguration,
   global: GlobalConfiguration
 ): AppConfiguration => {
   const result: AppConfiguration = {
+    isTwitch,
     broadcaster,
     developer,
     global
