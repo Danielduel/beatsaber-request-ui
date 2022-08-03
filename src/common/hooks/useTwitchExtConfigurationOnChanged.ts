@@ -48,7 +48,7 @@ function useTwitchExtConfigurationOnChanged() {
         // handler(appConfigurationFromStrings("overlay|topLeft;ss://76561198023909718", "", ""));
         // handler(appConfigurationFromStrings("overlay|topLeft;", "", ""));
         // handler(appConfigurationFromStrings("panel;ss://76561198023909718", "", ""));
-
+        console.log("📦 Loading config from localStorage")
         const localConfig = deserializeConfiguration(false, {
           broadcaster: { content: localBroadcasterConfig, version: "2" },
           developer: undefined,
@@ -68,6 +68,7 @@ function useTwitchExtConfigurationOnChanged() {
       console.log("Twitch ext:");
       console.log(Twitch.ext);
       console.log("Broadcaster content: " + Twitch.ext.configuration.broadcaster?.content);
+      console.log("🔗 Loading config from Twitch")
 
       const newConfig = deserializeConfiguration(true, Twitch.ext.configuration);
 
