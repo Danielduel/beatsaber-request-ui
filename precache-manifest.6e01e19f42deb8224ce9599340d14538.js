@@ -1,103 +1,103 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "382e8c29c3ec38f017d4834899bd3776",
+    "revision": "775e1be2b402cf105e6f88a5601d108c",
     "url": "/beatsaber-request-ui/config.html"
   },
   {
-    "revision": "3ad397693deb5f787b7c98323f334fd3",
+    "revision": "351dbbad675e93887e26dd77168fe0c8",
     "url": "/beatsaber-request-ui/fullvideo.html"
   },
   {
-    "revision": "718c36b43854208cd9c814c48d403630",
+    "revision": "dcddb5c7096441e938d77701a0309fc5",
     "url": "/beatsaber-request-ui/index.html"
   },
   {
-    "revision": "65b85faf971a8631072269843fe77a04",
+    "revision": "b1d006403cf53a1b0cbe1f245db07615",
     "url": "/beatsaber-request-ui/mobile.html"
   },
   {
-    "revision": "53d07708cbc98489faf004173591de28",
+    "revision": "046fc6482faf8a97d0e52068e2711c7c",
     "url": "/beatsaber-request-ui/panel.html"
   },
   {
-    "revision": "2af5fb971dd456f4b71f",
+    "revision": "0448891ef4b1b094d4ff",
     "url": "/beatsaber-request-ui/static/css/config.8e947f00.chunk.css"
   },
   {
-    "revision": "ec65054ab4cb25e62d40",
+    "revision": "605ba63aa52708dc1c3c",
     "url": "/beatsaber-request-ui/static/css/fullvideo.5b5f9093.chunk.css"
   },
   {
-    "revision": "a658df72d03645882699",
+    "revision": "61f081d2bf2f0161041f",
     "url": "/beatsaber-request-ui/static/css/mobile.5b5f9093.chunk.css"
   },
   {
-    "revision": "4f9e0d6efe4ce27be42a",
+    "revision": "fb6ac27e61ba7b84b773",
     "url": "/beatsaber-request-ui/static/css/panel.5b5f9093.chunk.css"
   },
   {
-    "revision": "f2d2b083269bfc27078a",
-    "url": "/beatsaber-request-ui/static/js/0.11c579f0.chunk.js"
+    "revision": "54e1c9f55c09905a4634",
+    "url": "/beatsaber-request-ui/static/js/0.6b6756f0.chunk.js"
   },
   {
     "revision": "6673e90349f6cb4629a772fd2c7c7727",
-    "url": "/beatsaber-request-ui/static/js/0.11c579f0.chunk.js.LICENSE.txt"
+    "url": "/beatsaber-request-ui/static/js/0.6b6756f0.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "909afc0d11bbaceec3c6",
-    "url": "/beatsaber-request-ui/static/js/1.7b07775f.chunk.js"
+    "revision": "a6d81606bec77811c540",
+    "url": "/beatsaber-request-ui/static/js/1.48936619.chunk.js"
   },
   {
     "revision": "68e42ac05f1e6830f8cb1b2d7fb5beee",
-    "url": "/beatsaber-request-ui/static/js/1.7b07775f.chunk.js.LICENSE.txt"
+    "url": "/beatsaber-request-ui/static/js/1.48936619.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "60f8424c6b46bd3ef57f",
-    "url": "/beatsaber-request-ui/static/js/12.1118d336.chunk.js"
+    "revision": "674c7566a22ab5390e94",
+    "url": "/beatsaber-request-ui/static/js/12.d486f87e.chunk.js"
   },
   {
-    "revision": "2af5fb971dd456f4b71f",
-    "url": "/beatsaber-request-ui/static/js/config.288fe1bb.chunk.js"
+    "revision": "0448891ef4b1b094d4ff",
+    "url": "/beatsaber-request-ui/static/js/config.40ad31b4.chunk.js"
   },
   {
     "revision": "93b9b419fa624173230ff52d42adc4cb",
-    "url": "/beatsaber-request-ui/static/js/config.288fe1bb.chunk.js.LICENSE.txt"
+    "url": "/beatsaber-request-ui/static/js/config.40ad31b4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "ec65054ab4cb25e62d40",
-    "url": "/beatsaber-request-ui/static/js/fullvideo.48f8c746.chunk.js"
+    "revision": "605ba63aa52708dc1c3c",
+    "url": "/beatsaber-request-ui/static/js/fullvideo.b410b833.chunk.js"
   },
   {
-    "revision": "805fd9b47d1d4ba869c9",
-    "url": "/beatsaber-request-ui/static/js/index.91889fa8.chunk.js"
+    "revision": "7afff236b9da8816cf59",
+    "url": "/beatsaber-request-ui/static/js/index.acc89168.chunk.js"
   },
   {
-    "revision": "a658df72d03645882699",
-    "url": "/beatsaber-request-ui/static/js/mobile.8b114776.chunk.js"
+    "revision": "61f081d2bf2f0161041f",
+    "url": "/beatsaber-request-ui/static/js/mobile.83c58ccd.chunk.js"
   },
   {
-    "revision": "4f9e0d6efe4ce27be42a",
-    "url": "/beatsaber-request-ui/static/js/panel.ed8ddacc.chunk.js"
+    "revision": "fb6ac27e61ba7b84b773",
+    "url": "/beatsaber-request-ui/static/js/panel.6150f5be.chunk.js"
   },
   {
-    "revision": "6ded110a3c37ada34362",
-    "url": "/beatsaber-request-ui/static/js/runtime-config.0b642170.js"
+    "revision": "02ce9c80bfb260d3db07",
+    "url": "/beatsaber-request-ui/static/js/runtime-config.ac26d93e.js"
   },
   {
-    "revision": "7243d85b94088c8859cc",
-    "url": "/beatsaber-request-ui/static/js/runtime-fullvideo.5999bdc3.js"
+    "revision": "e67a410b200fa674810a",
+    "url": "/beatsaber-request-ui/static/js/runtime-fullvideo.00fccb61.js"
   },
   {
     "revision": "b470ecbd6c9b911ac9e0",
     "url": "/beatsaber-request-ui/static/js/runtime-index.d4d8507d.js"
   },
   {
-    "revision": "c1d74cc7dbaf7ad2fd75",
-    "url": "/beatsaber-request-ui/static/js/runtime-mobile.5481ec27.js"
+    "revision": "2c4a663a9ca533bc47bc",
+    "url": "/beatsaber-request-ui/static/js/runtime-mobile.e863cf82.js"
   },
   {
-    "revision": "cf4f27b94bccb98e0df7",
-    "url": "/beatsaber-request-ui/static/js/runtime-panel.1dfc210b.js"
+    "revision": "6ca0d0356e25690c6e0a",
+    "url": "/beatsaber-request-ui/static/js/runtime-panel.6cb84bbe.js"
   },
   {
     "revision": "d307861dae08e91f6dec24f0b92a86a0",

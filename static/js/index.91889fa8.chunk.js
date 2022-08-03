@@ -1,2 +1,0 @@
-(this["webpackJsonpbeatsaber-request-ui"]=this["webpackJsonpbeatsaber-request-ui"]||[]).push([[4],{158:function(e,t,n){e.exports=n(159)},159:function(e,t,n){"use strict";n.r(t);var a=n(0),r=n.n(a),s=n(44);n.n(s).a.render(r.a.createElement(r.a.StrictMode,null,r.a.createElement(r.a.Fragment,null)),document.getElementById("root"))}},[[158,9,0]]]);
-//# sourceMappingURL=index.91889fa8.chunk.js.map
