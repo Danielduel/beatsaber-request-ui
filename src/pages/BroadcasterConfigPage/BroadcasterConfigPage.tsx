@@ -12,7 +12,7 @@ import Color from "color";
 import { useTwitchExtConfigurationOnChanged } from "../../common/hooks/useTwitchExtConfigurationOnChanged";
 import { useStreamSubscribe } from "../../common/hooks/useStreamSubscribe";
 import { AppConfiguration } from "../../common/config/AppConfiguration";
-import { useFormField } from "../../common/hooks/useFormField";
+import { FormFieldType, isDirty, useFormField } from "../../common/hooks/useFormField";
 
 const ConfigPageLayoutWrapper = styled.div`
   background-color: #333;
@@ -79,12 +79,18 @@ const unwrapScoreSaberId = (link: string) => {
   const id = splitLink.find((part) => Number(part));
   return !id ? "" : id;
 };
-const useConfigContextValue = () => {
-  const [activeId, setActiveId] = React.useState("theme");
 
-  const [layoutActiveId, setLayoutActiveId] = React.useState<LayoutConfigOptionIds>("custom");
-  const [layoutPreciseX, setLayoutPreciseX] = React.useState(50);
-  const [layoutPreciseY, setLayoutPreciseY] = React.useState(50);
+const transformToNumber = (value: string) => {
+  // TODO - remove leading zero
+  return Number.parseInt(value.trim().split(" ").join(""));
+};
+
+const useConfigContextValue = () => {
+  const [activeId, setActiveId] = React.useState("layout");
+
+  const layoutActiveId = useFormField("custom" as LayoutConfigOptionIds);
+  const layoutPreciseX = useFormField(50 as number, "onchange", () => void 0, transformToNumber);
+  const layoutPreciseY = useFormField(50 as number, "onchange", () => void 0, transformToNumber);
 
   const scoreSaberEnabled = useFormField(false);
   const scoreSaberId = useFormField("", "onchange", () => void 0, unwrapScoreSaberId);
@@ -100,7 +106,20 @@ const useConfigContextValue = () => {
     setConfigOnTwitch(configuration);
   });
 
-  const wasSomethingChanged = scoreSaberEnabled.dirty || scoreSaberId.dirty;
+  const wasSomethingChanged = isDirty(
+    scoreSaberEnabled,
+    scoreSaberId,
+
+    layoutActiveId,
+    layoutPreciseX,
+    layoutPreciseY,
+
+    themePrimaryColor,
+    themeSecondaryColor,
+    themeAccentColor,
+    themeWarningColor
+  );
+
   const isSomethingChanged = wasSomethingChanged;
 
   return {
@@ -109,11 +128,8 @@ const useConfigContextValue = () => {
     activeId,
     setActiveId,
     layoutActiveId,
-    setLayoutActiveId,
     layoutPreciseX,
-    setLayoutPreciseX,
     layoutPreciseY,
-    setLayoutPreciseY,
     scoreSaberEnabled,
     scoreSaberId,
     themePrimaryColor,
@@ -158,7 +174,7 @@ const menuItems = [
   menuItem("ScoreSaber", "scoresaber"),
   menuItem("Theme", "theme"),
   menuItem("SRM Bridge", "srmbridge")
-];
+] as const;
 
 const ConfigContextProvider = ({ children }: PropsWithChildren<Record<string, unknown>>) => {
   const state = useConfigContextValue();

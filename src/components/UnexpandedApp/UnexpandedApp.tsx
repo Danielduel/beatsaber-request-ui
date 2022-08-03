@@ -1,5 +1,5 @@
 import React from "react";
-import { Translation, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import AppEnvContext from "../../AppEnvContext";
 

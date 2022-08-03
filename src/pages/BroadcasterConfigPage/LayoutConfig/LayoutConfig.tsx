@@ -81,12 +81,12 @@ type LayoutOptionProps = {
   label: string;
 };
 const LayoutOption = ({ icon, wide, id, label, children }: React.PropsWithChildren<LayoutOptionProps>) => {
-  const { layoutActiveId, setLayoutActiveId } = React.useContext(ConfigContext);
-  const active = layoutActiveId === id;
+  const { layoutActiveId } = React.useContext(ConfigContext);
+  const active = layoutActiveId.value === id;
 
   const onClick = React.useCallback(() => {
-    setLayoutActiveId(id);
-  }, [setLayoutActiveId, id]);
+    layoutActiveId.setValue(id);
+  }, [layoutActiveId, id]);
 
   return (
     <LayoutOptionWrapper wide={wide}>
@@ -151,7 +151,7 @@ const PreciseInput = styled.input`
   appearance: none;
 `;
 const PreciseOptionDetails = () => {
-  const { layoutPreciseX, setLayoutPreciseX, layoutPreciseY, setLayoutPreciseY } = React.useContext(ConfigContext);
+  const { layoutPreciseX, layoutPreciseY } = React.useContext(ConfigContext);
 
   const matrixOnClick = React.useCallback(
     (ev: React.MouseEvent) => {
@@ -160,37 +160,41 @@ const PreciseOptionDetails = () => {
       const x = pageX - left;
       const y = pageY - top;
 
-      setLayoutPreciseX(~~((x / width) * 100));
-      setLayoutPreciseY(~~((y / height) * 100));
+      layoutPreciseX.setValue(~~((x / width) * 100));
+      layoutPreciseY.setValue(~~((y / height) * 100));
     },
-    [setLayoutPreciseX, setLayoutPreciseY]
-  );
-
-  const onChangeX = React.useCallback(
-    (ev: React.ChangeEvent<HTMLInputElement>) => {
-      setLayoutPreciseX(+ev.currentTarget.value);
-    },
-    [setLayoutPreciseX]
-  );
-
-  const onChangeY = React.useCallback(
-    (ev: React.ChangeEvent<HTMLInputElement>) => {
-      setLayoutPreciseX(+ev.currentTarget.value);
-    },
-    [setLayoutPreciseX]
+    [layoutPreciseX, layoutPreciseY]
   );
 
   return (
     <>
       <PreciseMatrix onClick={matrixOnClick}>
-        <PreciseMarker src={custom_marker} layoutPreciseX={layoutPreciseX} layoutPreciseY={layoutPreciseY} />
+        <PreciseMarker
+          src={custom_marker}
+          layoutPreciseX={layoutPreciseX.value}
+          layoutPreciseY={layoutPreciseY.value}
+        />
       </PreciseMatrix>
       <PreciseInputContainer>
-        <PreciseInput onChange={onChangeX} step="1" min="0" max="100" type="number" value={layoutPreciseX} />
+        <PreciseInput
+          onChange={layoutPreciseX.sinkEvent}
+          step="1"
+          min="0"
+          max="100"
+          type="number"
+          value={layoutPreciseX.value || "0"}
+        />
         <PreciseInputIcon src={ruler_horizontal_solid} />
       </PreciseInputContainer>
       <PreciseInputContainer>
-        <PreciseInput onChange={onChangeY} step="1" min="0" max="100" type="number" value={layoutPreciseY} />
+        <PreciseInput
+          onChange={layoutPreciseY.sinkEvent}
+          step="1"
+          min="0"
+          max="100"
+          type="number"
+          value={layoutPreciseY.value || "0"}
+        />
         <PreciseInputIcon src={ruler_vertical_solid} />
       </PreciseInputContainer>
     </>

@@ -67,7 +67,7 @@ const ContainerAppWrapper = styled.div`
 
 type CreatorKind = "manual" | "auto";
 export const ThemeSetup = () => {
-  const [creatorKind, setCreatorKind] = React.useState<CreatorKind>("auto");
+  const [creatorKind, setCreatorKind] = React.useState<CreatorKind>("manual");
   const groupButtonGroup = React.useMemo<GroupButtonProps["group"]>(() => {
     return [
       {

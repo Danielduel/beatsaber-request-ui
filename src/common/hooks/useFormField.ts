@@ -16,21 +16,25 @@ export const getGetValueFromEvent = <B extends BoundableEvents, E extends Bounda
   return () => "";
 };
 
+export type DirtyT = { dirty: boolean };
+export type FormFieldType = ReturnType<typeof useFormField>;
+export const isDirty = (...fields: DirtyT[]) => fields.some((field) => field.dirty);
 export const useFormField = <E extends BoundableHTMLElements, T>(
   initialValue: T,
   eventToBindTo: BoundableEvents = "onchange",
   onEvent: (value: T) => void = (v: T) => void 0,
   transform: (value: string) => T = (s: string) => s as unknown as T
 ) => {
+  const [pristineValue, setPristineValue] = React.useState(initialValue);
   const [value, _setValue] = React.useState<T>(initialValue);
   const [dirty, setDirty] = React.useState(false);
 
   const setValue = React.useCallback(
     (value: T) => {
       _setValue(value);
-      setDirty(true);
+      setDirty(value !== pristineValue);
     },
-    [_setValue, setDirty]
+    [_setValue, setDirty, pristineValue]
   );
 
   const getValueFromEvent = React.useMemo(() => getGetValueFromEvent(eventToBindTo), [eventToBindTo]);
